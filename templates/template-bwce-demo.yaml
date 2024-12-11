@@ -66,7 +66,7 @@ spec:
       name: BWCE Skeleton
       action: fetch:template
       input:
-        url: .
+        url: ./skeleton-s3-operation
         values:
           name: ${{ parameters.name }}
           description: ${{ parameters.description }}
