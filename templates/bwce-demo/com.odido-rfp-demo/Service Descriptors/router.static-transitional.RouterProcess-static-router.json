@@ -1,0 +1,38 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "static-router",
+    "description" : "static-router service"
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/static/router" : {
+      "get" : {
+        "summary" : "getStatic-router",
+        "description" : "getStatic-router",
+        "operationId" : "get-static-router",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "backend",
+          "in" : "header",
+          "description" : "Backend Type: JMS, SOAP, REST",
+          "type" : "string",
+          "required" : true
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a string to be returned",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : { }
+}

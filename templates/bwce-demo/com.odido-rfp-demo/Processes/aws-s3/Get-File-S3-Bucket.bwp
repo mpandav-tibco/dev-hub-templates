@@ -1,0 +1,1255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpws:process exitOnStandardFault="no" name="aws-s3.Get-File-S3-Bucket"
+    suppressJoinFailure="yes"
+    targetNamespace="http://xmlns.example.com/20231116100852"
+    xmlns:bpws="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+    xmlns:info="http://www.tibco.com/bw/process/info"
+    xmlns:ns="http://www.tibco.com/pe/EngineTypes"
+    xmlns:ns0="http://tns.tibco.com/bw/activity/timer/xsd/output"
+    xmlns:ns1="http://www.example.com/namespaces/tns/1699990752353"
+    xmlns:ns2="http://www.tibco.com/pe/WriteToLogActivitySchema"
+    xmlns:ns3="http://www.tibco.com/namespaces/tnt/plugins/awss3+b5efd524-1e0a-48b8-9f69-29edeb9ba905+Input"
+    xmlns:ns4="http://www.tibco.com/namespaces/tnt/plugins/awss3+b5efd524-1e0a-48b8-9f69-29edeb9ba905+Output"
+    xmlns:ns5="http://tns.tibco.com/bw/palette/internal/activityerror+bw.amazons3.GetObject"
+    xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+    xmlns:sca-bpel="http://docs.oasis-open.org/ns/opencsa/sca-bpel/200801"
+    xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"
+    xmlns:tibprop="http://ns.tibco.com/bw/property" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <tibex:VariableDescriptor type="MemorySaving">
+        <task name="Timer">
+            <endingVariables>
+                <variable>Timer</variable>
+            </endingVariables>
+        </task>
+        <task name="LogEnd">
+            <endingVariables>
+                <variable>Log-input</variable>
+                <variable>GetObject</variable>
+                <variable>fileKey</variable>
+            </endingVariables>
+        </task>
+        <task name="LogStart">
+            <endingVariables>
+                <variable>LogStart-input</variable>
+            </endingVariables>
+        </task>
+        <task name="GetObject">
+            <endingVariables>
+                <variable>GetObject-input</variable>
+                <variable>bucketName</variable>
+                <variable>destinationFileLocation</variable>
+            </endingVariables>
+        </task>
+    </tibex:VariableDescriptor>
+    <tibex:Types>
+        <xs:schema attributeFormDefault="unqualified"
+            elementFormDefault="qualified"
+            targetNamespace="http://www.tibco.com/pe/EngineTypes"
+            xmlns:tns="http://www.tibco.com/pe/EngineTypes" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="ErrorReport">
+                <xs:sequence>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="StackTrace" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="Msg" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="FullClass" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="Class" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ProcessStack" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="MsgCode" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Data" type="tns:anydata"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="OptionalErrorReport">
+                <xs:sequence>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0"
+                        name="StackTrace" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Msg" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0"
+                        name="FullClass" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Class" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0"
+                        name="ProcessStack" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="MsgCode" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Data" type="tns:anydata"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="FaultDetail">
+                <xs:sequence>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ActivityName" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Data" type="tns:anydata"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="Msg" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="MsgCode" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ProcessStack" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="StackTrace" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="FullClass" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="Class" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="ProcessContext">
+                <xs:sequence>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="JobId" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ApplicationName" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="EngineName" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ProcessInstanceId" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0"
+                        name="CustomJobId" type="xs:string"/>
+                    <!--xs:element name="RestartedFromCheckpoint" form="unqualified" block="extension restriction substitution" type="xs:boolean"/-->
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" maxOccurs="unbounded"
+                        minOccurs="0" name="TrackingInfo" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="anydata">
+                <xs:sequence>
+                    <xs:any namespace="##any" processContents="lax"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="OptionalErrorReport" type="tns:OptionalErrorReport"/>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="ErrorReport" type="tns:ErrorReport"/>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="FaultDetail" type="tns:FaultDetail"/>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="ProcessContext" type="tns:ProcessContext"/>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="CorrelationValue" type="xs:string"/>
+        </xs:schema>
+        <schema attributeFormDefault="unqualified"
+            elementFormDefault="unqualified"
+            targetNamespace="http://schemas.tibco.com/bw/pe/plugin/5.0/exceptions"
+            version="" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.tibco.com/bw/pe/plugin/5.0/exceptions">
+            <complexType name="ActivityExceptionType">
+                <sequence>
+                    <element name="msg" type="string"/>
+                    <element minOccurs="0" name="msgCode" type="string"/>
+                </sequence>
+            </complexType>
+            <element name="ActivityException" type="tns:ActivityExceptionType"/>
+            <complexType name="ActivityTimedOutExceptionType">
+                <complexContent>
+                    <extension base="tns:ActivityExceptionType"/>
+                </complexContent>
+            </complexType>
+            <element name="ActivityTimedOutException" type="tns:ActivityTimedOutExceptionType"/>
+            <complexType name="DuplicateKeyExceptionType">
+                <complexContent>
+                    <extension base="tns:ActivityExceptionType">
+                        <sequence>
+                            <element name="duplicateKey" type="string"/>
+                            <element minOccurs="0" name="previousJobID" type="string"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="DuplicateKeyException" type="tns:DuplicateKeyExceptionType"/>
+        </schema>
+        <xs:schema attributeFormDefault="unqualified"
+            elementFormDefault="qualified"
+            targetNamespace="http://tns.tibco.com/bw/activity/timer/xsd/output"
+            xmlns:tns="http://tns.tibco.com/bw/activity/timer/xsd/output" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:complexType name="TimerOutputSchemaType">
+                <xs:sequence>
+                    <xs:element form="unqualified" name="Now" type="xs:long"/>
+                    <xs:element form="unqualified" name="Hour" type="xs:int"/>
+                    <xs:element form="unqualified" name="Minute" type="xs:int"/>
+                    <xs:element form="unqualified" name="Second" type="xs:int"/>
+                    <xs:element form="unqualified" name="Week" type="xs:int"/>
+                    <xs:element form="unqualified" name="Month" type="xs:int"/>
+                    <xs:element form="unqualified" name="Year" type="xs:int"/>
+                    <xs:element form="unqualified" name="Date" type="xs:date"/>
+                    <xs:element form="unqualified" name="Time" type="xs:string"/>
+                    <xs:element form="unqualified" name="DayOfMonth" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="TimerOutputSchema" type="tns:TimerOutputSchemaType"/>
+        </xs:schema>
+        <xs:schema attributeFormDefault="unqualified"
+            elementFormDefault="qualified"
+            targetNamespace="http://www.tibco.com/pe/WriteToLogActivitySchema"
+            xmlns:tns="http://www.tibco.com/pe/WriteToLogActivitySchema" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:complexType name="LogParametersType">
+                <xs:sequence>
+                    <xs:element form="unqualified" minOccurs="0"
+                        name="msgCode" type="xs:string"/>
+                    <xs:element form="unqualified" minOccurs="0"
+                        name="loggerName" type="xs:string"/>
+                    <xs:element form="unqualified" minOccurs="0"
+                        name="logLevel" type="xs:string"/>
+                    <xs:element form="unqualified" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="ActivityInput" type="tns:LogParametersType"/>
+        </xs:schema>
+        <xsd:schema elementFormDefault="qualified"
+            targetNamespace="http://www.tibco.com/namespaces/tnt/plugins/awss3+b5efd524-1e0a-48b8-9f69-29edeb9ba905+Input"
+            xmlns:Q1="http://www.tibco.com/namespaces/tnt/plugins/awss3+b5efd524-1e0a-48b8-9f69-29edeb9ba905+Input" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:element name="GetSingleObjectInputFileClass" type="Q1:GetSingleObjectInputFileClassType"/>
+            <xsd:element name="GetSingleObjectInputTextContentClass" type="Q1:GetSingleObjectInputContentType"/>
+            <xsd:element name="GetSingleObjectInputBinaryContentClass" type="Q1:GetSingleObjectInputContentType"/>
+            <xsd:element name="GetSingleObjectOutputFileClass" type="Q1:GetSingleObjectOutputFileClassType"/>
+            <xsd:element name="GetSingleObjectOutputTextContentClass" type="Q1:GetSingleObjectOutputTextContentClassType"/>
+            <xsd:element name="GetSingleObjectOutputBinaryContentClass" type="Q1:GetSingleObjectOutputBinaryContentClassType"/>
+            <xsd:element name="GetAllObjectsInput" type="Q1:GetAllObjectsInput"/>
+            <xsd:element name="GetAllObjectsOutput" type="Q1:GetAllObjectsOutput"/>
+            <xsd:element name="GetS3BucketsOutput" type="Q1:GetS3BucketsOutputType"/>
+            <xsd:element name="GetS3BucketsInput" type="Q1:GetS3BucketsInputType"/>
+            <xsd:element name="GetS3ObjectMetadataInput" type="Q1:GetS3ObjectMetadataInputType"/>
+            <xsd:element name="GetS3ObjectMetadataOutput" type="Q1:GetS3ObjectMetadataOutputType"/>
+            <xsd:element name="metadata" type="Q1:metadataType"/>
+            <xsd:complexType name="GetSingleObjectInputContentType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="key" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="versionId" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="range" type="Q1:RangeType"/>
+                    <!-- <xsd:element  name="amazonS3Connection" type="Q1:nativeJavaObjectKey" minOccurs="0" maxOccurs="1"></xsd:element> -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="amazonS3Connection" type="xsd:anySimpleType"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="customerEncryptionAlgorithm" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="customerEncryptionKey" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="customerKeyMD5" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="timeout" type="xsd:long"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetS3ObjectMetadataInputType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="key" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="versionId" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="amazonS3Connection" type="xsd:anySimpleType"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="customerEncryptionAlgorithm" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="customerEncryptionKey" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="customerKeyMD5" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetSingleObjectInputFileClassType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="key" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="versionId" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1"
+                        name="destinationFilePath" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="range" type="Q1:RangeType"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="amazonS3Connection" type="xsd:anySimpleType"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="customerEncryptionAlgorithm" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="customerEncryptionKey" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="customerKeyMD5" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="transferManagerConfig" type="Q1:TransferManagerConfigType"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="timeout" type="xsd:long"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="RangeType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1"
+                        name="start" type="xsd:long"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="end" type="xsd:long"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetS3ObjectMetadataOutputType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="key" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="metadata" type="Q1:metadataType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetSingleObjectOutputTextContentClassType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="key" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="textContent" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="metadata" type="Q1:metadataType"/>
+                    <!-- <xsd:element name="redirectLocation" type="xsd:string" minOccurs="0" maxOccurs="1"></xsd:element> -->
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetSingleObjectOutputBinaryContentClassType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="key" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="binaryContent" type="xsd:base64Binary"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="metadata" type="Q1:metadataType"/>
+                    <!-- <xsd:element name="redirectLocation" type="xsd:string" minOccurs="0" maxOccurs="1"></xsd:element> -->
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetSingleObjectOutputFileClassType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="key" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="destinationFilePath" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="metadata" type="Q1:metadataType"/>
+                    <!-- <xsd:element name="redirectLocation" type="xsd:string" minOccurs="0" maxOccurs="1"></xsd:element> -->
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="metadataType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="versionId" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="cacheControl" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="contentDisposition" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="contentEncoding" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="contentLength" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="contentMD5" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="contentType" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="eTag" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="expirationTime" type="xsd:dateTime"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="expirationTimeRuleId" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="httpExpiresDate" type="xsd:dateTime"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="instanceLength" type="xsd:int"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="lastModified" type="xsd:dateTime"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="ongoingRestore" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="restoreExpirationTime" type="xsd:dateTime"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="serverSideEncryption" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="sseAlgorithm" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="sseAwsKmsKeyId" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="sseCustomerAlgorithm" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="sseCustomerKeyMd5" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="storageClass" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="userMetadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element maxOccurs="1" minOccurs="0"
+                                    name="key" type="xsd:string"/>
+                                <xsd:element maxOccurs="1" minOccurs="0"
+                                    name="value" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetAllObjectsInput">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="prefix" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="amazonS3Connection" type="xsd:anySimpleType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetAllObjectsOutput">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="prefix" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="objectList" type="Q1:ObjectList"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ObjectList">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0"
+                        name="objectSummary" type="Q1:ObjectSummary"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ObjectSummary">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="eTag" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="key" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="lastModified" type="xsd:dateTime"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="owner" type="Q1:Owner"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="storageClass" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="size" type="xsd:long"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Owner">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="id" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="displayName" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetS3BucketsOutputType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetS3BucketsInputType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="prefix" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="amazonS3Connection" type="xsd:anySimpleType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="MetadataAttributeType">
+                <xsd:sequence>
+                    <xsd:element name="key" type="xsd:string"/>
+                    <xsd:element name="value" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="TransferManagerConfigType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="useTransferManager" type="xsd:boolean"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="disableParallelDownloads" type="xsd:boolean"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="downloadThreadCount" type="xsd:int"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+        <xsd:schema elementFormDefault="qualified"
+            targetNamespace="http://www.tibco.com/namespaces/tnt/plugins/awss3+b5efd524-1e0a-48b8-9f69-29edeb9ba905+Output"
+            xmlns:Q1="http://www.tibco.com/namespaces/tnt/plugins/awss3+b5efd524-1e0a-48b8-9f69-29edeb9ba905+Output" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:element name="GetSingleObjectInputFileClass" type="Q1:GetSingleObjectInputFileClassType"/>
+            <xsd:element name="GetSingleObjectInputTextContentClass" type="Q1:GetSingleObjectInputContentType"/>
+            <xsd:element name="GetSingleObjectInputBinaryContentClass" type="Q1:GetSingleObjectInputContentType"/>
+            <xsd:element name="GetSingleObjectOutputFileClass" type="Q1:GetSingleObjectOutputFileClassType"/>
+            <xsd:element name="GetSingleObjectOutputTextContentClass" type="Q1:GetSingleObjectOutputTextContentClassType"/>
+            <xsd:element name="GetSingleObjectOutputBinaryContentClass" type="Q1:GetSingleObjectOutputBinaryContentClassType"/>
+            <xsd:element name="GetAllObjectsInput" type="Q1:GetAllObjectsInput"/>
+            <xsd:element name="GetAllObjectsOutput" type="Q1:GetAllObjectsOutput"/>
+            <xsd:element name="GetS3BucketsOutput" type="Q1:GetS3BucketsOutputType"/>
+            <xsd:element name="GetS3BucketsInput" type="Q1:GetS3BucketsInputType"/>
+            <xsd:element name="GetS3ObjectMetadataInput" type="Q1:GetS3ObjectMetadataInputType"/>
+            <xsd:element name="GetS3ObjectMetadataOutput" type="Q1:GetS3ObjectMetadataOutputType"/>
+            <xsd:element name="metadata" type="Q1:metadataType"/>
+            <xsd:complexType name="GetSingleObjectInputContentType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="key" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="versionId" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="range" type="Q1:RangeType"/>
+                    <!-- <xsd:element  name="amazonS3Connection" type="Q1:nativeJavaObjectKey" minOccurs="0" maxOccurs="1"></xsd:element> -->
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="amazonS3Connection" type="xsd:anySimpleType"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="customerEncryptionAlgorithm" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="customerEncryptionKey" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="customerKeyMD5" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="timeout" type="xsd:long"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetS3ObjectMetadataInputType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="key" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="versionId" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="amazonS3Connection" type="xsd:anySimpleType"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="customerEncryptionAlgorithm" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="customerEncryptionKey" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="customerKeyMD5" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetSingleObjectInputFileClassType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="key" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="versionId" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1"
+                        name="destinationFilePath" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="range" type="Q1:RangeType"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="amazonS3Connection" type="xsd:anySimpleType"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="customerEncryptionAlgorithm" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="customerEncryptionKey" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="customerKeyMD5" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="transferManagerConfig" type="Q1:TransferManagerConfigType"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="timeout" type="xsd:long"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="RangeType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1"
+                        name="start" type="xsd:long"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="end" type="xsd:long"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetS3ObjectMetadataOutputType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="key" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="metadata" type="Q1:metadataType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetSingleObjectOutputTextContentClassType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="key" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="textContent" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="metadata" type="Q1:metadataType"/>
+                    <!-- <xsd:element name="redirectLocation" type="xsd:string" minOccurs="0" maxOccurs="1"></xsd:element> -->
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetSingleObjectOutputBinaryContentClassType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="key" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="binaryContent" type="xsd:base64Binary"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="metadata" type="Q1:metadataType"/>
+                    <!-- <xsd:element name="redirectLocation" type="xsd:string" minOccurs="0" maxOccurs="1"></xsd:element> -->
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetSingleObjectOutputFileClassType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="key" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="destinationFilePath" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="metadata" type="Q1:metadataType"/>
+                    <!-- <xsd:element name="redirectLocation" type="xsd:string" minOccurs="0" maxOccurs="1"></xsd:element> -->
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="metadataType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="versionId" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="cacheControl" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="contentDisposition" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="contentEncoding" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="contentLength" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="contentMD5" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="contentType" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="eTag" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="expirationTime" type="xsd:dateTime"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="expirationTimeRuleId" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="httpExpiresDate" type="xsd:dateTime"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="instanceLength" type="xsd:int"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="lastModified" type="xsd:dateTime"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="ongoingRestore" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="restoreExpirationTime" type="xsd:dateTime"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="serverSideEncryption" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="sseAlgorithm" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="sseAwsKmsKeyId" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="sseCustomerAlgorithm" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="sseCustomerKeyMd5" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="storageClass" type="xsd:string"/>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0" name="userMetadata">
+                        <xsd:complexType>
+                            <xsd:sequence>
+                                <xsd:element maxOccurs="1" minOccurs="0"
+                                    name="key" type="xsd:string"/>
+                                <xsd:element maxOccurs="1" minOccurs="0"
+                                    name="value" type="xsd:string"/>
+                            </xsd:sequence>
+                        </xsd:complexType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetAllObjectsInput">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="prefix" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="amazonS3Connection" type="xsd:anySimpleType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetAllObjectsOutput">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="prefix" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="objectList" type="Q1:ObjectList"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ObjectList">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0"
+                        name="objectSummary" type="Q1:ObjectSummary"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="ObjectSummary">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="eTag" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="key" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="lastModified" type="xsd:dateTime"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="owner" type="Q1:Owner"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="storageClass" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="size" type="xsd:long"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="Owner">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="id" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="displayName" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetS3BucketsOutputType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0"
+                        name="bucketName" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="GetS3BucketsInputType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="prefix" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="amazonS3Connection" type="xsd:anySimpleType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="MetadataAttributeType">
+                <xsd:sequence>
+                    <xsd:element name="key" type="xsd:string"/>
+                    <xsd:element name="value" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="TransferManagerConfigType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="useTransferManager" type="xsd:boolean"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="disableParallelDownloads" type="xsd:boolean"/>
+                    <xsd:element maxOccurs="1" minOccurs="0"
+                        name="downloadThreadCount" type="xsd:int"/>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+        <schema elementFormDefault="unqualified"
+            targetNamespace="http://schemas.tibco.com/bw/plugins/amazons3/6.0/Amazons3PluginExceptions"
+            xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.tibco.com/bw/plugins/amazons3/6.0/Amazons3PluginExceptions">
+            <element name="AmazonS3PluginException" type="tns:PluginExceptionType"/>
+            <element name="AmazonS3ClientException" type="tns:AmazonClientExceptionType"/>
+            <element name="AmazonS3ServiceException" type="tns:AmazonServiceExceptionType"/>
+            <complexType name="PluginExceptionType">
+                <sequence>
+                    <element name="msg" type="string"/>
+                    <element minOccurs="0" name="msgCode" type="string"/>
+                </sequence>
+            </complexType>
+            <complexType name="AmazonClientExceptionType">
+                <sequence>
+                    <element name="msg" type="string"/>
+                    <element minOccurs="0" name="msgCode" type="string"/>
+                </sequence>
+            </complexType>
+            <complexType name="AmazonServiceExceptionType">
+                <sequence>
+                    <element name="msg" type="string"/>
+                    <element minOccurs="0" name="msgCode" type="string"/>
+                </sequence>
+            </complexType>
+        </schema>
+        <schema elementFormDefault="unqualified"
+            targetNamespace="http://tns.tibco.com/bw/palette/internal/activityerror+bw.amazons3.GetObject"
+            xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:Q1="http://schemas.tibco.com/bw/plugins/amazons3/6.0/Amazons3PluginExceptions" xmlns:tns="http://tns.tibco.com/bw/palette/internal/activityerror+bw.amazons3.GetObject">
+            <import namespace="http://schemas.tibco.com/bw/plugins/amazons3/6.0/Amazons3PluginExceptions"/>
+            <element name="ActivityErrorData" type="tns:ActivityErrorDataType"/>
+            <complexType name="ActivityErrorDataType">
+                <choice>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:AmazonS3PluginException"/>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:AmazonS3ClientException"/>
+                    <element maxOccurs="1" minOccurs="0" ref="Q1:AmazonS3ServiceException"/>
+                </choice>
+            </complexType>
+        </schema>
+    </tibex:Types>
+    <tibex:ProcessInfo callable="false" createdBy="mpandav"
+        createdOn="Thu Nov 16 10:08:52 CET 2023" description=""
+        extraErrorVars="true" modifiers="public"
+        productVersion="2.8.3 V39 2023-08-01" scalable="false"
+        singleton="true" stateless="true" type="IT"/>
+    <tibex:ProcessInterface context="" input="" output=""/>
+    <tibex:ProcessTemplateConfigurations/>
+    <notation:Diagram measurementUnit="Pixel" type="BWProcess"
+        xmlns:bwnotation="http://tns.tibco.com/bw/runtime/BWNotation"
+        xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <children type="2001">
+            <children type="5001"/>
+            <children type="3001">
+                <styles xsi:type="notation:SortingStyle"/>
+                <styles xsi:type="notation:FilteringStyle"/>
+                <element href="//0/@process"/>
+            </children>
+            <children type="3002">
+                <styles xsi:type="notation:SortingStyle"/>
+                <styles xsi:type="notation:FilteringStyle"/>
+            </children>
+            <children type="3003">
+                <styles xsi:type="notation:SortingStyle"/>
+                <styles xsi:type="notation:FilteringStyle"/>
+            </children>
+            <children type="3004">
+                <children type="4018">
+                    <children type="3018">
+                        <children type="4020">
+                            <children type="3020">
+                                <children type="4005">
+                                    <children type="3007">
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.0"/>
+                                    <layoutConstraint x="-10"
+                                    xsi:type="notation:Bounds" y="114"/>
+                                    </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.1"/>
+                                    <layoutConstraint x="357"
+                                    xsi:type="notation:Bounds" y="114"/>
+                                    </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.2"/>
+                                    <layoutConstraint x="103"
+                                    xsi:type="notation:Bounds" y="114"/>
+                                    </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.3"/>
+                                    <layoutConstraint x="218"
+                                    xsi:type="notation:Bounds" y="114"/>
+                                    </children>
+                                    <styles xsi:type="notation:DrawerStyle"/>
+                                    <styles xsi:type="notation:SortingStyle"/>
+                                    <styles xsi:type="notation:FilteringStyle"/>
+                                    <element href="//0/@process/@activity/@activity"/>
+                                    </children>
+                                    <styles
+                                    fontName=".AppleSystemUIFont"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <styles xsi:type="bwnotation:ResizingStyle"/>
+                                    <element href="//0/@process/@activity/@activity"/>
+                                    <layoutConstraint height="243"
+                                    width="515" xsi:type="notation:Bounds"/>
+                                </children>
+                                <styles xsi:type="notation:SortingStyle"/>
+                                <styles xsi:type="notation:FilteringStyle"/>
+                            </children>
+                            <styles fontName=".AppleSystemUIFont"
+                                lineColor="0" xsi:type="notation:ShapeStyle"/>
+                            <styles xsi:type="bwnotation:BackgroundStyle"/>
+                            <styles xsi:type="bwnotation:ResizingStyle"/>
+                            <element href="//0/@process/@activity"/>
+                            <layoutConstraint height="365" width="444"
+                                x="30" xsi:type="notation:Bounds" y="20"/>
+                        </children>
+                        <styles xsi:type="notation:SortingStyle"/>
+                        <styles xsi:type="notation:FilteringStyle"/>
+                        <element href="//0/@process/@activity"/>
+                    </children>
+                    <styles fontName=".AppleSystemUIFont" lineColor="0" xsi:type="notation:ShapeStyle"/>
+                    <styles xsi:type="bwnotation:BackgroundStyle"/>
+                    <styles xsi:type="bwnotation:ResizingStyle"/>
+                    <element href="//0/@process/@activity"/>
+                    <layoutConstraint height="409" width="519" xsi:type="notation:Bounds"/>
+                </children>
+                <styles xsi:type="notation:SortingStyle"/>
+                <styles xsi:type="notation:FilteringStyle"/>
+                <element href="//0/@process"/>
+            </children>
+            <styles fontName=".AppleSystemUIFont" lineColor="0" xsi:type="notation:ShapeStyle"/>
+            <element href="//0/@process"/>
+            <layoutConstraint height="319" width="860" xsi:type="notation:Bounds"/>
+        </children>
+        <styles xsi:type="notation:DiagramStyle"/>
+        <element href="//0"/>
+        <edges
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName=".AppleSystemUIFont" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.0"/>
+            <bendpoints points="[0, 0, 0, 0]$[0, 0, 0, 0]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.3" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName=".AppleSystemUIFont" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.1"/>
+            <bendpoints points="[0, 0, 0, 0]$[0, 0, 0, 0]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.3"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName=".AppleSystemUIFont" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.2"/>
+            <bendpoints points="[25, 0, -71, 0]$[72, 0, -24, 0]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+    </notation:Diagram>
+    <tibex:NamespaceRegistry enabled="true">
+        <tibex:namespaceItem
+            namespace="http://www.tibco.com/pe/WriteToLogActivitySchema" prefix="tns"/>
+        <tibex:namespaceItem
+            namespace="http://www.tibco.com/bw/xpath/bw-custom-functions" prefix="bw"/>
+        <tibex:namespaceItem
+            namespace="http://www.tibco.com/namespaces/tnt/plugins/awss3+b5efd524-1e0a-48b8-9f69-29edeb9ba905+Input" prefix="tns1"/>
+        <tibex:namespaceItem
+            namespace="http://www.tibco.com/namespaces/tnt/plugins/awss3+b5efd524-1e0a-48b8-9f69-29edeb9ba905+Output" prefix="Q1"/>
+    </tibex:NamespaceRegistry>
+    <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://www.example.com/namespaces/tns/1699990752353"/>
+    <bpws:variables>
+        <bpws:variable element="ns:ProcessContext"
+            name="_processContext" sca-bpel:internal="true"/>
+        <bpws:variable element="ns0:TimerOutputSchema" name="Timer" sca-bpel:internal="true"/>
+        <bpws:variable element="ns2:ActivityInput" name="Log-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns2:ActivityInput" name="LogStart-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns3:GetSingleObjectInputFileClass"
+            name="GetObject-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns4:GetSingleObjectOutputFileClass"
+            name="GetObject" sca-bpel:internal="true"/>
+        <bpws:variable element="ns5:ActivityErrorData"
+            name="_error_GetObject" sca-bpel:internal="true"/>
+        <bpws:variable element="ns:ErrorReport" name="_error" sca-bpel:internal="true"/>
+        <bpws:variable name="amazons3Property"
+            sca-bpel:hotUpdate="false" sca-bpel:privateProperty="true"
+            sca-bpel:property="yes"
+            sca-bpel:sharedResourceType="{http://ns.tibco.com/bw/sharedresource/amazons3}Amazons3ClientConfiguration" type="xsd:string">
+            <bpws:from>
+                <bpws:literal>aws.AmazonConnectionResource</bpws:literal>
+            </bpws:from>
+        </bpws:variable>
+        <bpws:variable name="fileKey" sca-bpel:hotUpdate="false"
+            sca-bpel:privateProperty="true" sca-bpel:property="yes"
+            tibex:propertySource="//sharedLibrary///EnvOperations/AWS-S3/fileKey" type="xsd:string"/>
+        <bpws:variable name="bucketName" sca-bpel:hotUpdate="false"
+            sca-bpel:privateProperty="true" sca-bpel:property="yes"
+            tibex:propertySource="//sharedLibrary///EnvOperations/AWS-S3/bucketName" type="xsd:string"/>
+        <bpws:variable name="destinationFileLocation"
+            sca-bpel:hotUpdate="false" sca-bpel:privateProperty="true"
+            sca-bpel:property="yes"
+            tibex:propertySource="//sharedLibrary///EnvOperations/AWS-S3/destinationFileLocation" type="xsd:string"/>
+    </bpws:variables>
+    <bpws:extensions>
+        <bpws:extension mustUnderstand="no" namespace="http://www.eclipse.org/gmf/runtime/1.0.2/notation"/>
+        <bpws:extension mustUnderstand="no" namespace="http://www.tibco.com/bw/process/info"/>
+        <bpws:extension mustUnderstand="no" namespace="http://docs.oasis-open.org/ns/opencsa/sca-bpel/200801"/>
+        <bpws:extension mustUnderstand="no" namespace="http://docs.oasis-open.org/ns/opencsa/sca/200912"/>
+        <bpws:extension mustUnderstand="no" namespace="http://ns.tibco.com/bw/property"/>
+        <bpws:extension mustUnderstand="no" namespace="http://www.tibco.com/bpel/2007/extensions"/>
+    </bpws:extensions>
+    <bpws:scope name="scope">
+        <bpws:flow name="flow">
+            <bpws:links>
+                <bpws:link name="TimerToLog1" tibex:linkType="SUCCESS"/>
+                <bpws:link name="Log1ToGetObject" tibex:linkType="SUCCESS"/>
+                <bpws:link name="GetObjectToLog" tibex:linkType="SUCCESS"/>
+            </bpws:links>
+            <bpws:extensionActivity>
+                <tibex:receiveEvent createInstance="yes"
+                    eventTimeout="60" name="Timer"
+                    tibex:xpdlId="fe6c8f28-b946-441f-9df2-d9e33ee4e90c"
+                    variable="Timer" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    <bpws:sources>
+                        <bpws:source linkName="TimerToLog1"/>
+                    </bpws:sources>
+                    <tibex:eventSource>
+                        <bwext:BWActivity
+                            activityTypeID="bw.generalactivities.timer"
+                            version="6.0.0.001"
+                            xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
+                            xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
+                            xmlns:generalactivities="http://ns.tibco.com/bw/palette/generalactivities" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <activityConfig>
+                                <properties name="config" xsi:type="activityconfig:EMFProperty">
+                                    <type href="http://ns.tibco.com/bw/palette/generalactivities#//Timer"/>
+                                    <value
+                                    endTime="2023-11-16T10:09:01.921+0100"
+                                    intervalUnit="Minute"
+                                    startTime="2023-11-16T10:09:01.921+0100"
+                                    timeInterval="1" xsi:type="generalactivities:Timer"/>
+                                </properties>
+                            </activityConfig>
+                        </bwext:BWActivity>
+                    </tibex:eventSource>
+                </tibex:receiveEvent>
+            </bpws:extensionActivity>
+            <bpws:extensionActivity>
+                <tibex:activityExtension inputVariable="Log-input"
+                    name="LogEnd"
+                    tibex:xpdlId="c1f8b9d8-16b3-416f-81e1-937f029a87b5" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    <bpws:targets>
+                        <bpws:target linkName="GetObjectToLog"/>
+                    </bpws:targets>
+                    <tibex:inputBindings>
+                        <tibex:inputBinding
+                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.tibco.com/pe/WriteToLogActivitySchema&quot; xmlns:Q1=&quot;http://www.tibco.com/namespaces/tnt/plugins/awss3+b5efd524-1e0a-48b8-9f69-29edeb9ba905+Output&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;fileKey&quot;/>&lt;xsl:param name=&quot;GetObject&quot;/>&lt;xsl:template name=&quot;Log-input&quot; match=&quot;/&quot;>&lt;tns:ActivityInput>&lt;message>&lt;xsl:value-of select=&quot;concat(&amp;quot; #### Scheduler:  Successfully Downloaded file : &amp;quot;,$fileKey, &amp;quot; at location :&amp;quot;, $GetObject/Q1:destinationFilePath)&quot;/>&lt;/message>&lt;/tns:ActivityInput>&lt;/xsl:template>&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                    </tibex:inputBindings>
+                    <tibex:config>
+                        <bwext:BWActivity
+                            activityTypeID="bw.generalactivities.log"
+                            version="6.0.0.001"
+                            xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
+                            xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
+                            xmlns:generalactivities="http://ns.tibco.com/bw/palette/generalactivities" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <activityConfig>
+                                <properties name="config" xsi:type="activityconfig:EMFProperty">
+                                    <type href="http://ns.tibco.com/bw/palette/generalactivities#//Log"/>
+                                    <value role="Info"
+                                    suppressJobInfo="true" xsi:type="generalactivities:Log"/>
+                                </properties>
+                            </activityConfig>
+                        </bwext:BWActivity>
+                    </tibex:config>
+                </tibex:activityExtension>
+            </bpws:extensionActivity>
+            <bpws:extensionActivity>
+                <tibex:activityExtension inputVariable="LogStart-input"
+                    name="LogStart"
+                    tibex:xpdlId="fbedbf9b-9fad-4f14-8ca5-9b13c3377e6d" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    <bpws:targets>
+                        <bpws:target linkName="TimerToLog1"/>
+                    </bpws:targets>
+                    <bpws:sources>
+                        <bpws:source linkName="Log1ToGetObject"/>
+                    </bpws:sources>
+                    <tibex:inputBindings>
+                        <tibex:inputBinding
+                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns=&quot;http://www.tibco.com/pe/WriteToLogActivitySchema&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;fileKey&quot;/>&lt;xsl:param name=&quot;bucketName&quot;/>&lt;xsl:template name=&quot;Log1-input&quot; match=&quot;/&quot;>&lt;tns:ActivityInput>&lt;message>&lt;xsl:value-of select=&quot;concat(&amp;quot; #### Scheduler: Downloading File : &amp;quot;,$fileKey, &amp;quot; from S3 Bucket : &amp;quot;,$bucketName)&quot;/>&lt;/message>&lt;/tns:ActivityInput>&lt;/xsl:template>&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                    </tibex:inputBindings>
+                    <tibex:config>
+                        <bwext:BWActivity
+                            activityTypeID="bw.generalactivities.log"
+                            version="6.0.0.001"
+                            xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
+                            xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
+                            xmlns:generalactivities="http://ns.tibco.com/bw/palette/generalactivities" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <activityConfig>
+                                <properties name="config" xsi:type="activityconfig:EMFProperty">
+                                    <type href="http://ns.tibco.com/bw/palette/generalactivities#//Log"/>
+                                    <value role="Info"
+                                    suppressJobInfo="true" xsi:type="generalactivities:Log"/>
+                                </properties>
+                            </activityConfig>
+                        </bwext:BWActivity>
+                    </tibex:config>
+                </tibex:activityExtension>
+            </bpws:extensionActivity>
+            <bpws:extensionActivity>
+                <tibex:activityExtension inputVariable="GetObject-input"
+                    name="GetObject" outputVariable="GetObject"
+                    tibex:xpdlId="b5efd524-1e0a-48b8-9f69-29edeb9ba905" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    <bpws:targets>
+                        <bpws:target linkName="Log1ToGetObject"/>
+                    </bpws:targets>
+                    <bpws:sources>
+                        <bpws:source linkName="GetObjectToLog"/>
+                    </bpws:sources>
+                    <tibex:inputBindings>
+                        <tibex:inputBinding
+                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns1=&quot;http://www.tibco.com/namespaces/tnt/plugins/awss3+b5efd524-1e0a-48b8-9f69-29edeb9ba905+Input&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;fileKey&quot;/>&lt;xsl:param name=&quot;bucketName&quot;/>&lt;xsl:param name=&quot;destinationFileLocation&quot;/>&lt;xsl:template name=&quot;GetObject-input&quot; match=&quot;/&quot;>&lt;tns1:GetSingleObjectInputFileClass>&lt;tns1:bucketName>&lt;xsl:value-of select=&quot;$bucketName&quot;/>&lt;/tns1:bucketName>&lt;tns1:key>&lt;xsl:value-of select=&quot;$fileKey&quot;/>&lt;/tns1:key>&lt;tns1:destinationFilePath>&lt;xsl:value-of select=&quot;concat($destinationFileLocation, $fileKey)&quot;/>&lt;/tns1:destinationFilePath>&lt;/tns1:GetSingleObjectInputFileClass>&lt;/xsl:template>&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                    </tibex:inputBindings>
+                    <tibex:config>
+                        <bwext:BWActivity
+                            activityTypeID="bw.amazons3.GetObject"
+                            xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
+                            xmlns:amazons3="http://ns.tibco.com/bw/palette/amazons3"
+                            xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <activityConfig>
+                                <properties name="config" xsi:type="activityconfig:EMFProperty">
+                                    <type href="http://ns.tibco.com/bw/palette/amazons3#//GetObject"/>
+                                    <value
+                                    AmazonS3Configuration="amazons3Property"
+                                    bucketName="odido-bwce-demo-bucket"
+                                    operation="Single"
+                                    outputType="File" xsi:type="amazons3:GetObject"/>
+                                </properties>
+                            </activityConfig>
+                        </bwext:BWActivity>
+                    </tibex:config>
+                </tibex:activityExtension>
+            </bpws:extensionActivity>
+        </bpws:flow>
+    </bpws:scope>
+</bpws:process>

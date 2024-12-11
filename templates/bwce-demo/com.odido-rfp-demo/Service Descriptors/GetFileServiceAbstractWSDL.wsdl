@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.tibco.com/GetFileServiceAbstractWSDL/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="GetFileServiceAbstractWSDL"
+	targetNamespace="http://www.tibco.com/GetFileServiceAbstractWSDL/">
+	<wsdl:types>
+		<xsd:schema
+			targetNamespace="http://www.tibco.com/GetFileServiceAbstractWSDL/">
+			<xsd:element name="GetFileRequest">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="fileName" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GetFileResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="fileMetadata" type="xsd:string" />
+						<xsd:element name="fileContent" type="xsd:base64Binary" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="GetFileRequest">
+		<wsdl:part element="tns:GetFileRequest" name="parameters" />
+	</wsdl:message>
+	<wsdl:message name="GetFileResponse">
+		<wsdl:part element="tns:GetFileResponse" name="parameters" />
+	</wsdl:message>
+	<wsdl:portType name="GetFileServiceAbstractWSDL">
+		<wsdl:operation name="GetFile">
+			<wsdl:input message="tns:GetFileRequest" />
+			<wsdl:output message="tns:GetFileResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+</wsdl:definitions>

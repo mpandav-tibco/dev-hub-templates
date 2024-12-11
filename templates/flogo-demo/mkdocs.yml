@@ -1,0 +1,8 @@
+site_name: "Flogo_Webinar"
+site_description: "A service that makes an external call"
+
+nav:
+  - Introduction: index.md
+
+plugins:
+  - techdocs-core

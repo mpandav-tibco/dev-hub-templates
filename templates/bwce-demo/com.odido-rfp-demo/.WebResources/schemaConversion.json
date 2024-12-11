@@ -1,0 +1,17 @@
+{"records": [
+    {
+        "jsonSchemaLocation": "/com.odido-rfp-demo/Service Descriptors/jms.Requestor-Resource.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "http://www.example.com/namespaces/tns/1699990752353"
+    },
+    {
+        "jsonSchemaLocation": "/com.odido-rfp-demo/Service Descriptors/router.RouterProcess-router.json",
+        "conversionType": "linked",
+        "xsdSchemaTargetNamespace": "http://tns.tibco.com/bw/REST"
+    },
+    {
+        "jsonSchemaLocation": "/com.odido-rfp-demo/Service Descriptors/openapi-file-download.json",
+        "conversionType": "generated",
+        "xsdSchemaTargetNamespace": "/T1700143829778Converted/JsonSchema"
+    }
+]}

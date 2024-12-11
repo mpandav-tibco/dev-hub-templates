@@ -1,0 +1,8 @@
+site_name: "file-download-S3-3"
+site_description: "this project download the file from s3 bucket as a servuce"
+
+nav:
+- Introduction: index.md
+
+plugins:
+- techdocs-core

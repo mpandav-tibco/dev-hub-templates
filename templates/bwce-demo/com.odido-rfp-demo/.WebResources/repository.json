@@ -1,0 +1,37 @@
+{
+    "records": [{
+        "name": "Cloud",
+        "items": [],
+        "url": "https://integration.cloud.tibco.com:443"
+    }],
+    "resources": [
+        {
+            "location": "Service Descriptors/jms.Requestor-Resource.json",
+            "type": "generated"
+        },
+        {
+            "location": "Service Descriptors/jms.rest-Client-Resource.json",
+            "type": "generated"
+        },
+        {
+            "location": "Service Descriptors/router.RouterProcess-router.json",
+            "type": "generated"
+        },
+        {
+            "location": "Service Descriptors/router.dynamic-router.RouterProcess-router.json",
+            "type": "generated"
+        },
+        {
+            "location": "Service Descriptors/router.dynamic.RouterProcess-router.json",
+            "type": "generated"
+        },
+        {
+            "location": "Service Descriptors/router.static-transitional.RouterProcess-static-router.json",
+            "type": "generated"
+        },
+        {
+            "location": "Service Descriptors/router.dynamic.RouterProcess-dynamic-router.json",
+            "type": "generated"
+        }
+    ]
+}

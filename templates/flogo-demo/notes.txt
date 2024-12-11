@@ -1,0 +1,3 @@
+Call the service:
+
+nodemon --watch call-service.flogo --exec "./scripts/watch-script.sh ./call-service.flogo ./bin/call-service"

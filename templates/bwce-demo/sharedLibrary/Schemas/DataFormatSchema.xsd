@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:dataformat="http://ns.tibco.com/bw/palette/dataformat/0db58d87-d48b-43d4-b25c-6f88af271c26" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://ns.tibco.com/bw/palette/dataformat/0db58d87-d48b-43d4-b25c-6f88af271c26">
+    
+  <xsd:element name="Employee" tibex:source="sr.index.dataFormatResource">
+        
+    <xsd:complexType>
+            
+      <xsd:sequence>
+        <xsd:element name="employee_id" type="xsd:string"/>
+        <xsd:element name="first_name" type="xsd:string"/>
+        <xsd:element name="last_name" type="xsd:string"/>
+        <xsd:element name="email" type="xsd:string"/>
+        <xsd:element name="gender" type="xsd:string"/>
+        <xsd:element name="ip_address" type="xsd:string"/>
+        <xsd:element name="age" type="xsd:string"/>
+        <xsd:element name="start_date" type="xsd:string"/>
+        <xsd:element name="salary" type="xsd:string"/>
+        <xsd:element name="country" type="xsd:string"/>
+        <xsd:element name="postal_code" type="xsd:string"/>
+        <xsd:element name="favorite_color" type="xsd:string"/>
+      </xsd:sequence>
+          
+    </xsd:complexType>
+      
+  </xsd:element>
+  
+</xsd:schema>

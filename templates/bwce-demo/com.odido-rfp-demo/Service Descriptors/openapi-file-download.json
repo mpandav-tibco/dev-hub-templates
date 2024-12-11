@@ -1,0 +1,61 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Swagger File Operations - OpenAPI 3.0",
+    "description": "A API spec for file operations",
+    "version": "1.0.11"
+  },
+  "tags": [
+    {
+      "name": "file",
+      "description": "Operations about Files"
+    }
+  ],
+  "paths": {
+    "/files/{FileName}": {
+      "get": {
+        "tags": [
+          "file"
+        ],
+        "summary": "Returns the requested ZIP file as \"file download\" i.e. with content-disposition = attachment",
+        "description": "Returns a file from S3 bucket",
+        "parameters": [
+          {
+            "name": "FileName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/zip": {
+                "schema": {
+                  "$ref": "#/components/schemas/File"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid filename supplied"
+          },
+          "404": {
+            "description": "File not found with name provided"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "File": {
+        "type": "string",
+        "format": "binary"
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:GetFileServiceAbstractWSDL="http://www.tibco.com/GetFileServiceAbstractWSDL/" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:attachments="http://www.example.com/interface/attachments" xmlns:axis2="http://xsd.tns.tibco.com/bw/models/binding/soap/axis2" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:parameters="http://xmlns.example.com/routing-service/parameters" xmlns:parameters_1="http://xmlns.example.com/router/parameters" xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_97O5YILgEe6jBansLhUkCQ" targetNamespace="http://tns.tibco.com/bw/composite/com.odido-rfp-demo" name="com.odido-rfp-demo" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_GY27cYMtEe6jBansLhUkCQ" name="GetFileAttachmentPortType" promote="Component1Process/GetFileAttachmentPortType">
+    <sca:interface.wsdl xmi:id="_GY3igIMtEe6jBansLhUkCQ" interface="http://www.example.com/interface/attachments#wsdl.interface(GetFileAttachmentPortType)" scaext:wsdlLocation="../Service%20Descriptors/getFileAttachmentService.wsdl"/>
+    <scaext:binding xsi:type="axis2:SOAPServiceBinding" xmi:id="_P9moIIMtEe6jBansLhUkCQ" name="SOAPServiceBinding1" targetNamespace="http://www.tibco.com/4778606aa0de414a89eefaf896d3d5a6/SOAPServiceBinding1" portTypeQName="attachments:GetFileAttachmentPortType" transportBindingType="HTTP" attachmentStyle="SwA" modelVersion="1.2.0" portTypeWSDLLocation="platform:/resource/com.odido-rfp-demp/Service%20Descriptors/getFileAttachmentService.wsdl">
+      <bindingType xmi:id="_P9moIYMtEe6jBansLhUkCQ"/>
+      <inboundConfiguration xsi:type="axis2:HttpTransportConfiguration" xmi:id="_kkDHsIMtEe6jBansLhUkCQ" endpointURI="/SOAPServiceBinding1/getFileAttachmentPortType/" httpConnector="http.Resource"/>
+      <operationConfiguration xmi:id="_P9moIoMtEe6jBansLhUkCQ" operationName="getFileAttachment" action="getFileAttachment" actionNeeded="true">
+        <bindingType xmi:id="_P9moI4MtEe6jBansLhUkCQ"/>
+        <messageConfiguration xmi:id="_P9moJIMtEe6jBansLhUkCQ" messageQName="attachments:getFileAttachmentSoapIn" wsdlLocation="platform:/resource/com.odido-rfp-demp/Service%20Descriptors/getFileAttachmentService.wsdl">
+          <messagePartConfigurations xsi:type="axis2:BodyPartConfiguration" xmi:id="_P9moJYMtEe6jBansLhUkCQ" partName="fileName" partTypeName="XMLSchema:string"/>
+        </messageConfiguration>
+        <messageConfiguration xmi:id="_P9moJoMtEe6jBansLhUkCQ" messageQName="attachments:getFileAttachmentSoapOut" messageDirection="OUTPUT" wsdlLocation="platform:/resource/com.odido-rfp-demp/Service%20Descriptors/getFileAttachmentService.wsdl">
+          <messagePartConfigurations xsi:type="axis2:BodyPartConfiguration" xmi:id="_P9moJ4MtEe6jBansLhUkCQ" partName="fileMetaData" partTypeName="XMLSchema:string"/>
+          <messagePartConfigurations xsi:type="axis2:MIMEPartConfiguration" xmi:id="_VakAEIMtEe6jBansLhUkCQ" partName="fileContents" partTypeName="XMLSchema:base64Binary" contentType=""/>
+        </messageConfiguration>
+        <context xmi:id="_P9moKYMtEe6jBansLhUkCQ">
+          <inputMapping xmi:id="_P9moKoMtEe6jBansLhUkCQ"/>
+          <outputMapping xmi:id="_P9moK4MtEe6jBansLhUkCQ" direction="OUTPUT"/>
+        </context>
+      </operationConfiguration>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_P9moLIMtEe6jBansLhUkCQ" bindingName="SOAPServiceBinding1"/>
+  </sca:service>
+  <sca:service xmi:id="_5yxMEISJEe6DpoNTZIz0Kg" name="files" promote="ComponentFile-Download-API/files">
+    <sca:interface.wsdl xmi:id="_5zBqwISJEe6DpoNTZIz0Kg" interface="http://xmlns.example.com/20231116151004PLT#wsdl.interface(files)" scaext:wsdlLocation="../Processes/rest/File-Download-API.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_5zJmkISJEe6DpoNTZIz0Kg" name="RestService3" path="/files/{FileName}" docBasePath="http://localhost:7777/com.odido-rfp-demo" docResourcePath="Files-FileName" basePath="/" connector="http.Resource" structuredData="true" technologyVersion="3.0.0" implementation="Service Descriptors/openapi-file-download.json">
+      <operation xmi:id="_5zN4AISJEe6DpoNTZIz0Kg" operationName="get" httpMethod="GET" notes="Returns a file from S3 bucket" responseStyle="element" outputPartName="item">
+        <responseStatus xmi:id="_6CYVYISJEe6DpoNTZIz0Kg" statusCode="400" reasonPhrase="Invalid filename supplied" dataType="string"/>
+        <responseStatus xmi:id="_6CY8cISJEe6DpoNTZIz0Kg" statusCode="404" reasonPhrase="File not found with name provided" dataType="string"/>
+      </operation>
+      <parameters xmi:id="_6CY8cYSJEe6DpoNTZIz0Kg">
+        <parameterMapping xmi:id="_6CY8coSJEe6DpoNTZIz0Kg" parameterName="FileName" parameterType="Path" dataType="string" required="true"/>
+      </parameters>
+      <advancedConfig xmi:id="_5zJmkYSJEe6DpoNTZIz0Kg" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_5zN4AYSJEe6DpoNTZIz0Kg" bindingName="RestService3"/>
+  </sca:service>
+  <sca:property xmi:id="_-s2jkILgEe6jBansLhUkCQ" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_-tL6wILgEe6jBansLhUkCQ" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_-tNv8ILgEe6jBansLhUkCQ" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_-tQzQILgEe6jBansLhUkCQ" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_-tSBYILgEe6jBansLhUkCQ" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_-tUdoILgEe6jBansLhUkCQ" name="BW.CLOUD.PORT" type="XMLSchema:int" scalable="true"/>
+  <sca:property xmi:id="_-tVrwILgEe6jBansLhUkCQ" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:component xmi:id="_70asUIMsEe6jBansLhUkCQ" name="Component1Process" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_70asUYMsEe6jBansLhUkCQ" processName="soap.GetFileAttachmentService"/>
+    <sca:service xmi:id="_GY2UYIMtEe6jBansLhUkCQ" name="GetFileAttachmentPortType">
+      <sca:interface.wsdl xmi:id="_GY27cIMtEe6jBansLhUkCQ" interface="http://www.example.com/interface/attachments#wsdl.interface(GetFileAttachmentPortType)" scaext:wsdlLocation="../Service%20Descriptors/getFileAttachmentService.wsdl"/>
+    </sca:service>
+  </sca:component>
+  <sca:component xmi:id="_w02n8IRfEe6DpoNTZIz0Kg" name="ComponentGet-File-S3-Bucket" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_w03PAIRfEe6DpoNTZIz0Kg" processName="aws-s3.Get-File-S3-Bucket"/>
+  </sca:component>
+  <sca:component xmi:id="_1qu_sISJEe6DpoNTZIz0Kg" name="ComponentFile-Download-API" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_1qvmwISJEe6DpoNTZIz0Kg" processName="rest.File-Download-API"/>
+    <sca:service xmi:id="_5yqeYISJEe6DpoNTZIz0Kg" name="files">
+      <sca:interface.wsdl xmi:id="_5yuv0ISJEe6DpoNTZIz0Kg" interface="http://xmlns.example.com/20231116151004PLT#wsdl.interface(files)"/>
+    </sca:service>
+  </sca:component>
+</sca:composite>

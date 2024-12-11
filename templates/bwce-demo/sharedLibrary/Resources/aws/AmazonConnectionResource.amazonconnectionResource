@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amazons3="http://ns.tibco.com/bw/sharedresource/amazons3" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmi:id="_LCKngILuEe6jBansLhUkCQ" name="aws.AmazonConnectionResource" type="amazons3:Amazons3ClientConfiguration">
+  <jndi:configuration xsi:type="amazons3:Amazons3ClientConfiguration" xmi:id="_LCTKYILuEe6jBansLhUkCQ" IdpEntryURL="https://tibcocloud.awsapps.com/start#" IdpUsername="mpandav@tibco.com" IdpPassword="#!tyOhpQ7wGTNXjMuv8i8XypddDZAegPVUWkCuajMPbWA=" AwsRole="arn:aws:sts::075021648303:assumed-role/AWSReservedSSO_use_71a20de8e48fa276/mpandav@tibco.com" TokenExpirationDuration="60" roleARN="arn:aws:s3:::odido-bwce-demo-bucket">
+    <substitutionBindings xmi:id="_66onkIPPEe6IlNDnN1QGtA" template="region" propName="/SharedResources/AWS/region"/>
+    <substitutionBindings xmi:id="_-W5TEIPPEe6IlNDnN1QGtA" template="accessKey" propName="/SharedResources/AWS/accessKey"/>
+    <substitutionBindings xmi:id="_-pI5oIPPEe6IlNDnN1QGtA" template="secretkey" propName="/SharedResources/AWS/secretKey"/>
+    <substitutionBindings xmi:id="_-1kMEIPPEe6IlNDnN1QGtA" template="sessionToken" propName="/SharedResources/AWS/sessionToken"/>
+  </jndi:configuration>
+</jndi:namedResource>

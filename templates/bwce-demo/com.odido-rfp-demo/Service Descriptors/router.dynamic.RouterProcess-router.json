@@ -1,0 +1,38 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "router",
+    "description" : "router service"
+  },
+  "host" : "localhost:18080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/dynamic/router" : {
+      "get" : {
+        "summary" : "getRouter",
+        "description" : "getRouter",
+        "operationId" : "get-router",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "name" : "backend",
+          "in" : "header",
+          "description" : "Backend Type: JMS, SOAP, REST",
+          "type" : "string",
+          "required" : false
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "a string to be returned",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : { }
+}

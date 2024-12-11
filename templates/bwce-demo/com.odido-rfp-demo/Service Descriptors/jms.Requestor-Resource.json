@@ -1,0 +1,43 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "Resource",
+    "description" : "Resource service"
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/jms/getmsg/" : {
+      "get" : {
+        "summary" : "getResource",
+        "description" : "getResource",
+        "operationId" : "get-jms-getmsg",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "a FileContents to be returned",
+            "schema" : {
+              "$ref" : "#/definitions/FileContents"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "FileContents" : {
+      "type" : "object",
+      "required" : [ "metadata", "binaryData" ],
+      "properties" : {
+        "metadata" : {
+          "type" : "string"
+        },
+        "binaryData" : { }
+      }
+    }
+  }
+}

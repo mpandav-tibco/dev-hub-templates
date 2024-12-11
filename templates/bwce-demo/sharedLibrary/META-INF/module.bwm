@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:property="http://ns.tibco.com/bw/property" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_eKM8oIMgEe6jBansLhUkCQ" targetNamespace="http://tns.tibco.com/bw/composite/sharedLibrary" name="sharedLibrary" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:property xmi:id="_eOveYIMgEe6jBansLhUkCQ" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_eOzv0IMgEe6jBansLhUkCQ" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_eO098IMgEe6jBansLhUkCQ" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_eO1lAIMgEe6jBansLhUkCQ" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_eO2MEIMgEe6jBansLhUkCQ" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_eO2zIIMgEe6jBansLhUkCQ" name="BW.CLOUD.PORT" type="XMLSchema:int" scalable="true"/>
+  <sca:property xmi:id="_eO4oUIMgEe6jBansLhUkCQ" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ax_soIPOEe6IlNDnN1QGtA" name="/SharedResources/AWS/region" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_hI02YIPPEe6IlNDnN1QGtA" name="/SharedResources/AWS/accessKey" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_hNSfoIPPEe6IlNDnN1QGtA" name="/SharedResources/AWS/secretKey" type="property:password" scaext:simpleValue="#!DMwRb0Y5D/ewp/FH/3LfBQ==" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_hRaKoIPPEe6IlNDnN1QGtA" name="/SharedResources/AWS/sessionToken" type="property:password" scaext:simpleValue="#!Y1v0uwRASBh2PPvUlvp5WQ==" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_aiEaQIPOEe6IlNDnN1QGtA" name="/SharedResources/HTTP/host" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_Kibb0IPQEe6IlNDnN1QGtA" name="/SharedResources/HTTP/port" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_b_ihAIPSEe6IlNDnN1QGtA" name="/EnvOperations/AWS-S3/fileKey" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_MJdBgIeVEe6EvJdoKUCh3A" name="/EnvOperations/AWS-S3/bucketName" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_EKCecIeWEe6EvJdoKUCh3A" name="/EnvOperations/AWS-S3/destinationFileLocation" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+</sca:composite>

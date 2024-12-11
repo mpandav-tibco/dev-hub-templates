@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+      <svg:svg xmlns:svg="http://www.w3.org/2000/svg" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:CustomFunctions="com.behaim.commons.xsl.CustomFunctions" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:html="http://www.w3.org/1999/xhtml" y="0px" xml:space="preserve" x="0px" width="498" version="1.1" id="Layer_1" height="220">
+		 <svg:style type="text/css">
+    .Rect { fill:rgb(245,246,206); stroke:rgb(150,0,0); stroke-width:1 }
+    .Line { fill:none; stroke:black; stroke-width:1 }
+    .DashLine { stroke:rgb(150,0,0); stroke-width:2; stroke-dasharray:10,10,10 }
+    .Text {font-family:courier; font-weight:bold; font-size:12px; text-anchor: middle}
+    .TextRight {font-family:courier; font-weight:normal; font-size:12px; text-anchor: left}
+    .Operation {fill:rgb(224,233,246); stroke:black; stroke-width:0.5}
+    .Message {fill:rgb(255,255,255); stroke:black; stroke-width:0.5}
+    .IOPut {fill:rgb(255,255,225); stroke:black; stroke-width:0.5}
+    .Port {fill:rgb(255,255,255); stroke:black; stroke-width:0.5}
+    .Service {fill:url(#Header); stroke:black; stroke-width:0.5}
+    .PortType {fill:url(#Header); stroke:black; stroke-width:0.5}
+	</svg:style>
+		<svg:defs>
+			<svg:marker viewBox="0 0 80 80" refY="40" refX="60" orient="auto" markerWidth="8" markerUnits="strokeWidth" markerHeight="7" id="arrow">
+				<svg:polyline points="0,0 80,40 0,80"/>
+			</svg:marker>
+			<svg:marker viewBox="0 -20 100 80" refY="20" refX="60" orient="auto" markerWidth="12" markerUnits="strokeWidth" markerHeight="12" id="arrowfilled">
+				<svg:polyline style="black;stroke-width:10" points="0,0 60,20 0,40 0,0" fill="black"/>
+			</svg:marker>
+			<svg:marker viewBox="0 0 180 80" refY="40" refX="60" orient="auto" markerWidth="12" markerUnits="strokeWidth" markerHeight="12" id="composite">
+				<svg:polyline style="stroke:rgb(150,0,0);stroke-width:10" points="60,40 120,0 180,40 120,80 60,40" fill="rgb(255,255,255)"/>
+			</svg:marker>
+			<svg:linearGradient y2="100%" y1="20%" x2="100%" x1="20%" id="Header">
+				<svg:stop style="stop-color:rgb(227,236,247);stop-opacity:1" offset="0%"/>
+				<svg:stop style="stop-color:rgb(251,252,254);stop-opacity:1" offset="100%"/>
+			</svg:linearGradient>
+		</svg:defs>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+				
+				
+				
+				
+								
+				
+				
+				
+				
+					
+				
+				
+				
+				
+				
+				
+				<svg:rect y="30" x="160" width="336" height="20" class="PortType"/>
+				<svg:image y="32" xlink:href="data:image/gif;base64,R0lGODlhEAAQAOYAAMW84MW93tfR6XBesG9drnJgsXFfsHNhsXVksXhmtH1suH1st4JyuY+AwpeIxpWHxZiKx56Ry5yPyZ+Sy6KWzKWZz6ic0K6k0bGn1NzX7OLe8FVCn1pHn11KpFpIn1lHnlxJoF5LpF1KoVxKoF1LoWFPp2BPpmFPpmJQp2RSqGJQpWBPomRSp2VTqGVUqWxbrWtbrGxcrHFgsW9ernVksoN0vIl6v4Z4u4t9v4p8vo6AwaGVzK6l0rmw2szG5F5OoWlZrK6l1P///////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAEMALAAAAAAQABAAAAedgEOCg4SFhj4OBQMGDj6GgjsDCg2UCgM7hjsuOhVBnhU6LpiDGSU2FkKpQgIWOCUZgw4LNTURqQC0NQwSgwdABMCpPcAwMAeDKCAiHx+pF8wiHCe9JiQeHqk8Hh8iI8eCEi0qKz+pGD8rKywUgxobMzeqQgE3MhuwgxMdCTn9/TEpJhiaEIIGgoM0Qgh85OPBCxMvIDh6RLGixSGBAAA7" x="162" width="16" height="16"/>
+				<svg:text y="45" x="178" class="TextRight">GetFileAttachmentPortType</svg:text>
+				
+				
+					
+					
+					
+					
+					
+					
+					
+					<svg:rect y="50" x="160" width="336" height="20" class="Operation"/>
+					<svg:image y="52" xlink:href="data:image/gif;base64,R0lGODlhEAAQALMAAIyl0sPO3V9/nwA8bjZ3rVqPu2qawgBOjP/78P///wAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAAkALAAAAAAQABAAAARDMMlJq7046zPOHskReN01BMOZothQAHABWgcHCIMAdB41GMAB4hes1H44gYFnKhCeshYhNR1ML5wQgdTDcLqasFgSAQA7" x="162" width="16" height="16"/>
+					<svg:text y="65" x="178" class="TextRight">getFileAttachment</svg:text>	   
+					
+										
+					
+					
+					
+					<svg:rect y="70" x="160" width="70" height="20" class="IOPut"/>
+					<svg:image y="72" xlink:href="data:image/gif;base64,R0lGODlhEAAQANUAAJDDvKfMxgBZSk2dj6fNxrvRzQJcSgJbSqjNxqjMxQZeSqjNxQZfSgpiSgphSg9mSrXSyRNrShNqSZjItpnItr3VzL3VyxlvSRlvSpzKtp3Ktr3Wy5zKtZ3KtR1zSaDMtSJ3SaDMtMTYzSZ6SSZ7SaPNtCl+SSl9SSp+SSp9SaTNtCyASaXOs8rbz////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAC4ALAAAAAAQABAAAAZvQJdwSCwaj0jXapUsrlrMpAl1QolEKeJgKyRVNuCNZTQsFAZCEGTNhoDKaJdnkUAEFoS6R3gWXgCAgYEYLn0uEhSJihMUEXxxDxkaHB0Zkg9wQg4hIR+dHw1lhgqkDCUqClpcRAcsBk1DAgKwtEJBADs=" x="162" width="16" height="16"/>
+					<svg:text y="84" x="180" class="TextRight">input</svg:text>
+					
+						
+						
+						
+						<svg:rect y="70" x="230" width="124" height="20" class="Port"/>
+						<svg:image y="74" xlink:href="data:image/gif;base64,R0lGODlhEAAQAMQAAJyQl5qQmZqPmpiQnZePnPn4+pSOoZSPoebl7JGOpubl7ZCOptva5dva5MXE1sXE1Y2Nqs/P3fDw9Pn5+o2OqoqNr4qNrunq9IeMsYWMtIeNsv///////wAAAAAAAAAAACH5BAEAABwALAAAAAAQABAAAAVFICeOZGmeaGoCbNuewCbPG3AGWzHt0yachI1EciluBifDBqEwHJ6G02LDaCRUHMomEoFgLZuHo4LVbIoYbGa9xrrfcFMIADs=" x="232" width="16" height="16"/>
+						<svg:text y="85" x="250" class="TextRight">fileName</svg:text>
+						
+						<svg:rect y="70" x="354" width="142" height="20" class="Port"/>
+						<svg:image y="74" xlink:href="data:image/gif;base64,R0lGODlhEAAQALMAAHiOtnqQuH2SuoCWvIOYvYWav4ecwEiIuBhooDB4rHWdudro8v///////wAAAAAAACH5BAEAAA0ALAAAAAAQABAAAARDsMlJq704U3W6/50iJUtpnmUyLkzrvovakG/NxGtbFMQgBICbjGZz4WYsg4HnC7SOxKIwJ50iUViZAsHterkijVgcAQA7" x="356" width="16" height="16"/>
+						<svg:text y="85" x="374" class="TextRight">s:string</svg:text>
+					
+					
+					
+					
+					
+					
+					
+					<svg:rect y="90" x="160" width="70" height="40" class="IOPut"/>
+					<svg:image y="102" xlink:href="data:image/gif;base64,R0lGODlhEAAQANUAACM+oCI/oCNAoSVDpCVDoyZDoydGpilIqChGpSxLqmh+wWd8v2p/wmyBxClJpytLqi5PrC5Oqy9RrjBRrjJUsG2ExW6GxnCIyDRXsjVZtDVatDRXsTZatDdbtTZaszhdtnKLy3GKyXOMyzZctZO45JK24pS45JW75pO55Je+6Ja855a955W75ZS55JrC65nA6Z7J8J7J76XS9qPQ9KfW96jY95jA0Ji/z5jB0JnB0Ji/zprC0P///wAAAAAAAAAAACH5BAEAADwALAAAAAAQABAAAAZ4QJ5wSCwahZ/P0dipjZZEDo3m0XAyPBEIRMTIvuANb7cLDSmztHpGEeYuwkkMBovN6xIhzsKLvP6Afy4QQjYVQg8liouKCUI3DUMOKC0tJiYkLQePDEQILKAnoAY8OjoKRQQrKgQFAwM8C7JGAikCUEUBALi8vUZBADs=" x="162" width="16" height="16"/>
+					<svg:text y="113" x="180" class="TextRight">output</svg:text>
+					
+						
+						
+						
+						<svg:rect y="90" x="230" width="124" height="20" class="Port"/>
+						<svg:image y="94" xlink:href="data:image/gif;base64,R0lGODlhEAAQAMQAAJyQl5qQmZqPmpiQnZePnPn4+pSOoZSPoebl7JGOpubl7ZCOptva5dva5MXE1sXE1Y2Nqs/P3fDw9Pn5+o2OqoqNr4qNrunq9IeMsYWMtIeNsv///////wAAAAAAAAAAACH5BAEAABwALAAAAAAQABAAAAVFICeOZGmeaGoCbNuewCbPG3AGWzHt0yachI1EciluBifDBqEwHJ6G02LDaCRUHMomEoFgLZuHo4LVbIoYbGa9xrrfcFMIADs=" x="232" width="16" height="16"/>
+						<svg:text y="105" x="250" class="TextRight">fileMetaData</svg:text>
+						
+						<svg:rect y="90" x="354" width="142" height="20" class="Port"/>
+						<svg:image y="94" xlink:href="data:image/gif;base64,R0lGODlhEAAQALMAAHiOtnqQuH2SuoCWvIOYvYWav4ecwEiIuBhooDB4rHWdudro8v///////wAAAAAAACH5BAEAAA0ALAAAAAAQABAAAARDsMlJq704U3W6/50iJUtpnmUyLkzrvovakG/NxGtbFMQgBICbjGZz4WYsg4HnC7SOxKIwJ50iUViZAsHterkijVgcAQA7" x="356" width="16" height="16"/>
+						<svg:text y="105" x="374" class="TextRight">s:string</svg:text>
+					
+						
+						
+						
+						<svg:rect y="110" x="230" width="124" height="20" class="Port"/>
+						<svg:image y="114" xlink:href="data:image/gif;base64,R0lGODlhEAAQAMQAAJyQl5qQmZqPmpiQnZePnPn4+pSOoZSPoebl7JGOpubl7ZCOptva5dva5MXE1sXE1Y2Nqs/P3fDw9Pn5+o2OqoqNr4qNrunq9IeMsYWMtIeNsv///////wAAAAAAAAAAACH5BAEAABwALAAAAAAQABAAAAVFICeOZGmeaGoCbNuewCbPG3AGWzHt0yachI1EciluBifDBqEwHJ6G02LDaCRUHMomEoFgLZuHo4LVbIoYbGa9xrrfcFMIADs=" x="232" width="16" height="16"/>
+						<svg:text y="125" x="250" class="TextRight">fileContents</svg:text>
+						
+						<svg:rect y="110" x="354" width="142" height="20" class="Port"/>
+						<svg:image y="114" xlink:href="data:image/gif;base64,R0lGODlhEAAQALMAAHiOtnqQuH2SuoCWvIOYvYWav4ecwEiIuBhooDB4rHWdudro8v///////wAAAAAAACH5BAEAAA0ALAAAAAAQABAAAARDsMlJq704U3W6/50iJUtpnmUyLkzrvovakG/NxGtbFMQgBICbjGZz4WYsg4HnC7SOxKIwJ50iUViZAsHterkijVgcAQA7" x="356" width="16" height="16"/>
+						<svg:text y="125" x="374" class="TextRight">s:base64Binary</svg:text>
+					
+					
+					
+					
+				
+			
+			
+			
+			<svg:text y="15" x="15" fill="gray"/>		  
+		</svg:svg>

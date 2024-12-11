@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" 
+xmlns:ns="http://ws-i.org/profiles/basic/1.1/xsd" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://www.example.com/interface/attachments" 
+xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tibex="http://www.tibco.com/bs3.2/extensions" 
+targetNamespace="http://www.example.com/interface/attachments" tibex:src="file:/C:/Users/Administrator/tmp/BoundAttachments/ServerAbstract.wsdl">
+
+	<message name="getFileAttachmentSoapIn">
+		<part name="fileName" type="s:string"/>
+	</message>
+	<message name="getFileAttachmentSoapOut">
+		<part name="fileMetaData" type="s:string"/>
+		<part name="fileContents" type="s:base64Binary"/>
+	</message>
+	<portType name="GetFileAttachmentPortType">
+		<operation name="getFileAttachment">
+			<input message="s1:getFileAttachmentSoapIn"/>
+			<output message="s1:getFileAttachmentSoapOut"/>
+		</operation>
+	</portType>
+</definitions>

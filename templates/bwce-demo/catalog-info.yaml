@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "file-download-S3-3"
+  description: "this project download the file from s3 bucket as a servuce"
+  links:
+  - title: TIBCO Home
+    url: https://www.tibco.com/
+  - title: TIBCO Documentation
+    url: https://docs.tibco.com/
+  annotations:
+    github.com/project-slug: TIBCO-Hub-Backstage/file-download-S3-3
+    backstage.io/techdocs-ref: dir:.
+    backstage.io/kubernetes-id: file-download-S3-3
+    jenkins.io/job-full-name: Build_Deploy_BWCE_TIBCO_PLATFORM
+spec:
+  type: service
+  lifecycle: development
+  owner: "group:default/tibco-templates"
