@@ -8,6 +8,8 @@ metadata:
       url: https://cloud.tibco.com/
     - title: Documentation
       url: https://eu.integration.cloud.tibco.com/docs/index.html
+    - title: TIBCO Cloud Integration
+      url: https://eu.integration.cloud.tibco.com/applications
   annotations:
     github.com/project-slug: ${{values.destination.owner + "/" + values.destination.repo}}
     backstage.io/techdocs-ref: dir:.
