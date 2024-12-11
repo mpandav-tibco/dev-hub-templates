@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: bwce-template-otk
+  name: bwce-template-s3-operation
   title: BWCE - S3 File Operation
   description: Create a new demo - BWCE project for an S3 File Operation
   tags:
