@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/DBXMLSchema" xmlns:tns="http://www.example.org/DBXMLSchema" elementFormDefault="qualified">
+
+    <element name="DBCustom" type="tns:DBResponseType"></element>
+
+    <complexType name="DBResponseType">
+    	<sequence>
+    		<element name="DatabaseTable" type="string"></element>
+    		<element name="Row" type="tns:rowType" minOccurs="0" maxOccurs="unbounded"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="rowType">
+    	<sequence>
+    		<element name="Column" type="tns:columnType" minOccurs="0" maxOccurs="unbounded"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="columnType">
+    	<sequence>
+    		<element name="Name" type="string"></element>
+    		<element name="Value" type="string" minOccurs="0" maxOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+</schema>
+

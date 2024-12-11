@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:audit="urn://tibco.com/CommonServices/Data/Event/Audit" xmlns:auditevt="urn://tibco.com/CommonServices/Data/Event/AuditEvent" xmlns:com="urn://tibco.com/CommonServices/Data/Common" xmlns:head="urn://tibco.com/CommonServices/Data/Message/MessageHeader" xmlns:rtc="urn://tibco.com/CommonServices/Data/Internal/RuntimeContext" xmlns:tns="urn://tibco.com/CommonServices/Audit/SendAuditEvent" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn://tibco.com/CommonServices/Audit/SendAuditEvent">
+
+	<!-- Imports -->
+	<xs:import namespace="urn://tibco.com/CommonServices/Data/Common" >
+	</xs:import>
+	<xs:import namespace="urn://tibco.com/CommonServices/Data/Internal/RuntimeContext" >
+	</xs:import>
+	<xs:import namespace="urn://tibco.com/CommonServices/Data/Event/AuditEvent" >
+	</xs:import>
+	<xs:import namespace="urn://tibco.com/CommonServices/Data/Message/MessageHeader" />
+
+	<!-- Elements -->
+	<xs:element name="sendSystemEventRequest" type="tns:SendSystemEventRequestType"/>
+	<xs:element name="sendAuditEventResponse" type="tns:SendAuditEventResponseType"/>
+	<xs:element name="sendAuditEventRequest" type="tns:SendAuditEventRequestType"/>
+	
+	<xs:element name="responseMessage" type="xs:string"/>
+	
+	<xs:element name="eventType" type="xs:string"/>
+	<xs:element name="message" type="xs:string"/>
+
+	<!-- Complex Types -->
+
+	<xs:complexType name="SendSystemEventRequestType">
+		<xs:sequence>
+			<xs:element ref="rtc:runtimeContext"/>
+			<xs:element ref="tns:eventType"/>
+			<xs:element ref="tns:message"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="AuditEventType">
+		<xs:sequence>
+			<xs:element minOccurs="1" ref="auditevt:eventType"/>
+			<xs:element maxOccurs="1" minOccurs="0" ref="auditevt:message"/>
+			<xs:element maxOccurs="1" minOccurs="0" ref="auditevt:auditElementList"/>
+			<xs:element minOccurs="0" ref="auditevt:payload"/>
+			<xs:element minOccurs="0" ref="auditevt:exceptionCode"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:element name="auditEvent" type="tns:AuditEventType"/>
+
+
+	<xs:complexType name="SendAuditEventRequestType">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:auditEvent"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SendAuditEventResponseType">
+		<xs:sequence>
+			<xs:element maxOccurs="1" minOccurs="0" ref="tns:responseMessage"/>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

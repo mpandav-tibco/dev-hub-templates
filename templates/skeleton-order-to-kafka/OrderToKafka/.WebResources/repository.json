@@ -1,0 +1,19 @@
+{
+    "records": [{
+        "name": "Cloud",
+        "items": [{
+            "localTimestamp": 1670511758000,
+            "localURI": "/OrderToKafka/Service Descriptors/Order-Sync-Service API_1.0.json",
+            "disabled": false,
+            "remoteTimestamp": 0,
+            "localHash": "4350815cb8b77dd138d81cd262ad98944231703a",
+            "remoteId": "254",
+            "remoteHash": "4350815cb8b77dd138d81cd262ad98944231703a"
+        }],
+        "url": "https://integration.cloud.tibco.com:443"
+    }],
+    "resources": [{
+        "location": "Service Descriptors/ordersync.Process-Order.json",
+        "type": "generated"
+    }]
+}

@@ -1,0 +1,127 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: bwce-template-db-maven
+  title: BWCE Template (DB Table) - Maven Pipeline
+  description: Create a new BWCE project with Documentation, that exposes a configured database table.
+  tags:
+    - tibco
+    - bwce
+    - maven
+    - postgres
+    - database
+    - table
+    - recommended
+
+spec:
+  owner: ACME
+  type: integration
+
+  parameters:
+    - title: Provide Database Details
+      required:
+        - name
+        - description
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Unique name of the BWCE-Database Project
+          ui:field: EntityNamePicker
+          ui:autofocus: true
+        description:
+          title: Description
+          type: string
+          description: A description for the BWCE-Database Project
+        table_name:
+          title: Table Name
+          type: string
+          description: The Database table that this BWCE-Project should expose as a service (customers / products)
+          default: 'customers'
+        db_url:
+          title: Database URL
+          type: string
+          description: The Database URL that this BWCE-Project should use to connect to the database
+          default: 'jdbc:tibcosoftwareinc:postgresql://postgres-internal-service.bwce-pg.svc.cluster.local:5432;DatabaseName=mydb'
+        db_user:
+          title: Database User
+          type: string
+          description: The Database user for this BWCE-Project to connect to the database
+          default: 'root'
+        db_pass:
+          title: Database Password
+          type: string
+          default: '#!Ur54lVPPs47bGTRzTDMyOaQhnjYIfbloim4Atg6HV08='
+          ui:field: Secret # will print '******' as value for property 'password' on Review Step
+        owner:
+          title: Owner
+          type: string
+          description: Owner of the component
+          ui:field: OwnerPicker
+          ui:options:
+            allowedKinds:
+              - Group
+
+    - title: Choose a location
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+
+  # This template is meant to be used on top of an existing template.
+  # By adding the following and fetching from an absolute URL you can
+  # add in the docs template
+  steps:
+    - id: fetch
+      name: BWCE Skeleton
+      action: fetch:template
+      input:
+        url: ./skeleton-db-maven
+        values:
+          name: ${{ parameters.name }}
+          description: ${{ parameters.description }}
+          destination: ${{ parameters.repoUrl | parseRepoUrl }}
+          owner: ${{ parameters.owner }}
+          table_name: ${{ parameters.table_name }}
+          db_url: ${{ parameters.db_url }}
+          db_user: ${{ parameters.db_user }}
+          db_pass: ${{ parameters.db_pass }}
+
+    - id: publish
+      name: Publish
+      action: publish:github
+      input:
+        allowedHosts: ["github.com"]
+        description: This is ${{ parameters.name }}
+        repoUrl: ${{ parameters.repoUrl }}
+
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: "/catalog-info.yaml"
+
+    - id: jenkinsEarBuild
+      name: Trigger Jenkins EAR Build
+      action: tibco:jenkins-trigger-ear-build
+      input:
+        name: ${{ parameters.name }}
+        job: Build_BWCE_EAR_Maven
+
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps.publish.output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}
+      - title: Open Jenkins Job
+        icon: dashboard
+        url: ${{ steps.jenkinsEarBuild.output.jobLink }}

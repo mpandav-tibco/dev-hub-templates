@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.example.org/audit" elementFormDefault="qualified"
+	targetNamespace="http://www.example.org/audit">
+
+	<element name="correlationID" type="string" />
+
+	<element name="correlationIdDesc" type="string" />
+
+	<element name="logAttributes" type="tns:logAttributesType" />
+
+	<element name="name" type="string" />
+
+	<element name="value" type="string" />
+
+	<element name="logPayload" type="string" />
+
+	<element name="logPayloadType" type="string" />
+
+	<element name="timestamp" type="string" />
+
+	<element name="currentProcessName" type="string" />
+
+	<element name="logMessage" type="string" />
+
+	<element name="logStage" type="string" />
+
+	<element name="isHealthCheck" type="boolean" />
+
+	<element name="interfaceID" type="string" />
+
+	<element name="scenarioID" type="string" />
+
+	<element name="sourceSystem" type="string" />
+
+	<element name="targetSystem" type="string" />
+
+	<element name="componentType" type="string" />
+
+	<element name="interfaceSourceProtocol" type="string" />
+
+	<element name="interfaceTargetProtocol" type="string" />
+
+	<element name="sourceConnectionDetails" type="string" />
+
+	<element name="targetConnectionDetails" type="string" />
+
+	<element name="repository" type="string" />
+	<element name="inputString" type="string"/>
+	<element name="object" type="string" />
+
+	<element name="sourcePayload" type="string" />
+
+	<element name="tibcoErrorStack" type="tns:tibcoErrorStackType" />
+
+	<element name="activityName" type="string" />
+
+	<element name="processStack" type="string" />
+
+	<element name="errorData" type="string" />
+
+	<element name="errorMessage" type="string" />
+
+	<element name="errorMessageCode" type="string" />
+
+	<element name="errorStackTrace" type="string" />
+
+	<element name="errorClass" type="string" />
+
+	<element name="errorFullClass" type="string" />
+
+	<element name="recoverableErrorString" type="string" />
+
+	<element name="recoverableFlag" type="boolean" />
+
+	<element name="nonRecoverableFlag" type="boolean" />
+
+	<element name="isRecoverable" type="boolean" />
+
+	<element name="isError" type="boolean" />
+
+	<element name="isFiltered" type="boolean" />
+
+	<element name="bwceExceptionCode" type="string" />
+
+	<element name="bwceExceptionMessage" type="string" />
+
+	<element name="errorCategory" type="string" />
+
+	<complexType name="metaDataType">
+		<sequence>
+			<element ref="tns:interfaceID" />
+			<element ref="tns:scenarioID" />
+			<element ref="tns:sourceSystem" />
+			<element ref="tns:targetSystem" />
+			<element ref="tns:componentType" />
+			<element ref="tns:interfaceSourceProtocol" />
+			<element ref="tns:interfaceTargetProtocol" />
+			<element ref="tns:sourceConnectionDetails" />
+			<element ref="tns:targetConnectionDetails" />
+			<element ref="tns:repository" />
+			<element ref="tns:object" />
+		</sequence>
+	</complexType>
+
+
+	<complexType name="auditStartType">
+		<sequence>
+            <element ref="tns:correlationID" />
+            <element ref="tns:correlationIdDesc" />
+			<element maxOccurs="unbounded" minOccurs="0"
+				ref="tns:logAttributes" />
+			<element ref="tns:logPayload" />
+			<element ref="tns:logPayloadType" />
+			<element ref="tns:timestamp" />
+			<element ref="tns:currentProcessName" />
+            <element ref="tns:logMessage" />
+        </sequence>
+	</complexType>
+
+	<complexType name="auditLogType">
+		<sequence>
+			<element ref="tns:logMessage" />
+			<element maxOccurs="unbounded" minOccurs="0"
+				ref="tns:logAttributes" />
+			<element ref="tns:currentProcessName" />
+			<element ref="tns:logPayload" />
+			<element ref="tns:logPayloadType" />
+			<element ref="tns:timestamp" />
+		</sequence>
+	</complexType>
+
+	<complexType name="logEventVarType">
+		<sequence>
+			<element ref="tns:correlationID" />
+			<element ref="tns:correlationIdDesc" />
+			<element maxOccurs="unbounded" minOccurs="0"
+				name="logAttributes" type="tns:logAttributesType" />
+		</sequence>
+
+	</complexType>
+
+	<complexType name="logType">
+		<sequence>
+			<element maxOccurs="1" minOccurs="1" ref="tns:metaData" />
+			<element maxOccurs="1" minOccurs="1" ref="tns:logEvent" />
+		</sequence>
+	</complexType>
+
+	<complexType name="errorType">
+		<sequence>
+			<element ref="tns:metaData" />
+			<element ref="tns:errorEvent" />
+		</sequence>
+	</complexType>
+
+	<complexType name="auditErrorType">
+		<sequence>
+			<element ref="tns:timestamp" />
+			<element ref="tns:currentProcessName" />
+			<element maxOccurs="unbounded" minOccurs="0"
+				ref="tns:recoverableErrorString" />
+			<element ref="tns:recoverableFlag" minOccurs="0" maxOccurs="1"/>
+			<element ref="tns:nonRecoverableFlag" minOccurs="0" maxOccurs="1"/>
+			<element name="tibcoErrorStack"
+				type="tns:tibcoErrorStackType" />
+		</sequence>
+	</complexType>
+
+	<complexType name="tibcoErrorStackType">
+		<sequence>
+            <element ref="tns:activityName"></element>
+            <element ref="tns:errorCategory" minOccurs="0"
+				maxOccurs="1">
+			</element>
+			<element ref="tns:processStack" />
+			<element ref="tns:errorMessage" />
+			<element ref="tns:errorMessageCode" />
+			<element ref="tns:errorStackTrace" />
+			<element ref="tns:errorClass" />
+			<element ref="tns:errorFullClass" />
+		</sequence>
+	</complexType>
+
+	<complexType name="logAttributesType">
+		<sequence maxOccurs="1" minOccurs="1">
+			<element ref="tns:name" />
+			<element ref="tns:value" />
+		</sequence>
+	</complexType>
+
+	<complexType name="decisionShVariableType">
+		<sequence>
+			<element ref="tns:isError" />
+			<element ref="tns:isRecoverable" />
+			<element ref="tns:isFiltered" />
+			<element ref="tns:isHealthCheck" />
+		</sequence>
+	</complexType>
+
+	<complexType name="excpLookupShVariableType">
+		<sequence maxOccurs="1" minOccurs="1">
+			<element ref="tns:bwceExceptionCode" />
+			<element ref="tns:bwceExceptionMessage" />
+			<element ref="tns:errorCategory" />
+			<element ref="tns:isRecoverable" />
+		</sequence>
+	</complexType>
+
+	<complexType name="errorEventType">
+		<sequence>
+            <element ref="tns:logStage" minOccurs="0"></element>
+            <element ref="tns:correlationID" minOccurs="0"/>
+			<element ref="tns:correlationIdDesc" minOccurs="0"/>
+			<element ref="tns:logAttributes" minOccurs="0"
+				maxOccurs="unbounded" />
+			<element ref="tns:timestamp" />
+			<element ref="tns:sourcePayload" />
+			<element ref="tns:currentProcessName" />
+			<element ref="tns:isRecoverable" minOccurs="0"/>
+			<element ref="tns:isHealthCheck" minOccurs="0"/>
+			<element maxOccurs="unbounded" minOccurs="0"
+				ref="tns:recoverableErrorString" />
+			<element ref="tns:tibcoErrorStack" />
+		</sequence>
+	</complexType>
+
+
+
+	<complexType name="routeProcessor">
+		<sequence>
+			<element ref="tns:sourcePayload" />
+		</sequence>
+	</complexType>
+
+	<element name="log" type="tns:logType" />
+
+	<element name="metaData" type="tns:metaDataType" />
+
+	<element name="logEvent" type="tns:logEventType" />
+
+	<complexType name="logEventType">
+		<sequence>
+            <element ref="tns:logStage" />
+            <element ref="tns:correlationID" />
+			<element ref="tns:correlationIdDesc" />
+			<element maxOccurs="unbounded" minOccurs="0"
+				ref="tns:logAttributes" />
+			<element ref="tns:logPayload" />
+			<element ref="tns:logPayloadType" />
+			<element ref="tns:timestamp" />
+			<element ref="tns:currentProcessName" />
+			<element ref="tns:logMessage" />
+			<element ref="tns:isHealthCheck" />
+		</sequence>
+	</complexType>
+
+	<element name="auditStart" type="tns:auditStartType" />
+
+	<element name="auditLog" type="tns:auditLogType" />
+
+	<element name="auditError" type="tns:auditErrorType" />
+
+	<element name="evaluationPath" type="tns:evaluationPathType" />
+
+	<complexType name="evaluationPathType">
+		<sequence>
+			<element ref="tns:sourcePayload" />
+		</sequence>
+	</complexType>
+
+	<element name="error" type="tns:errorType" />
+
+	<element name="errorEvent" type="tns:errorEventType" />
+
+	<element name="logEventVar" type="tns:logEventVarType" />
+
+	<element name="decisionShVariable"
+		type="tns:decisionShVariableType" />
+
+	<element name="excpLookupShVar" type="tns:excpLookupShVariableType" />
+
+	<element name="errorEventShvar" type="tns:auditErrorType" />
+
+	<complexType name="auditEndType">
+		<sequence>
+			<element ref="tns:logMessage" />
+			<element ref="tns:currentProcessName" />
+			<element ref="tns:timestamp" />
+		</sequence>
+	</complexType>
+
+	<element name="auditEnd" type="tns:auditEndType" />
+
+	<element name="routeProcessor" type="tns:routeProcessor" />
+
+
+	<element name="exception" type="tns:exceptionType" />
+
+
+	<complexType name="exceptionType">
+		<sequence>
+			<element maxOccurs="unbounded" minOccurs="0"
+				ref="tns:excpLookupShVar" />
+		</sequence>
+	</complexType>
+
+</schema>

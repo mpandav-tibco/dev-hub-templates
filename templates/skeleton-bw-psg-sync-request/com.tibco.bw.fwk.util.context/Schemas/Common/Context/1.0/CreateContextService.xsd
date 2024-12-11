@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="urn://tibco.com/CommonServices/Context/CreateContextService"
+	xmlns:tns="urn://tibco.com/CommonServices/Context/CreateContextService"
+	elementFormDefault="qualified"
+	xmlns:pref="urn://tibco.com/CommonServices/Data/Internal/RuntimeContext" xmlns:com="urn://tibco.com/CommonServices/Data/Common">
+
+	<import
+		namespace="urn://tibco.com/CommonServices/Data/Internal/RuntimeContext">
+	</import>
+	<import namespace="urn://tibco.com/CommonServices/Data/Common"></import>
+	<element name="createContextRequest"
+		type="tns:CreateContextRequestType">
+	</element>
+
+	<element name="createContextResponse"
+		type="tns:CreateContextResponseType">
+	</element>
+
+	<complexType name="CreateContextRequestType">
+		<sequence>
+			<element ref="com:flow" minOccurs="0"/>
+			<element ref="com:externalID" minOccurs="0" />
+		</sequence>
+	</complexType>
+
+	<complexType name="CreateContextResponseType">
+		<sequence>
+				<element ref="pref:runtimeContext"></element>
+				</sequence>
+	</complexType>
+</schema>

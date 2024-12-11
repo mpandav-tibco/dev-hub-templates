@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:audit="urn://tibco.com/CommonServices/Data/Event/Audit" xmlns:bwp="urn://tibco.com/CommonServices/Data/Internal/RuntimeContext" xmlns:com="urn://tibco.com/CommonServices/Data/Common" xmlns:fault="urn://tibco.com/CommonServices/Data/Event/Fault" xmlns:head="urn://tibco.com/CommonServices/Data/Message/MessageHeader" xmlns:tns="urn://tibco.com/CommonServices/ErrorHandler/CreateExceptionEvent" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn://tibco.com/CommonServices/ErrorHandler/CreateExceptionEvent">
+
+	<!-- Imports -->
+	<xs:import namespace="urn://tibco.com/CommonServices/Data/Common"/>
+	<xs:import namespace="urn://tibco.com/CommonServices/Data/Event/Fault" />
+	<xs:import namespace="urn://tibco.com/CommonServices/Data/Message/MessageHeader" />
+	<xs:import namespace="urn://tibco.com/CommonServices/Data/Internal/RuntimeContext" />
+
+	<!-- Elements -->	
+	<xs:element name="CreateExceptionEventRequest" type="tns:CreateExceptionEventRequestType"/>
+	<xs:element name="CreateExceptionEventResponse" type="tns:CreateExceptionEventResponseType"/>
+
+	<!-- Complex Types -->
+	<xs:complexType name="CreateExceptionEventRequestType">
+		<xs:sequence>
+			<xs:element ref="fault:faultDetails"/>
+			<xs:element maxOccurs="1" minOccurs="0" ref="com:payload"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CreateExceptionEventResponseType">
+		<xs:sequence>
+		<xs:element ref="fault:fault"/>
+			<xs:element name="responseFault">
+				<xs:complexType>
+					<xs:choice>
+						<xs:element ref="fault:validationFault"/>
+						<xs:element ref="fault:technicalFault"/>
+						<xs:element ref="fault:businessFault"/>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+
+</xs:schema>

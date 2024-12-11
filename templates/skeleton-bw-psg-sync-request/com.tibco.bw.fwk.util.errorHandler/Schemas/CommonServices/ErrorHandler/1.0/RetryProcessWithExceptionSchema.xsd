@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn://tibco.com/CommonServices/ErrorHandler/RetryProcessWithExceptionSchema" xmlns:context="urn://tibco.com/CommonServices/ErrorHandler/ErrorContext" xmlns:logic="urn://tibco.com/CommonServices/Data/Internal/Logic" xmlns:tns="urn://tibco.com/CommonServices/ErrorHandler/RetryProcessWithExceptionSchema" elementFormDefault="qualified">
+
+<import namespace="urn://tibco.com/CommonServices/ErrorHandler/ErrorContext" />
+<import namespace="urn://tibco.com/CommonServices/Data/Internal/Logic" />
+
+<element name="RetryProcessWithExceptionRequest" type="tns:RetryProcessWithExceptionRequestType"></element>
+
+<complexType name="RetryProcessWithExceptionRequestType">
+<sequence>
+	<element name="process" type="string" />
+	<element ref="logic:LogicRequest" />
+	<element name="ErrorContext" minOccurs="0">
+	<complexType>
+    	<sequence>
+    		<element name="totalAttempts" type="int"></element>
+    		<element name="retryExceptionCodeRE" type="string"></element>
+    		<element name="sleepTimeBetweenRetries" type="int"></element>
+    		<element name="unifiedSleepTime" type="boolean"></element>
+    	</sequence>
+    </complexType>
+	</element>
+
+</sequence>
+</complexType>
+
+</schema>

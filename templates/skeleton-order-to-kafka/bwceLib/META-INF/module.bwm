@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:dataformat="http://ns.tibco.com/bw/palette/dataformat" xmlns:http="http://xsd.tns.tibco.com/bw/models/sharedresource/httpclient" xmlns:jms="http://xsd.tns.tibco.com/bw/models/sharedresource/jms" xmlns:kafka="http://ns.tibco.com/bw/sharedresource/kafka" xmlns:property="http://ns.tibco.com/bw/property" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_UYa-MBmUEemvpZA0ShIQOA" targetNamespace="http://tns.tibco.com/bw/composite/bwceLib" name="bwceLib" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:property xmi:id="_Uc7qwBmUEemvpZA0ShIQOA" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_Uc_8MBmUEemvpZA0ShIQOA" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_UdCYcBmUEemvpZA0ShIQOA" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_UdENoBmUEemvpZA0ShIQOA" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_UdGC0BmUEemvpZA0ShIQOA" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_UdHQ8BmUEemvpZA0ShIQOA" name="BW.CLOUD.PORT" type="XMLSchema:int" scalable="true"/>
+  <sca:property xmi:id="_UdJGIBmUEemvpZA0ShIQOA" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_LUsk0BmdEemyYe1cS3qbdA" name="/Framework/Loggers/AuditErrorLogger" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_qfyH0BmdEemyYe1cS3qbdA" name="/Framework/Loggers/AuditLogger" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_qjrJUBmdEemyYe1cS3qbdA" name="/Framework/Loggers/FrameworkLogger" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_qnLJQBmdEemyYe1cS3qbdA" name="/Framework/Loggers/FrameworkErrorLogger" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_MHQDIBmdEemyYe1cS3qbdA" name="/Framework/LogLevels/AuditLogLevel" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_x1SVwBmdEemyYe1cS3qbdA" name="/Framework/LogLevels/AuditErrorLoglevel" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_x5kY0BmdEemyYe1cS3qbdA" name="/Framework/LogLevels/FrameworkLogLevel" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_x_97wBmdEemyYe1cS3qbdA" name="/Framework/LogLevels/FrameworkErrorLogLevel" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_MLr3MBmdEemyYe1cS3qbdA" name="/Framework/Payload/auditPayloadEnabled" type="XMLSchema:boolean" scaext:simpleValue="false" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_36vREBmdEemyYe1cS3qbdA" name="/Framework/Payload/errorPayloadEnabled" type="XMLSchema:boolean" scaext:simpleValue="false" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_MPbHsBmdEemyYe1cS3qbdA" name="/Framework/LogTransports/ConsoleLoggingEnabled" type="XMLSchema:boolean" scaext:simpleValue="false" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_DtQc4BmeEemyYe1cS3qbdA" name="/Framework/LogTransports/WebserviceLoggingEnabled" type="XMLSchema:boolean" scaext:simpleValue="false" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_MVrgsBmdEemyYe1cS3qbdA" name="/Framework/AlertingTransports/ConsoleAlertLoggingEnabled" type="XMLSchema:boolean" scaext:simpleValue="false" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_Fh7fgBmeEemyYe1cS3qbdA" name="/Framework/AlertingTransports/WebserviceAlertLoggingEnabled" type="XMLSchema:boolean" scaext:simpleValue="false" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_TZkaMBmdEemyYe1cS3qbdA" name="/Framework/Metadata/InterfaceID" type="XMLSchema:string" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_PIpiIBmeEemyYe1cS3qbdA" name="/Framework/Metadata/ScenarioID" type="XMLSchema:string" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_PMW9cBmeEemyYe1cS3qbdA" name="/Framework/Metadata/SourceSystem" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_POVTYBmeEemyYe1cS3qbdA" name="/Framework/Metadata/TargetSystem" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_PQBVcBmeEemyYe1cS3qbdA" name="/Framework/Metadata/ComponentType" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_PRi_cBmeEemyYe1cS3qbdA" name="/Framework/Metadata/InterfaceSourceProtocol" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_PTEpcBmeEemyYe1cS3qbdA" name="/Framework/Metadata/InterfaceTargetProtocol" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_PUXp8BmeEemyYe1cS3qbdA" name="/Framework/Metadata/RepoName" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_PVuU0BmeEemyYe1cS3qbdA" name="/Framework/Metadata/BusinessObject" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_Tdw9sBmdEemyYe1cS3qbdA" name="/Framework/onStartup/ExceptionLookupFile" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_W4DbECBzEemweJEjqSO9fg" name="/Framework/onStartup/ExceptionLookupDataFormat" type="dataformat:DataFormat" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_j2r3YCkIEem4OYfRWc-Ccg" name="/Framework/ExceptionTransports/enableRecoverySleep" type="XMLSchema:boolean" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_rjej8CkIEem4OYfRWc-Ccg" name="/Framework/ExceptionTransports/RecoverySleepTime" type="XMLSchema:int" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_S3X8EHcXEe2suOnlqJFzcg" name="/Framework/KibanaLogging/KibanaENV" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_Vl2UgHcXEe2suOnlqJFzcg" name="/Framework/KibanaLogging/Leanixid" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_VqKMwHcXEe2suOnlqJFzcg" name="/Framework/KibanaLogging/KibanaVersion" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_V0aU8HcXEe2suOnlqJFzcg" name="/Framework/KibanaLogging/KibanaLoglevel" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_WO2OMHcXEe2suOnlqJFzcg" name="/Framework/KibanaLogging/KibanaErrorLoglevel" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_lKoBABmdEemyYe1cS3qbdA" name="/EnvConnections/FrameworkRestConnection/FWLogServiceHostName" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_jYJE0BmfEemyYe1cS3qbdA" name="/EnvConnections/FrameworkRestConnection/FWErrorServiceHostName" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_jaToABmfEemyYe1cS3qbdA" name="/EnvConnections/FrameworkRestConnection/FWLogServicePort" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_jcOTkBmfEemyYe1cS3qbdA" name="/EnvConnections/FrameworkRestConnection/FWErrorServicePort" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_jd-nEBmfEemyYe1cS3qbdA" name="/EnvConnections/FrameworkRestConnection/FWLogServiceResourcePath" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_jfWgEBmfEemyYe1cS3qbdA" name="/EnvConnections/FrameworkRestConnection/FWErrorServiceResourcePath" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_O14x4CBnEemZPZyhVR-wYQ" name="/EnvConnections/FrameworkRestConnection/FWLogHTTPClient" type="http:HttpClientConfiguration" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_QJ7FQCBqEemZPZyhVR-wYQ" name="/EnvConnections/FrameworkRestConnection/FWErrorHTTPClient" type="http:HttpClientConfiguration" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_EHbCwCkoEem_psWI-S34VA" name="/EnvConnections/ObjectKafka/ObjectKafkaBootStrapServer" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_KWRKoCkoEem_psWI-S34VA" name="/EnvConnections/ObjectKafka/ObjectKafkaConnectionTimeout" type="XMLSchema:long" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_OXoHQCkoEem_psWI-S34VA" name="/EnvConnections/ObjectKafka/ObjectKafkaUsername" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_5FTjsCkoEem_psWI-S34VA" name="/EnvConnections/ObjectKafka/ObjectKafkaTopic" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_JR-CgCnMEemP6tBdzTNhDg" name="/EnvConnections/ObjectKafka/ObjectKafkaPassword" type="property:password" publicAccess="true" scalable="true"/>
+</sca:composite>

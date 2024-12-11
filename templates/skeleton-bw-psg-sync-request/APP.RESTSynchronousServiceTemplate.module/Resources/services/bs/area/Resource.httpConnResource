@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:httpconnector="http://xsd.tns.tibco.com/bw/models/sharedresource/httpconnector" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmi:id="_JSvkEZbmEeuG6-H1LOgaBA" name="services.bs.area.Resource" type="httpconnector:HttpConnectorConfiguration">
+  <jndi:configuration xsi:type="httpconnector:HttpConnectorConfiguration" xmi:id="_JSvkEpbmEeuG6-H1LOgaBA">
+    <substitutionBindings xmi:id="_JSvkE5bmEeuG6-H1LOgaBA" template="host" propName="BW.HOST.NAME"/>
+    <substitutionBindings xmi:id="_FBoEcJb3EeuG6-H1LOgaBA" template="port" propName="/resources/internal/HTTP/Port"/>
+    <substitutionBindings xmi:id="_2YCvcJb3EeuG6-H1LOgaBA" template="acceptQueueSize" propName="/resources/internal/HTTP/AcceptQueueSize"/>
+    <substitutionBindings xmi:id="_7Uc_EJb3EeuG6-H1LOgaBA" template="acceptors" propName="/resources/internal/HTTP/AcceptorThreads"/>
+    <substitutionBindings xmi:id="_LTqNwJb4EeuG6-H1LOgaBA" template="hideErrorResponse" propName="/resources/internal/HTTP/HideServerImplementation"/>
+    <substitutionBindings xmi:id="_RkboQJb4EeuG6-H1LOgaBA" template="headerBufferSize" propName="/resources/internal/HTTP/HeaderBufferSize"/>
+    <substitutionBindings xmi:id="_UIGe4Jb4EeuG6-H1LOgaBA" template="uriEncoding" propName="/resources/internal/HTTP/URIEncoding"/>
+    <substitutionBindings xmi:id="_Vi5B4Jb4EeuG6-H1LOgaBA" template="enableDNSLookup" propName="/resources/internal/HTTP/EnableDNSLookups"/>
+    <substitutionBindings xmi:id="_XA54AJb4EeuG6-H1LOgaBA" template="compression" propName="/resources/internal/HTTP/Compression"/>
+    <substitutionBindings xmi:id="_YHY-8Jb4EeuG6-H1LOgaBA" template="compressableMimeTypes" propName="/resources/internal/HTTP/CompressibleMimeTypes"/>
+    <substitutionBindings xmi:id="_Z1Q2AJb4EeuG6-H1LOgaBA" template="reverseProxyHost" propName="/resources/internal/HTTP/ReverseProxyHost"/>
+    <substitutionBindings xmi:id="_bPKBIJb4EeuG6-H1LOgaBA" template="reverseProxyPort" propName="/resources/internal/HTTP/ReserveProxyPort"/>
+    <substitutionBindings xmi:id="_jxYg4Jb4EeuG6-H1LOgaBA" template="enableAccessLogs" propName="/resources/internal/HTTP/EnableAccessLogs"/>
+    <substitutionBindings xmi:id="_k7zFkJb4EeuG6-H1LOgaBA" template="shareAcrossApplications" propName="/resources/internal/HTTP/ShareAcrossApplications"/>
+    <substitutionBindings xmi:id="_mbBcoJb4EeuG6-H1LOgaBA" template="requestBufferSize" propName="/resources/internal/HTTP/RequestBufferSize"/>
+    <substitutionBindings xmi:id="_n0QgcJb4EeuG6-H1LOgaBA" template="responseBufferSize" propName="/resources/internal/HTTP/ResponseBufferSize"/>
+    <substitutionBindings xmi:id="_o589MJb4EeuG6-H1LOgaBA" template="maxIdleTime" propName="/resources/internal/HTTP/MaxIdleTime"/>
+    <substitutionBindings xmi:id="_p78lsJb4EeuG6-H1LOgaBA" template="lowResourceMaxIdleTime" propName="/resources/internal/HTTP/LowResourceMaxIdleTime"/>
+    <substitutionBindings xmi:id="_rHImcJb4EeuG6-H1LOgaBA" template="lingerTime" propName="/resources/internal/HTTP/LingerTime"/>
+    <substitutionBindings xmi:id="_sHvu4Jb4EeuG6-H1LOgaBA" template="sessionTimeout" propName="/resources/internal/HTTP/SessionTimeout"/>
+    <substitutionBindings xmi:id="_tA16EJb4EeuG6-H1LOgaBA" template="maxPostSize" propName="/resources/internal/HTTP/MaxPostSize"/>
+    <substitutionBindings xmi:id="_uSsjgJb4EeuG6-H1LOgaBA" template="maxSavePostSize" propName="/resources/internal/HTTP/MaxSavePostSize"/>
+    <substitutionBindings xmi:id="_voAwoJb4EeuG6-H1LOgaBA" template="minThreads" propName="/resources/internal/HTTP/MinimumQTPThreads"/>
+    <substitutionBindings xmi:id="_w5hb0Jb4EeuG6-H1LOgaBA" template="maxThreads" propName="/resources/internal/HTTP/MaximumQTPThreads"/>
+    <substitutionBindings xmi:id="_VrRFUJb5EeuG6-H1LOgaBA" template="useDirectBuffers" propName="/resources/internal/HTTP/UseDirectBuffers"/>
+  </jndi:configuration>
+</jndi:namedResource>

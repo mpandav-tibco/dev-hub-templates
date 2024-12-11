@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="urn://tibco.com/CommonServices/Context/SetContextService"
+	xmlns:tns="urn://tibco.com/CommonServices/Context/SetContextService"
+	elementFormDefault="qualified"
+	xmlns:pref="urn://tibco.com/CommonServices/Data/Internal/RuntimeContext" xmlns:com="urn://tibco.com/CommonServices/Data/Common">
+
+	<import
+		namespace="urn://tibco.com/CommonServices/Data/Internal/RuntimeContext">
+	</import>
+	<import namespace="urn://tibco.com/CommonServices/Data/Common"></import>
+	<element name="setContextRequest"
+		type="tns:SetContextRequestType">
+	</element>
+
+	<element name="setContextResponse"
+		type="tns:SetContextResponseType">
+	</element>
+
+	<complexType name="SetContextRequestType">
+		<sequence>
+		<element ref="pref:runtimeContext"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="SetContextResponseType">
+		<sequence>
+				<element ref="pref:runtimeContext"></element>
+				</sequence>
+	</complexType>
+</schema>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn://tibco.com/CommonServices/Data/Internal/Logic"
+	xmlns:tns="urn://tibco.com/CommonServices/Data/Internal/Logic" elementFormDefault="qualified">
+	
+	
+	
+	<element name="LogicRequest">
+		<complexType>
+			<sequence>
+				<any minOccurs="0" maxOccurs="unbounded" processContents="skip" />
+			</sequence>
+		</complexType>
+	</element>
+	
+	<element name="PreprocessorRequest">
+		<complexType>
+			<sequence>
+				<any minOccurs="0" maxOccurs="unbounded" processContents="skip" />
+			</sequence>
+		</complexType>
+	</element> 
+		<element name="PreprocessorResponse">
+		<complexType>
+			<sequence>
+				<element name="discarded" type="boolean" />
+				<element name="message" type="string" minOccurs="0"/>
+			</sequence>
+		</complexType>
+	</element>
+
+	<element name="LogicResponse">
+		<complexType>
+			<sequence>
+				<element name="status" type="string" />
+				<element minOccurs="0" name="responseCode" type="string" />
+				<element minOccurs="0" name="response">
+					<complexType>
+						<sequence>
+							<any minOccurs="0" maxOccurs="unbounded" />
+						</sequence>
+					</complexType>
+				</element>
+			</sequence>
+		</complexType>
+	</element>
+</schema>

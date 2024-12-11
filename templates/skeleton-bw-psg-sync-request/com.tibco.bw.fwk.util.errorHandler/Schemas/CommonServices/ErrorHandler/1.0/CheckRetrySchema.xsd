@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn://tibco.com/CommonServices/ErrorHandler/CheckRetrySchema" xmlns:internal="urn://tibco.com/CommonServices/Data/Internal" xmlns:tns="urn://tibco.com/CommonServices/ErrorHandler/CheckRetrySchema" elementFormDefault="qualified">
+
+	<import namespace="urn://tibco.com/CommonServices/Data/Internal" />
+
+    <element name="CheckRetrySchemaRequest"
+    	type="tns:CheckRetrySchemaRequestType">
+    </element>
+    
+    <complexType name="CheckRetrySchemaRequestType">
+    	<sequence>
+    		<element name="status" type="string"></element>
+    		<element name="exceptionCode" type="string" minOccurs="0"></element>
+    		<choice>
+    			<element  ref="internal:throwableValidationFault"/>
+    			<element  ref="internal:throwableBusinessFault"/>
+    			<element  ref="internal:throwableTechnicalFault"/>
+    			<element  ref="internal:throwableFault"/>
+    		</choice>
+    		
+    	</sequence>
+    </complexType>
+</schema>

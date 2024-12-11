@@ -1,0 +1,28 @@
+Manifest-Version: 1.0.0.qualifier
+Bundle-ManifestVersion: 2
+Bundle-Name: LIB_XML Module
+Bundle-SymbolicName: com.tibco.bw.fwk.data
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: TIBCO Software Inc.
+TIBCO-BW-Edition: bwe,bwcf,bwcloud
+TIBCO-BW-JobSharedVariables: META-INF/module.jsv
+TIBCO-BW-SharedModule: META-INF/module.bwm
+TIBCO-BW-Version: 6.3.5 V17 2017-02-02
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Provide-Capability: com.tibco.bw.module; name="com.tibco.bw.fwk.data"; v
+ ersion:Version="1.0.0",com.tibco.bw.schemas; ns="urn://tibco.com/Common
+ Services/Data/Common",com.tibco.bw.schemas; ns="urn://tibco.com/CommonS
+ ervices/Data/Event/AuditEvent",com.tibco.bw.schemas; ns="urn://tibco.co
+ m/CommonServices/Data/Event/Error",com.tibco.bw.schemas; ns="urn://tibc
+ o.com/CommonServices/Data/Event/Fault",com.tibco.bw.schemas; ns="urn://
+ tibco.com/CommonServices/Data/Internal",com.tibco.bw.schemas; ns="urn:/
+ /tibco.com/CommonServices/Data/Internal/Logic",com.tibco.bw.schemas; ns
+ ="urn://tibco.com/CommonServices/Data/Internal/RuntimeContext",com.tibc
+ o.bw.schemas; ns="urn://tibco.com/CommonServices/Data/Internal/Validati
+ onError",com.tibco.bw.schemas; ns="urn://tibco.com/CommonServices/Data/
+ Message/MessageHeader"
+TIBCO-BW-ConfigProfile: META-INF/default.substvar
+TIBCO-BW-ModuleSharedVariables: META-INF/module.msv
+Require-Capability: com.tibco.bw.model; filter:="(name=bwext)"
+

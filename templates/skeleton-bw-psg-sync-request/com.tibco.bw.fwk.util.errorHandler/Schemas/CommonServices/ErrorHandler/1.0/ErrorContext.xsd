@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn://tibco.com/CommonServices/ErrorHandler/ErrorContext" xmlns:tns="urn://tibco.com/CommonServices/ErrorHandler/ErrorContext" elementFormDefault="qualified">
+
+    <element name="ErrorContext" type="tns:ErrorContextType"></element>
+    
+    <complexType name="ErrorContextType">
+    	<sequence>
+    		<element name="totalAttempts" type="int"></element>
+    		<element name="currentAttempt" type="int"></element>
+    		<element name="retryExceptionCodeRE" type="string"></element>
+    		<element name="sleepTimeBetweenRetries" type="int"></element>
+    		<element name="unifiedSleepTime" type="boolean"></element>
+    	</sequence>
+    </complexType>
+</schema>

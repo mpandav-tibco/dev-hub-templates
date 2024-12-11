@@ -1,0 +1,32 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "PGDatabaseManager.application"
+  },
+  "host" : "k8s-bwcename-bwceingr-98eb831145-249879362.eu-west-1.elb.amazonaws.com",
+  "schemes" : [ "http" ],
+  "consumes" : [ "application/json" ],
+  "produces" : [ "application/json" ],
+  "paths" : {
+    "/data" : {
+      "get" : {
+        "tags" : [ "Resource" ],
+        "summary" : "getResource",
+        "description" : "getResource",
+        "operationId" : "get-data",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Sample Description",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : { }
+}

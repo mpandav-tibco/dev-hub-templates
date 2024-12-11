@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="urn://tibco.com/CommonServices/Data/Internal/ValidationError" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn://tibco.com/CommonServices/Data/Internal/ValidationError">
+
+	<!-- Elements -->
+	<xs:element name="ValidationErrors" type="tns:ValidationErrorsType"/>
+	
+	<!--  Complex Types-->
+	<xs:complexType name="ValidationErrorsType">
+		<xs:sequence>
+			<xs:element name="ValidationError" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

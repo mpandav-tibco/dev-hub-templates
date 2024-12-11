@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsv:DocumentRoot xmlns:jsv="http://tns.tibco.com/bw/model/core/jobSV">
+  <jobSharedVariables>
+    <jobSharedVariable name="jobSharedVariable" type="{urn://tibco.com/CommonServices/Data/Internal/RuntimeContext}runtimeContext" initialValueMode="none"/>
+  </jobSharedVariables>
+  <import importType="http://www.w3.org/2001/XMLSchema" namespace="urn://tibco.com/CommonServices/Data/Internal/RuntimeContext"/>
+</jsv:DocumentRoot>

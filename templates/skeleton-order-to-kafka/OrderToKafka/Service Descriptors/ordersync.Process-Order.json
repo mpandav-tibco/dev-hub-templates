@@ -1,0 +1,153 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "tci-demo-sync service",
+    "description" : "tci-demo-sync service"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:18081/"
+  } ],
+  "paths" : {
+    "/tci/demo/sync/order" : {
+      "post" : {
+        "summary" : "create order with details",
+        "description" : "provide order details for synchronisation to backend services",
+        "operationId" : "create-order-with-details",
+        "parameters" : [ ],
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/OrderDetails"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "a OrderReference to be returned",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/OrderReference"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tci/demo/sync/order/{orderId}" : { }
+  },
+  "components" : {
+    "schemas" : {
+      "OrderDetails" : {
+        "type" : "object",
+        "properties" : {
+          "customerId" : {
+            "type" : "string"
+          },
+          "partnerId" : {
+            "type" : "string"
+          },
+          "shopId" : {
+            "type" : "string"
+          },
+          "invoiceAmount" : {
+            "type" : "string"
+          },
+          "invoiceAmountNet" : {
+            "type" : "string"
+          },
+          "orderTime" : {
+            "type" : "string"
+          },
+          "currency" : {
+            "type" : "string"
+          },
+          "remoteAddress" : {
+            "type" : "string"
+          },
+          "Items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Items",
+              "uniqueItems" : false
+            }
+          },
+          "billing" : {
+            "$ref" : "#/components/schemas/OrderDetails_billing"
+          },
+          "shipping" : {
+            "$ref" : "#/components/schemas/OrderDetails_billing"
+          }
+        }
+      },
+      "OrderReference" : {
+        "type" : "object",
+        "properties" : {
+          "orderId" : {
+            "type" : "string"
+          },
+          "location" : {
+            "type" : "string"
+          }
+        }
+      },
+      "OrderDetails_billing" : {
+        "type" : "object",
+        "properties" : {
+          "countryId" : {
+            "type" : "string"
+          },
+          "stateId" : {
+            "type" : "string"
+          },
+          "company" : {
+            "type" : "string"
+          },
+          "salutation" : {
+            "type" : "string"
+          },
+          "firstName" : {
+            "type" : "string"
+          },
+          "lastName" : {
+            "type" : "string"
+          },
+          "street" : {
+            "type" : "string"
+          },
+          "zipCode" : {
+            "type" : "string"
+          },
+          "city" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Items" : {
+        "type" : "object",
+        "properties" : {
+          "orderId" : {
+            "type" : "string"
+          },
+          "itemNumber" : {
+            "type" : "string"
+          },
+          "price" : {
+            "type" : "string"
+          },
+          "quantity" : {
+            "type" : "string"
+          },
+          "itemName" : {
+            "type" : "string"
+          }
+        }
+      }
+    }
+  }
+}

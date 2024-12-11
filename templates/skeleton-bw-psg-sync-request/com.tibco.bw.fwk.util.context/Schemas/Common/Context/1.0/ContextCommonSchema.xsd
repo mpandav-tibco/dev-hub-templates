@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/ContextCommonSchema"
+	xmlns:tns="http://www.example.org/ContextCommonSchema"
+	elementFormDefault="qualified" xmlns:pref="urn://tibco.com/CommonServices/Data/Internal/RuntimeContext" >
+
+	<import namespace="urn://tibco.com/CommonServices/Data/Internal/RuntimeContext">
+	</import>
+	<import namespace="urn://tibco.com/CommonServices/Data/Common"></import>
+	<element name="contextPayload" type="tns:CommonContextPayload">
+	</element>
+
+	<complexType name="CommonContextPayload">
+		<sequence>
+			<element ref="pref:runtimeContext"></element>
+			<element name="payload" type="string"></element>
+		</sequence>
+	</complexType>
+
+</schema>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsv:DocumentRoot xmlns:jsv="http://tns.tibco.com/bw/model/core/jobSV">
+  <jobSharedVariables>
+    <jobSharedVariable name="errorContext" type="{urn://tibco.com/CommonServices/ErrorHandler/ErrorContext}ErrorContext" initialValueMode="none" initialValue=""/>
+  </jobSharedVariables>
+  <import importType="http://www.w3.org/2001/XMLSchema" namespace="urn://tibco.com/CommonServices/ErrorHandler/ErrorContext" location="../Schemas/CommonServices/ErrorHandler/1.0/ErrorContext.xsd"/>
+</jsv:DocumentRoot>

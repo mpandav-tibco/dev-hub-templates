@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_zs6EEJblEeuG6-H1LOgaBA" targetNamespace="http://tns.tibco.com/bw/composite/APP.RESTSynchronousServiceTemplate.module" name="APP.RESTSynchronousServiceTemplate.module" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_NYXB4JcjEeu_95RqqqZfxA" name="resource" promote="Componentmain/resource">
+    <sca:interface.wsdl xmi:id="_NYdIgJcjEeu_95RqqqZfxA" interface="http://xmlns.example.com/20210406163854PLT#wsdl.interface(resource)" scaext:wsdlLocation="../Processes/services/bs/area/main.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_VeSnMJcjEeu_95RqqqZfxA" name="RestService" path="/resource" docBasePath="http://localhost:7777/APP.RESTSynchronousServiceTemplate.module" docResourcePath="Resource" connector="services.bs.area.Resource" structuredData="true" technologyVersion="2.0">
+      <operation xmi:id="_VeYGwJcjEeu_95RqqqZfxA" operationName="post" nickname="createItem" httpMethod="POST" notes="Create a new item">
+        <responseStatus xmi:id="_Z0sRwJ9dEeuzvqwCeovZgg" statusCode="200" reasonPhrase="OK" dataType="string"/>
+        <responseStatus xmi:id="_aFMy8J9dEeuzvqwCeovZgg" statusCode="400" reasonPhrase="Bad Request" dataType="string"/>
+        <responseStatus xmi:id="_a7zq0J9dEeuzvqwCeovZgg" statusCode="500" reasonPhrase="Internal Server Error" dataType="string"/>
+      </operation>
+      <clientFormat>JSON</clientFormat>
+      <advancedConfig xmi:id="_VeSnMZcjEeu_95RqqqZfxA" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_VeYt0JcjEeu_95RqqqZfxA" bindingName="RestService"/>
+  </sca:service>
+  <sca:property xmi:id="_0dIAEJblEeuG6-H1LOgaBA" name="BW.DEPLOYMENTUNIT.TYPE" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_0dUNUJblEeuG6-H1LOgaBA" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_0dYewJblEeuG6-H1LOgaBA" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_0dd-UJblEeuG6-H1LOgaBA" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_0dhosJblEeuG6-H1LOgaBA" name="BW.DOMAIN.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_0dmhMJblEeuG6-H1LOgaBA" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_0dqyoJblEeuG6-H1LOgaBA" name="BW.APPSPACE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_0dvrIJblEeuG6-H1LOgaBA" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_0d0joJblEeuG6-H1LOgaBA" name="BW.CLOUD.PORT" type="XMLSchema:int" scalable="true"/>
+  <sca:property xmi:id="_0d5cIJblEeuG6-H1LOgaBA" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_6dS18JbpEeuG6-H1LOgaBA" name="/data/newProperty" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_7CXR4JbpEeuG6-H1LOgaBA" name="/data/newGroup/newProperty" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_-mV4gJb1EeuG6-H1LOgaBA" name="/resources/internal/HTTP/Port" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_3fjxIJb3EeuG6-H1LOgaBA" name="/resources/internal/HTTP/AcceptQueueSize" type="XMLSchema:int" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_8QGH8Jb3EeuG6-H1LOgaBA" name="/resources/internal/HTTP/AcceptorThreads" type="XMLSchema:int" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_N2O4MJb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/HideServerImplementation" type="XMLSchema:boolean" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_SrZ3YJb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/HeaderBufferSize" type="XMLSchema:int" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_VIkdYJb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/URIEncoding" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_WXiK4Jb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/EnableDNSLookups" type="XMLSchema:boolean" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_XmobQJb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/Compression" type="XMLSchema:boolean" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_ZXHhcJb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/CompressibleMimeTypes" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_a2TcQJb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/ReverseProxyHost" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_cWXg0Jb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/ReserveProxyPort" type="XMLSchema:int" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_kfCREJb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/EnableAccessLogs" type="XMLSchema:boolean" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_ltzKQJb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/ShareAcrossApplications" type="XMLSchema:boolean" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_nNzkcJb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/RequestBufferSize" type="XMLSchema:int" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_oih7sJb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/ResponseBufferSize" type="XMLSchema:int" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_plktEJb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/MaxIdleTime" type="XMLSchema:int" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_qxd4cJb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/LowResourceMaxIdleTime" type="XMLSchema:int" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_ry_m4Jb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/LingerTime" type="XMLSchema:int" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_srUWAJb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/SessionTimeout" type="XMLSchema:int" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_tzFPUJb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/MaxPostSize" type="XMLSchema:int" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_vSVbkJb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/MaxSavePostSize" type="XMLSchema:int" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_wkK24Jb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/MinimumQTPThreads" type="XMLSchema:int" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_xpNzYJb4EeuG6-H1LOgaBA" name="/resources/internal/HTTP/MaximumQTPThreads" type="XMLSchema:int" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_Wc9oAJb5EeuG6-H1LOgaBA" name="/resources/internal/HTTP/UseDirectBuffers" type="XMLSchema:boolean" publicAccess="true" scalable="true"/>
+  <sca:component xmi:id="_NYLbsJcjEeu_95RqqqZfxA" name="Componentmain" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_NYLbsZcjEeu_95RqqqZfxA" processName="services.bs.area.main"/>
+    <sca:service xmi:id="_NYRiUJcjEeu_95RqqqZfxA" name="resource">
+      <sca:interface.wsdl xmi:id="_NYSwcJcjEeu_95RqqqZfxA" interface="http://xmlns.example.com/20210406163854PLT#wsdl.interface(resource)" scaext:wsdlLocation="../Processes/services/bs/area/main.bwp"/>
+    </sca:service>
+  </sca:component>
+</sca:composite>

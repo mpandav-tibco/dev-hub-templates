@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	targetNamespace="urn://tibco.com/CommonServices/Data/Internal"
+	elementFormDefault="qualified"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="urn://tibco.com/CommonServices/Data/Internal" 
+	xmlns:fault="urn://tibco.com/CommonServices/Data/Event/Fault">
+	
+	<!-- Imports -->
+	<xs:import  namespace="urn://tibco.com/CommonServices/Data/Event/Fault"></xs:import>
+	
+	<!--  Elements -->
+	<xs:element name="throwableFault" type="tns:ThrowableType" />
+	<xs:element name="throwableValidationFault" type="tns:ThrowableType" />
+	<xs:element name="throwableBusinessFault" type="tns:ThrowableType" />
+	<xs:element name="throwableTechnicalFault" type="tns:ThrowableType" />
+	
+	<!-- Complex Types -->
+	<xs:complexType name="ThrowableType">
+		<xs:sequence>
+			<xs:element ref="fault:exceptionCode" minOccurs="0" />
+			<xs:element ref="fault:exceptionName" minOccurs="0" />
+			<xs:element ref="fault:exceptionTimestamp" />
+			<xs:element ref="fault:exceptionDescription" minOccurs="0" />
+			<xs:element ref="fault:exceptionDetails" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	
+</xs:schema>

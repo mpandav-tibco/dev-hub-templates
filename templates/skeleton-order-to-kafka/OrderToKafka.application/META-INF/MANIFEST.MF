@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: OrderToKafka application
+Bundle-SymbolicName: OrderToKafka.application
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: TIBCO Software Inc.
+TIBCO-BW-Version: 2.8.0 V26 2022-11-02
+TIBCO-BW-Edition: bwcloud
+TIBCO-BW-Application: META-INF/TIBCO.xml
+TIBCO-BW-ConfigProfile: META-INF/default.substvar

@@ -1,0 +1,482 @@
+{
+    "openapi": "3.0.0",
+    "info":
+    {
+        "title": "Order-Sync-Service API",
+        "version": "1.0",
+        "description": "Synchronizing an Order to Backend Systems via Kafka Messaging",
+        "contact":
+        {
+            "name": "Rene Kiessling",
+            "url": "https://tibco.com",
+            "email": "rkiessli@tibco.com"
+        },
+        "termsOfService": "https://cloud.tibco.com/tibco-cloud-overview"
+    },
+    "servers":
+    [
+        {
+            "url": "http://localhost:3000/tci/demo/sync"
+        }
+    ],
+    "paths":
+    {
+        "/order":
+        {
+            "parameters":
+            [],
+            "post":
+            {
+                "summary": "create order with details",
+                "tags":
+                [
+                    "demo"
+                ],
+                "operationId": "create-order-with-details",
+                "description": "provide order details for synchronisation to backend services",
+                "requestBody":
+                {
+                    "content":
+                    {
+                        "application/json":
+                        {
+                            "schema":
+                            {
+                                "$ref": "#/components/schemas/OrderDetails"
+                            },
+                            "examples":
+                            {
+                                "example-1":
+                                {
+                                    "$ref": "#/components/examples/OrderDetails"
+                                }
+                            }
+                        }
+                    },
+                    "description": "request must include all order details to synchronize with other systems"
+                },
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "Order Created",
+                        "content":
+                        {
+                            "application/json":
+                            {
+                                "schema":
+                                {
+                                    "$ref": "#/components/schemas/OrderReference"
+                                },
+                                "examples":
+                                {
+                                    "example-1":
+                                    {
+                                        "$ref": "#/components/examples/OrderReference"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters":
+                []
+            }
+        },
+        "/order/{orderId}":
+        {
+            "get":
+            {
+                "summary": "retrieve order details by id",
+                "description": "get all available order details",
+                "parameters":
+                [
+                    {
+                        "name": "orderId",
+                        "in": "path",
+                        "description": "order number",
+                        "required": true,
+                        "schema":
+                        {
+                            "type": "string",
+                            "default": ""
+                        }
+                    }
+                ],
+                "responses":
+                {
+                    "200":
+                    {
+                        "description": "success response",
+                        "content":
+                        {
+                            "application/json":
+                            {
+                                "schema":
+                                {
+                                    "$ref": "#/components/schemas/OrderDetails"
+                                },
+                                "example":
+                                [
+                                    {
+                                        "customerId": "1",
+                                        "partnerId": "",
+                                        "shopId": "1",
+                                        "invoiceAmount": "201.86",
+                                        "invoiceAmountNet": "169.63",
+                                        "orderTime": "2012-08-31 08:51:46",
+                                        "currency": "EUR",
+                                        "remoteAddress": "217.86.205.141",
+                                        "Items":
+                                        [
+                                            {
+                                                "orderId": "220",
+                                                "itemNumber": "SW10001",
+                                                "price": "35.99",
+                                                "quantity": "1",
+                                                "itemName": "Versandkostenfreier Artikel"
+                                            }
+                                        ],
+                                        "billing":
+                                        {
+                                            "countryId": "2",
+                                            "stateId": "3",
+                                            "company": "shopware AG",
+                                            "salutation": "mr",
+                                            "firstName": "Max",
+                                            "lastName": "Mustermann",
+                                            "street": "Mustermannstrasse 92",
+                                            "zipCode": "48624",
+                                            "city": "Shufane"
+                                        },
+                                        "shipping":
+                                        {
+                                            "countryId": "2",
+                                            "stateId": "3",
+                                            "company": "shopware AG",
+                                            "salutation": "mr",
+                                            "firstName": "Max",
+                                            "lastName": "Mustermann",
+                                            "street": "Mustermannstrasse 92",
+                                            "zipCode": "48624",
+                                            "city": "Shufane"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "headers":
+                        {}
+                    }
+                },
+                "operationId": "retrieve-order-details"
+            }
+        }
+    },
+    "components":
+    {
+        "schemas":
+        {
+            "OrderReference":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "orderId":
+                    {
+                        "type": "string"
+                    },
+                    "location":
+                    {
+                        "type": "string"
+                    }
+                },
+                "x-examples":
+                {
+                    "example-1":
+                    {
+                        "orderId": "60",
+                        "location": "https://shop.example.com/api/orders/60"
+                    }
+                },
+                "description": "Reference to an existing order."
+            },
+            "OrderDetails":
+            {
+                "type": "object",
+                "x-examples":
+                {
+                    "example-1":
+                    {
+                        "customerId": "1",
+                        "partnerId": "",
+                        "shopId": "1",
+                        "invoiceAmount": "201.86",
+                        "invoiceAmountNet": "169.63",
+                        "orderTime": "2012-08-31 08:51:46",
+                        "currency": "EUR",
+                        "remoteAddress": "217.86.205.141",
+                        "Items":
+                        [
+                            {
+                                "orderId": "220",
+                                "itemNumber": "SW10001",
+                                "price": "35.99",
+                                "quantity": "1",
+                                "itemName": "Versandkostenfreier Artikel"
+                            }
+                        ],
+                        "billing":
+                        {
+                            "countryId": "2",
+                            "stateId": "3",
+                            "company": "shopware AG",
+                            "salutation": "mr",
+                            "firstName": "Max",
+                            "lastName": "Mustermann",
+                            "street": "Mustermannstrasse 92",
+                            "zipCode": "48624",
+                            "city": "Shufane"
+                        },
+                        "shipping":
+                        {
+                            "countryId": "2",
+                            "stateId": "3",
+                            "company": "shopware AG",
+                            "salutation": "mr",
+                            "firstName": "Max",
+                            "lastName": "Mustermann",
+                            "street": "Mustermannstrasse 92",
+                            "zipCode": "48624",
+                            "city": "Shufane"
+                        }
+                    }
+                },
+                "properties":
+                {
+                    "customerId":
+                    {
+                        "type": "string"
+                    },
+                    "partnerId":
+                    {
+                        "type": "string"
+                    },
+                    "shopId":
+                    {
+                        "type": "string"
+                    },
+                    "invoiceAmount":
+                    {
+                        "type": "string"
+                    },
+                    "invoiceAmountNet":
+                    {
+                        "type": "string"
+                    },
+                    "orderTime":
+                    {
+                        "type": "string"
+                    },
+                    "currency":
+                    {
+                        "type": "string"
+                    },
+                    "remoteAddress":
+                    {
+                        "type": "string"
+                    },
+                    "Items":
+                    {
+                        "type": "array",
+                        "items":
+                        {
+                            "type": "object",
+                            "properties":
+                            {
+                                "orderId":
+                                {
+                                    "type": "string"
+                                },
+                                "itemNumber":
+                                {
+                                    "type": "string"
+                                },
+                                "price":
+                                {
+                                    "type": "string"
+                                },
+                                "quantity":
+                                {
+                                    "type": "string"
+                                },
+                                "itemName":
+                                {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "billing":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "countryId":
+                            {
+                                "type": "string"
+                            },
+                            "stateId":
+                            {
+                                "type": "string"
+                            },
+                            "company":
+                            {
+                                "type": "string"
+                            },
+                            "salutation":
+                            {
+                                "type": "string"
+                            },
+                            "firstName":
+                            {
+                                "type": "string"
+                            },
+                            "lastName":
+                            {
+                                "type": "string"
+                            },
+                            "street":
+                            {
+                                "type": "string"
+                            },
+                            "zipCode":
+                            {
+                                "type": "string"
+                            },
+                            "city":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "shipping":
+                    {
+                        "type": "object",
+                        "properties":
+                        {
+                            "countryId":
+                            {
+                                "type": "string"
+                            },
+                            "stateId":
+                            {
+                                "type": "string"
+                            },
+                            "company":
+                            {
+                                "type": "string"
+                            },
+                            "salutation":
+                            {
+                                "type": "string"
+                            },
+                            "firstName":
+                            {
+                                "type": "string"
+                            },
+                            "lastName":
+                            {
+                                "type": "string"
+                            },
+                            "street":
+                            {
+                                "type": "string"
+                            },
+                            "zipCode":
+                            {
+                                "type": "string"
+                            },
+                            "city":
+                            {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "description": "Complete order details."
+            }
+        },
+        "securitySchemes":
+        {},
+        "requestBodies":
+        {},
+        "responses":
+        {},
+        "examples":
+        {
+            "OrderReference":
+            {
+                "value":
+                {
+                    "orderId": "60",
+                    "location": "https://shop.example.com/api/orders/60"
+                }
+            },
+            "OrderDetails":
+            {
+                "value":
+                {
+                    "customerId": "1",
+                    "partnerId": "",
+                    "shopId": "1",
+                    "invoiceAmount": "201.86",
+                    "invoiceAmountNet": "169.63",
+                    "orderTime": "2012-08-31 08:51:46",
+                    "currency": "EUR",
+                    "remoteAddress": "217.86.205.141",
+                    "Items":
+                    [
+                        {
+                            "orderId": "220",
+                            "itemNumber": "SW10001",
+                            "price": "35.99",
+                            "quantity": "1",
+                            "itemName": "Versandkostenfreier Artikel"
+                        }
+                    ],
+                    "billing":
+                    {
+                        "countryId": "2",
+                        "stateId": "3",
+                        "company": "shopware AG",
+                        "salutation": "mr",
+                        "firstName": "Max",
+                        "lastName": "Mustermann",
+                        "street": "Mustermannstrasse 92",
+                        "zipCode": "48624",
+                        "city": "Shufane"
+                    },
+                    "shipping":
+                    {
+                        "countryId": "2",
+                        "stateId": "3",
+                        "company": "shopware AG",
+                        "salutation": "mr",
+                        "firstName": "Max",
+                        "lastName": "Mustermann",
+                        "street": "Mustermannstrasse 92",
+                        "zipCode": "48624",
+                        "city": "Shufane"
+                    }
+                }
+            }
+        }
+    },
+    "tags":
+    [
+        {
+            "name": "demo"
+        }
+    ]
+}

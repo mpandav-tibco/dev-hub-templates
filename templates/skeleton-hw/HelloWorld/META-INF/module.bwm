@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_ek27MLdzEe2DAfBSRhvrYg" targetNamespace="http://tns.tibco.com/bw/composite/HelloWorld" name="HelloWorld" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_vyJtoLdzEe2DAfBSRhvrYg" name="greeting" promote="ComponentProcess/greeting">
+    <sca:interface.wsdl xmi:id="_vyJtpLdzEe2DAfBSRhvrYg" interface="http://xmlns.example.com/20230228152332PLT#wsdl.interface(greeting)" scaext:wsdlLocation="../Processes/helloworld/Process.bwp"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_vyNYALdzEe2DAfBSRhvrYg" name="RestService" path="/greeting/{name}" docBasePath="http://localhost:7777/HelloWorld" docResourcePath="Resource" basePath="/" connector="helloworld.Resource" structuredData="true" technologyVersion="1.2" implementation=".WebResources/Resource">
+      <operation xmi:id="_vyN_ELdzEe2DAfBSRhvrYg" operationName="get" nickname="get-greeting" httpMethod="GET" notes="getResource" responseStyle="element" outputPartName="item">
+        <parameters xmi:id="_9juAELdzEe2DAfBSRhvrYg"/>
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_ERqewLd0Ee2DAfBSRhvrYg">
+        <parameterMapping xmi:id="_ERqewbd0Ee2DAfBSRhvrYg" parameterName="name" parameterType="Path" required="true"/>
+      </parameters>
+      <advancedConfig xmi:id="_vyNYAbdzEe2DAfBSRhvrYg" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_vyN_EbdzEe2DAfBSRhvrYg" bindingName="RestService"/>
+  </sca:service>
+  <sca:property xmi:id="_janwQLdzEe2DAfBSRhvrYg" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_jazWcLdzEe2DAfBSRhvrYg" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ja2ZwLdzEe2DAfBSRhvrYg" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ja4O8LdzEe2DAfBSRhvrYg" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ja6rMLdzEe2DAfBSRhvrYg" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ja-8oLdzEe2DAfBSRhvrYg" name="BW.CLOUD.PORT" type="XMLSchema:int" scalable="true"/>
+  <sca:property xmi:id="_jbFDQLdzEe2DAfBSRhvrYg" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_ON3aMLz7Ee2Hg97IPab_7A" name="KUB_MOD_PROPERTY" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:component xmi:id="_ervmULdzEe2DAfBSRhvrYg" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_ervmUbdzEe2DAfBSRhvrYg" processName="helloworld.Process"/>
+    <sca:service xmi:id="_vyIfgLdzEe2DAfBSRhvrYg" name="greeting">
+      <sca:interface.wsdl xmi:id="_vyIfgbdzEe2DAfBSRhvrYg" interface="http://xmlns.example.com/20230228152332PLT#wsdl.interface(greeting)"/>
+    </sca:service>
+  </sca:component>
+  <sca:component xmi:id="_5rUs4DzjEe6FcsdVo5TV7g" name="ComponentProcess1" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_5rUs4TzjEe6FcsdVo5TV7g" processName="helloworld.Process1"/>
+  </sca:component>
+</sca:composite>

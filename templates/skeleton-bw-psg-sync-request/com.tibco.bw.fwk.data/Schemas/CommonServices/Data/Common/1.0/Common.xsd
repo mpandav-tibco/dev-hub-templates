@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:tns="urn://tibco.com/CommonServices/Data/Common" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn://tibco.com/CommonServices/Data/Common">
+
+	<!-- Elements -->
+
+	<xs:element name="requestTimestamp" type="xs:dateTime"/>
+	<xs:element name="externalID" type="xs:string"/>
+	<xs:element name="requestID" type="xs:string"/>
+	<xs:element name="payload" type="tns:PayloadType"/>
+	<xs:element name="domain" type="xs:string"/>
+	<xs:element name="application" type="xs:string"/>
+	<xs:element name="flow" type="xs:string"/>
+	<xs:element name="applicationVersion" type="xs:string"/>
+	
+	<!-- Complex Types -->
+	<xs:complexType name="PayloadType">
+		<xs:sequence>
+			<xs:any maxOccurs="unbounded" minOccurs="0" namespace="##any" processContents="skip"/>
+		</xs:sequence>
+	</xs:complexType>
+
+		
+</xs:schema>

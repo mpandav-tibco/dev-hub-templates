@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:kafka="http://ns.tibco.com/bw/sharedresource/kafka" xmlns:keystore="http://xsd.tns.tibco.com/bw/sharedresource/trinity/models/cred/keystore" xmi:id="_PsAF4HcPEe2suOnlqJFzcg" name="ordersync.tcm-demo-KafkaConnectionResource" type="kafka:KafkaConnection">
+  <jndi:reference xmi:id="_ZogLQHcPEe2suOnlqJFzcg" key="trustStoreServiceProvider" type="keystore:KeystoreConfiguration" value="ordersync.KeystoreProviderResource"/>
+  <jndi:configuration xsi:type="kafka:KafkaConnection" xmi:id="_PsAs8HcPEe2suOnlqJFzcg" reconnectBackoffMs="50" retryBackoffMs="100" requestTimeout="40000" metadataMaxAge="300000" SSL="true" Authentication="true" AuthenticationType="Simple Username &amp; Password (PLAIN)" SchemaRegistryVendor="None">
+    <substitutionBindings xmi:id="_-h_NgHepEe27l4Uu9Rfmzw" template="bootstrapServers" propName="/SharedResource/Kafka/brokerURL"/>
+    <substitutionBindings xmi:id="_C5OTgHeqEe27l4Uu9Rfmzw" template="AuthUsername" propName="/SharedResource/Kafka/userName"/>
+    <substitutionBindings xmi:id="_EPqiAHeqEe27l4Uu9Rfmzw" template="AuthPassword" propName="/SharedResource/Kafka/passWord"/>
+  </jndi:configuration>
+</jndi:namedResource>

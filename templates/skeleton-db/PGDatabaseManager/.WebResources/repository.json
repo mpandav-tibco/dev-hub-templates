@@ -1,0 +1,13 @@
+{
+    "records": [],
+    "resources": [
+        {
+            "location": "Service Descriptors/pgdatabasemanager.GetDB_Data_SQLDirect-Resource.json",
+            "type": "generated"
+        },
+        {
+            "location": "Service Descriptors/pgdatabasemanager.GetDB_Data_SQLDirect_RenderJSON-Resource.json",
+            "type": "generated"
+        }
+    ]
+}

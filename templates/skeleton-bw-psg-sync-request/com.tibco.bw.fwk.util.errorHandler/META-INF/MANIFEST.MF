@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: LIB_TSUTIL_SystemErrorHandler_Client Module
+Bundle-SymbolicName: com.tibco.bw.fwk.util.errorHandler
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: TIBCO Software Inc.
+Require-Bundle: com.tibco.bw.fwk.data;bundle-version="1.0.0"
+TIBCO-BW-Edition: bwcf
+Provide-Capability: com.tibco.bw.module; name="com.tibco.bw.fwk.util.errorHandler"; version:Version="1.0.0",
+ com.tibco.bw.schemas; ns="urn://tibco.com/CommonServices/ErrorHandler/CheckRetrySchema",
+ com.tibco.bw.schemas; ns="urn://tibco.com/CommonServices/ErrorHandler/CreateExceptionEvent",
+ com.tibco.bw.schemas; ns="urn://tibco.com/CommonServices/ErrorHandler/ErrorContext",
+ com.tibco.bw.schemas; ns="urn://tibco.com/CommonServices/ErrorHandler/RetryProcessWithExceptionSchema",
+ com.tibco.bw.schemas; ns="urn://tibco.com/CommonServices/ErrorHandler/SendExceptionEvent",
+ com.tibco.bw.processes; name="com.tibco.bw.fwk.util.errorHandler"
+TIBCO-BW-Version: 6.3.5 V17 2017-02-02
+Require-Capability: com.tibco.bw.model; filter:="(name=bwext)",com.tibco.bw.module; filter:="(&(name=com.tibco.bw.fwk.data)(version=1.0.0))",com.tibco.bw.module; filter:="(&(name=com.tibco.bw.fwk.util.context)(version=1.0.0))",com.tibco.bw.palette; filter:="(name=bw.generalactivities)",com.tibco.bw.sharedresource.model; filter:="(name=bw.jdbc)",com.tibco.bw.sharedresource.model; filter:="(name=bw.jndiconfiguration)"
+TIBCO-BW-ConfigProfile: META-INF/default.substvar
+TIBCO-BW-ModuleSharedVariables: META-INF/module.msv
+TIBCO-BW-SharedModule: META-INF/module.bwm
+TIBCO-BW-JobSharedVariables: META-INF/module.jsv

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+	targetNamespace="urn://tibco.com/CommonServices/Data/Internal/RuntimeContext"
+	elementFormDefault="qualified"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="urn://tibco.com/CommonServices/Data/Internal/RuntimeContext" xmlns:com="urn://tibco.com/CommonServices/Data/Common">
+
+	<!-- Imports -->
+
+	<!-- Elements -->
+	<xs:import  namespace="urn://tibco.com/CommonServices/Data/Common"></xs:import>
+	<xs:element name="runtimeContext" type="tns:RuntimeContextType" />
+
+
+	<!-- Complex Types -->
+	<xs:complexType name="RuntimeContextType">
+		<xs:sequence>
+			<xs:element minOccurs="0" ref="com:requestTimestamp"/>
+			<xs:element minOccurs="0" ref="com:requestID"/>
+			<xs:element minOccurs="0" ref="com:externalID"/>
+			<xs:element ref="com:application" />
+			<xs:element ref="com:applicationVersion" />
+			<xs:element ref="com:flow" />
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

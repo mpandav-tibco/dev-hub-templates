@@ -1,0 +1,5 @@
+{"records": [{
+    "jsonSchemaLocation": "/OrderToKafka/Service Descriptors/Order-Sync-Service API_1.0.json",
+    "conversionType": "generated",
+    "xsdSchemaTargetNamespace": "/tci/demo/sync/T1670512241399Converted/JsonSchema"
+}]}

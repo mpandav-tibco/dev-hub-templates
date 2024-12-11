@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsv:DocumentRoot xmlns:jsv="http://tns.tibco.com/bw/model/core/jobSV">
+  <jobSharedVariables>
+    <jobSharedVariable name="decisionShVar" type="{http://www.example.org/audit}decisionShVariable" initialValueMode="none"/>
+    <jobSharedVariable name="logEventShVar" type="{http://www.example.org/audit}logEventVar" initialValueMode="none"/>
+    <jobSharedVariable name="errorEventShVar" type="{http://www.example.org/audit}errorEventShvar" initialValueMode="none"/>
+  </jobSharedVariables>
+  <import importType="http://www.w3.org/2001/XMLSchema" namespace="http://www.example.org/audit" location="../Schemas/audit.xsd"/>
+</jsv:DocumentRoot>

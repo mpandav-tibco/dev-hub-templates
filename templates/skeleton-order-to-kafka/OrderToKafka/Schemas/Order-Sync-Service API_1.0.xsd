@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="/tci/demo/sync/T1670512241399Converted/JsonSchema" xmlns:tns="/tci/demo/sync/T1670512241399Converted/JsonSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="OrderDetails_billing" type="tns:OrderDetails_billing"/>
+    <xs:complexType name="OrderDetails_billing">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="countryId" type="xs:string"/>
+            <xs:element minOccurs="0" name="stateId" type="xs:string"/>
+            <xs:element minOccurs="0" name="company" type="xs:string"/>
+            <xs:element minOccurs="0" name="salutation" type="xs:string"/>
+            <xs:element minOccurs="0" name="firstName" type="xs:string"/>
+            <xs:element minOccurs="0" name="lastName" type="xs:string"/>
+            <xs:element minOccurs="0" name="street" type="xs:string"/>
+            <xs:element minOccurs="0" name="zipCode" type="xs:string"/>
+            <xs:element minOccurs="0" name="city" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="OrderDetails_Items" type="tns:OrderDetails_Items"/>
+    <xs:complexType name="OrderDetails_Items">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="orderId" type="xs:string"/>
+            <xs:element minOccurs="0" name="itemNumber" type="xs:string"/>
+            <xs:element minOccurs="0" name="price" type="xs:string"/>
+            <xs:element minOccurs="0" name="quantity" type="xs:string"/>
+            <xs:element minOccurs="0" name="itemName" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="OrderDetails" type="tns:OrderDetails"/>
+    <xs:complexType name="OrderDetails">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="customerId" type="xs:string"/>
+            <xs:element minOccurs="0" name="partnerId" type="xs:string"/>
+            <xs:element minOccurs="0" name="shopId" type="xs:string"/>
+            <xs:element minOccurs="0" name="invoiceAmount" type="xs:string"/>
+            <xs:element minOccurs="0" name="invoiceAmountNet" type="xs:string"/>
+            <xs:element minOccurs="0" name="orderTime" type="xs:string"/>
+            <xs:element minOccurs="0" name="currency" type="xs:string"/>
+            <xs:element minOccurs="0" name="remoteAddress" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Items" type="tns:OrderDetails_Items"/>
+            <xs:element minOccurs="0" name="billing" type="tns:OrderDetails_billing"/>
+            <xs:element minOccurs="0" name="shipping" type="tns:OrderDetails_billing"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="OrderReference" type="tns:OrderReference"/>
+    <xs:complexType name="OrderReference">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="orderId" type="xs:string"/>
+            <xs:element minOccurs="0" name="location" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

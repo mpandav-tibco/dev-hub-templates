@@ -1,0 +1,13 @@
+{
+    "records": [],
+    "resources": [
+        {
+            "location": ".WebResources/docs.json",
+            "type": "generated"
+        },
+        {
+            "location": ".WebResources/Resource",
+            "type": "generated"
+        }
+    ]
+}

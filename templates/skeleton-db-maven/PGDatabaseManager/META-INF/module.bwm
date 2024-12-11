@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:property="http://ns.tibco.com/bw/property" xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_9v5FUMGvEe2elKJBMRq1cw" targetNamespace="http://tns.tibco.com/bw/composite/PGDatabaseManager" name="PGDatabaseManager" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_rOFS0sG2Ee2elKJBMRq1cw" name="data" promote="ComponentGetDB_Data_SQLDirect/data">
+    <sca:interface.wsdl xmi:id="_rOF54MG2Ee2elKJBMRq1cw" interface="http://xmlns.example.com/20230313163948PLT#wsdl.interface(data)"/>
+    <scaext:binding xsi:type="rest:RestServiceBinding" xmi:id="_rOWYkMG2Ee2elKJBMRq1cw" name="RestService" path="/data" docBasePath="http://localhost:7777/PGDatabaseManager" docResourcePath="Resource" basePath="/" connector="pgdatabasemanager.Resource" structuredData="true" technologyVersion="2.0" implementation="Service Descriptors/pgdatabasemanager.GetDB_Data_SQLDirect-Resource.json">
+      <operation xmi:id="_rOe7cMG2Ee2elKJBMRq1cw" operationName="get" nickname="get-data" httpMethod="GET" notes="getResource" responseStyle="element" outputPartName="item">
+        <clientFormat>json</clientFormat>
+        <clientRequestFormat>json</clientRequestFormat>
+      </operation>
+      <parameters xmi:id="_rQwMUMG2Ee2elKJBMRq1cw"/>
+      <advancedConfig xmi:id="_rOdtUMG2Ee2elKJBMRq1cw" blockingQueueSize="2147483647"/>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_rOe7ccG2Ee2elKJBMRq1cw" bindingName="RestService"/>
+  </sca:service>
+  <sca:property xmi:id="__Wgd0MGvEe2elKJBMRq1cw" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="__W2cEMGvEe2elKJBMRq1cw" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="__XA0IMGvEe2elKJBMRq1cw" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="__XIv8MGvEe2elKJBMRq1cw" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="__XPdoMGvEe2elKJBMRq1cw" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="__XWyYMGvEe2elKJBMRq1cw" name="BW.CLOUD.PORT" type="XMLSchema:int" scalable="true"/>
+  <sca:property xmi:id="__Xf8UMGvEe2elKJBMRq1cw" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_4kCJwMKGEe2elKJBMRq1cw" name="TableName" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_z8YKQMMXEe2BmJU8oMF2MA" name="DBUser" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_1RotAMMXEe2BmJU8oMF2MA" name="DBPass" type="property:password" scaext:simpleValue="#!mN6tkjrBijtv5KeTqRchog==" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_2V2jEMMXEe2BmJU8oMF2MA" name="DBURL" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:component xmi:id="_SYZoIMG1Ee2elKJBMRq1cw" name="ComponentGetDB_Data_SQLDirect" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_SYZoIcG1Ee2elKJBMRq1cw" processName="pgdatabasemanager.GetDB_Data_SQLDirect_RenderJSON"/>
+    <sca:service xmi:id="_rOFS0MG2Ee2elKJBMRq1cw" name="data">
+      <sca:interface.wsdl xmi:id="_rOFS0cG2Ee2elKJBMRq1cw" interface="http://xmlns.example.com/20230313163948PLT#wsdl.interface(data)"/>
+    </sca:service>
+  </sca:component>
+  <sca:component xmi:id="_wE4GgMMSEe2BmJU8oMF2MA" name="ComponentDisplayStartupINFO" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_wE4GgcMSEe2BmJU8oMF2MA" processName="pgdatabasemanager.DisplayStartupINFO"/>
+  </sca:component>
+</sca:composite>

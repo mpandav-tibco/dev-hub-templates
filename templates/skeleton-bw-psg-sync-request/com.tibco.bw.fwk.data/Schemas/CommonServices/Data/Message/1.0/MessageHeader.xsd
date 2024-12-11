@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:com="urn://tibco.com/CommonServices/Data/Common" xmlns:head="urn://tibco.com/CommonServices/Data/Message/MessageHeader" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn://tibco.com/CommonServices/Data/Message/MessageHeader">
+
+	<!-- Imports -->
+	<xs:import namespace="urn://tibco.com/CommonServices/Data/Common" />
+
+	<!-- Elements -->
+
+	<xs:element name="requestHeader" type="head:RequestHeaderType"/>
+	<xs:element name="responseHeader" type="head:ResponseHeaderType"/>
+	
+	<xs:element name="statusCode" type="xs:string"/>
+	<xs:element name="statusDescription" type="xs:string"/>
+	<xs:element name="statusDescriptionKey" type="xs:string"/>
+	<xs:element name="statusMessages" type="head:StatusMessagesType"/>
+
+	<!--  Complex Types-->
+	<xs:complexType name="RequestHeaderType">
+		<xs:sequence>
+			<xs:element minOccurs="0" ref="com:requestTimestamp"/>
+			<xs:element minOccurs="0" ref="com:requestID"/>
+			<xs:element minOccurs="0" ref="com:externalID"/>
+			<xs:element minOccurs="0" ref="com:application"/>
+			<xs:element ref="com:applicationVersion" />
+			<xs:element minOccurs="0" ref="com:flow"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ResponseHeaderType">
+		<xs:sequence>
+			<xs:element minOccurs="0" ref="head:statusCode"/>
+			<xs:element minOccurs="0" ref="head:statusDescription"/>
+			<xs:element minOccurs="0" ref="head:statusDescriptionKey"/>
+			<xs:element minOccurs="0" ref="head:statusMessages"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	
+	
+	<xs:complexType name="StatusMessagesType">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="messageCode" type="xs:string"/>
+			<xs:element minOccurs="0" name="messageDescription" type="xs:string"/>
+			<xs:element minOccurs="0" name="messageType" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

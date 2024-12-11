@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:tns="urn://tibco.com/CommonServices/Data/Event/Error" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn://tibco.com/CommonServices/Data/Event/Error">
+
+  <!-- Elements -->
+  <xs:element name="errorList" type="tns:ErrorListType"/>
+  <xs:element name="error" type="tns:ErrorType"/>
+  
+  <!-- Complex types -->
+  <xs:complexType name="ErrorListType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Error" type="tns:ErrorType"/>
+    </xs:sequence>    
+  </xs:complexType>
+    <xs:complexType name="ErrorType">
+      <xs:sequence>
+      <xs:element name="systemDetail" type="xs:string"/>
+      <xs:element name="errorDetail" type="tns:ErrorDetailType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ErrorDetailType">
+    <xs:sequence>
+      <xs:element name="errorLevel" type="tns:ErrorLevelType"/>
+      <xs:element name="stackTrace" type="xs:string"/>
+	  <xs:element name="msg" type="xs:string"/>
+	  <xs:element name="fullClass" type="xs:string"/>
+	  <xs:element name="class" type="xs:string"/>
+	  <xs:element name="processStack" type="xs:string"/>
+	  <xs:element name="msgCode" type="xs:string"/>
+	  <xs:element name="data" type="xs:anySimpleType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ErrorLevelType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="INFO"/>
+      <xs:enumeration value="WARN"/>
+      <xs:enumeration value="ERROR"/>
+      <xs:enumeration value="DEBUG"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

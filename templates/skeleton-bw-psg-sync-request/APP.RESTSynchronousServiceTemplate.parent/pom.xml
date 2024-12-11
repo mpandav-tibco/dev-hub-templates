@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.tibco.bw</groupId>
+  <artifactId>APP.AsynchronousServiceTemplate.parent</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+    <module>../../../../../Data/Projects/businessworks-templates/resources/modules/com.tibco.bw.fwk.data</module>
+    <module>../../../../../Data/Projects/businessworks-templates/resources/modules/com.tibco.bw.fwk.util.context</module>
+    <module>../../../../../Data/Projects/businessworks-templates/resources/modules/com.tibco.bw.fwk.util.audit</module>
+    <module>../../../../../Data/Projects/businessworks-templates/resources/modules/com.tibco.bw.fwk.util.errorHandler</module>
+    <module>../APP.AsynchronousServiceTemplate.module</module>
+    <module>../APP.AsynchronousServiceTemplate</module>
+  </modules>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.7.1</version>
+      </plugin>
+    </plugins>
+  </build>
+</project>

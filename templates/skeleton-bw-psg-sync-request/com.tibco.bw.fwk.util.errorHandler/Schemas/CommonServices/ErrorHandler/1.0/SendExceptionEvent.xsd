@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns:audit="urn://tibco.com/CommonServices/Data/Event/Audit" xmlns:fault="urn://tibco.com/CommonServices/Data/Event/Fault" xmlns:tns="urn://tibco.com/CommonServices/ErrorHandler/SendExceptionEvent" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn://tibco.com/CommonServices/ErrorHandler/SendExceptionEvent">
+	
+	<!-- Imports -->
+	<xs:import namespace="urn://tibco.com/CommonServices/Data/Event/Fault" />
+
+	<!-- Elements -->
+	<xs:element name="sendExceptionEventRequest" type="tns:SendExceptionEventRequestType"/>
+
+	<!-- Complex Types -->
+   	<xs:complexType name="SendExceptionEventRequestType">
+   		<xs:sequence>
+			<xs:element ref="fault:fault"/>
+   		</xs:sequence>
+  	</xs:complexType>
+
+
+</xs:schema>
