@@ -3,7 +3,7 @@ kind: Template
 metadata:
   name: bwce-template-otk
   title: BWCE - Order to Kafka
-  description: Create a new FedEx - BWCE project for an order to Kafka
+  description: Create a new DEMO - BWCE project for an order to Kafka
   tags:
     - tibco
     - bwce
