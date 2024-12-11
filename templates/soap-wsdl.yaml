@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: demo-soap-wsdl
+  description: The T-Shirt Inventory Service
+  tags:
+    - store
+    - rest
+  links:
+    - url: https://github.com/mpandav-tibco/dev-hub-templates/blob/mastart/templates/apis/
+      title: GitHub Repo
+      icon: github
+    - url: https://github.com/mpandav-tibco/dev-hub-templates/blob/mastart/templates/apis/Soap-Example.wsdl
+      title: WSDL Service
+      icon: code
+spec:
+  type: WSDL
+  lifecycle: experimental
+  owner: team-c
+  definition:
+    $text: ./apis/Soap-Example.wsdl
