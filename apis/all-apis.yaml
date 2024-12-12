@@ -6,3 +6,4 @@ metadata:
 spec:
   targets:
     - ./soap-wsdl/api-soap-wsdl.yaml
+    - ./product-catalgue/openapi-product-catalogue.yaml
