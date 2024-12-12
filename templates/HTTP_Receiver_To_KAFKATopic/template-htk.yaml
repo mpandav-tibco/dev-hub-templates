@@ -1,9 +1,9 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: bwce-template-otk
-  title: BWCE - EMS Q To Kaka Topic
-  description: Create a new BWCE project for an EMS Q to Kafka T
+  name: bwce-template-htk
+  title: BWCE - HTTP TO Kafka Pattern
+  description: Create a new BWCE project for an HTTP to Kafka
   tags:
     - tibco
     - bwce
