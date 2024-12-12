@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: bwce-template-otk
+  name: bwce-template-ktr
   title: BWCE - KAFKA TO REST
   description: Create a new BWCE project for an kafka to rest pattern
   tags:

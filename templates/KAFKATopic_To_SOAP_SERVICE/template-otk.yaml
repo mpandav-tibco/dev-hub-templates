@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: bwce-template-otk
+  name: bwce-template-ssk
   title: BWCE - Kafka to SOAP Service Pattern
   description: Create a new BWCE project to move data from kafka to SOAP service
   tags:

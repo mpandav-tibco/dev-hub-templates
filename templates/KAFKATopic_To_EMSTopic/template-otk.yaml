@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: bwce-template-otk
+  name: bwce-template-kte
   title: BWCE - Kafka To EMS Pattern
   description: Create a new BWCE project for an Kafka to EMS
   tags:

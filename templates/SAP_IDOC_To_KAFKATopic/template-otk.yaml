@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: bwce-template-otk
+  name: bwce-template-sapk
   title: BWCE - SAP IDoc To Kafka
   description: Create a new BWCE project for SAP IDOC to Kafka Topic
   tags:

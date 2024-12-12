@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: bwce-template-otk
+  name: bwce-template-sftpk
   title: BWCE - sFTP File to Kakfa Topic
   description: Create a new BWCE project to move FILE from SFTP to Kafka Topic
   tags:

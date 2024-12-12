@@ -1,9 +1,9 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: bwce-template-otk
+  name: bwce-template-ksftp
   title: BWCE - Kafka to SFTP(put) Pattern
-  description: Create a new DEMO - BWCE project for an order to Kafka
+  description: Create a new DEMO - BWCE project for an kafka to SFTP(Put)
   tags:
     - tibco
     - bwce

@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: bwce-template-otk
+  name: bwce-template-fpk
   title: BWCE - File Plugin to Kafka Topic
   description: Create a new BWCE project for File plugin operation with Kafka
   tags:

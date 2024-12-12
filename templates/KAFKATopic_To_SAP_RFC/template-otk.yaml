@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: bwce-template-otk
+  name: bwce-template-ksaprfc
   title: BWCE - Kafka to SAP RFC 
   description: Create a new BWCE project to move data from kafka topic to SAP RFC
   tags:
