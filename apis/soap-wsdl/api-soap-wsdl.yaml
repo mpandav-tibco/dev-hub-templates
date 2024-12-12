@@ -16,6 +16,6 @@ metadata:
 spec:
   type: WSDL
   lifecycle: experimental
-  owner: team-c
+  owner: sc-dach
   definition:
     $text: ./skeleton/Soap-Example.wsdl
