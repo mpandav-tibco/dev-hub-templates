@@ -15,7 +15,7 @@ metadata:
       icon: code
 spec:
   type: WSDL
-  lifecycle: experimental
+  lifecycle: production
   owner: sc-dach
   definition:
     $text: ./skeleton/Soap-Example.wsdl
