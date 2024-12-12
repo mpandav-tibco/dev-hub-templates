@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:saptidmanager="http://ns.tibco.com/bw/sharedresource/saptidmanager" xmi:id="_eSxOcMMgEe2DKasVEU-fig" name="sap_idoc_to_kafkatopic.module.SAPTIDManagerResource" type="saptidmanager:SAPTIDmanager">
+  <jndi:configuration xsi:type="saptidmanager:SAPTIDmanager" xmi:id="_eSxOccMgEe2DKasVEU-fig" isActive="None"/>
+</jndi:namedResource>

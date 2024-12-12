@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: KAFKATopic_To_REST_SERVICE Module
+Bundle-SymbolicName: KAFKATopic_To_REST_SERVICE.module
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: TIBCO Software Inc.
+TIBCO-BW-ModuleSharedVariables: META-INF/module.msv
+Require-Capability: com.tibco.bw.model; filter:="(name=bwext)",
+ com.tibco.bw.module; filter:="(&(name=bwceLib)(version=1.0.0))",
+ com.tibco.bw.palette; filter:="(name=bw.generalactivities)",
+ com.tibco.bw.palette; filter:="(name=bw.restjson)",
+ com.tibco.bw.palette; filter:="(name=bw.kafka)",
+ com.tibco.bw.palette; filter:="(name=bw.xml)",
+ com.tibco.bw.sharedresource.model; filter:="(name=bw.httpclient)",
+ com.tibco.bw.sharedresource.model; filter:="(name=bw.kafkaconnection)",
+ com.tibco.bw.sharedresource.model; filter:="(name=bw.cred)",
+ com.tibco.bw.sharedresource.model; filter:="(name=bw.sslclient)",
+ com.tibco.bw.sharedresource.model; filter:="(name=bw.trustResource)",
+ com.tibco.bw.sharedresource.model; filter:="(name=bw.userid)"
+TIBCO-BW-Edition: bwcf
+TIBCO-BW-ConfigProfile: META-INF/default.substvar
+TIBCO-BW-ApplicationModule: META-INF/module.bwm
+TIBCO-BW-JobSharedVariables: META-INF/module.jsv
+TIBCO-BW-Version: 2.7.2 V21 2022-05-12

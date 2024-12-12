@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:keystore="http://xsd.tns.tibco.com/bw/sharedresource/trinity/models/cred/keystore" xmlns:sslclient="http://xsd.tns.tibco.com/bw/sharedresource/trinity/models/sslclient" xmi:id="_nKJz8QmWEe2AtOqZZNLsvw" name="kafkatopic_to_rest_service.module.HTTPSSLClientResource" type="sslclient:SSLClientConfiguration">
+  <jndi:reference xmi:id="_nKa5sAmWEe2AtOqZZNLsvw" key="trustStoreServiceProvider" type="keystore:KeystoreConfiguration" value="kafkatopic_to_rest_service.module.HTTPKeystore"/>
+  <jndi:configuration xsi:type="sslclient:SSLClientConfiguration" xmi:id="_nKa5sQmWEe2AtOqZZNLsvw">
+    <substitutionBindings xmi:id="_vw0u0AmWEe2AtOqZZNLsvw" template="sslProvider" propName="/SystemName/ObjectName/HTTPSSLSecurityProvider"/>
+  </jndi:configuration>
+</jndi:namedResource>

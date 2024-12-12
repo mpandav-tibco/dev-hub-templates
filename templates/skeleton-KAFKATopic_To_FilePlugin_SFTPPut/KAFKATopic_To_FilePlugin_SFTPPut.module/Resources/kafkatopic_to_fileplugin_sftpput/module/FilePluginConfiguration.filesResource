@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:filepluginresource="http://ns.tibco.com/bw/sharedresource/filepluginresource" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmi:id="_pyWCMSSeEe6U9tU5f6b_Qw" name="kafkatopic_to_fileplugin_sftpput.module.FilePluginConfiguration" type="filepluginresource:filepluginresource">
+  <jndi:configuration xsi:type="filepluginresource:FilesConfiguration" xmi:id="_pypkMCSeEe6U9tU5f6b_Qw" uid="6b55c56d-1caa-4b85-a8f6-98e5bb7c20bb" manualMode="true" xsdPath="">
+    <schemaList xsi:type="filepluginresource:WriteSchema" xmi:id="_SvCU0CUxEe6U9tU5f6b_Qw" name="WriterFileRecord" uid="6397fb42-1f73-4420-aa21-f2805bcad952" schemaType="WRITE_MANUAL" parseType="Delimited" delimiter="Other" delimiterOther=";">
+      <attributesList xmi:id="_Zj-zYCUxEe6U9tU5f6b_Qw" name="Record_Identifier" dataType="string" dateTimePattern="EEEE, MMMM d, yyyy h:mm:ss a z" alignment="left" padding=" " width="-1"/>
+      <attributesList xmi:id="_ZmoewCUxEe6U9tU5f6b_Qw" name="Article_Number" dataType="string" dateTimePattern="EEEE, MMMM d, yyyy h:mm:ss a z" position="1" alignment="left" padding=" " width="-1"/>
+      <attributesList xmi:id="_ZoijQCUxEe6U9tU5f6b_Qw" name="Model_Number" dataType="string" dateTimePattern="EEEE, MMMM d, yyyy h:mm:ss a z" position="2" alignment="left" padding=" " width="-1"/>
+    </schemaList>
+  </jndi:configuration>
+</jndi:namedResource>

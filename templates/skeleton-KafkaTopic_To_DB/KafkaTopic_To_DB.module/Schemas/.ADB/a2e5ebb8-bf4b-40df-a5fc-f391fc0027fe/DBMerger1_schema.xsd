@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns:tns="http://www.tibco.com/xmlns/adb/a2e5ebb8-bf4b-40df-a5fc-f391fc0027fe94655e12-551f-4279-9bb5-b7917b6e7b30_schema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.tibco.com/xmlns/adb/a2e5ebb8-bf4b-40df-a5fc-f391fc0027fe94655e12-551f-4279-9bb5-b7917b6e7b30_schema" xmlns="http://www.w3.org/2001/XMLSchema">
+    <element name="ORDER__TABLE" type="tns:ORDER__TABLE_Type"/>
+    <complexType name="ORDER__TABLE_Type">
+        <all>
+            <element minOccurs="1" name="ORDER__ID" nillable="true" type="double"/>
+            <element minOccurs="0" name="ORDER__DESCRIPTION" nillable="true" type="string"/>
+            <element minOccurs="0" name="ORDER__PRICE" nillable="true" type="double"/>
+            <element minOccurs="0" name="ADB__OPCODE" nillable="true" type="int"/>
+        </all>
+    </complexType>
+    <complexType name="ORDER__TABLE_Output_Type">
+        <all>
+            <element minOccurs="0" name="ORDER__ID" nillable="true" type="double"/>
+            <element minOccurs="0" name="ADB__STATUS" nillable="true" type="string"/>
+            <element minOccurs="0" name="ADB__ERROR__TEXT" nillable="true" type="string"/>
+        </all>
+    </complexType>
+</schema>

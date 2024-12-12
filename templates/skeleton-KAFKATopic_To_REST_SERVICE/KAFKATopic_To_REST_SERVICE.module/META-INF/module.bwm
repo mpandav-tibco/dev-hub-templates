@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:http="http://xsd.tns.tibco.com/bw/models/sharedresource/httpclient" xmlns:property="http://ns.tibco.com/bw/property" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_wtbpYAmIEe2IlKETQUQavA" targetNamespace="http://tns.tibco.com/bw/composite/KAFKATopic_To_REST_SERVICE.module" name="KAFKATopic_To_REST_SERVICE.module" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:property xmi:id="_zue_kAmIEe2IlKETQUQavA" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_zuxTcAmIEe2IlKETQUQavA" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_zu2zAAmIEe2IlKETQUQavA" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_zu7EcAmIEe2IlKETQUQavA" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_zvAkAAmIEe2IlKETQUQavA" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_zvFcgAmIEe2IlKETQUQavA" name="BW.CLOUD.PORT" type="XMLSchema:int" scalable="true"/>
+  <sca:property xmi:id="_zvJt8AmIEe2IlKETQUQavA" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_piJNwAmQEe2IlKETQUQavA" name="/SystemName/DeploymentENV" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_rrv-kAmQEe2IlKETQUQavA" name="/SystemName/ObjectName/RESTPath" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_0WgvQAmQEe2IlKETQUQavA" name="/SystemName/ObjectName/KafkaRetry" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_3L9SYAmQEe2IlKETQUQavA" name="/SystemName/ObjectName/KafkaGroupID" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_5PB9YAmQEe2IlKETQUQavA" name="/SystemName/ObjectName/KafkaMaxRequestSize" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_5US34AmQEe2IlKETQUQavA" name="/SystemName/ObjectName/KafkaConsumerCount" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_5YpzcAmQEe2IlKETQUQavA" name="/SystemName/ObjectName/KafkaFetchTimeout" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_5aLdcAmQEe2IlKETQUQavA" name="/SystemName/ObjectName/KafkaFetchMinBytes" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_5btHcAmQEe2IlKETQUQavA" name="/SystemName/ObjectName/KafkaFetchMaxWait" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_5dJR4AmQEe2IlKETQUQavA" name="/SystemName/ObjectName/KafkaHeartbeatInterval" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_5eIwYAmQEe2IlKETQUQavA" name="/SystemName/ObjectName/KafkaSessionTimeout" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_RA_WsAmREe2IlKETQUQavA" name="/SystemName/ObjectName/HTTPIdleConnectionTimeout" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_RGb3YAmREe2IlKETQUQavA" name="/SystemName/ObjectName/HTTPMaxTotalConnection" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_RJfLYAmREe2IlKETQUQavA" name="/SystemName/ObjectName/HTTPMaxTotConnectionPerHost" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_RLsx4AmREe2IlKETQUQavA" name="/SystemName/ObjectName/HTTPUserName" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_ROOhcAmREe2IlKETQUQavA" name="/SystemName/ObjectName/HTTPPassword" type="property:password" scaext:simpleValue="#!WnZAlvalRmT27/0zwaRt6g==" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_RRCk4AmREe2IlKETQUQavA" name="/SystemName/ObjectName/HTTPSSLSecurityProvider" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_RULYcAmREe2IlKETQUQavA" name="/SystemName/ObjectName/HTTPKeyStoreLocation" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_RXdV8AmREe2IlKETQUQavA" name="/SystemName/ObjectName/HTTPKeyStorePassword" type="property:password" scaext:simpleValue="#!65b9FPKZKn6UQfh8jWZgvw==" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_5tmi0BMfEe2-iI2dKY76Zg" name="/SystemName/ObjectName/HTTPSocketTimeout" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_6XAFIBMfEe2-iI2dKY76Zg" name="/SystemName/ObjectName/HTTPConnectionTimeout" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_6eZtoBMfEe2-iI2dKY76Zg" name="/SystemName/ObjectName/HTTPRetryCount" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_R9B-UPoqEe2BONtMQcI2TA" name="/SystemName/ObjectName/HTTPRefreshInterval" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_dXD5IBMhEe2-iI2dKY76Zg" name="/SystemName/ObjectName/KafkaReconnectBackoff" type="XMLSchema:long" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_dcHYQBMhEe2-iI2dKY76Zg" name="/SystemName/ObjectName/KafkaRertyBackoff" type="XMLSchema:long" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_dgT7wBMhEe2-iI2dKY76Zg" name="/SystemName/ObjectName/KafkaConnectionTimeout" type="XMLSchema:long" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_hd5x0H0QEe2yY4J1IC83EA" name="/SystemName/ObjectName/RestErrorCodesNonRecov" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_aDcJIPVmEe233oboVIBzEQ" name="/SystemName/ObjectName/KafkaRefreshInterval" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_vyVgsPV1Ee233oboVIBzEQ" name="/SystemName/ObjectName/KafkaMaxPollRecords" type="XMLSchema:string" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_wXRZwPV1Ee233oboVIBzEQ" name="/SystemName/ObjectName/KafkaMaxPollInterval" type="XMLSchema:string" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_GTGloPV7Ee233oboVIBzEQ" name="/SystemName/ObjectName/RestActivityTimeOut" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_uC1KsAmQEe2IlKETQUQavA" name="/SystemName/KafkaCerts/KafkaTrustStoreLocation" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_ndBe4AmREe2IlKETQUQavA" name="/SystemName/KafkaCerts/KafkaTrustStorePassword" type="property:password" scaext:simpleValue="#!KrfaReacHXYKk55CmIaeOw==" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_nes54AmREe2IlKETQUQavA" name="/SystemName/KafkaCerts/KafkaKeyStoreLocation" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_ngXt0AmREe2IlKETQUQavA" name="/SystemName/KafkaCerts/KafkaKeyStorePassword" type="property:password" scaext:simpleValue="#!DPale2O6yWNFgaasUW46sw==" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_nh_ecAmREe2IlKETQUQavA" name="/SystemName/KafkaCerts/KafkaKeyPassword" type="property:password" scaext:simpleValue="#!gGabLr32ItK+kx/gWOn9IQ==" publicAccess="true" scalable="true"/>
+  <sca:component xmi:id="_PfiPEGVnEe2b1ITC9wRNfQ" name="ComponentActivator" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_PfiPEWVnEe2b1ITC9wRNfQ" processName="kafkatopic_to_rest_service.module.Activator"/>
+  </sca:component>
+  <sca:component xmi:id="_sQuPMPoXEe2Rioc4JS1ohQ" name="ComponentMP_KafkaReceiver" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_sQuPMfoXEe2Rioc4JS1ohQ" processName="kafkatopic_to_rest_service.module.MP_KafkaReceiver"/>
+  </sca:component>
+</sca:composite>

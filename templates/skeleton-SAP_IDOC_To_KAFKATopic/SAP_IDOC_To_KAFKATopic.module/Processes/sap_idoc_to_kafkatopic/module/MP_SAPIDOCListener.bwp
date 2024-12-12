@@ -1,0 +1,2068 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpws:process exitOnStandardFault="no"
+    name="sap_idoc_to_kafkatopic.module.MP_SAPIDOCListener"
+    suppressJoinFailure="yes"
+    targetNamespace="http://xmlns.example.com/20221202110431"
+    xmlns:bpws="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+    xmlns:info="http://www.tibco.com/bw/process/info"
+    xmlns:ns="http://www.tibco.com/pe/EngineTypes"
+    xmlns:ns0="http://www.example.org/audit"
+    xmlns:ns1="http://www.tibco.com/xmlns/sapscalar/2015/05"
+    xmlns:ns2="http://www.tibco.com/pe/WriteToLogActivitySchema"
+    xmlns:ns3="http://www.tibco.com/xmlns/sap/613d59eb-516e-4e0c-b87a-2d86917fd3cb/DELVRY03"
+    xmlns:ns4="http://tns.tibco.com/bw/palette/internal/activityerror+bw.sap.IDocConverter"
+    xmlns:ns5="http://www.tibco.com/xmlns/sap/613d59eb-516e-4e0c-b87a-2d86917fd3cb/DELVRY03-ZDELVRY03"
+    xmlns:ns6="http://ns.tibco.com/bw/palette/sap"
+    xmlns:ns7="http://www.tibco.com/namespaces/tnt/plugins/idocrenderer+11251a6b-6c3b-4f1f-b57b-ceb1ab83d168+Input"
+    xmlns:ns8="http://tns.tibco.com/bw/palette/internal/activityerror+bw.sap.IDocRenderer"
+    xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+    xmlns:sca-bpel="http://docs.oasis-open.org/ns/opencsa/sca-bpel/200801"
+    xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"
+    xmlns:tibprop="http://ns.tibco.com/bw/property" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <tibex:Types>
+        <xs:schema attributeFormDefault="unqualified"
+            elementFormDefault="qualified"
+            targetNamespace="http://www.tibco.com/pe/EngineTypes"
+            xmlns:tns="http://www.tibco.com/pe/EngineTypes" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="ErrorReport">
+                <xs:sequence>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="StackTrace" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="Msg" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="FullClass" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="Class" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ProcessStack" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="MsgCode" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Data" type="tns:anydata"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="OptionalErrorReport">
+                <xs:sequence>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0"
+                        name="StackTrace" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Msg" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0"
+                        name="FullClass" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Class" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0"
+                        name="ProcessStack" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="MsgCode" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Data" type="tns:anydata"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="FaultDetail">
+                <xs:sequence>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ActivityName" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0" name="Data" type="tns:anydata"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="Msg" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="MsgCode" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ProcessStack" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="StackTrace" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="FullClass" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="Class" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="ProcessContext">
+                <xs:sequence>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="JobId" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ApplicationName" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="EngineName" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" name="ProcessInstanceId" type="xs:string"/>
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" minOccurs="0"
+                        name="CustomJobId" type="xs:string"/>
+                    <!--xs:element name="RestartedFromCheckpoint" form="unqualified" block="extension restriction substitution" type="xs:boolean"/-->
+                    <xs:element
+                        block="extension restriction substitution"
+                        form="unqualified" maxOccurs="unbounded"
+                        minOccurs="0" name="TrackingInfo" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType block="extension restriction"
+                final="extension restriction" name="anydata">
+                <xs:sequence>
+                    <xs:any namespace="##any" processContents="lax"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="OptionalErrorReport" type="tns:OptionalErrorReport"/>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="ErrorReport" type="tns:ErrorReport"/>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="FaultDetail" type="tns:FaultDetail"/>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="ProcessContext" type="tns:ProcessContext"/>
+            <xs:element block="extension restriction substitution"
+                final="extension restriction" name="CorrelationValue" type="xs:string"/>
+        </xs:schema>
+        <schema attributeFormDefault="unqualified"
+            elementFormDefault="unqualified"
+            targetNamespace="http://schemas.tibco.com/bw/pe/plugin/5.0/exceptions"
+            version="" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.tibco.com/bw/pe/plugin/5.0/exceptions">
+            <complexType name="ActivityExceptionType">
+                <sequence>
+                    <element name="msg" type="string"/>
+                    <element minOccurs="0" name="msgCode" type="string"/>
+                </sequence>
+            </complexType>
+            <element name="ActivityException" type="tns:ActivityExceptionType"/>
+            <complexType name="ActivityTimedOutExceptionType">
+                <complexContent>
+                    <extension base="tns:ActivityExceptionType"/>
+                </complexContent>
+            </complexType>
+            <element name="ActivityTimedOutException" type="tns:ActivityTimedOutExceptionType"/>
+            <complexType name="DuplicateKeyExceptionType">
+                <complexContent>
+                    <extension base="tns:ActivityExceptionType">
+                        <sequence>
+                            <element name="duplicateKey" type="string"/>
+                            <element minOccurs="0" name="previousJobID" type="string"/>
+                        </sequence>
+                    </extension>
+                </complexContent>
+            </complexType>
+            <element name="DuplicateKeyException" type="tns:DuplicateKeyExceptionType"/>
+        </schema>
+        <xsd:schema attributeFormDefault="qualified"
+            elementFormDefault="qualified"
+            targetNamespace="http://www.tibco.com/xmlns/sapscalar/2015/05"
+            xmlns:r3="http://www.tibco.com/xmlns/sapscalar/2015/05" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:simpleType name="segmentType" r3:type="segmentType">
+                <xsd:restriction base="xsd:string"/>
+            </xsd:simpleType>
+            <xsd:simpleType name="abapType" r3:type="abapType">
+                <xsd:restriction base="xsd:string"/>
+            </xsd:simpleType>
+            <xsd:simpleType name="javaType" r3:type="javaType">
+                <xsd:restriction base="xsd:string"/>
+            </xsd:simpleType>
+            <xsd:simpleType name="jcoType" r3:type="jcoType">
+                <xsd:restriction base="xsd:int"/>
+            </xsd:simpleType>
+            <xsd:simpleType name="offset" r3:type="offset">
+                <xsd:restriction base="xsd:int"/>
+            </xsd:simpleType>
+            <xsd:simpleType name="document" r3:type="document">
+                <xsd:restriction base="xsd:string"/>
+            </xsd:simpleType>
+            <xsd:complexType name="RFCException">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="msg"
+                        nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="msgCode"
+                        nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="SAPPluginException" type="r3:SAPPluginException_Type"/>
+            <xsd:complexType name="SAPPluginException_Type">
+                <xsd:sequence>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="msg" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="msgCode" type="xsd:string"/>
+                    <xsd:any minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="SAPSystemException" type="r3:SAPSystemException_Type"/>
+            <xsd:complexType name="SAPSystemException_Type">
+                <xsd:sequence>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="msg" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="msgCode" type="xsd:string"/>
+                    <xsd:any minOccurs="0"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="IDocParserEventSourceFault" type="r3:IDocParserEventSourceFault_Type"/>
+            <xsd:complexType name="IDocParserEventSourceFault_Type">
+                <xsd:sequence>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="msg" nillable="true" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="msgCode" nillable="true" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="idocNumber" nillable="true">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="16"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="IDocReaderFault" type="r3:IDocReaderFault_Type"/>
+            <xsd:complexType name="IDocReaderFault_Type">
+                <xsd:sequence>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="msg" nillable="true" type="xsd:string"/>
+                    <xsd:element form="unqualified" minOccurs="0"
+                        name="msgCode" nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="postIDocStatusList" type="r3:postIDocStatusList_Type"/>
+            <xsd:complexType name="postIDocStatusList_Type">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="sessionID" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="CPIC_ID" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="item" type="r3:postIDocItem_Type"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="postIDocItem_Type">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="TID" nillable="true">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="24"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="postIDocNOMSGStatusList" type="r3:postIDocNOMSGStatusList_Type"/>
+            <xsd:complexType name="postIDocNOMSGStatusList_Type">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="sessionID" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="CPIC_ID" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="item" type="r3:postIDocNOMSGItem_Type"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="postIDocNOMSGItem_Type">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="TID" nillable="true">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="24"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="correlationID" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="errorMessage" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="idocNumber">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="16"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="idocStatus" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="successMessage" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="idocReaderStatusList" type="r3:idocReaderStatusListst_Type"/>
+            <xsd:complexType name="idocReaderStatusListst_Type">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="item" type="r3:idocReaderItem_Type"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="idocReaderItem_Type">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="MessageID"
+                        nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="TID" nillable="true">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="24"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="DynamicProperties" type="r3:JmsDynamicProperties"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="JmsDynamicProperties">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0"
+                        name="property" type="r3:JmsDynamicProperty"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="JmsDynamicProperty">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="1" minOccurs="1" name="name"
+                        nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="1"
+                        name="value" nillable="true" type="xsd:string"/>
+                    <xsd:element maxOccurs="1" minOccurs="0" name="type"
+                        nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="idocListenerStatusListJMS" type="r3:idocListenerStatusList_JMSType"/>
+            <xsd:complexType name="idocListenerStatusList_JMSType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="item" type="r3:idocListenerItem_JMSType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="idocListenerItem_JMSType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="IDocNumber" nillable="true">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="16"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="TID" nillable="true">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="24"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="MessageID"
+                        nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="idocListenerStatusListKAFKA" type="r3:idocListenerStatusList_KAFKAType"/>
+            <xsd:complexType name="idocListenerStatusList_KAFKAType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="item" type="r3:idocListenerItem_KAFKAType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="idocListenerItem_KAFKAType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="IDocNumber" nillable="true">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="16"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="TID" nillable="true">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="24"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="TopicName"
+                        nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="PartitionID"
+                        nillable="true" type="xsd:int"/>
+                    <xsd:element minOccurs="0" name="Offset"
+                        nillable="true" type="xsd:int"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="idocListenerStatusListNOMSG" type="r3:idocListenerStatusList_NOMSGType"/>
+            <xsd:complexType name="idocListenerStatusList_NOMSGType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="item" type="r3:idocListenerItem_NOMSGType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="idocListenerItem_NOMSGType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="IDocNumber" nillable="true">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="16"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="TID" nillable="true">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="24"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="SAPIDOC" type="r3:SAPIDOC_TYPE"/>
+                    <xsd:element minOccurs="0" name="IDoc" type="r3:NoMsgIDocType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="NoMsgIDocType">
+                <xsd:sequence>
+                    <xsd:element name="ControlRecord" nillable="true" type="xsd:string"/>
+                    <xsd:element name="DataRecord" type="r3:NoMsgDataRecordType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="NoMsgDataRecordType">
+                <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" minOccurs="0"
+                        name="item" type="r3:NoMsgSegmentType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="NoMsgSegmentType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="Segname" nillable="true">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="30"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="Data"
+                        nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="IDocAckOutput" type="r3:IDocAckOutput_Type"/>
+            <xsd:complexType name="IDocAckOutput_Type">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="TID">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="24"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="statusList" type="r3:statusList_Type"/>
+            <xsd:complexType name="statusList_Type">
+                <xsd:sequence>
+                    <!-- 	
+			<xsd:element name="sessionID" nillable="true" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="27" />
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+-->
+                    <xsd:element minOccurs="0" name="item" type="r3:item_Type"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="item_Type">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="idocStatus">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="2"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="statusCode">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="3"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="idocNumber" nillable="true">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="16"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="msgType" nillable="true">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="30"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="client" nillable="true">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="3"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="senderPort">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="10"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="senderPartnerNumber">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="10"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="receiverPort">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="10"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="receiverPartnerNumber">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="10"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="successMsg"
+                        nillable="true" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="errorMsg"
+                        nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="IDocListenerOutput">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element minOccurs="0" name="fake"
+                            nillable="true" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="EDI_DD40" type="r3:EDI_DD40_Type"/>
+            <xsd:complexType name="EDI_DD40_Type">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="SEGNAM">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="30"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="MANDT">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="3"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="DOCNUM">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="16"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="SEGNUM">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="6"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="PSGNUM">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="6"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="HLEVEL">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="2"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="SDATA">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="1000"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute default="detail" name="type" type="xsd:string"/>
+            </xsd:complexType>
+            <xsd:element name="EDI_DC40" type="r3:EDI_DC40_Type"/>
+            <xsd:complexType name="SAPIDOC_TYPE">
+                <xsd:sequence>
+                    <xsd:element fixed="EDI_DC40" minOccurs="0" name="TABNAM">
+                        <xsd:annotation>
+                            <xsd:documentation>Name of Table Structure</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="10"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="MANDT">
+                        <xsd:annotation>
+                            <xsd:documentation>Client</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="3"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="1" name="DOCNUM">
+                        <xsd:annotation>
+                            <xsd:documentation>IDoc number</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="16"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="DOCREL">
+                        <xsd:annotation>
+                            <xsd:documentation>SAP Release for IDoc</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="4"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="STATUS">
+                        <xsd:annotation>
+                            <xsd:documentation>Status of IDoc</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="2"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="DIRECT">
+                        <xsd:annotation>
+                            <xsd:documentation>Direction</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="1"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="OUTMOD">
+                        <xsd:annotation>
+                            <xsd:documentation>Output mode</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="1"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="EXPRSS">
+                        <xsd:annotation>
+                            <xsd:documentation>Overriding in inbound processing
+					</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="1"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="TEST">
+                        <xsd:annotation>
+                            <xsd:documentation>Test flag</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="1"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="IDOCTYP">
+                        <xsd:annotation>
+                            <xsd:documentation>Name of basic type</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="30"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="CIMTYP">
+                        <xsd:annotation>
+                            <xsd:documentation>Extension (defined by customer)
+					</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="30"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="MESTYP">
+                        <xsd:annotation>
+                            <xsd:documentation>Message type</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="30"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="MESCOD">
+                        <xsd:annotation>
+                            <xsd:documentation>Message code</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="3"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="MESFCT">
+                        <xsd:annotation>
+                            <xsd:documentation>Message Function</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="3"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="STD">
+                        <xsd:annotation>
+                            <xsd:documentation>EDI standard, flag</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="1"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="STDVRS">
+                        <xsd:annotation>
+                            <xsd:documentation>EDI standard, version and release
+					</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="6"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="STDMES">
+                        <xsd:annotation>
+                            <xsd:documentation>EDI message type</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="6"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="SNDPOR">
+                        <xsd:annotation>
+                            <xsd:documentation>Sender port (SAP System, external subsystem)
+					</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="10"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="SNDPRT">
+                        <xsd:annotation>
+                            <xsd:documentation>Partner type of sender</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="2"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="SNDPFC">
+                        <xsd:annotation>
+                            <xsd:documentation>Partner Function of Sender</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="2"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="SNDPRN">
+                        <xsd:annotation>
+                            <xsd:documentation>Partner Number of Sender</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="10"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="SNDSAD">
+                        <xsd:annotation>
+                            <xsd:documentation>Sender address (SADR)</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="21"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="SNDLAD">
+                        <xsd:annotation>
+                            <xsd:documentation>Logical address of sender</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="70"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="RCVPOR">
+                        <xsd:annotation>
+                            <xsd:documentation>Receiver port</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="10"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="RCVPRT">
+                        <xsd:annotation>
+                            <xsd:documentation>Partner Type of Receiver</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="2"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="RCVPFC">
+                        <xsd:annotation>
+                            <xsd:documentation>Partner function of recipient
+					</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="2"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="RCVPRN">
+                        <xsd:annotation>
+                            <xsd:documentation>Partner Number of Receiver</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="10"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="RCVSAD">
+                        <xsd:annotation>
+                            <xsd:documentation>Recipient address (SADR)</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="21"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="RCVLAD">
+                        <xsd:annotation>
+                            <xsd:documentation>Logical address of recipient
+					</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="70"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="CREDAT">
+                        <xsd:annotation>
+                            <xsd:documentation>Created on</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="8"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="CRETIM">
+                        <xsd:annotation>
+                            <xsd:documentation>Created at</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="6"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="REFINT">
+                        <xsd:annotation>
+                            <xsd:documentation>Transmission file (EDI Interchange)
+					</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="14"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="REFGRP">
+                        <xsd:annotation>
+                            <xsd:documentation>Message group (EDI Message Group)
+					</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="14"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="REFMES">
+                        <xsd:annotation>
+                            <xsd:documentation>Message (EDI Message)</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="14"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="ARCKEY">
+                        <xsd:annotation>
+                            <xsd:documentation>Key for external message archive
+					</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="70"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="SERIAL">
+                        <xsd:annotation>
+                            <xsd:documentation>Serialization</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="20"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute default="header" name="type" type="xsd:string"/>
+            </xsd:complexType>
+            <xsd:complexType name="EDI_DC40_Type">
+                <xsd:sequence>
+                    <xsd:element fixed="EDI_DC40" name="TABNAM">
+                        <xsd:annotation>
+                            <xsd:documentation>Name of Table Structure</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="10"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="MANDT">
+                        <xsd:annotation>
+                            <xsd:documentation>Client</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="3"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="DOCNUM">
+                        <xsd:annotation>
+                            <xsd:documentation>IDoc number</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="16"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="DOCREL">
+                        <xsd:annotation>
+                            <xsd:documentation>SAP Release for IDoc</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="4"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="STATUS">
+                        <xsd:annotation>
+                            <xsd:documentation>Status of IDoc</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="2"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="DIRECT">
+                        <xsd:annotation>
+                            <xsd:documentation>Direction</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="1"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="OUTMOD">
+                        <xsd:annotation>
+                            <xsd:documentation>Output mode</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="1"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="EXPRSS">
+                        <xsd:annotation>
+                            <xsd:documentation>Overriding in inbound processing
+					</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="1"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="TEST">
+                        <xsd:annotation>
+                            <xsd:documentation>Test flag</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="1"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="IDOCTYP">
+                        <xsd:annotation>
+                            <xsd:documentation>Name of basic type</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="30"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="CIMTYP">
+                        <xsd:annotation>
+                            <xsd:documentation>Extension (defined by customer)
+					</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="30"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="MESTYP">
+                        <xsd:annotation>
+                            <xsd:documentation>Message type</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="30"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="MESCOD">
+                        <xsd:annotation>
+                            <xsd:documentation>Message code</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="3"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="MESFCT">
+                        <xsd:annotation>
+                            <xsd:documentation>Message Function</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="3"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="STD">
+                        <xsd:annotation>
+                            <xsd:documentation>EDI standard, flag</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="1"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="STDVRS">
+                        <xsd:annotation>
+                            <xsd:documentation>EDI standard, version and release
+					</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="6"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="STDMES">
+                        <xsd:annotation>
+                            <xsd:documentation>EDI message type</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="6"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="SNDPOR">
+                        <xsd:annotation>
+                            <xsd:documentation>Sender port (SAP System, external subsystem)
+					</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="10"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="SNDPRT">
+                        <xsd:annotation>
+                            <xsd:documentation>Partner type of sender</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="2"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="SNDPFC">
+                        <xsd:annotation>
+                            <xsd:documentation>Partner Function of Sender</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="2"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="SNDPRN">
+                        <xsd:annotation>
+                            <xsd:documentation>Partner Number of Sender</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="10"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="SNDSAD">
+                        <xsd:annotation>
+                            <xsd:documentation>Sender address (SADR)</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="21"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="SNDLAD">
+                        <xsd:annotation>
+                            <xsd:documentation>Logical address of sender</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="70"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="RCVPOR">
+                        <xsd:annotation>
+                            <xsd:documentation>Receiver port</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="10"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="RCVPRT">
+                        <xsd:annotation>
+                            <xsd:documentation>Partner Type of Receiver</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="2"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="RCVPFC">
+                        <xsd:annotation>
+                            <xsd:documentation>Partner function of recipient
+					</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="2"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element name="RCVPRN">
+                        <xsd:annotation>
+                            <xsd:documentation>Partner Number of Receiver</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="10"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="RCVSAD">
+                        <xsd:annotation>
+                            <xsd:documentation>Recipient address (SADR)</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="21"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="RCVLAD">
+                        <xsd:annotation>
+                            <xsd:documentation>Logical address of recipient
+					</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="70"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="CREDAT">
+                        <xsd:annotation>
+                            <xsd:documentation>Created on</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="8"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="CRETIM">
+                        <xsd:annotation>
+                            <xsd:documentation>Created at</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="6"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="REFINT">
+                        <xsd:annotation>
+                            <xsd:documentation>Transmission file (EDI Interchange)
+					</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="14"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="REFGRP">
+                        <xsd:annotation>
+                            <xsd:documentation>Message group (EDI Message Group)
+					</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="14"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="REFMES">
+                        <xsd:annotation>
+                            <xsd:documentation>Message (EDI Message)</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="14"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="ARCKEY">
+                        <xsd:annotation>
+                            <xsd:documentation>Key for external message archive
+					</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="70"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="SERIAL">
+                        <xsd:annotation>
+                            <xsd:documentation>Serialization</xsd:documentation>
+                        </xsd:annotation>
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="20"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute default="header" name="type" type="xsd:string"/>
+            </xsd:complexType>
+            <xsd:complexType name="RequestInputType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="sessionID" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="contextTimeout" type="xsd:long"/>
+                    <xsd:element minOccurs="0" name="DynamicConnections" type="r3:DynamicConnection"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="DynamicConnection">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="connectionType" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="appServer" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="systemNumber" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="client" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="userName" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="password" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="systemName" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="msgServer" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="groupName" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="snc_mode" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="snc_partnername" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="snc_qop" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="snc_lib" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="snc_bSSO" type="xsd:boolean"/>
+                    <xsd:element minOccurs="0" name="snc_SSOrecv" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="snc_x509" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="codePage" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="language">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="1"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="rfcTrace" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="useSAPGUI" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <!-- RFCBAPI Listener -->
+            <xsd:element name="ProcessStarterOutput" type="r3:ProcessStarterOutputType"/>
+            <xsd:complexType name="ProcessStarterOutputType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="SAPJCoAttributes" type="r3:SAPJCoAttributesType"/>
+                    <xsd:element minOccurs="0" name="RfcRequest" type="xsd:anyType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="SAPJCoAttributesType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0"
+                        name="SAPJCO_RFCDESTINATION" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="SAPJCO_CLIENT" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="SAPJCO_CPICCONVID" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="SAPJCO_HOST" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="SAPJCO_SYSID" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="SAPJCO_USER" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <!-- Respond to resquest -->
+            <xsd:element name="ProcessStarterResponse" type="r3:ProcessStarterResponse"/>
+            <xsd:complexType name="ProcessStarterResponse">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="timeout" type="xsd:long"/>
+                    <xsd:element minOccurs="0" name="SAPSystemException" type="r3:RFCException"/>
+                    <xsd:element minOccurs="0" name="RfcResponse" type="xsd:anyType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="RequestInput" type="r3:RequestInput_Type"/>
+            <xsd:complexType name="RequestInput_Type">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="sessionID" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="RequestInputType" type="r3:RequestInputType"/>
+            <xsd:complexType name="RequestOutputType">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="sessionID" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="CPIC_ID" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="DynamicConnections" type="r3:DynamicConnection"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="RequestOutputType" type="r3:RequestOutputType"/>
+            <xsd:element name="AsynOutput" type="r3:AsynOutput"/>
+            <xsd:complexType name="AsynOutput">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="SessionID" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="CPIC_ID" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="TID" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:complexType name="IDocConfirmationStatusList">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="TID">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="24"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="correlationID" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="errorMessage" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="idocNumber">
+                        <xsd:simpleType>
+                            <xsd:restriction base="xsd:string">
+                                <xsd:maxLength value="16"/>
+                            </xsd:restriction>
+                        </xsd:simpleType>
+                    </xsd:element>
+                    <xsd:element minOccurs="0" name="idocStatus" type="xsd:string"/>
+                    <xsd:element minOccurs="0" name="successMessage" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="IDocConfirmationStatusList" type="r3:IDocConfirmationStatusList"/>
+            <xsd:element name="ProcessInput" type="r3:ProcessInput_Type"/>
+            <xsd:complexType name="ProcessInput_Type">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="data"
+                        nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="IDocRendererInput" type="r3:IDocRendererInput_Type"/>
+            <xsd:complexType name="IDocRendererInput_Type">
+                <xsd:sequence/>
+            </xsd:complexType>
+            <xsd:element name="IDocRendererOutput" type="r3:IDocRendererOutput_Type"/>
+            <xsd:complexType name="IDocRendererOutput_Type">
+                <xsd:sequence>
+                    <xsd:element minOccurs="0" name="data"
+                        nillable="true" type="xsd:string"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="IDocConverterInput" type="r3:IDocConverterInput_Type"/>
+            <xsd:complexType name="IDocConverterInput_Type">
+                <xsd:sequence>
+                    <xsd:element minOccurs="1" name="SAPIDOC" type="r3:SAPIDOC_TYPE"/>
+                    <xsd:element minOccurs="1" name="IDoc" type="r3:NoMsgIDocType"/>
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="IDocConverterOutput" type="r3:IDocConverterOutput_Type"/>
+            <xsd:complexType name="IDocConverterOutput_Type">
+                <xsd:sequence/>
+            </xsd:complexType>
+        </xsd:schema>
+    </tibex:Types>
+    <tibex:ProcessInfo callable="false" createdBy="406039"
+        createdOn="Fri Dec 02 11:04:31 IST 2022" description=""
+        extraErrorVars="true" modifiers="public"
+        productVersion="2.7.2 V21 2022-05-12" scalable="true"
+        singleton="true" stateless="true" type="IT"/>
+    <tibex:ProcessInterface context="" input="" output=""/>
+    <tibex:ProcessTemplateConfigurations/>
+    <notation:Diagram measurementUnit="Pixel" type="BWProcess"
+        xmlns:bwnotation="http://tns.tibco.com/bw/runtime/BWNotation"
+        xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <children type="2001">
+            <children type="5001">
+                <element href="//0/@process"/>
+            </children>
+            <children type="3001">
+                <styles xsi:type="notation:SortingStyle"/>
+                <styles xsi:type="notation:FilteringStyle"/>
+                <element href="//0/@process"/>
+            </children>
+            <children type="3002">
+                <styles xsi:type="notation:SortingStyle"/>
+                <styles xsi:type="notation:FilteringStyle"/>
+                <element href="//0/@process"/>
+            </children>
+            <children type="3003">
+                <styles xsi:type="notation:SortingStyle"/>
+                <styles xsi:type="notation:FilteringStyle"/>
+                <element href="//0/@process"/>
+            </children>
+            <children type="3004">
+                <children type="4018">
+                    <children type="3018">
+                        <children type="4020">
+                            <children type="3020">
+                                <children type="4005">
+                                    <children type="3007">
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.0"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.0"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.0"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.0"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.0"/>
+                                    <layoutConstraint x="16"
+                                    xsi:type="notation:Bounds" y="33"/>
+                                    </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.1"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.1"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.1"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.1"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.1"/>
+                                    <layoutConstraint x="480"
+                                    xsi:type="notation:Bounds" y="33"/>
+                                    </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.2"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.2"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.2"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.2"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@activity/@activities.2"/>
+                                    <layoutConstraint x="306"
+                                    xsi:type="notation:Bounds" y="33"/>
+                                    </children>
+                                    <styles xsi:type="notation:DrawerStyle"/>
+                                    <styles xsi:type="notation:SortingStyle"/>
+                                    <styles xsi:type="notation:FilteringStyle"/>
+                                    <element href="//0/@process/@activity/@activity"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <styles xsi:type="bwnotation:ResizingStyle"/>
+                                    <element href="//0/@process/@activity/@activity"/>
+                                    <layoutConstraint height="246"
+                                    width="813" xsi:type="notation:Bounds"/>
+                                </children>
+                                <styles xsi:type="notation:SortingStyle"/>
+                                <styles xsi:type="notation:FilteringStyle"/>
+                                <element href="//0/@process/@activity"/>
+                            </children>
+                            <styles fontName="Segoe UI" lineColor="0" xsi:type="notation:ShapeStyle"/>
+                            <styles xsi:type="bwnotation:BackgroundStyle"/>
+                            <styles xsi:type="bwnotation:ResizingStyle"/>
+                            <element href="//0/@process/@activity"/>
+                            <layoutConstraint height="246" width="816" xsi:type="notation:Bounds"/>
+                        </children>
+                        <children type="4022">
+                            <children type="3022">
+                                <children type="4029">
+                                    <children type="3031">
+                                    <children type="4033">
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@faultHandlers/@catchAll"/>
+                                    <layoutConstraint
+                                    height="34" width="34"
+                                    xsi:type="notation:Bounds" y="68"/>
+                                    </children>
+                                    <styles xsi:type="notation:SortingStyle"/>
+                                    <styles xsi:type="notation:FilteringStyle"/>
+                                    <element href="//0/@process/@activity/@faultHandlers/@catchAll"/>
+                                    </children>
+                                    <children type="3032">
+                                    <children type="4005">
+                                    <children type="3007">
+                                    <eAnnotations source="Pixel"/>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@faultHandlers/@catchAll/@activity/@activity/@activities.0"/>
+
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@faultHandlers/@catchAll/@activity/@activity/@activities.0"/>
+
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@faultHandlers/@catchAll/@activity/@activity/@activities.0"/>
+
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@faultHandlers/@catchAll/@activity/@activity/@activities.0"/>
+
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@faultHandlers/@catchAll/@activity/@activity/@activities.0"/>
+                                    <layoutConstraint
+                                    height="97"
+                                    x="72"
+                                    xsi:type="notation:Bounds" y="19"/>
+                                    </children>
+                                    <children type="4002">
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@faultHandlers/@catchAll/@activity/@activity/@activities.1"/>
+
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@faultHandlers/@catchAll/@activity/@activity/@activities.1"/>
+
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@faultHandlers/@catchAll/@activity/@activity/@activities.1"/>
+
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <children type="4017">
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <element href="//0/@process/@activity/@faultHandlers/@catchAll/@activity/@activity/@activities.1"/>
+
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles
+                                    fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <element href="//0/@process/@activity/@faultHandlers/@catchAll/@activity/@activity/@activities.1"/>
+                                    <layoutConstraint
+                                    height="97"
+                                    x="298"
+                                    xsi:type="notation:Bounds" y="19"/>
+                                    </children>
+                                    <styles xsi:type="notation:DrawerStyle"/>
+                                    <styles xsi:type="notation:SortingStyle"/>
+                                    <styles xsi:type="notation:FilteringStyle"/>
+                                    <element href="//0/@process/@activity/@faultHandlers/@catchAll/@activity/@activity"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles
+                                    backgroundColor="16777215"
+                                    gradientEndColor="50431"
+                                    gradientStartColor="16777215" xsi:type="bwnotation:BackgroundStyle"/>
+                                    <styles xsi:type="bwnotation:ResizingStyle"/>
+                                    <element href="//0/@process/@activity/@faultHandlers/@catchAll/@activity/@activity"/>
+                                    <layoutConstraint
+                                    height="151" width="715" xsi:type="notation:Bounds"/>
+                                    </children>
+                                    <styles xsi:type="notation:SortingStyle"/>
+                                    <styles xsi:type="notation:FilteringStyle"/>
+                                    <element href="//0/@process/@activity/@faultHandlers/@catchAll"/>
+                                    </children>
+                                    <styles fontName="Segoe UI"
+                                    lineColor="0" xsi:type="notation:ShapeStyle"/>
+                                    <styles xsi:type="bwnotation:BackgroundStyle"/>
+                                    <styles xsi:type="bwnotation:ResizingStyle"/>
+                                    <element href="//0/@process/@activity/@faultHandlers/@catchAll"/>
+                                    <layoutConstraint xsi:type="notation:Bounds"/>
+                                </children>
+                                <styles xsi:type="notation:SortingStyle"/>
+                                <styles xsi:type="notation:FilteringStyle"/>
+                                <element href="//0/@process/@activity/@faultHandlers"/>
+                            </children>
+                            <styles fontName="Segoe UI" lineColor="0" xsi:type="notation:ShapeStyle"/>
+                            <styles xsi:type="bwnotation:BackgroundStyle"/>
+                            <styles xsi:type="bwnotation:ResizingStyle"/>
+                            <element href="//0/@process/@activity/@faultHandlers"/>
+                            <layoutConstraint height="183" width="776"
+                                x="22" xsi:type="notation:Bounds" y="131"/>
+                        </children>
+                        <styles xsi:type="notation:SortingStyle"/>
+                        <styles xsi:type="notation:FilteringStyle"/>
+                        <element href="//0/@process/@activity"/>
+                    </children>
+                    <styles fontName="Segoe UI" lineColor="0" xsi:type="notation:ShapeStyle"/>
+                    <styles xsi:type="bwnotation:BackgroundStyle"/>
+                    <styles xsi:type="bwnotation:ResizingStyle"/>
+                    <element href="//0/@process/@activity"/>
+                    <layoutConstraint height="430" width="816" x="1"
+                        xsi:type="notation:Bounds" y="1"/>
+                </children>
+                <styles xsi:type="notation:SortingStyle"/>
+                <styles xsi:type="notation:FilteringStyle"/>
+                <element href="//0/@process"/>
+            </children>
+            <styles fontName="Segoe UI" lineColor="0" xsi:type="notation:ShapeStyle"/>
+            <element href="//0/@process"/>
+            <layoutConstraint height="482" width="1158" xsi:type="notation:Bounds"/>
+        </children>
+        <styles xsi:type="notation:DiagramStyle"/>
+        <element href="//0"/>
+        <edges
+            source="//@children.0/@children.4/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.0"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1/@children.0/@children.0/@children.1" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@faultHandlers/@catchAll/@activity/@activity/@links/@children.0"/>
+            <bendpoints points="[25, 1, -207, -9]$[208, 9, -24, -1]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.0"/>
+            <bendpoints points="[25, 7, -140, -41]$[141, 41, -24, -7]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+        <edges
+            source="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.2"
+            target="//@children.0/@children.4/@children.0/@children.0/@children.0/@children.0/@children.0/@children.0/@children.1" type="4006">
+            <children type="6002">
+                <layoutConstraint xsi:type="notation:Location" y="40"/>
+            </children>
+            <styles lineColor="0" xsi:type="notation:ConnectorStyle"/>
+            <styles fontName="Segoe UI" xsi:type="notation:FontStyle"/>
+            <element href="//0/@process/@activity/@activity/@links/@children.1"/>
+            <bendpoints points="[25, 7, -248, 0]$[249, 0, -24, -7]" xsi:type="notation:RelativeBendpoints"/>
+        </edges>
+    </notation:Diagram>
+    <tibex:NamespaceRegistry enabled="true">
+        <tibex:namespaceItem
+            namespace="http://www.tibco.com/pe/WriteToLogActivitySchema" prefix="tns"/>
+        <tibex:namespaceItem
+            namespace="http://www.tibco.com/xmlns/sapscalar/2015/05" prefix="r3"/>
+        <tibex:namespaceItem namespace="http://www.example.org/audit" prefix="tns1"/>
+        <tibex:namespaceItem
+            namespace="http://www.tibco.com/bw/xpath/bw-custom-functions" prefix="bw"/>
+        <tibex:namespaceItem
+            namespace="http://www.tibco.com/bw/xslt/custom-functions" prefix="tib"/>
+        <tibex:namespaceItem
+            namespace="http://www.w3.org/2001/XMLSchema-instance" prefix="xsi"/>
+        <tibex:namespaceItem
+            namespace="http://www.tibco.com/xmlns/sap/613d59eb-516e-4e0c-b87a-2d86917fd3cb/WBBDLD06-ZWBBDLD_2" prefix="tns12"/>
+    </tibex:NamespaceRegistry>
+    <bpws:import importType="http://www.w3.org/2001/XMLSchema" namespace="http://www.example.org/audit"/>
+    <bpws:variables>
+        <bpws:variable element="ns:ProcessContext"
+            name="_processContext" sca-bpel:internal="true"/>
+        <bpws:variable name="FaultName" sca-bpel:internal="true" type="xsd:string"/>
+        <bpws:variable element="ns:FaultDetail" name="FaultDetails" sca-bpel:internal="true"/>
+        <bpws:variable name="SapServerConnection"
+            sca-bpel:hotUpdate="false" sca-bpel:privateProperty="true"
+            sca-bpel:property="yes"
+            sca-bpel:sharedResourceType="{http://ns.tibco.com/bw/sharedresource/sapconnection}SAPConnection" type="xsd:string">
+            <bpws:from>
+                <bpws:literal>sap_idoc_to_kafkatopic.module.SAPConnectionResource</bpws:literal>
+            </bpws:from>
+        </bpws:variable>
+        <bpws:variable name="JmsConnection" sca-bpel:hotUpdate="false"
+            sca-bpel:privateProperty="true" sca-bpel:property="yes"
+            sca-bpel:sharedResourceType="{http://xsd.tns.tibco.com/bw/models/sharedresource/jms}JMSConnectionFactory" type="xsd:string">
+            <bpws:from>
+                <bpws:literal>sap_idoc_to_kafkatopic.module.JMSConnectionResource</bpws:literal>
+            </bpws:from>
+        </bpws:variable>
+        <bpws:variable element="ns0:errorEvent"
+            name="unexpectedError-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns0:isRecoverable"
+            name="unexpectedError" sca-bpel:internal="true"/>
+        <bpws:variable element="ns1:idocListenerStatusListJMS"
+            name="IDOCListener" sca-bpel:internal="true"/>
+        <bpws:variable name="IdocDestination" sca-bpel:hotUpdate="false"
+            sca-bpel:privateProperty="true" sca-bpel:property="yes"
+            tibex:propertySource="/SystemName/ObjectName/IdocDestination" type="xsd:string"/>
+        <bpws:variable name="SapClientConnection"
+            sca-bpel:hotUpdate="false" sca-bpel:privateProperty="true"
+            sca-bpel:property="yes"
+            sca-bpel:sharedResourceType="{http://ns.tibco.com/bw/sharedresource/sapconnection}SAPConnection" type="xsd:string">
+            <bpws:from>
+                <bpws:literal>sap_idoc_to_kafkatopic.module.SAPConnectionResource</bpws:literal>
+            </bpws:from>
+        </bpws:variable>
+        <bpws:variable name="TidManager" sca-bpel:hotUpdate="false"
+            sca-bpel:privateProperty="true" sca-bpel:property="yes"
+            sca-bpel:sharedResourceType="{http://ns.tibco.com/bw/sharedresource/saptidmanager}SAPTIDmanager" type="xsd:string">
+            <bpws:from>
+                <bpws:literal>sap_idoc_to_kafkatopic.module.SAPTIDManagerResource</bpws:literal>
+            </bpws:from>
+        </bpws:variable>
+        <bpws:variable name="AuditPayloadEnabled"
+            sca-bpel:hotUpdate="false" sca-bpel:privateProperty="true"
+            sca-bpel:property="yes"
+            tibex:propertySource="//bwceLib///Framework/Payload/auditPayloadEnabled" type="xsd:boolean"/>
+        <bpws:variable element="ns0:auditStart" name="auditStart-input" sca-bpel:internal="true"/>
+        <bpws:variable element="ns0:log" name="auditStart" sca-bpel:internal="true"/>
+        <bpws:variable name="BusinessObject" sca-bpel:hotUpdate="false"
+            sca-bpel:privateProperty="true" sca-bpel:property="yes"
+            tibex:propertySource="//bwceLib///Framework/Metadata/BusinessObject" type="xsd:string"/>
+        <bpws:variable name="IdocExpiration" sca-bpel:hotUpdate="false"
+            sca-bpel:privateProperty="true" sca-bpel:property="yes"
+            tibex:propertySource="/SystemName/ObjectName/IdocExpiration" type="xsd:int"/>
+    </bpws:variables>
+    <bpws:extensions>
+        <bpws:extension mustUnderstand="no" namespace="http://www.eclipse.org/gmf/runtime/1.0.2/notation"/>
+        <bpws:extension mustUnderstand="no" namespace="http://www.tibco.com/bw/process/info"/>
+        <bpws:extension mustUnderstand="no" namespace="http://docs.oasis-open.org/ns/opencsa/sca-bpel/200801"/>
+        <bpws:extension mustUnderstand="no" namespace="http://docs.oasis-open.org/ns/opencsa/sca/200912"/>
+        <bpws:extension mustUnderstand="no" namespace="http://ns.tibco.com/bw/property"/>
+        <bpws:extension mustUnderstand="no" namespace="http://www.tibco.com/bpel/2007/extensions"/>
+    </bpws:extensions>
+    <bpws:scope name="scope">
+        <bpws:faultHandlers>
+            <bpws:catchAll tibex:faultDetailsVar="FaultDetails"
+                tibex:faultNameVar="FaultName" tibex:xpdlId="8af18722-f9e6-4b5c-ba50-ec3f5c5c376e">
+                <bpws:scope name="scope1">
+                    <bpws:flow name="flow1">
+                        <bpws:links>
+                            <bpws:link
+                                name="unexpectedErrorToConfirmErr" tibex:linkType="SUCCESS"/>
+                        </bpws:links>
+                        <bpws:extensionActivity>
+                            <tibex:extActivity
+                                inputVariable="unexpectedError-input"
+                                name="unexpectedError"
+                                outputVariable="unexpectedError"
+                                tibex:xpdlId="ef00661e-aead-4734-a3ec-357073c03ce6"
+                                type="bw.generalactivities.callprocess" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                                <bpws:sources>
+                                    <bpws:source linkName="unexpectedErrorToConfirmErr"/>
+                                </bpws:sources>
+                                <tibex:inputBindings>
+                                    <tibex:inputBinding coercion=""
+                                    expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns1=&quot;http://www.example.org/audit&quot; xmlns:r3=&quot;http://www.tibco.com/xmlns/sapscalar/2015/05&quot; xmlns:tib=&quot;http://www.tibco.com/bw/xslt/custom-functions&quot; xmlns:bw=&quot;http://www.tibco.com/bw/xpath/bw-custom-functions&quot; version=&quot;2.0&quot;>&lt;xsl:param name=&quot;FaultDetails&quot;/>&lt;xsl:param name=&quot;IDOCListener&quot;/>&lt;xsl:param name=&quot;auditStart&quot;/>&lt;xsl:param name=&quot;AuditPayloadEnabled&quot;/>&lt;xsl:template name=&quot;unexpectedError-input&quot; match=&quot;/&quot;>&lt;tns1:errorEvent>&lt;tns1:logStage>&lt;xsl:value-of select=&quot;'UnexpectedAuditError'&quot;/>&lt;/tns1:logStage>&lt;tns1:correlationID>&lt;xsl:value-of select=&quot;$auditStart/tns1:logEvent/tns1:correlationID&quot;/>&lt;/tns1:correlationID>&lt;tns1:correlationIdDesc>&lt;xsl:value-of select=&quot;$auditStart/tns1:logEvent/tns1:correlationIdDesc&quot;/>&lt;/tns1:correlationIdDesc>&lt;xsl:copy-of select=&quot;$auditStart/tns1:logEvent/tns1:logAttributes&quot;/>&lt;tns1:timestamp>&lt;xsl:value-of select=&quot;current-dateTime()&quot;/>&lt;/tns1:timestamp>&lt;xsl:choose>&lt;xsl:when test=&quot;$AuditPayloadEnabled = true()&quot;>&lt;tns1:sourcePayload>&lt;xsl:value-of select=&quot;tib:render-xml($IDOCListener/r3:item)&quot;/>&lt;/tns1:sourcePayload>&lt;/xsl:when>&lt;xsl:otherwise>&lt;tns1:sourcePayload>&lt;xsl:value-of select=&quot;'auditPayload logging disabled'&quot;/>&lt;/tns1:sourcePayload>&lt;/xsl:otherwise>&lt;/xsl:choose>&lt;tns1:currentProcessName>&lt;xsl:value-of select=&quot;bw:getModuleProperty(&amp;quot;BW.PROCESS.NAME&amp;quot;)&quot;/>&lt;/tns1:currentProcessName>&lt;tns1:tibcoErrorStack>&lt;tns1:activityName>&lt;xsl:value-of select=&quot;$FaultDetails/ActivityName&quot;/>&lt;/tns1:activityName>&lt;tns1:processStack>&lt;xsl:value-of select=&quot;$FaultDetails/ProcessStack&quot;/>&lt;/tns1:processStack>&lt;tns1:errorMessage>&lt;xsl:value-of select=&quot;$FaultDetails/Msg&quot;/>&lt;/tns1:errorMessage>&lt;tns1:errorMessageCode>&lt;xsl:value-of select=&quot;$FaultDetails/MsgCode&quot;/>&lt;/tns1:errorMessageCode>&lt;tns1:errorStackTrace>&lt;xsl:value-of select=&quot;$FaultDetails/StackTrace&quot;/>&lt;/tns1:errorStackTrace>&lt;tns1:errorClass>&lt;xsl:value-of select=&quot;$FaultDetails/Class&quot;/>&lt;/tns1:errorClass>&lt;tns1:errorFullClass>&lt;xsl:value-of select=&quot;$FaultDetails/FullClass&quot;/>&lt;/tns1:errorFullClass>&lt;/tns1:tibcoErrorStack>&lt;/tns1:errorEvent>&lt;/xsl:template>&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                                </tibex:inputBindings>
+                                <tibex:CallProcess moduleRef="bwceLib"
+                                    subProcessName="bwcelib.unexpectedAuditError" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"/>
+                            </tibex:extActivity>
+                        </bpws:extensionActivity>
+                        <bpws:empty name="EndErr" tibex:xpdlId="0ecb3c3c-612f-4569-ab0e-90cb4f873be2">
+                            <bpws:targets>
+                                <bpws:target linkName="unexpectedErrorToConfirmErr"/>
+                            </bpws:targets>
+                        </bpws:empty>
+                    </bpws:flow>
+                </bpws:scope>
+            </bpws:catchAll>
+        </bpws:faultHandlers>
+        <bpws:flow name="flow">
+            <bpws:links>
+                <bpws:link name="IDocListenerToauditStart" tibex:linkType="SUCCESS"/>
+                <bpws:link name="auditStartToEmpty" tibex:linkType="SUCCESS"/>
+            </bpws:links>
+            <bpws:extensionActivity>
+                <tibex:receiveEvent createInstance="yes"
+                    eventTimeout="60" name="IDOCListener"
+                    tibex:xpdlId="34dfcc06-0334-4320-ac1a-9ccb59808e25"
+                    variable="IDOCListener" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    <bpws:sources>
+                        <bpws:source linkName="IDocListenerToauditStart"/>
+                    </bpws:sources>
+                    <tibex:eventSource>
+                        <bwext:BWActivity
+                            activityTypeID="bw.sap.IDocListener"
+                            xmlns:activityconfig="http://tns.tibco.com/bw/model/activityconfig"
+                            xmlns:bwext="http://tns.tibco.com/bw/model/core/bwext"
+                            xmlns:sap="http://ns.tibco.com/bw/palette/sap" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                            <attributeBindings
+                                bindingType="moduleProperty"
+                                eAttributeName="destination" processProperty="IdocDestination"/>
+                            <attributeBindings
+                                bindingType="moduleProperty"
+                                eAttributeName="iDocExpiration" processProperty="IdocExpiration"/>
+                            <activityConfig>
+                                <properties name="config" xsi:type="activityconfig:EMFProperty">
+                                    <type href="http://ns.tibco.com/bw/palette/sap#//IDocListener"/>
+                                    <value
+                                    connectionReference="SapServerConnection"
+                                    jmsConnection="JmsConnection"
+                                    tidManager="TidManager" xsi:type="sap:IDocListener"/>
+                                </properties>
+                            </activityConfig>
+                        </bwext:BWActivity>
+                    </tibex:eventSource>
+                </tibex:receiveEvent>
+            </bpws:extensionActivity>
+            <bpws:empty name="Empty" tibex:xpdlId="adf6670a-7353-4e49-a1bf-a080a524d89f">
+                <bpws:targets>
+                    <bpws:target linkName="auditStartToEmpty"/>
+                </bpws:targets>
+            </bpws:empty>
+            <bpws:extensionActivity>
+                <tibex:extActivity inputVariable="auditStart-input"
+                    name="auditStart" outputVariable="auditStart"
+                    tibex:xpdlId="ed2dce41-2e1f-49c0-9885-5f6bb172c544"
+                    type="bw.generalactivities.callprocess" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions">
+                    <bpws:targets>
+                        <bpws:target linkName="IDocListenerToauditStart"/>
+                    </bpws:targets>
+                    <bpws:sources>
+                        <bpws:source linkName="auditStartToEmpty"/>
+                    </bpws:sources>
+                    <tibex:inputBindings>
+                        <tibex:inputBinding coercion=""
+                            expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xa;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns1=&quot;http://www.example.org/audit&quot; xmlns:r3=&quot;http://www.tibco.com/xmlns/sapscalar/2015/05&quot; xmlns:tib=&quot;http://www.tibco.com/bw/xslt/custom-functions&quot; xmlns:bw=&quot;http://www.tibco.com/bw/xpath/bw-custom-functions&quot; version=&quot;2.0&quot;>&#xa;    &lt;xsl:param name=&quot;IDOCListener&quot;/>&#xa;    &lt;xsl:param name=&quot;AuditPayloadEnabled&quot;/>&#xa;    &lt;xsl:param name=&quot;BusinessObject&quot;/>&#xa;    &lt;xsl:template name=&quot;auditStart-input&quot; match=&quot;/&quot;>&#xa;        &lt;tns1:auditStart>&#xa;            &lt;xsl:variable name=&quot;correlationID&quot; select=&quot;tib:uuid()&quot;/>&#xa;            &lt;tns1:correlationID>&#xa;                &lt;xsl:value-of select=&quot;$correlationID&quot;/>&#xa;            &lt;/tns1:correlationID>&#xa;            &lt;tns1:correlationIdDesc>&#xa;                &lt;xsl:value-of select=&quot;&amp;quot;uuid&amp;quot;&quot;/>&#xa;            &lt;/tns1:correlationIdDesc>&#xa;            &lt;tns1:logAttributes>&#xa;                &lt;tns1:name>&#xa;                    &lt;xsl:value-of select=&quot;'TID'&quot;/>&#xa;                &lt;/tns1:name>&#xa;                &lt;tns1:value>&#xa;                    &lt;xsl:value-of select=&quot;$IDOCListener/r3:item/r3:TID&quot;/>&#xa;                &lt;/tns1:value>&#xa;            &lt;/tns1:logAttributes>&#xa;            &lt;tns1:logAttributes>&#xa;                &lt;tns1:name>&#xa;                    &lt;xsl:value-of select=&quot;'Message ID'&quot;/>&#xa;                &lt;/tns1:name>&#xa;                &lt;tns1:value>&#xa;                    &lt;xsl:value-of select=&quot;$IDOCListener/r3:item/r3:MessageID&quot;/>&#xa;                &lt;/tns1:value>&#xa;            &lt;/tns1:logAttributes>&#xa;            &lt;tns1:logAttributes>&#xa;                &lt;tns1:name>&#xa;                    &lt;xsl:value-of select=&quot;'event-id'&quot;/>&#xa;                &lt;/tns1:name>&#xa;                &lt;tns1:value>&#xa;                    &lt;xsl:value-of select=&quot;$correlationID&quot;/>&#xa;                &lt;/tns1:value>&#xa;            &lt;/tns1:logAttributes>&#xa;            &lt;tns1:logAttributes>&#xa;                &lt;tns1:name>&#xa;                    &lt;xsl:value-of select=&quot;'event-key'&quot;/>&#xa;                &lt;/tns1:name>&#xa;                &lt;tns1:value>&#xa;                    &lt;xsl:value-of select=&quot;$IDOCListener/r3:item/r3:IDocNumber&quot;/>&#xa;                &lt;/tns1:value>&#xa;            &lt;/tns1:logAttributes>&#xa;            &lt;tns1:logAttributes>&#xa;                &lt;tns1:name>&#xa;                    &lt;xsl:value-of select=&quot;'event-name'&quot;/>&#xa;                &lt;/tns1:name>&#xa;                &lt;tns1:value>&#xa;                    &lt;xsl:value-of select=&quot;concat($BusinessObject, &amp;quot;_&amp;lt;Create/Update/Delete>&amp;quot;)&quot;/>&#xa;                &lt;/tns1:value>&#xa;            &lt;/tns1:logAttributes>&#xa;            &lt;xsl:choose>&#xa;                &lt;xsl:when test=&quot;$AuditPayloadEnabled = true()&quot;>&#xa;                    &lt;tns1:logPayload>&#xa;                        &lt;xsl:value-of select=&quot;tib:render-xml($IDOCListener/r3:item)&quot;/>&#xa;                    &lt;/tns1:logPayload>&#xa;                &lt;/xsl:when>&#xa;                &lt;xsl:otherwise>&#xa;                    &lt;tns1:logPayload>&#xa;                        &lt;xsl:value-of select=&quot;'auditPayload logging disabled'&quot;/>&#xa;                    &lt;/tns1:logPayload>&#xa;                &lt;/xsl:otherwise>&#xa;            &lt;/xsl:choose>&#xa;            &lt;tns1:logPayloadType>&#xa;                &lt;xsl:value-of select=&quot;'InputPayload'&quot;/>&#xa;            &lt;/tns1:logPayloadType>&#xa;            &lt;tns1:timestamp>&#xa;                &lt;xsl:value-of select=&quot;current-dateTime()&quot;/>&#xa;            &lt;/tns1:timestamp>&#xa;            &lt;tns1:currentProcessName>&#xa;                &lt;xsl:value-of select=&quot;bw:getModuleProperty(&amp;quot;BW.PROCESS.NAME&amp;quot;)&quot;/>&#xa;            &lt;/tns1:currentProcessName>&#xa;            &lt;tns1:logMessage>&#xa;                &lt;xsl:value-of select=&quot;'IDOC received from SAP System'&quot;/>&#xa;            &lt;/tns1:logMessage>&#xa;        &lt;/tns1:auditStart>&#xa;    &lt;/xsl:template>&#xa;&lt;/xsl:stylesheet>" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xslt1.0"/>
+                    </tibex:inputBindings>
+                    <tibex:CallProcess moduleRef="bwceLib"
+                        subProcessName="bwcelib.auditStart" xmlns:tibex="http://www.tibco.com/bpel/2007/extensions"/>
+                </tibex:extActivity>
+            </bpws:extensionActivity>
+        </bpws:flow>
+    </bpws:scope>
+</bpws:process>

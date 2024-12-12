@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns:ae="http://www.tibco.com/xmlns/ae2xsd/2002/05" xmlns:tns="http://www.tibco.com/xmlns/file/6b55c56d-1caa-4b85-a8f6-98e5bb7c20bb_WriterFileRecord" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.tibco.com/xmlns/file/6b55c56d-1caa-4b85-a8f6-98e5bb7c20bb_WriterFileRecord" xmlns="http://www.w3.org/2001/XMLSchema">
+    <element name="ActivityInput" type="tns:ActivityInput_Type"/>
+    <complexType name="ActivityInput_Type">
+        <sequence>
+            <element name="body" type="tns:body_Type"/>
+        </sequence>
+    </complexType>
+    <complexType name="body_Type">
+        <sequence>
+            <element maxOccurs="1" minOccurs="0" name="WriterFileRecord" type="tns:WriterFileRecord_Type"/>
+        </sequence>
+    </complexType>
+    <complexType name="WriterFileRecord_Type">
+        <all>
+            <element minOccurs="0" name="Record_Identifier" nillable="true" type="string"/>
+            <element minOccurs="0" name="Article_Number" nillable="true" type="string"/>
+            <element minOccurs="0" name="Model_Number" nillable="true" type="string"/>
+        </all>
+    </complexType>
+</schema>

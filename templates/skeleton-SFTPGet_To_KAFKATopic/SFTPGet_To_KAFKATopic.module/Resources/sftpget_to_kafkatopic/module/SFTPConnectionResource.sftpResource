@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:sftpconnection="http://ns.tibco.com/bw/palette/sftpconnection" xmi:id="_31UHMVQoEe2_UctHim2F_Q" name="sftpget_to_kafkatopic.module.SFTPConnectionResource" type="sftpconnection:sftpconnection">
+  <jndi:configuration xsi:type="sftpconnection:SFTPConnection" xmi:id="_31UHMlQoEe2_UctHim2F_Q">
+    <substitutionBindings xmi:id="_8F39cFQoEe2_UctHim2F_Q" template="password" propName="//bwceLib///EnvConnections/ObjectSFTP/ObjectSFTPPassword"/>
+    <substitutionBindings xmi:id="_9aDiIFQoEe2_UctHim2F_Q" template="userName" propName="//bwceLib///EnvConnections/ObjectSFTP/ObjectSFTPUsername"/>
+    <substitutionBindings xmi:id="_CVZawFQpEe2_UctHim2F_Q" template="port" propName="//bwceLib///EnvConnections/ObjectSFTP/ObjectSFTPPort"/>
+    <substitutionBindings xmi:id="_BvVOYFQrEe2_UctHim2F_Q" template="host" propName="//bwceLib///EnvConnections/ObjectSFTP/ObjectSFTPHost"/>
+    <substitutionBindings xmi:id="_1-1JEAkGEe6FeLLZ8uY4XA" template="timeout" propName="/SystemName/ObjectName/SFTPTimeOutMilliSec"/>
+  </jndi:configuration>
+</jndi:namedResource>

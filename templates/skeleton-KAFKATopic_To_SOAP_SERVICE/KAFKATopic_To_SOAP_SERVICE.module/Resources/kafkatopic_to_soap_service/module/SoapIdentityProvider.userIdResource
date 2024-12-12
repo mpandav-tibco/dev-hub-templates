@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:sp="http://xsd.tns.tibco.com/bw/sharedresource/trinity/models/securityprovider" xmlns:subject="http://xsd.tns.tibco.com/bw/sharedresource/trinity/models/identity/subject" xmi:id="_e41FkRJrEe2NQ5tvlxqNOg" name="kafkatopic_to_soap_service.module.SoapIdentityProvider" type="subject:SubjectConfiguration">
+  <jndi:configuration xsi:type="sp:IdentitySecurityProvider" xmi:id="_e5MR8BJrEe2NQ5tvlxqNOg">
+    <configuration xsi:type="subject:SubjectConfiguration" xmi:id="_e5MR8RJrEe2NQ5tvlxqNOg">
+      <substitutionBindings xmi:id="_7jZzoBJrEe2NQ5tvlxqNOg" template="username" propName="//bwceLib///EnvConnections/ObjectSOAP/ObjectSOAPUsername"/>
+      <substitutionBindings xmi:id="_81DowBJrEe2NQ5tvlxqNOg" template="userpassword" propName="//bwceLib///EnvConnections/ObjectSOAP/ObjectSOAPPassword"/>
+    </configuration>
+  </jndi:configuration>
+</jndi:namedResource>

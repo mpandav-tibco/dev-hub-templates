@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:filepluginresource="http://ns.tibco.com/bw/sharedresource/filepluginresource" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmi:id="_5J8x4R9aEe6ehPaQFeGOTQ" name="sftpget_fileplugin_to_kafkatopic.module.FilePluginConfiguration" type="filepluginresource:filepluginresource">
+  <jndi:configuration xsi:type="filepluginresource:FilesConfiguration" xmi:id="_5KGi4B9aEe6ehPaQFeGOTQ" uid="110ebb44-bd21-4255-8f0a-81d7a9d257c6" manualMode="true">
+    <schemaList xsi:type="filepluginresource:DelimitedReadSchema" xmi:id="_Vj4RsB-kEe6ehPaQFeGOTQ" name="DelimitedRecord" uid="d587a04b-71eb-4deb-9682-6f18dbfce2a1" schemaType="READ_DELIMITED" delimiter="Other" delimiterOther=";">
+      <attributesList xmi:id="_lqCmQCUxEe6_TtNq5DfjOA" name="Record_Identifier" dataType="string" dateTimePattern="EEEE, MMMM d, yyyy h:mm:ss a z" constant="'A'" use="true"/>
+      <attributesList xmi:id="_Xt__4B-kEe6ehPaQFeGOTQ" name="UniqueID" dataType="string" dateTimePattern="EEEE, MMMM d, yyyy h:mm:ss a z" position="1" use="true"/>
+      <attributesList xmi:id="_XvyIkB-kEe6ehPaQFeGOTQ" name="Article_Number" dataType="string" dateTimePattern="EEEE, MMMM d, yyyy h:mm:ss a z" position="2" use="true"/>
+      <attributesList xmi:id="_XxrmAB-kEe6ehPaQFeGOTQ" name="Model_Number" dataType="string" dateTimePattern="EEEE, MMMM d, yyyy h:mm:ss a z" position="3" use="true"/>
+    </schemaList>
+  </jndi:configuration>
+</jndi:namedResource>

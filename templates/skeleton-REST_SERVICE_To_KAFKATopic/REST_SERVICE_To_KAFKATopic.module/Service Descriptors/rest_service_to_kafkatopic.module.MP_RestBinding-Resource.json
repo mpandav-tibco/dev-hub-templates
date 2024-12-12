@@ -1,0 +1,77 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "1.0",
+    "title" : "Resource",
+    "description" : "Resource service"
+  },
+  "host" : "localhost:8080",
+  "basePath" : "/",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/systemname/objectname" : {
+      "post" : {
+        "summary" : "postResource",
+        "description" : "postResource",
+        "operationId" : "post-objectname",
+        "consumes" : [ "application/json", "application/xml", "text/plain" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "description" : "",
+          "schema" : {
+            "$ref" : "#/definitions/messageBody"
+          },
+          "required" : true
+        } ],
+        "responses" : {
+          "400" : {
+            "description" : "Bad Request",
+            "schema" : {
+              "type" : "string"
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      },
+      "get" : {
+        "summary" : "getResource",
+        "description" : "getResource",
+        "operationId" : "get-objectname",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ ],
+        "responses" : {
+          "400" : {
+            "description" : "Bad Request",
+            "schema" : {
+              "type" : "string"
+            }
+          },
+          "500" : {
+            "description" : "Internal Server Error",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "messageBody" : {
+      "type" : "object",
+      "properties" : {
+        "messageBody" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

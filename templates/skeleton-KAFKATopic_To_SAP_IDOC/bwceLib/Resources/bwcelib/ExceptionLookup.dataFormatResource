@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:audit="http://www.example.org/audit" xmlns:dataformat="http://ns.tibco.com/bw/palette/dataformat" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmi:id="_Ul8xARjdEemb9dG9tR0Vzw" name="bwcelib.ExceptionLookup" type="dataformat:DataFormat">
+  <imports xmi:id="_cdJWwBjdEemb9dG9tR0Vzw" importType="http://www.w3.org/2001/XMLSchema" namespace="http://www.example.org/audit"/>
+  <jndi:configuration xsi:type="dataformat:DataFormat" xmi:id="_Ul8xAhjdEemb9dG9tR0Vzw" formatType="Delimiter separated" colSeparator="||" colSeparatorParseRule="Treat all characters as entered as a single column separator string" lineSeparator="Carriage Return/Line Feed (windows)" fillCharacter="Space" schemaElementQName="audit:exception" fieldOffsetsStr="excpLookupShVar(0,0)">
+    <fieldOffsets xmi:id="_f_wh4BjdEemb9dG9tR0Vzw" name="excpLookupShVar"/>
+  </jndi:configuration>
+</jndi:namedResource>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://xsd.tns.tibco.com/amf/models/sharedresource/jdbc" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:subject="http://xsd.tns.tibco.com/trinity/models/identity/subject" xmi:id="_dLQo0eNWEe2GN7KCRvDiIQ" name="kafkatopic_to_db.module.JDBCConnectionResource" type="jdbc:JdbcDataSource">
+  <jndi:reference xmi:id="_dLQo0uNWEe2GN7KCRvDiIQ" key="subjectJndiName" type="subject:SubjectConfiguration" value=""/>
+  <jndi:configuration xsi:type="jdbc:JdbcDataSource" xmi:id="_dLQo0-NWEe2GN7KCRvDiIQ">
+    <substitutionBindings xmi:id="_1o9t0ONWEe2GN7KCRvDiIQ" template="username" propName="//bwceLib///EnvConnections/ObjectDatabase/DBUserName"/>
+    <substitutionBindings xmi:id="_3ixvIONWEe2GN7KCRvDiIQ" template="password" propName="//bwceLib///EnvConnections/ObjectDatabase/DBPassword"/>
+    <substitutionBindings xmi:id="_npkBcONbEe2GN7KCRvDiIQ" template="maxConnections" propName="/SystemName/Database/DBMaxConnection"/>
+    <connectionConfig xsi:type="jdbc:NonXaConnection" xmi:id="_dLQo1ONWEe2GN7KCRvDiIQ">
+      <substitutionBindings xmi:id="_6Ow0QONWEe2GN7KCRvDiIQ" template="dbURL" propName="//bwceLib///EnvConnections/ObjectDatabase/DBUrl"/>
+      <substitutionBindings xmi:id="_8ULBkONWEe2GN7KCRvDiIQ" template="loginTimeout" propName="/SystemName/Database/DBLoginTimeoutInSecs"/>
+      <substitutionBindings xmi:id="_9yRXQONWEe2GN7KCRvDiIQ" template="connectionIdleTimeout" propName="/SystemName/Database/DBConnectionIdleTimeout"/>
+      <substitutionBindings xmi:id="_lz_uUONYEe2GN7KCRvDiIQ" template="jdbcDriver" propName="//bwceLib///EnvConnections/ObjectDatabase/DBDriver"/>
+    </connectionConfig>
+  </jndi:configuration>
+</jndi:namedResource>

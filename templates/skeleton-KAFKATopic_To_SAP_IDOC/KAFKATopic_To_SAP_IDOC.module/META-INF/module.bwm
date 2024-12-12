@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:adbplugin="http://ns.tibco.com/bw/sharedresource/adbplugin" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:property="http://ns.tibco.com/bw/property" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_hhPH4G9VEe29YOmp6-YNPQ" targetNamespace="http://tns.tibco.com/bw/composite/KAFKATopic_To_SAP_IDOC.module" name="KAFKATopic_To_SAP_IDOC.module" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:property xmi:id="_n_83wG9VEe29YOmp6-YNPQ" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_oAmYAG9VEe29YOmp6-YNPQ" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_oAxXIG9VEe29YOmp6-YNPQ" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_oA4E0G9VEe29YOmp6-YNPQ" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_oBBOwG9VEe29YOmp6-YNPQ" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_oBIjgG9VEe29YOmp6-YNPQ" name="BW.CLOUD.PORT" type="XMLSchema:int" scalable="true"/>
+  <sca:property xmi:id="_oBQfUG9VEe29YOmp6-YNPQ" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_g5S8gHSXEe2YheWLHtkf3g" name="DeploymentENV" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_rS74kHSREe2YheWLHtkf3g" name="/SystemName/ObjectName/KafkaGroupID" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_qWuVsHSWEe2YheWLHtkf3g" name="/SystemName/ObjectName/KafkaMaxReqSize" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_qY2coHSWEe2YheWLHtkf3g" name="/SystemName/ObjectName/KafkaConsumerCount" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_qac_IHSWEe2YheWLHtkf3g" name="/SystemName/ObjectName/KafkaReconnectBackoff" type="XMLSchema:long" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_qcIaIHSWEe2YheWLHtkf3g" name="/SystemName/ObjectName/KafkaRetryBackoff" type="XMLSchema:long" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_vTWAsHSWEe2YheWLHtkf3g" name="/SystemName/ObjectName/KafkaTimeout" type="XMLSchema:long" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_cRdOsHSXEe2YheWLHtkf3g" name="/SystemName/ObjectName/HTTPIdleConnTimeout" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_cVezEHSXEe2YheWLHtkf3g" name="/SystemName/ObjectName/HTTPMaxTotalConn" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_cXoIIHSXEe2YheWLHtkf3g" name="/SystemName/ObjectName/HTTPMaxTotConnPerHost" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_hcjakHSXEe2YheWLHtkf3g" name="/SystemName/ObjectName/HTTPSocketTimeout" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_heHg0HSXEe2YheWLHtkf3g" name="/SystemName/ObjectName/HTTPConnectionTimeout" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_hf1YEHSXEe2YheWLHtkf3g" name="/SystemName/ObjectName/HTTPRetry" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_kAlZYHSeEe2YheWLHtkf3g" name="/SystemName/ObjectName/KafkaFetchTimeout" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_kKAbIHSeEe2YheWLHtkf3g" name="/SystemName/ObjectName/KafkaFetchMinBytes" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_kMwNIHSeEe2YheWLHtkf3g" name="/SystemName/ObjectName/KafkaMaxWait" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_kQHDIHSeEe2YheWLHtkf3g" name="/SystemName/ObjectName/KafkaHeartbeatInterval" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_GL9BEHSgEe2YheWLHtkf3g" name="/SystemName/ObjectName/KafkaSessionTimeout" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_EPQfEHVJEe29eeTdJOHmTw" name="/SystemName/ObjectName/IdocDestination" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_UkvtkOTYEe2wTdUwqccOgw" name="/SystemName/ObjectName/KafkaMaxPollRecords" type="XMLSchema:string" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_UznQAOTYEe2wTdUwqccOgw" name="/SystemName/ObjectName/KafkaMaxPollInterval" type="XMLSchema:string" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_W0M1YAB8Ee68_tTrgAe5Tg" name="/SystemName/ObjectName/KafkaRefreshInterval" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_rbjCAHSREe2YheWLHtkf3g" name="/SystemName/KafkaCerts/KafkaTrustStoreLocation" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_Ze4O0HSWEe2YheWLHtkf3g" name="/SystemName/KafkaCerts/KafkaTrustStorePassword" type="property:password" scaext:simpleValue="#!NxHPVMah5tBk2F6e/mfAsQ==" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_Zjnk4HSWEe2YheWLHtkf3g" name="/SystemName/KafkaCerts/KafkaKeyStoreLocation" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_ZmAxkHSWEe2YheWLHtkf3g" name="/SystemName/KafkaCerts/KafkaKeyStorePassword" type="property:password" scaext:simpleValue="#!N5VHlyyQgVk9ZG7Qbb2D5A==" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_ZnkQwHSWEe2YheWLHtkf3g" name="/SystemName/KafkaCerts/KafkaKeyPassword" type="property:password" scaext:simpleValue="#!S4795YtgGlAoNNsp26W6dA==" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_nYyaoOREEe27d7vzu7t8Pg" name="/SystemName/SAPConnection/SAPAppServer" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_zQtD0OREEe27d7vzu7t8Pg" name="/SystemName/SAPConnection/SAPSystemNumber" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_4QFu8OREEe27d7vzu7t8Pg" name="/SystemName/SAPConnection/SAPClientValue" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_8ZYfkOREEe27d7vzu7t8Pg" name="/SystemName/SAPConnection/SAPUserName" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_MpqQIORFEe27d7vzu7t8Pg" name="/SystemName/SAPConnection/SAPPassword" type="property:password" scaext:simpleValue="#!TGpgl1soWkrJoaVJuvfOdw==" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_bVDGgORFEe27d7vzu7t8Pg" name="/SystemName/SAPConnection/SAPLogonGroup" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_AVXXgORGEe27d7vzu7t8Pg" name="/SystemName/SAPConnection/SAPConnRetryAttempt" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_FPmc4ORGEe27d7vzu7t8Pg" name="/SystemName/SAPConnection/SAPReconnectInterval" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_Kn1F0ORGEe27d7vzu7t8Pg" name="/SystemName/SAPConnection/SAPMaxConnection" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_N6KZQORGEe27d7vzu7t8Pg" name="/SystemName/SAPConnection/SAPRfcBapiThreads" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_mYNqAOTqEe2UW73iuavG_A" name="/SystemName/SAPConnection/SAPSncMode" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_midyMOTqEe2UW73iuavG_A" name="/SystemName/SAPConnection/SAPSncPartnername" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_mpC7UOTqEe2UW73iuavG_A" name="/SystemName/SAPConnection/SAPSncMyname" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_mvEDwOTqEe2UW73iuavG_A" name="/SystemName/SAPConnection/SAPSncLib" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_m1GaUOTqEe2UW73iuavG_A" name="/SystemName/SAPConnection/SAPClientOptions" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_uAhfMOTqEe2UW73iuavG_A" name="/SystemName/SAPConnection/SAPServerOptions" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_uKZM4OTqEe2UW73iuavG_A" name="/SystemName/SAPConnection/SAPSncQop" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_ohYHYPO7Ee2Dnqpjw72uPw" name="/SystemName/IDOC/TABNAM" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_qHz5sPO7Ee2Dnqpjw72uPw" name="/SystemName/IDOC/MANDT" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_qPnK0PO7Ee2Dnqpjw72uPw" name="/SystemName/IDOC/DOCREL" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_qV0ggPO7Ee2Dnqpjw72uPw" name="/SystemName/IDOC/DIRECT" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_qb23EPO7Ee2Dnqpjw72uPw" name="/SystemName/IDOC/IDOCTYP" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_qim_UPO7Ee2Dnqpjw72uPw" name="/SystemName/IDOC/MESTYP" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_qphfoPO7Ee2Dnqpjw72uPw" name="/SystemName/IDOC/SNDPOR" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_qwpbUPO7Ee2Dnqpjw72uPw" name="/SystemName/IDOC/SNDPRT" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_q3QZoPO7Ee2Dnqpjw72uPw" name="/SystemName/IDOC/RCVPOR" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_q_pgoPO7Ee2Dnqpjw72uPw" name="/SystemName/IDOC/RCVPRT" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:component xmi:id="_J41GEHZOEe2lef8mGaiZZA" name="ComponentActivator" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_J41GEXZOEe2lef8mGaiZZA" processName="kafkatopic_to_sap_idoc.module.Activator"/>
+  </sca:component>
+  <sca:component xmi:id="_L1DiMHZOEe2lef8mGaiZZA" name="ComponentMP_SubKafka" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_L1DiMXZOEe2lef8mGaiZZA" processName="kafkatopic_to_sap_idoc.module.MP_KafkaStarter"/>
+  </sca:component>
+</sca:composite>

@@ -1,0 +1,6 @@
+----------------------------------------------------------------
+2023-04-13 09:09:06.563 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.5.1.1 - (764942): instance a816c00e-0187-79e0-2904-ffff9b809a74
+on database directory memory:/opt/home/CICDHome/bwce/Templates/Code_UpdateMaxpoll/KAFKATopic_To_SOAP_SERVICE/.metadata/.plugins/com.tibco.xpd.resources/db/TibcoResources  
+
+Database Class Loader started - derby.database.classpath=''

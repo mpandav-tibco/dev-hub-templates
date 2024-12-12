@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jms="http://xsd.tns.tibco.com/bw/models/sharedresource/jms" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmi:id="_28BGUBlREe2s4rfinGwMtA" name="kafkatopic_to_emstopic.module.JNDIConfigurationResource" type="jms:JNDIConnection">
+  <jndi:configuration xsi:type="jms:JNDIConnectionConfiguration" xmi:id="_28C7gBlREe2s4rfinGwMtA">
+    <substitutionBindings xmi:id="_rXAIABlyEe2RCI8VZAwDMQ" template="providerUrl" propName="//bwceLib///EnvConnections/ObjectEMS/ObjectEMSUrl"/>
+    <userCredentials xmi:id="_FeFlUB1HEe2LXIVEEF0kYA">
+      <substitutionBindings xmi:id="_Fs3BIB1HEe2LXIVEEF0kYA" template="username" propName="//bwceLib///EnvConnections/ObjectEMS/ObjectEMSUsername"/>
+      <substitutionBindings xmi:id="_F8ZR8B1HEe2LXIVEEF0kYA" template="password" propName="//bwceLib///EnvConnections/ObjectEMS/ObjectEMSPassword"/>
+    </userCredentials>
+  </jndi:configuration>
+</jndi:namedResource>

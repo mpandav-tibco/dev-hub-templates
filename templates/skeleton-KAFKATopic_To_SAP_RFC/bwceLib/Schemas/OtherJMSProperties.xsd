@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:tns="http://simple.schema/simple" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://simple.schema/simple"  elementFormDefault="qualified"> 
+
+    <xsd:complexType name="MsgContextType">
+    	<xsd:sequence>
+
+    		<xsd:element ref="tns:CorrelationID"/>
+            <xsd:element ref="tns:CorrelationIdDesc"/>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" ref="tns:logAttributes">
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" ref="tns:AdditionalIdentifier">
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" ref="tns:timeStamp">
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" ref="tns:ProcessName">
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" ref="tns:ProcessID">
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" ref="tns:OrigMsgContext">
+    		</xsd:element>
+
+    		<xsd:element maxOccurs="1" minOccurs="0" ref="tns:Payload"/>
+
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+
+    <xsd:element name="timeStamp" type="xsd:string"/>
+
+    <xsd:element name="AdditionalIdentifier" type="xsd:string"/>
+
+    <xsd:element name="ProcessName" type="xsd:string"/>
+
+    <xsd:element name="ProcessID" type="xsd:string"/>
+
+    <xsd:element name="OrigSender" type="xsd:string"/>
+
+    <xsd:element name="OrigtimeStamp" type="xsd:string"/>
+
+    <xsd:element name="XmlString" type="xsd:string"/>
+
+    <xsd:complexType name="OrigMsgContextType">    	
+    <xsd:sequence>
+    		<xsd:element maxOccurs="1" minOccurs="0" ref="tns:OrigSender">
+    		</xsd:element>
+    		<xsd:element maxOccurs="1" minOccurs="0" ref="tns:OrigtimeStamp"/>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="OrigMsgContext" type="tns:OrigMsgContextType"/>
+ 
+
+
+    <xsd:element name="value" type="xsd:string"/>
+
+
+    <xsd:element name="CorrelationID" type="xsd:string"/>
+
+    <xsd:element name="CorrelationIdDesc" type="xsd:string"/>
+
+
+    <xsd:element name="name" type="xsd:string"></xsd:element>
+
+
+
+    <xsd:element name="logAttributes" type="tns:logAttributesType"></xsd:element>
+
+    <xsd:element name="Payload" type="tns:PayloadType"></xsd:element>
+
+    <xsd:complexType name="logAttributesType">
+    	<xsd:sequence>
+    		<xsd:element ref="tns:name"></xsd:element>
+    		<xsd:element ref="tns:value"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="PayloadType">
+    	<xsd:sequence>
+    		<xsd:element ref="tns:XmlString" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="IntermediateType">
+    	<xsd:sequence>
+    		<xsd:element ref="tns:MsgContext" minOccurs="0"
+    			maxOccurs="1">
+    		</xsd:element>
+
+    		<xsd:element name="SourcePayload" type="xsd:string" minOccurs="0" maxOccurs="1"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="MsgContext" type="tns:MsgContextType"></xsd:element>
+
+    <xsd:element name="IntermediateMsg" type="tns:IntermediateType"></xsd:element>
+</xsd:schema>

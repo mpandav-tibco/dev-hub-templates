@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns:tns="http://www.tibco.com/xmlns/adb/607055ae-0557-41ec-adff-1425859cda0f241efcd8-1fcd-409d-a31a-a55c18f10965_schema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.tibco.com/xmlns/adb/607055ae-0557-41ec-adff-1425859cda0f241efcd8-1fcd-409d-a31a-a55c18f10965_schema" xmlns="http://www.w3.org/2001/XMLSchema">
+    <element name="P__ORDER__TABLE" type="tns:P__ORDER__TABLE_Type"/>
+    <complexType name="P__ORDER__TABLE_Type">
+        <all>
+            <element minOccurs="0" name="ORDER__ID" nillable="true" type="double"/>
+            <element minOccurs="0" name="ORDER__DESCRIPTION" nillable="true" type="string"/>
+            <element minOccurs="0" name="ORDER__PRICE" nillable="true" type="double"/>
+            <element minOccurs="0" name="ADB__OPCODE" nillable="true" type="int"/>
+            <element minOccurs="0" name="ADB__SEQUENCE" nillable="true" type="string"/>
+            <element minOccurs="0" name="ADB__TIMESTAMP" nillable="true" type="string"/>
+            <element minOccurs="0" name="ADB__REF__OBJECT" nillable="true" type="string"/>
+        </all>
+    </complexType>
+</schema>

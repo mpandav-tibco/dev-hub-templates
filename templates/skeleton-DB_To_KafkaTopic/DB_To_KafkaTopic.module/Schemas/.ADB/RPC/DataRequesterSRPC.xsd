@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.tibco.com/bw/plugins/adbplugin/8.2.0/DataRequesterSRPC" elementFormDefault="unqualified" targetNamespace="http://schemas.tibco.com/bw/plugins/adbplugin/8.2.0/DataRequesterSRPC">	
+	
+    <element name="ActivityInput" type="tns:ActivityInput_Type"/>
+    <complexType name="ActivityInput_Type">
+        <sequence>
+            <element minOccurs="0" name="body" type="tns:body_Type"/>
+        </sequence>
+    </complexType>
+    <complexType name="body_Type">
+        <choice>
+            <element minOccurs="0" name="STATEMENT" nillable="true" type="tns:STATEMENT_Type"/>
+        </choice>
+    </complexType>
+    <element name="ActivityOutput" type="tns:ActivityOutput_Type"/>
+    <complexType name="ActivityOutput_Type">
+        <sequence>
+            <element minOccurs="0" name="body" type="tns:body_Output_Type"/>
+        </sequence>
+    </complexType>
+    <complexType name="body_Output_Type">
+        <choice>
+            <element maxOccurs="unbounded" minOccurs="0" name="SQL__EXECUTE" type="tns:SQL__EXECUTE_Output_Type"/>
+        </choice>
+    </complexType>
+
+    <element name="STATEMENT" type="tns:STATEMENT_Type"/>
+
+    <complexType name="STATEMENT_Type">
+        <all>
+            <element minOccurs="0" name="MAXROWS" nillable="true" type="int"/>
+            <element minOccurs="0" name="SQL__STRING" nillable="true" type="string"/>
+            <element minOccurs="0" name="CLOSURE" nillable="true" type="string"/>
+            <element minOccurs="0" name="BINDS" nillable="true" type="tns:BINDS_Type"/>
+        </all>
+    </complexType>
+    <complexType name="BINDS_Type">
+        <sequence>
+            <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:BINDS"/>
+        </sequence>
+    </complexType>
+    <complexType name="BINDS">
+        <all>
+            <element minOccurs="0" name="POSITION" nillable="true" type="int"/>
+            <element minOccurs="0" name="NAME" nillable="true" type="string"/>
+            <element minOccurs="0" name="PARAMTYPE" nillable="true" type="string"/>
+            <element minOccurs="0" name="DATA" nillable="true" type="anyType"/>
+        </all>
+    </complexType>
+    <complexType name="SQL__EXECUTE_Output_Type">
+        <all>
+            <element minOccurs="0" name="STATUS" nillable="true" type="string"/>
+            <element minOccurs="0" name="SQL" nillable="true" type="string"/>
+            <element minOccurs="0" name="ERROR__DESC" nillable="true" type="string"/>
+            <element minOccurs="0" name="CLOSURE" nillable="true" type="string"/>
+            <element minOccurs="0" name="RETURNVALUE" nillable="true" type="tns:RETURNVALUE"/>
+        </all>
+    </complexType>
+    <complexType name="RETURNVALUE">
+        <all>
+            <element minOccurs="0" name="CLOSURE" nillable="true" type="string"/>
+            <element minOccurs="0" name="OUTBINDS" nillable="true" type="tns:OUTBINDS_Type"/>
+            <element minOccurs="0" name="RESULTSETS" nillable="true" type="tns:RESULTSETS_Type"/>
+        </all>
+    </complexType>
+    <complexType name="OUTBINDS_Type">
+        <sequence>
+            <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:OUTBINDS"/>
+        </sequence>
+    </complexType>
+    <complexType name="OUTBINDS">
+        <all>
+            <element minOccurs="0" name="POSITION" nillable="true" type="int"/>
+            <element minOccurs="0" name="NAME" nillable="true" type="string"/>
+            <element minOccurs="0" name="PARAMTYPE" nillable="true" type="string"/>
+            <element minOccurs="0" name="DATA" nillable="true" type="anyType"/>
+        </all>
+    </complexType>
+    <complexType name="RESULTSETS_Type">
+        <sequence>
+            <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:RESULTSETS"/>
+        </sequence>
+    </complexType>
+    <complexType name="RESULTSETS">
+        <all>
+            <element minOccurs="0" name="HEADER" nillable="true" type="tns:HEADER_Type"/>
+            <element minOccurs="0" name="ROWVALUES" nillable="true" type="tns:ROWVALUES_Type"/>
+        </all>
+    </complexType>
+    <complexType name="HEADER_Type">
+       <sequence>
+           <element maxOccurs="unbounded" minOccurs="0" name="item" type="string"/>
+       </sequence>
+   </complexType>
+   <complexType name="ROWVALUES_Type">
+       <sequence>
+           <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:ROW"/>
+       </sequence>
+   </complexType>
+   <complexType name="ROW">
+       <all>
+           <element minOccurs="0" name="ROW" nillable="true" type="tns:ROW_Type"/>
+       </all>
+   </complexType>
+   <complexType name="ROW_Type">
+       <sequence>
+           <element maxOccurs="unbounded" minOccurs="0" name="item" type="anyType"/>
+       </sequence>
+   </complexType>
+</schema>

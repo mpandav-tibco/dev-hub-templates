@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jms="http://xsd.tns.tibco.com/bw/models/sharedresource/jms" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmi:id="_wDU2gXIBEe2xXO-piG2mDw" name="sap_idoc_to_kafkatopic.module.JMSConnectionResource" type="jms:JMSConnectionFactory">
+  <jndi:reference xmi:id="_iz_-MHbSEe2atarYoPAH5g" key="jndiConnectionJNDIName" type="jms:JNDIConnection" value="sap_idoc_to_kafkatopic.module.JNDIConfigurationResource"/>
+  <jndi:configuration xsi:type="jms:JNDIConnectionFactory" xmi:id="_irilwHbSEe2atarYoPAH5g" factoryType="Queue/Topic" jndiName="QueueConnectionFactory" topicFactoryJNDIName="TopicConnectionFactory">
+    <substitutionBindings xmi:id="_UC3MUMJZEe2SK8YIvVa_Qw" template="topicFactoryJNDIName" propName="//bwceLib///EnvConnections/ObjectEMS/ObjectEMSTopicConnectionFactory"/>
+    <substitutionBindings xmi:id="_unbQIMJZEe2SK8YIvVa_Qw" template="jndiName" propName="//bwceLib///EnvConnections/ObjectEMS/ObjectEMSQueueConnectionFactory"/>
+    <userCredentials xmi:id="_Dwks8HbTEe2atarYoPAH5g">
+      <substitutionBindings xmi:id="_LK0isMJbEe2SK8YIvVa_Qw" template="username" propName="//bwceLib///EnvConnections/ObjectEMS/ObjectEMSUsername"/>
+      <substitutionBindings xmi:id="_NaNycMJbEe2SK8YIvVa_Qw" template="password" propName="//bwceLib///EnvConnections/ObjectEMS/ObjectEMSPassword"/>
+    </userCredentials>
+  </jndi:configuration>
+</jndi:namedResource>

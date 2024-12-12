@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:keystore="http://xsd.tns.tibco.com/bw/sharedresource/trinity/models/cred/keystore" xmlns:sp="http://xsd.tns.tibco.com/bw/sharedresource/trinity/models/securityprovider" xmlns:trust="http://xsd.tns.tibco.com/bw/sharedresource/trinity/models/identity/trust" xmi:id="_rexCgQyxEe2Vv_ZP-8OsYw" name="rest_service_to_kafkatopic.module.KafkaTrustProvider" type="trust:TrustConfiguration">
+  <jndi:reference xmi:id="_taNbgAyxEe2Vv_ZP-8OsYw" key="trustStoreServiceProvider" type="keystore:KeystoreConfiguration" value="rest_service_to_kafkatopic.module.KafkaTruststore"/>
+  <jndi:configuration xsi:type="sp:IdentitySecurityProvider" xmi:id="_re17AAyxEe2Vv_ZP-8OsYw">
+    <configuration xsi:type="trust:TrustConfiguration" xmi:id="_re2iEAyxEe2Vv_ZP-8OsYw"/>
+  </jndi:configuration>
+</jndi:namedResource>

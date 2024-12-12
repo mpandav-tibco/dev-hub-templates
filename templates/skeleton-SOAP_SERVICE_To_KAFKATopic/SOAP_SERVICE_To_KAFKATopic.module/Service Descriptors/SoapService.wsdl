@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:extns="http://www.example.org/adidasIntegrationMessage" xmlns:tns="http://www.example.org/wsdl/1659946471243" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SoapService" targetNamespace="http://www.example.org/wsdl/1659946471243">
+  <wsdl:types>
+    <xsd:schema elementFormDefault="unqualified" targetNamespace="http://www.example.org/wsdl/1659946471243">
+      <xsd:element name="SoapOperationRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="in" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SoapOperationResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="out" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="SoapOperationFault">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="fault" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+    <xsd:schema>
+      <xsd:import namespace="http://www.example.org/adidasIntegrationMessage" schemaLocation="../Schemas/adidasIntegrationMessage.xsd">
+    	</xsd:import>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="SoapOperationRequest">
+    <wsdl:part element="extns:ObjectNameElement" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="SoapOperationResponse">
+    <wsdl:part element="tns:SoapOperationResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="SoapOperationFault">
+    <wsdl:part element="tns:SoapOperationFault" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="SoapService">
+    <wsdl:operation name="SoapOperation">
+      <wsdl:input message="tns:SoapOperationRequest" name="SoapOperationInput"/>
+      <wsdl:output message="tns:SoapOperationResponse" name="SoapOperationOutput"/>
+      <wsdl:fault message="tns:SoapOperationFault" name="Fault"/>
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

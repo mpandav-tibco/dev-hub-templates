@@ -1,0 +1,17 @@
+{
+    "records": [{
+        "name": "Cloud",
+        "items": [],
+        "url": "https://integration.cloud.tibco.com:443"
+    }],
+    "resources": [
+        {
+            "location": "Service Descriptors/RestBinding.json",
+            "type": "generated"
+        },
+        {
+            "location": "Service Descriptors/rest_service_to_kafkatopic.module.MP_RestBinding-Resource.json",
+            "type": "generated"
+        }
+    ]
+}

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns:r3="http://www.tibco.com/xmlns/sapscalar/2015/05" xmlns:tns="http://www.tibco.com/xmlns/sap/SAPConnectionResource/__SLASH__BIC__SLASH__CFZECLTC_ADI_ADO" elementFormDefault="unqualified" targetNamespace="http://www.tibco.com/xmlns/sap/SAPConnectionResource/__SLASH__BIC__SLASH__CFZECLTC_ADI_ADO" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:import namespace="http://www.tibco.com/xmlns/sapscalar/2015/05" schemaLocation="/Schemas/.SAP/SAPSchema.xsd"/>
+    <xsd:element name="RequestInputType" type="tns:RequestInputTypeParam"/>
+    <xsd:complexType name="RequestInputTypeParam">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="sessionID" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="timeout" type="xsd:long"/>
+            <xsd:element name="RfcRequest" type="tns:__SLASH__BIC__SLASH__CFZECLTC_ADI_ADO_RequestParam"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="RfcRequest" type="tns:__SLASH__BIC__SLASH__CFZECLTC_ADI_ADO_RequestParam"/>
+    <xsd:complexType name="__SLASH__BIC__SLASH__CFZECLTC_ADI_ADO_RequestParam">
+        <xsd:sequence>
+            <xsd:element minOccurs="1" name="DATA" type="tns:sequence_lsqb___SLASH__BIC__SLASH__WCRZECLTC_ADI_ADO_rsqb_"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="RequestOutputType" type="tns:RequestOutputTypeParam"/>
+    <xsd:complexType name="RequestOutputTypeParam">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="sessionID" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="CPIC_ID" type="xsd:string"/>
+            <xsd:element name="RfcResponse" type="tns:__SLASH__BIC__SLASH__CFZECLTC_ADI_ADO_ResponseParam"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="RfcResponse" type="tns:__SLASH__BIC__SLASH__CFZECLTC_ADI_ADO_ResponseParam"/>
+    <xsd:complexType name="__SLASH__BIC__SLASH__CFZECLTC_ADI_ADO_ResponseParam">
+        <xsd:sequence/>
+    </xsd:complexType>
+    <xsd:element name="SAPSystemException" type="tns:__SLASH__BIC__SLASH__CFZECLTC_ADI_ADO_FaultParam"/>
+    <xsd:complexType name="__SLASH__BIC__SLASH__CFZECLTC_ADI_ADO_FaultParam">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="INTERNAL_ERROR" type="tns:RFCException"/>
+            <xsd:element minOccurs="0" name="OTHERS" type="tns:RFCException"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="sequence_lsqb___SLASH__BIC__SLASH__WCRZECLTC_ADI_ADO_rsqb_">
+        <xsd:sequence>
+            <xsd:element form="unqualified" maxOccurs="unbounded" minOccurs="0" name="item" type="tns:__SLASH__BIC__SLASH__WCRZECLTC_ADI_ADO"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="__SLASH__BIC__SLASH__WCRZECLTC_ADI_ADO">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="DATE" nillable="true" r3:abapType="C" r3:document="" r3:javaType="java.lang.String" r3:jcoType="0" r3:offset="0">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="20"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="COUNTRY" nillable="true" r3:abapType="C" r3:document="" r3:javaType="java.lang.String" r3:jcoType="0" r3:offset="40">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="256"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="__SLASH__BIC__SLASH__ZECMSITE" nillable="true" r3:abapType="C" r3:document="" r3:javaType="java.lang.String" r3:jcoType="0" r3:offset="552">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="20"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="__SLASH__BIC__SLASH__RTADBLTC" nillable="true" r3:abapType="C" r3:document="" r3:javaType="java.lang.String" r3:jcoType="0" r3:offset="592">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:string">
+                        <xsd:maxLength value="60"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="__SLASH__BIC__SLASH__ZECMTFCT" nillable="true" r3:abapType="P" r3:document="" r3:javaType="java.math.BigDecimal" r3:jcoType="2" r3:offset="712">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:decimal">
+                        <xsd:totalDigits value="17"/>
+                        <xsd:fractionDigits value="3"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element minOccurs="0" name="__SLASH__BIC__SLASH__RTADBORDS" nillable="true" r3:abapType="I" r3:document="" r3:javaType="int" r3:jcoType="8" r3:offset="724">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:int"/>
+                </xsd:simpleType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="RFCException">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="msg" nillable="true" type="xsd:string"/>
+            <xsd:element minOccurs="0" name="msgCode" nillable="true" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

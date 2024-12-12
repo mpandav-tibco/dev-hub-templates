@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:kafka="http://ns.tibco.com/bw/sharedresource/kafka" xmlns:keystore="http://xsd.tns.tibco.com/bw/sharedresource/trinity/models/cred/keystore" xmi:id="_4d5UUBlHEe2s4rfinGwMtA" name="kafkatopic_to_emstopic.module.KafkaConnectionResource" type="kafka:KafkaConnection">
+  <jndi:reference xmi:id="_-dxt8BlZEe2s4rfinGwMtA" key="trustStoreServiceProvider" type="keystore:KeystoreConfiguration" value="kafkatopic_to_emstopic.module.KafkaTrustStore"/>
+  <jndi:reference xmi:id="_Av4TcBlaEe2s4rfinGwMtA" key="identityStoreServiceProvider" type="keystore:KeystoreConfiguration" value="kafkatopic_to_emstopic.module.KafkaKeyStore"/>
+  <jndi:configuration xsi:type="kafka:KafkaConnection" xmi:id="_4d8-sBlHEe2s4rfinGwMtA" metadataMaxAge="300000" SSL="true" ClientAuthentication="true" SchemaRegistryVendor="None">
+    <substitutionBindings xmi:id="_PCm3YBlIEe2s4rfinGwMtA" template="bootstrapServers" propName="//bwceLib///EnvConnections/ObjectKafka/ObjectKafkaBootStrapServer"/>
+    <substitutionBindings xmi:id="_EXTV0BlJEe2s4rfinGwMtA" template="reconnectBackoffMs" propName="/SystemName/ObjectName/KafkaReconnectBackOff"/>
+    <substitutionBindings xmi:id="_cpcrEBlJEe2s4rfinGwMtA" template="retryBackoffMs" propName="/SystemName/ObjectName/KafkaRetryBackOff"/>
+    <substitutionBindings xmi:id="_d2-1MBlJEe2s4rfinGwMtA" template="requestTimeout" propName="/SystemName/ObjectName/KafkaRequestTimeout"/>
+    <substitutionBindings xmi:id="_Da6WUBlaEe2s4rfinGwMtA" template="KeyPassword" propName="/SystemName/KafkaCerts/KafkaKeyPassword"/>
+  </jndi:configuration>
+</jndi:namedResource>

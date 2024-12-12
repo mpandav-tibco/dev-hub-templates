@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd ="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/adidasIntegrationMessage" xmlns="http://www.example.org/adidasIntegrationMessage" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xsd:element name="JSON">
+        <xsd:complexType>
+            <xsd:all>
+                <xsd:element name="metadata" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:all>
+                            <xsd:element name="eventVersion" minOccurs="1" maxOccurs="1" type="xsd:string"/>
+                            <xsd:element name="eventSource" minOccurs="1" maxOccurs="1" type="xsd:string"/>
+                            <xsd:element name="eventName" minOccurs="0" maxOccurs="1" type="xsd:string"/>
+                            <xsd:element name="eventTime" minOccurs="1" maxOccurs="1" type="xsd:string"/>
+                            <xsd:element name="eventID" minOccurs="1" maxOccurs="1" type="xsd:string"/>
+                            <xsd:element name="eventKey" minOccurs="0" maxOccurs="1" type="xsd:string"/>
+                        </xsd:all>
+                    </xsd:complexType>
+                </xsd:element>
+                <xsd:element name="payload" minOccurs="1" maxOccurs="1">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="ObjectNameElement" type="ObjectNameElementType"/>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:all>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="ObjectNameElementType">
+      <xsd:sequence>
+      <xsd:element maxOccurs="1" minOccurs="0" name="hostIndicator" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="containerNumber" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="created" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="inboundDeliveryNumber" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="transactionNumber" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="internalReference" type="xsd:string"/>
+      <xsd:element maxOccurs="1" minOccurs="0" name="warehouse" type="xsd:string"/>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="inboundDeliveryLines">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element maxOccurs="1" minOccurs="0" name="articleNumber" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="lineNumber" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="srcSizeCd3" type="xsd:string"/>
+            <xsd:element maxOccurs="1" minOccurs="0" name="unitsReceived" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="ObjectNameElement" type="ObjectNameElementType"/>
+</xsd:schema>

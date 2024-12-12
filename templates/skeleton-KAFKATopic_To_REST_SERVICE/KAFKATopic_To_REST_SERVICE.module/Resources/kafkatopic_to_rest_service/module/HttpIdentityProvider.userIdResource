@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:sp="http://xsd.tns.tibco.com/bw/sharedresource/trinity/models/securityprovider" xmlns:subject="http://xsd.tns.tibco.com/bw/sharedresource/trinity/models/identity/subject" xmi:id="_hOjYMQmWEe2AtOqZZNLsvw" name="kafkatopic_to_rest_service.module.HTTPIdentityProvider" type="subject:SubjectConfiguration">
+  <jndi:configuration xsi:type="sp:IdentitySecurityProvider" xmi:id="_hO9A0AmWEe2AtOqZZNLsvw">
+    <configuration xsi:type="subject:SubjectConfiguration" xmi:id="_hO9A0QmWEe2AtOqZZNLsvw">
+      <substitutionBindings xmi:id="_o9Me4AmWEe2AtOqZZNLsvw" template="username" propName="/SystemName/ObjectName/HTTPUserName"/>
+      <substitutionBindings xmi:id="_qh39sAmWEe2AtOqZZNLsvw" template="userpassword" propName="/SystemName/ObjectName/HTTPPassword"/>
+    </configuration>
+  </jndi:configuration>
+</jndi:namedResource>

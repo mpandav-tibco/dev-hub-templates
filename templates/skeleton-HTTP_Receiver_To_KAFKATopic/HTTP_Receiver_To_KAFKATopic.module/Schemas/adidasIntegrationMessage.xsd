@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/adidasIntegrationMessage" xmlns:tns="http://www.example.org/adidasIntegrationMessage" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<element name="JSON">
+        <complexType>
+            <all>
+                <element name="metadata" minOccurs="1" maxOccurs="1">
+                    <complexType>
+                        <all>
+                            <element name="eventVersion" minOccurs="1" maxOccurs="1" type="string"/>
+                            <element name="eventSource" minOccurs="1" maxOccurs="1" type="string"/>
+                            <element name="eventName" minOccurs="0" maxOccurs="1" type="string"/>
+                            <element name="eventTime" minOccurs="1" maxOccurs="1" type="string"/>
+                            <element name="eventID" minOccurs="1" maxOccurs="1" type="string"/>
+                            <element name="eventKey" minOccurs="0" maxOccurs="1" type="string"/>
+                        </all>
+                    </complexType>
+                </element>
+                <element name="payload" minOccurs="1" maxOccurs="1">
+                    <complexType>
+                        <sequence>
+                            <element name="ObjectNameElement" type="tns:ObjectNameElementType"/>
+                        </sequence>
+                    </complexType>
+                </element>
+            </all>
+        </complexType>
+    </element>
+    <complexType name="ObjectNameElementType">
+      <sequence>
+      <element maxOccurs="1" minOccurs="0" name="hostIndicator" type="string"/>
+      <element maxOccurs="1" minOccurs="0" name="containerNumber" type="string"/>
+      <element maxOccurs="1" minOccurs="0" name="created" type="string"/>
+      <element maxOccurs="1" minOccurs="0" name="inboundDeliveryNumber" type="string"/>
+      <element maxOccurs="1" minOccurs="0" name="transactionNumber" type="string"/>
+      <element maxOccurs="1" minOccurs="0" name="internalReference" type="string"/>
+      <element maxOccurs="1" minOccurs="0" name="warehouse" type="string"/>
+      <element maxOccurs="1" minOccurs="0" name="inboundDeliveryLines">
+        <complexType>
+          <sequence>
+            <element maxOccurs="1" minOccurs="0" name="articleNumber" type="string"/>
+            <element maxOccurs="1" minOccurs="0" name="lineNumber" type="string"/>
+            <element maxOccurs="1" minOccurs="0" name="srcSizeCd3" type="string"/>
+            <element maxOccurs="1" minOccurs="0" name="unitsReceived" type="string"/>
+          </sequence>
+        </complexType>
+      </element>
+    </sequence>
+  </complexType>
+  <element name="ObjectNameElement" type="tns:ObjectNameElementType"/>
+</schema>

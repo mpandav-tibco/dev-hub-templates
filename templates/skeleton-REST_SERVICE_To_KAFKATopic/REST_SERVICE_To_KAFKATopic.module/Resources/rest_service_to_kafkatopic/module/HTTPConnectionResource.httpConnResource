@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:httpconnector="http://xsd.tns.tibco.com/bw/models/sharedresource/httpconnector" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmi:id="_ATkkoQymEe2Vv_ZP-8OsYw" name="rest_service_to_kafkatopic.module.HTTPConnectionResource" type="httpconnector:HttpConnectorConfiguration">
+  <jndi:configuration xsi:type="httpconnector:HttpConnectorConfiguration" xmi:id="_ATo2EAymEe2Vv_ZP-8OsYw">
+    <substitutionBindings xmi:id="_ATr5YAymEe2Vv_ZP-8OsYw" template="host" propName="BW.HOST.NAME"/>
+    <substitutionBindings xmi:id="_9b0TYAywEe2Vv_ZP-8OsYw" template="port" propName="BW.CLOUD.PORT"/>
+    <substitutionBindings xmi:id="_Rohc4CmzEe2ZIpWzENKpjw" template="acceptors" propName="/SystemName/ObjectName/HttpAcceptorThreads"/>
+    <substitutionBindings xmi:id="_TvrWoCmzEe2ZIpWzENKpjw" template="sessionTimeout" propName="/SystemName/ObjectName/HttpSessionTimeout"/>
+    <substitutionBindings xmi:id="_Vgi3UCmzEe2ZIpWzENKpjw" template="maxPostSize" propName="/SystemName/ObjectName/HttpMaxPostSize"/>
+    <substitutionBindings xmi:id="_W9R7ECmzEe2ZIpWzENKpjw" template="maxSavePostSize" propName="/SystemName/ObjectName/HttpMaxSavePostSize"/>
+    <substitutionBindings xmi:id="_YnYscCmzEe2ZIpWzENKpjw" template="minThreads" propName="/SystemName/ObjectName/HttpMinQTPThreads"/>
+    <substitutionBindings xmi:id="_aH9HUCmzEe2ZIpWzENKpjw" template="maxThreads" propName="/SystemName/ObjectName/HttpMaxQTPThreads"/>
+    <substitutionBindings xmi:id="_AnL6oPSJEe2_I798GblbeQ" template="requestBufferSize" propName="/SystemName/ObjectName/HttpRequestBufferSize"/>
+    <substitutionBindings xmi:id="_Em9i4PSJEe2_I798GblbeQ" template="responseBufferSize" propName="/SystemName/ObjectName/HttpResponseBufferSize"/>
+    <substitutionBindings xmi:id="_GrfmcPSJEe2_I798GblbeQ" template="maxIdleTime" propName="/SystemName/ObjectName/HttpMaxIdleTime"/>
+    <substitutionBindings xmi:id="_I2_0sPSJEe2_I798GblbeQ" template="lowResourceMaxIdleTime" propName="/SystemName/ObjectName/LowResourceMaxIdleTime"/>
+    <substitutionBindings xmi:id="_K_FikPSJEe2_I798GblbeQ" template="lingerTime" propName="/SystemName/ObjectName/HttpLingerTime"/>
+    <substitutionBindings xmi:id="_M1xXYPSJEe2_I798GblbeQ" template="headerBufferSize" propName="/SystemName/ObjectName/HeaderBufferSize"/>
+    <substitutionBindings xmi:id="_WMgdQPSJEe2_I798GblbeQ" template="reverseProxyPort" propName="/SystemName/ObjectName/HttpReverseProxyPort"/>
+    <substitutionBindings xmi:id="_aNj34PSJEe2_I798GblbeQ" template="acceptQueueSize" propName="/SystemName/ObjectName/HttpAcceptQueueSize"/>
+  </jndi:configuration>
+</jndi:namedResource>

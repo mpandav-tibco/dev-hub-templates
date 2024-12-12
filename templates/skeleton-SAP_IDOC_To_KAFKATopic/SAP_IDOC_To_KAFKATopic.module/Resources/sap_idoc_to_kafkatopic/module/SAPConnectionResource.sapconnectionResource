@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jms="http://xsd.tns.tibco.com/bw/models/sharedresource/jms" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:sapconnection="http://ns.tibco.com/bw/sharedresource/sapconnection" xmi:id="_llLeIWvWEe2HlbpsONB3-A" name="sap_idoc_to_kafkatopic.module.SAPConnectionResource" type="sapconnection:SAPConnection">
+  <jndi:reference xmi:id="__u6nIGvWEe2HlbpsONB3-A" key="jmsConnectionServiceProvider" type="jms:JMSConnectionFactory" value="sap_idoc_to_kafkatopic.module.JMSConnectionResource"/>
+  <jndi:configuration xsi:type="sapconnection:SAPConnection" xmi:id="_lqCwAGvWEe2HlbpsONB3-A" clientConnName="sap_idoc_to_kafkatopic.module.SAPConnectionResource.ClientConnection" connType="Load Balancing" language="English" isConnectionless="true" snc_Bsso="0" snc_SSOrecv="" snc_x509="" s_enabled="true" s_serverConnName="sap_idoc_to_kafkatopic.module.SAPConnectionResource.ServerConnection" s_connType="Default" sapConnAlias="613d59eb-516e-4e0c-b87a-2d86917fd3cb" languageCode="E" source="NoMessaging">
+    <substitutionBindings xmi:id="_DJnzcGvXEe2HlbpsONB3-A" template="bootstrapServers" propName="//bwceLib///EnvConnections/ObjectKafka/ObjectKafkaBootStrapServer"/>
+    <substitutionBindings xmi:id="_03kScHU_Ee29JLfm8AZwoQ" template="msgServer" propName="//bwceLib///EnvConnections/ObjectSAP/SAPMsgServer"/>
+    <substitutionBindings xmi:id="_2WBNcHU_Ee29JLfm8AZwoQ" template="groupName" propName="/SystemName/SAPConnection/SAPLogonGroup"/>
+    <substitutionBindings xmi:id="_3DTKMHU_Ee29JLfm8AZwoQ" template="client" propName="/SystemName/SAPConnection/SAPClientValue"/>
+    <substitutionBindings xmi:id="_4ARIwHU_Ee29JLfm8AZwoQ" template="userName" propName="/SystemName/SAPConnection/SAPUserName"/>
+    <substitutionBindings xmi:id="_4-BxgHU_Ee29JLfm8AZwoQ" template="password" propName="/SystemName/SAPConnection/SAPPassword"/>
+    <substitutionBindings xmi:id="_7E1tAHU_Ee29JLfm8AZwoQ" template="maxConnections" propName="/SystemName/SAPConnection/SAPMaxConnection"/>
+    <substitutionBindings xmi:id="_95PuUHU_Ee29JLfm8AZwoQ" template="s_programID" propName="//bwceLib///EnvConnections/ObjectSAP/SAPProgramID"/>
+    <substitutionBindings xmi:id="__HsecHU_Ee29JLfm8AZwoQ" template="s_gatewayService" propName="//bwceLib///EnvConnections/ObjectSAP/SAPGatewayService"/>
+    <substitutionBindings xmi:id="__9tgcHU_Ee29JLfm8AZwoQ" template="s_gatewayHost" propName="//bwceLib///EnvConnections/ObjectSAP/SAPGatewayHost"/>
+    <substitutionBindings xmi:id="_dZ9zAHVUEe2mM7mpuGkjlA" template="systemName" propName="//bwceLib///EnvConnections/ObjectSAP/SAPSystemID"/>
+    <substitutionBindings xmi:id="_nj7soHVUEe2mM7mpuGkjlA" template="appServer" propName="/SystemName/SAPConnection/SAPAppServer"/>
+    <substitutionBindings xmi:id="_pB9w4HVUEe2mM7mpuGkjlA" template="systemNumber" propName="/SystemName/SAPConnection/SAPSystemNumber"/>
+    <substitutionBindings xmi:id="_-lT-8HWTEe2mM7mpuGkjlA" template="snc_mode" propName="/SystemName/SAPConnection/SAPSncMode"/>
+    <substitutionBindings xmi:id="_Aa3LUHWUEe2mM7mpuGkjlA" template="snc_partnername" propName="/SystemName/SAPConnection/SAPSncPartnername"/>
+    <substitutionBindings xmi:id="_Brd3kHWUEe2mM7mpuGkjlA" template="snc_qop" propName="/SystemName/SAPConnection/SAPSncQop"/>
+    <substitutionBindings xmi:id="_DH1u8HWUEe2mM7mpuGkjlA" template="snc_lib" propName="/SystemName/SAPConnection/SAPSncLib"/>
+    <substitutionBindings xmi:id="_QSFisHWUEe2mM7mpuGkjlA" template="s_snc_mode" propName="/SystemName/SAPConnection/SAPSncMode"/>
+    <substitutionBindings xmi:id="_QfBygHWUEe2mM7mpuGkjlA" template="s_snc_qop" propName="/SystemName/SAPConnection/SAPSncQop"/>
+    <substitutionBindings xmi:id="_QuhAAHWUEe2mM7mpuGkjlA" template="s_snc_myname" propName="/SystemName/SAPConnection/SAPSncMyname"/>
+    <substitutionBindings xmi:id="_Q6HzEHWUEe2mM7mpuGkjlA" template="s_snc_lib" propName="/SystemName/SAPConnection/SAPSncLib"/>
+    <substitutionBindings xmi:id="_vApZ4OmUEe26ZuKmvuK1TA" template="maxAttempts" propName="/SystemName/SAPConnection/SAPConnRetryAttempt"/>
+    <substitutionBindings xmi:id="_xKe0MOmUEe26ZuKmvuK1TA" template="retryInterval" propName="/SystemName/SAPConnection/SAPReconnectInterval"/>
+    <substitutionBindings xmi:id="_7IBbYOmUEe26ZuKmvuK1TA" template="threadNum" propName="/SystemName/SAPConnection/SAPRfcBapiThreads"/>
+  </jndi:configuration>
+</jndi:namedResource>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xsd:element name="JSON">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="metadata" minOccurs="0" maxOccurs="1">
+					<xsd:complexType>
+						<xsd:sequence>
+                            <xsd:element name="eventVersion" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+							<xsd:element name="eventSource" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+							<xsd:element name="eventName" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+							<xsd:element name="eventTime" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+							<xsd:element name="eventID" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+							<xsd:element name="eventKey" type="xsd:string" minOccurs="0" maxOccurs="1" />
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="payload" minOccurs="0" maxOccurs="1">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="OrderDetails" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="ORDER_ID" type="xsd:double" minOccurs="0" maxOccurs="1" />
+										<xsd:element name="ORDER_DESCRIPTION" type="xsd:string" minOccurs="0" maxOccurs="1" />
+										<xsd:element name="ORDER_PRICE" type="xsd:double" minOccurs="0" maxOccurs="1" />
+										<xsd:element name="ADB_SEQUENCE" type="xsd:string" minOccurs="0" maxOccurs="1" />
+										<xsd:element name="ADB_TIMESTAMP" type="xsd:string" minOccurs="0" maxOccurs="1" />
+										<xsd:element name="ADB_OPCODE" type="xsd:int" minOccurs="0" maxOccurs="1" />
+										<xsd:element name="ADB_REF_OBJECT" type="xsd:string" minOccurs="0" maxOccurs="1" />
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

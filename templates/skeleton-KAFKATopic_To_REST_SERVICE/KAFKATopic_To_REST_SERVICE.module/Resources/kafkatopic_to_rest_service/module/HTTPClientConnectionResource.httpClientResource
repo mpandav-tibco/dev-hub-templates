@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:http="http://xsd.tns.tibco.com/bw/models/sharedresource/httpclient" xmlns:id="http://www.tibco.com/ws/2013/11/identity" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:sca_ext="http://www.tibco.com/ns/sca/201311" xmlns:sslclient="http://xsd.tns.tibco.com/bw/sharedresource/trinity/models/sslclient" xmlns:subject="http://xsd.tns.tibco.com/bw/sharedresource/trinity/models/identity/subject" xmi:id="_K__LoQmTEe2AtOqZZNLsvw" name="kafkatopic_to_rest_service.module.HTTPClientConnectionResource" type="http:HttpClientConfiguration">
+  <identitySet xmi:id="_hYORkAmWEe2AtOqZZNLsvw" appliesTo="namedResource" name="HttpClientIdentitySet" provides="confidentiality">
+    <sca_ext:intentMap xmi:id="_hYORkQmWEe2AtOqZZNLsvw" provides="sca_ext:confidentiality">
+      <sca_ext:qualifier xmi:id="_hYORkgmWEe2AtOqZZNLsvw" name="transport">
+        <id:IdentityReference xmi:id="_hYTKEAmWEe2AtOqZZNLsvw" URI="kafkatopic_to_rest_service.module.HTTPIdentityProvider" type="subject:SubjectConfiguration"/>
+        <id:IdentityReference xmi:id="_nSnzcAmWEe2AtOqZZNLsvw" URI="kafkatopic_to_rest_service.module.HTTPSSLClientResource" type="sslclient:SSLClientConfiguration"/>
+      </sca_ext:qualifier>
+    </sca_ext:intentMap>
+  </identitySet>
+  <jndi:configuration xsi:type="http:HttpClientConfiguration" xmi:id="_K__LogmTEe2AtOqZZNLsvw" useSSL="true" httpClientVersion="httpcomponents" cmdExecutionIsolationStrategy="COUNT_BASED" cmdExecutionIsolationTimeout="10" cmdExecutionIsolationInterruptOnTimeout="true" cmdExecutionIsolationSemaphoreMaxConcRequests="8" cmdCircuitBreakerRequestVolumeThreshold="50" cmdCircuitBreakerSleepWindow="100" cmdCircuitBreakerErrorThresholdPercentage="100" cmdMetricsRollingStatsTime="100" cmdMetricsRollingStatsNumBuckets="60000" cmdMetricsHealthSnapshotInterval="500" tpCoreSize="10" tpMaxQueueSize="60000" tpQueueSizeRejectionThreshold="6000" tpKeepAliveTime="1">
+    <substitutionBindings xmi:id="_KYqlkAmWEe2AtOqZZNLsvw" template="maxTotalConnections" propName="/SystemName/ObjectName/HTTPMaxTotalConnection"/>
+    <substitutionBindings xmi:id="_MTWJkAmWEe2AtOqZZNLsvw" template="maxTotalConnectionsPerHost" propName="/SystemName/ObjectName/HTTPMaxTotConnectionPerHost"/>
+    <substitutionBindings xmi:id="_O9ie8AmWEe2AtOqZZNLsvw" template="idleConnectionTimeout" propName="/SystemName/ObjectName/HTTPIdleConnectionTimeout"/>
+    <substitutionBindings xmi:id="_MeBU4BMgEe2-iI2dKY76Zg" template="retryCount" propName="/SystemName/ObjectName/HTTPRetryCount"/>
+    <tcpDetails xmi:id="_K__ysAmTEe2AtOqZZNLsvw">
+      <substitutionBindings xmi:id="_Rm9_UAmWEe2AtOqZZNLsvw" template="host" propName="//bwceLib///EnvConnections/ObjectHTTP/ObjectHTTPHostname"/>
+      <substitutionBindings xmi:id="_TXvZYAmWEe2AtOqZZNLsvw" template="port" propName="//bwceLib///EnvConnections/ObjectHTTP/ObjectHTTPPort"/>
+      <substitutionBindings xmi:id="_JX1AABMgEe2-iI2dKY76Zg" template="soTimeout" propName="/SystemName/ObjectName/HTTPSocketTimeout"/>
+      <substitutionBindings xmi:id="_LSze8BMgEe2-iI2dKY76Zg" template="connectionTimeout" propName="/SystemName/ObjectName/HTTPConnectionTimeout"/>
+    </tcpDetails>
+  </jndi:configuration>
+</jndi:namedResource>

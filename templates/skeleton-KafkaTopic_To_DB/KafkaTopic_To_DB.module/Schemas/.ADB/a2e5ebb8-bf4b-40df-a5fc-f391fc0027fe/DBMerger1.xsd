@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns:sub="http://www.tibco.com/xmlns/adb/a2e5ebb8-bf4b-40df-a5fc-f391fc0027fe94655e12-551f-4279-9bb5-b7917b6e7b30_schema" xmlns:tns="http://www.tibco.com/xmlns/adb/a2e5ebb8-bf4b-40df-a5fc-f391fc0027fe94655e12-551f-4279-9bb5-b7917b6e7b30" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.tibco.com/xmlns/adb/a2e5ebb8-bf4b-40df-a5fc-f391fc0027fe94655e12-551f-4279-9bb5-b7917b6e7b30" xmlns="http://www.w3.org/2001/XMLSchema">
+    <import namespace="http://www.tibco.com/xmlns/adb/a2e5ebb8-bf4b-40df-a5fc-f391fc0027fe94655e12-551f-4279-9bb5-b7917b6e7b30_schema" schemaLocation="DBMerger1_schema.xsd"/>
+    <element name="ActivityInput" type="tns:ActivityInput_Type"/>
+    <complexType name="ActivityInput_Type">
+        <sequence>
+            <element minOccurs="0" name="body" type="tns:body_Type"/>
+        </sequence>
+    </complexType>
+    <complexType name="body_Type">
+        <choice>
+            <element maxOccurs="unbounded" minOccurs="0" name="ORDER__TABLE" type="sub:ORDER__TABLE_Type"/>
+        </choice>
+    </complexType>
+    <element name="ActivityOutput" type="tns:ActivityOutput_Type"/>
+    <complexType name="ActivityOutput_Type">
+        <sequence>
+            <element minOccurs="0" name="body" type="tns:body_Output_Type"/>
+        </sequence>
+    </complexType>
+    <complexType name="body_Output_Type">
+        <choice>
+            <element maxOccurs="unbounded" minOccurs="0" name="ORDER__TABLE" type="sub:ORDER__TABLE_Output_Type"/>
+        </choice>
+    </complexType>
+</schema>

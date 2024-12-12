@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adbplugin="http://ns.tibco.com/bw/sharedresource/adbplugin" xmlns:jdbc="http://xsd.tns.tibco.com/amf/models/sharedresource/jdbc" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmi:id="_JpcDIcxZEe2nyZrTaGEi-g" name="kafkatopic_to_db.module.ADBConfigurationResource" type="adbplugin:ADBPluginConnection">
+  <jndi:reference xmi:id="_0PpdsNgiEe2ShomLyFYOyg" key="jdbcconncetion" type="jdbc:JdbcDataSource" value="kafkatopic_to_db.module.JDBCConnectionResource"/>
+  <jndi:configuration xsi:type="adbplugin:ADBPluginConnection" xmi:id="_JphiscxZEe2nyZrTaGEi-g" vendor="Microsoft SQL Server" uuid="a2e5ebb8-bf4b-40df-a5fc-f391fc0027fe">
+    <substitutionBindings xmi:id="_gLLj8OfzEe2Dct7GaEsZog" template="defaultSchema" propName="/SystemName/Database/DBSchema"/>
+    <substitutionBindings xmi:id="_0EvIUOfzEe2Dct7GaEsZog" template="noOfThreads" propName="/SystemName/Database/DBNoOfThread"/>
+    <eventPoller xmi:id="_JpjX4MxZEe2nyZrTaGEi-g" name="DBPoller" allowKeys="false" dummyNode="true"/>
+    <dbMerger xmi:id="_JpjX4cxZEe2nyZrTaGEi-g" name="DBMerger" dummyNode="true"/>
+    <dbMerger xmi:id="_42DNgONZEe2GN7KCRvDiIQ" name="DBMerger1" uuid="94655e12-551f-4279-9bb5-b7917b6e7b30">
+      <table xmi:id="_6dvkEONZEe2GN7KCRvDiIQ" name="ORDER_TABLE">
+        <tableConfiguration xmi:id="_6dvkEeNZEe2GN7KCRvDiIQ" name="ORDER_TABLE">
+          <rows xmi:id="_6dvkEuNZEe2GN7KCRvDiIQ" name="ORDER_ID" type="double" userKey="true" tableName="ORDER_TABLE" use="true" dbType="decimal" primaryKey="true"/>
+          <rows xmi:id="_6dvkE-NZEe2GN7KCRvDiIQ" name="ORDER_DESCRIPTION" type="string" tableName="ORDER_TABLE" use="true" dbType="varchar"/>
+          <rows xmi:id="_6dvkFONZEe2GN7KCRvDiIQ" name="ORDER_PRICE" type="double" tableName="ORDER_TABLE" use="true" dbType="decimal"/>
+        </tableConfiguration>
+      </table>
+    </dbMerger>
+    <dbRequester xmi:id="_JpjX4sxZEe2nyZrTaGEi-g" dummyNode="true" name="DBRequester"/>
+  </jndi:configuration>
+</jndi:namedResource>

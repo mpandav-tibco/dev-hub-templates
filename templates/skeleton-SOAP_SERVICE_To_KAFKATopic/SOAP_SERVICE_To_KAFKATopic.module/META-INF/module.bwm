@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:axis2="http://xsd.tns.tibco.com/bw/models/binding/soap/axis2" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:httpconnector="http://xsd.tns.tibco.com/bw/models/sharedresource/httpconnector" xmlns:property="http://ns.tibco.com/bw/property" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmlns:wsdl_1659353489795="http://www.example.org/wsdl/1659353489795" xmlns:wsdl_1659946471243="http://www.example.org/wsdl/1659946471243" xmi:id="_6GzhYBF8Ee29c9IxVbqhUw" targetNamespace="http://tns.tibco.com/bw/composite/SOAP_SERVICE_To_KAFKATopic.module" name="SOAP_SERVICE_To_KAFKATopic.module" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:service xmi:id="_03psMBGNEe29c9IxVbqhUw" name="SoapService" promote="ComponentProcess/SoapService">
+    <sca:interface.wsdl xmi:id="_04LQoBGNEe29c9IxVbqhUw" interface="http://www.example.org/wsdl/1659946471243#wsdl.interface(SoapService)"/>
+    <scaext:binding xsi:type="axis2:SOAPServiceBinding" xmi:id="_C67jQBGaEe2pqObBU2JEZg" name="SOAPServiceBinding" targetNamespace="http://www.tibco.com/cb25f41e6156493b98243593fa48e2eb/SOAPServiceBinding" portTypeQName="wsdl_1659946471243:SoapService" transportBindingType="HTTP" attachmentStyle="SwA" modelVersion="1.2.0" portTypeWSDLLocation="platform:/resource/SOAP_SERVICE_To_KAFKATopic.module/Service%20Descriptors/SoapService.wsdl">
+      <bindingType xmi:id="_33pi8BbyEe2aU5MnLKicoQ"/>
+      <inboundConfiguration xsi:type="axis2:HttpTransportConfiguration" xmi:id="_Ka9mMBGaEe2pqObBU2JEZg" endpointURI="/SOAPServiceBinding/soapService/" httpConnector="soap_service_to_kafkatopic.module.HttpConnectionResource"/>
+      <operationConfiguration xmi:id="_33qKABbyEe2aU5MnLKicoQ" description="" operationName="SoapOperation" action="SoapOperation" actionNeeded="true">
+        <bindingType xmi:id="_33qKARbyEe2aU5MnLKicoQ"/>
+        <messageConfiguration xmi:id="_33qKAhbyEe2aU5MnLKicoQ" messageQName="wsdl_1659946471243:SoapOperationRequest" wsdlLocation="platform:/resource/SOAP_SERVICE_To_KAFKATopic.module/Service%20Descriptors/SoapService.wsdl">
+          <messagePartConfigurations xsi:type="axis2:BodyPartConfiguration" xmi:id="_33qKAxbyEe2aU5MnLKicoQ" partName="parameters" partElementName="wsdl_1659946471243:SoapOperationRequest"/>
+        </messageConfiguration>
+        <messageConfiguration xmi:id="_33qKBBbyEe2aU5MnLKicoQ" messageQName="wsdl_1659946471243:SoapOperationResponse" messageDirection="OUTPUT" wsdlLocation="platform:/resource/SOAP_SERVICE_To_KAFKATopic.module/Service%20Descriptors/SoapService.wsdl">
+          <messagePartConfigurations xsi:type="axis2:BodyPartConfiguration" xmi:id="_33qKBRbyEe2aU5MnLKicoQ" partName="parameters" partElementName="wsdl_1659946471243:SoapOperationResponse"/>
+        </messageConfiguration>
+        <messageConfiguration xmi:id="_33qKBhbyEe2aU5MnLKicoQ" messageQName="wsdl_1659946471243:SoapOperationFault" messageDirection="FAULT" action="Fault" wsdlLocation="platform:/resource/SOAP_SERVICE_To_KAFKATopic.module/Service%20Descriptors/SoapService.wsdl">
+          <messagePartConfigurations xsi:type="axis2:BodyPartConfiguration" xmi:id="_33qKBxbyEe2aU5MnLKicoQ" partName="parameters" partElementName="wsdl_1659946471243:SoapOperationFault"/>
+        </messageConfiguration>
+        <context xmi:id="_33qKCBbyEe2aU5MnLKicoQ">
+          <inputMapping xmi:id="_33qxEBbyEe2aU5MnLKicoQ"/>
+          <outputMapping xmi:id="_33qxERbyEe2aU5MnLKicoQ" direction="OUTPUT"/>
+          <faultMappings xmi:id="_33wQoBbyEe2aU5MnLKicoQ" direction="FAULT" faultName="Fault"/>
+        </context>
+      </operationConfiguration>
+    </scaext:binding>
+    <scact:bindingAdjunct xmi:id="_C7gyEBGaEe2pqObBU2JEZg" bindingName="SOAPServiceBinding">
+      <sca:property xmi:id="_YP9KwPMgEe2u1qLMsWXimQ" name="endpointURI" scaext:simpleValue="//bwceLib///EnvConnections/ObjectSOAP/ObjectSOAPEndPointUrl"/>
+    </scact:bindingAdjunct>
+  </sca:service>
+  <sca:property xmi:id="_BJjLYBF9Ee29c9IxVbqhUw" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_BKMEkBF9Ee29c9IxVbqhUw" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_BKY44BF9Ee29c9IxVbqhUw" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_BKltMBF9Ee29c9IxVbqhUw" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_BKx6cBF9Ee29c9IxVbqhUw" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_BK7EYBF9Ee29c9IxVbqhUw" name="BW.CLOUD.PORT" type="XMLSchema:int" scalable="true"/>
+  <sca:property xmi:id="_BLAj8BF9Ee29c9IxVbqhUw" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_1LTWEBGPEe29c9IxVbqhUw" name="DeploymentENV" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_7bRkgBF9Ee29c9IxVbqhUw" name="/SystemName/ObjectName/KafkaRetryCount" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_2NIgIBGHEe29c9IxVbqhUw" name="/SystemName/ObjectName/KafkaMaxRequestSize" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_2mobkBMDEe2-19VxNgkcWA" name="/SystemName/ObjectName/KafkaBatchSize" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_lgLjEBMmEe2vn6aoPys8xA" name="/SystemName/ObjectName/KafkaReconnectBackOff" type="XMLSchema:long" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_mDazABMmEe2vn6aoPys8xA" name="/SystemName/ObjectName/KafkaRetryBackOff" type="XMLSchema:long" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_mDu8EBMmEe2vn6aoPys8xA" name="/SystemName/ObjectName/KafkaRequestTimeout" type="XMLSchema:long" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_xwK-4BPzEe2935aWo2qF1g" name="/SystemName/ObjectName/KafkaBufferMemory" type="XMLSchema:long" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_O0VT8COSEe2TqfH7GKZFBg" name="/SystemName/ObjectName/eventVersion" type="XMLSchema:string" scaext:simpleValue="" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_bJs2MCdYEe2sv-4g1MF8rQ" name="/SystemName/ObjectName/HttpAcceptorThreads" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_bUCd8CdYEe2sv-4g1MF8rQ" name="/SystemName/ObjectName/HttpMinQTPThreads" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_bWU88CdYEe2sv-4g1MF8rQ" name="/SystemName/ObjectName/HttpMaxQTPThreads" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_bYYLYCdYEe2sv-4g1MF8rQ" name="/SystemName/ObjectName/HttpSessionTimeout" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_bacA4CdYEe2sv-4g1MF8rQ" name="/SystemName/ObjectName/HttpMaxPostSize" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_-8TW4CdYEe2sv-4g1MF8rQ" name="/SystemName/ObjectName/HttpMaxSavePostSize" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_9otFsPMnEe2u1qLMsWXimQ" name="/SystemName/ObjectName/HeaderBufferSize" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_PGqxYPMoEe2u1qLMsWXimQ" name="/SystemName/ObjectName/HttpRequestBufferSize" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_Ym_REPMoEe2u1qLMsWXimQ" name="/SystemName/ObjectName/HttpResponseBufferSize" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_iVEf8PMoEe2u1qLMsWXimQ" name="/SystemName/ObjectName/HttpMaxIdleTime" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_s82W8PMoEe2u1qLMsWXimQ" name="/SystemName/ObjectName/HttpLingerTime" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_0OQvEPMoEe2u1qLMsWXimQ" name="/SystemName/ObjectName/LowResourceMaxIdleTime" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_LcvA0PMpEe2u1qLMsWXimQ" name="/SystemName/ObjectName/KafkaRefreshInterval" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_aL-ccPMpEe2u1qLMsWXimQ" name="/SystemName/ObjectName/HttpAcceptQueueSize" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_OZJxgPSQEe2R9N5mmtwOjQ" name="/SystemName/ObjectName/HttpReverseProxyPort" type="XMLSchema:int" scaext:simpleValue="0" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="_89AdABF9Ee29c9IxVbqhUw" name="/SystemName/KafkaCerts/KafkaTrustStoreLocation" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="__ZapgBGHEe29c9IxVbqhUw" name="/SystemName/KafkaCerts/KafkaTrustStorePassword" type="property:password" scaext:simpleValue="#!KBl68DopOc8JJvcf7LdJjw==" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="__eWM0BGHEe29c9IxVbqhUw" name="/SystemName/KafkaCerts/KafkaKeyStoreLocation" type="XMLSchema:string" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="__iV8ABGHEe29c9IxVbqhUw" name="/SystemName/KafkaCerts/KafkaKeyStorePassword" type="property:password" scaext:simpleValue="#!YLZCndSdyJ9rEPE3ko3eVw==" publicAccess="true" scalable="true"/>
+  <sca:property xmi:id="__m2okBGHEe29c9IxVbqhUw" name="/SystemName/KafkaCerts/KafkaKeyPassword" type="property:password" scaext:simpleValue="#!ReX55X+A/qn2FMWl2HFdew==" publicAccess="true" scalable="true"/>
+  <sca:component xmi:id="_72NCcBF8Ee29c9IxVbqhUw" name="ComponentProcess" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_72PesBF8Ee29c9IxVbqhUw" processName="soap_service_to_kafkatopic.module.MP_SoapService"/>
+    <sca:service xmi:id="_03DPQBGNEe29c9IxVbqhUw" name="SoapService">
+      <sca:interface.wsdl xmi:id="_03WKMBGNEe29c9IxVbqhUw" interface="http://www.example.org/wsdl/1659946471243#wsdl.interface(SoapService)"/>
+    </sca:service>
+  </sca:component>
+  <sca:component xmi:id="_lXD_MGVrEe2QgvHjb4X-ow" name="ComponentActivator" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_lXD_MWVrEe2QgvHjb4X-ow" processName="soap_service_to_kafkatopic.module.Activator"/>
+  </sca:component>
+</sca:composite>

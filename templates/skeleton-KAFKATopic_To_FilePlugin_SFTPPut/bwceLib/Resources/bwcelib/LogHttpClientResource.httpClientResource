@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jndi:namedResource xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:http="http://xsd.tns.tibco.com/bw/models/sharedresource/httpclient" xmlns:jndi="http://xsd.tns.tibco.com/amf/models/sharedresource/jndi" xmlns:tp="http://xsd.tns.tibco.com/bw/models/sharedresource/threadpool" xmi:id="_0HM7ASBhEemZPZyhVR-wYQ" name="bwcelib.LogHttpClientResource" type="http:HttpClientConfiguration">
+  <jndi:reference xmi:id="_A_99MCBiEemZPZyhVR-wYQ" key="threadPoolConfigurationName" type="tp:ThreadPoolConfiguration" value=""/>
+  <jndi:configuration xsi:type="http:HttpClientConfiguration" xmi:id="_0HQlYCBhEemZPZyhVR-wYQ" httpClientVersion="httpcomponents" retryCount="3" idleConnectionTimeout="30000" cmdExecutionIsolationStrategy="THREAD" cmdExecutionIsolationTimeout="1000" cmdExecutionTimeoutEnabled="true" cmdExecutionIsolationInterruptOnTimeout="true" cmdExecutionIsolationSemaphoreMaxConcRequests="8" cmdCircuitBreakerRequestVolumeThreshold="20" cmdCircuitBreakerSleepWindow="5000" cmdCircuitBreakerErrorThresholdPercentage="50" cmdMetricsRollingStatsTime="10000" cmdMetricsRollingStatsNumBuckets="10" cmdMetricsHealthSnapshotInterval="500" cmdRequestLogEnabled="true" tpCoreSize="10" tpMaxQueueSize="-1" tpQueueSizeRejectionThreshold="5" tpKeepAliveTime="1">
+    <tcpDetails xmi:id="_0HRzgCBhEemZPZyhVR-wYQ">
+      <substitutionBindings xmi:id="_79oEsCBhEemZPZyhVR-wYQ" template="host" propName="/EnvConnections/FrameworkRestConnection/FWLogServiceHostName"/>
+      <substitutionBindings xmi:id="_3lKswCnPEemP6tBdzTNhDg" template="port" propName="/EnvConnections/FrameworkRestConnection/FWLogServicePort"/>
+    </tcpDetails>
+  </jndi:configuration>
+</jndi:namedResource>
