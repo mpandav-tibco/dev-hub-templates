@@ -18,4 +18,4 @@ spec:
   lifecycle: experimental
   owner: team-c
   definition:
-    $text: ./apis/soap-wsdl/skeleton/Soap-Example.wsdl
+    $text: ./skeleton/Soap-Example.wsdl
