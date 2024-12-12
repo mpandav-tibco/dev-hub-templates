@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: bwce-template-soap-kafka
-  title: BWCE - Order to Kafka
+  title: BWCE - SOAP Service to Kafka Topic
   description: Create a new BWCE project for an SOAP to Kafka
   tags:
     - tibco
