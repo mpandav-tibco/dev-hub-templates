@@ -65,7 +65,7 @@ spec:
       name: BWCE Skeleton
       action: fetch:template
       input:
-        url: .skeleton-SOAP_SERVICE_To_KAFKATopic
+        url: /skeleton-SOAP_SERVICE_To_KAFKATopic
         values:
           name: ${{ parameters.name }}
           description: ${{ parameters.description }}
