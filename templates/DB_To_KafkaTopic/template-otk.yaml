@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: bwce-template-ktk
+  name: bwce-template-dbtk
   title: BWCE - DB To Kafka Pattern
   description: Create a new BWCE project for DB to Kafka
   tags:
