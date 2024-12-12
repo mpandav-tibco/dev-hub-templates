@@ -1,21 +1,21 @@
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: T-Shirt-Inventory-SOAP-Service
-  description: The T-Shirt Inventory Service
+  name: Product-Catalogue-OpenAPI
+  description: The openapi product catalogue information
   tags:
     - store
-    - WSDL
+    - rest
   links:
     - url: https://github.com/mpandav-tibco/dev-hub-templates/blob/mastart/templates/apis/
       title: GitHub Repo
       icon: github
     - url: https://github.com/mpandav-tibco/dev-hub-templates/blob/mastart/templates/apis/Soap-Example.wsdl
-      title: WSDL Service
+      title: API Spec
       icon: code
 spec:
-  type: WSDL
+  type: openapi
   lifecycle: experimental
   owner: sc-dach
   definition:
-    $text: ./skeleton/Soap-Example.wsdl
+    $text: ./skeleton/openapi-product-catalogue.json
