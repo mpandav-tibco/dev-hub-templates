@@ -65,7 +65,7 @@ spec:
       name: BWCE Skeleton
       action: fetch:template
       input:
-        url: ./skeleton-SOAP_SERVICE_To_KAFKATopic
+        url: ./skeleton-SOAP-SERVICE-To-KAFKATopic
         values:
           name: ${{ parameters.name }}
           description: ${{ parameters.description }}
@@ -77,7 +77,8 @@ spec:
       name: Publish
       action: publish:github
       input:
-        allowedHosts: ["github.com"]
+        allowedHosts: 
+          - github.com
         description: This is ${{ parameters.name }}
         repoUrl: ${{ parameters.repoUrl }}
 
