@@ -1,2 +1,2 @@
-# bwce-skeleton
-BWCE Base Template
+# Templates
+BWCE and Flogo Templates
