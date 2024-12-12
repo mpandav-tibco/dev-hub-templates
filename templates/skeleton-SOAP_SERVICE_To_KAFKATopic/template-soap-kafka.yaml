@@ -1,9 +1,9 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: bwce-template-otk
+  name: bwce-template-soap-kafka
   title: BWCE - Order to Kafka
-  description: Create a new DEMO - BWCE project for an order to Kafka
+  description: Create a new BWCE project for an SOAP to Kafka
   tags:
     - tibco
     - bwce
@@ -31,11 +31,11 @@ spec:
         system:
           title: System
           type: string
-          description: Target System to Send Order To
+          description: Target System to be part of
           ui:field: EntityPicker
           ui:options:
             catalogFilter:
-              kind: API
+              kind: SYSTEM
         owner:
           title: Owner
           type: string
@@ -65,7 +65,7 @@ spec:
       name: BWCE Skeleton
       action: fetch:template
       input:
-        url: ./skeleton-order-to-kafka
+        url: .skeleton-SOAP_SERVICE_To_KAFKATopic
         values:
           name: ${{ parameters.name }}
           description: ${{ parameters.description }}
