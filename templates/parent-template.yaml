@@ -13,7 +13,7 @@ spec:
     - id: bwce-template-etk
       include: ./EMSQueue_To_KAFKATopic/template-otk.yaml
     - id: bwce-template-htk
-      include: ./HTTP_Receiver_To_KAFKATopic(template-htk.yaml
+      include: ./HTTP_Receiver_To_KAFKATopic/template-htk.yaml
 
   # Define parameters (if needed)
   # parameters:
