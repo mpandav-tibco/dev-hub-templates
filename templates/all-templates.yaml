@@ -7,19 +7,4 @@ spec:
   targets:
     - ./templates/SOAP-SERVICE-To-KAFKATopic/template-soap-kafka.yaml
     - ./templates/SFTPGet_To_KAFKATopic/template-otk.yaml
-    - ./templates/SFTPGet_FilePlugin_To_KAFKATopic/template-otk.yaml
-    - ./templates/SAP_IDOC_To_KAFKATopic/template-otk.yaml
-    - ./templates/Order-To-Kafka/template-otk.yaml
-    - ./templates/KAFKATopic_To_SOAP_SERVICE/template-otk.yaml
-    - ./templates/KAFKATopic_To_SFTPPut/template-otk.yaml
-    - ./templates/KAFKATopic_To_SAP_RFC/template-otk.yaml
-    - ./templates/KAFKATopic_To_SAP_IDOC/template-otk.yaml
-    - ./templates/KAFKATopic_To_REST_SERVICE/template-otk.yaml
-    - ./templates/KAFKATopic_To_KAFKATopic/template-otk.yaml
-    - ./templates/KAFKATopic_To_FilePlugin_SFTPPut/template-otk.yaml
-    - ./templates/KAFKATopic_To_EMSTopic/template-otk.yaml
-    - ./templates/KafkaTopic_To_DB/template-otk.yaml
-    - ./templates/HTTP_Receiver_To_KAFKATopic/template-htk.yaml
-    - ./templates/EMSQueue_To_KAFKATopic/template-etk.yaml
-    - ./templates/DB_To_KafkaTopic/template-otk.yaml
-    - ./templates/bw-psg-sync-request/template-psg-synch.yaml
+ 
