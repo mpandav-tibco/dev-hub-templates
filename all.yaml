@@ -5,8 +5,5 @@ metadata:
   description: A collection of all dev hub api, entities, templates, etc.
 spec:
   targets:
-    - ./all-apis.yaml
+    - ./apis/all-apis.yaml
     - ./templates/all-templates.yaml
-    - ./all-domains.yaml
-    - ./all-resources.yaml
-    - ./all-systems.yaml
