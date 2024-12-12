@@ -5,7 +5,7 @@ metadata:
   description: The T-Shirt Inventory Service
   tags:
     - store
-    - WSDL
+    - wsdl
   links:
     - url: https://github.com/mpandav-tibco/dev-hub-templates/blob/mastart/templates/apis/
       title: GitHub Repo
