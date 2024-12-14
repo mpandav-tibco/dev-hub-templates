@@ -93,7 +93,7 @@ spec:
       action: tibco:trigger-jenkins-job
       input:
         repoUrl: ${{ parameters.repoUrl | parseRepoUrl}}
-        job: Build_BWCE_EAR
+        job: "bwce/job/build_bwce_ear"
         authToken: BuildEARToken
         jenkinsInstructions: '&bw_project_folder=OrderToKafka'
 
