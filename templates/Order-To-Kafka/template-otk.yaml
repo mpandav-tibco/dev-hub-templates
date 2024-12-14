@@ -88,6 +88,15 @@ spec:
         repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
         catalogInfoPath: "/catalog-info.yaml"
 
+    - id: jenkinsEarBuild
+      name: Trigger Jenkins EAR Build & Platform Deployment
+      action: tibco:trigger-jenkins-job
+      input:
+        repoUrl: ${{ parameters.repoUrl | parseRepoUrl}}
+        job: Build_BWCE_EAR_Maven_Secret
+        authToken: test
+        jenkinsInstructions: '&bw_project_folder=TestSecret'
+
   output:
     links:
       - title: Repository
