@@ -93,9 +93,9 @@ spec:
       action: tibco:trigger-jenkins-job
       input:
         repoUrl: ${{ parameters.repoUrl | parseRepoUrl}}
-        job: Build_BWCE_EAR_Maven_Secret
-        authToken: test
-        jenkinsInstructions: '&bw_project_folder=TestSecret'
+        job: Build_BWCE_EAR
+        authToken: BuildEARToken
+        jenkinsInstructions: '&bw_project_folder=OrderToKafka'
 
   output:
     links:
