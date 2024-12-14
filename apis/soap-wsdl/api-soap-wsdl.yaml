@@ -14,7 +14,7 @@ metadata:
       title: WSDL Service
       icon: code
 spec:
-  type: WSDL
+  type: wsdl
   lifecycle: production
   owner: sc-dach
   definition:
