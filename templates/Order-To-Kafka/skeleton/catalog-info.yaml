@@ -15,6 +15,7 @@ metadata:
     backstage.io/techdocs-ref: dir:.
     backstage.io/kubernetes-id: ${{values.destination.repo}}
     jenkins.io/job-full-name: build_bwce_ear
+spec:
   type: service
   lifecycle: development
   owner: ${{values.owner | dump}}
