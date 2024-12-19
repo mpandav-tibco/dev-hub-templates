@@ -94,7 +94,7 @@ spec:
       input:
         repoUrl: ${{ parameters.repoUrl | parseRepoUrl}}
         job: "bwce/job/build_bwce_ear"
-        authToken: BuildEARToken
+        authToken: tibco
         jenkinsInstructions: '&bw_project_folder=OrderToKafka'
 
   output:
