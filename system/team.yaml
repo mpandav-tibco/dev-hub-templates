@@ -119,3 +119,37 @@ spec:
   children:
     - component:default/checkout-api
   members: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: database-team
+  description: The team responsible for database administration
+spec:
+  type: team
+  profile:
+    displayName: Database Team
+    email: database-team@example.com
+  parent: group:default/engineering
+  children:
+    - component:default/catalog-database
+    - component:default/cart-database
+    - component:default/user-database
+  members: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: payments-team
+  description: The team responsible for payment processing
+spec:
+  type: team
+  profile:
+    displayName: Payments Team
+    email: payments-team@example.com
+  parent: group:default/engineering
+  children:
+    - component:default/payment-gateway
+  members: []
+---
+
