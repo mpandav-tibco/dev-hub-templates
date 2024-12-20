@@ -41,6 +41,8 @@ spec:
     displayName: Inventory Team
     email: inventory-team@example.com
   parent: group:default/engineering
+  children:
+    - component:default/inventory-service
   members: []
 ---
 apiVersion: backstage.io/v1alpha1
@@ -54,6 +56,8 @@ spec:
     displayName: Order Team
     email: order-team@example.com
   parent: group:default/engineering
+  children:
+    - component:default/checkout-api
   members: []
 ---
 apiVersion: backstage.io/v1alpha1
@@ -67,6 +71,8 @@ spec:
     displayName: Shipping Team
     email: shipping-team@example.com
   parent: group:default/engineering
+  children:
+    - component:default/shipping-service
   members: []
 ---
 apiVersion: backstage.io/v1alpha1
@@ -80,6 +86,8 @@ spec:
     displayName: User Team
     email: user-team@example.com
   parent: group:default/engineering
+  children:
+    - component:default/user-service
   members: []
 ---
 
