@@ -39,7 +39,7 @@ spec:
 ---
 # catalog-api.yaml
 apiVersion: backstage.io/v1alpha1
-kind: api
+kind: API
 metadata:
   name: catalog-api
   description: Provides product catalog information
