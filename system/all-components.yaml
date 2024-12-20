@@ -136,7 +136,7 @@ spec:
   type: api
   lifecycle: production
   owner: shipping-team
-  definition:
+  definition: ""
   openapi: 3.0.0
   info:
     title: Shipping API
@@ -213,6 +213,11 @@ spec:
                         type: object
                         properties:
                           timestamp:
+                            type: string
+                            format: date-time
+                          location:
+                            type: string
+                          description:
                             type: string
 ---
 # payment-gateway.yaml
