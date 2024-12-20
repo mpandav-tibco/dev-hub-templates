@@ -34,7 +34,7 @@ metadata:
   name: catalog-api
   description: Provides product catalog information
 spec:
-  type: api
+  type: openapi
   lifecycle: production
   owner: catalog-team
   relations:
@@ -52,7 +52,7 @@ metadata:
   name: cart-api
   description: Manages shopping carts and user sessions
 spec:
-  type: api
+  type: openapi
   lifecycle: production
   owner: cart-team
   relations:
@@ -70,7 +70,7 @@ metadata:
   name: checkout-api
   description: Handles order processing and payment integration
 spec:
-  type: api
+  type: openapi
   lifecycle: production
   owner: checkout-team
   relations:
@@ -148,7 +148,7 @@ metadata:
   name: shipping-api
   description: Provides shipping rates and tracking information
 spec:
-  type: api
+  type: openapi
   lifecycle: production
   owner: shipping-team
   definition:
@@ -220,3 +220,4 @@ spec:
   lifecycle: production
   owner: database-team
 ---
+
