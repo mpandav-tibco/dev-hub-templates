@@ -10,7 +10,7 @@ spec:
     email: ecommerce-team@example.com
     picture: https://example.com/ecommerce-team-logo.png
   parent: group:default/engineering
-  children: []
+  children: [engineering]
   members: []
   tags: e-commerce-team
 ---
@@ -28,7 +28,7 @@ spec:
   parent: E-Commerce
   children:
     - group:default/ecommerce-team
-  members: []
+  members: [jdoe]
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Group
@@ -152,4 +152,13 @@ spec:
     - component:default/payment-gateway
   members: []
 ---
-
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: jdoe
+spec:
+  profile:
+    displayName: Jenny Doe
+    email: jenny-doe@example.com
+    picture: https://example.com/staff/jenny-with-party-hat.jpeg
+  memberOf: [engineering]
