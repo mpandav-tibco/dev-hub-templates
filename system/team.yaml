@@ -16,3 +16,19 @@ spec:
     - user:default/neu bie
     - user:default/old hand
   tags: e-commerce-team
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: engineering
+  description: The engineering organization
+spec:
+  type: organization
+  profile:
+    displayName: Engineering
+    email: engineering@example.com
+    picture: https://example.com/engineering-logo.png
+  parent: null
+  children:
+    - group:default/ecommerce-team
+  members: []
