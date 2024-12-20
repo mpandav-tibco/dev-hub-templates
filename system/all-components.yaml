@@ -33,6 +33,8 @@ spec:
       target: catalog-database
     - type: dependsOn
       target: inventory-service
+  definition:
+    $text: ../apis/catalog/catalog-api.yaml
 ---
 # cart-api.yaml
 apiVersion: backstage.io/v1alpha1
