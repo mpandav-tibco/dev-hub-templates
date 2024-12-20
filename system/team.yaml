@@ -90,4 +90,32 @@ spec:
     - component:default/user-service
   members: []
 ---
-
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: catalog-team
+  description: The team responsible for the product catalog
+spec:
+  type: team
+  profile:
+    displayName: Catalog Team
+    email: catalog-team@example.com
+  parent: group:default/engineering
+  children:
+    - component:default/catalog-api
+  members: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: checkout-team
+  description: The team responsible for the checkout process
+spec:
+  type: team
+  profile:
+    displayName: Checkout Team
+    email: checkout-team@example.com
+  parent: group:default/engineering
+  children:
+    - component:default/checkout-api
+  members: []
