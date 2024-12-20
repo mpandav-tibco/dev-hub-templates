@@ -49,6 +49,8 @@ spec:
       target: cart-database
     - type: dependsOn
       target: user-service
+  definition:
+    $text: ../apis/cart/cart-api.yaml
 ---
 # checkout-api.yaml
 apiVersion: backstage.io/v1alpha1
