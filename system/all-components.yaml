@@ -1,0 +1,204 @@
+# storefront.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: storefront
+  description: The user-facing storefront website
+spec:
+  type: service
+  lifecycle: production
+  owner: ecommerce-team
+  relations:
+    - type: consumesApi
+      target: catalog-api
+    - type: consumesApi
+      target: cart-api
+    - type: consumesApi
+      target: checkout-api
+    - type: dependsOn
+      target: user-service
+---
+# catalog-api.yaml
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: catalog-api
+  description: Provides product catalog information
+spec:
+  type: api
+  lifecycle: production
+  owner: catalog-team
+  relations:
+    - type: dependsOn
+      target: catalog-database
+    - type: dependsOn
+      target: inventory-service
+---
+# cart-api.yaml
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: cart-api
+  description: Manages shopping carts and user sessions
+spec:
+  type: api
+  lifecycle: production
+  owner: cart-team
+  relations:
+    - type: dependsOn
+      target: cart-database
+    - type: dependsOn
+      target: user-service
+---
+# checkout-api.yaml
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: checkout-api
+  description: Handles order processing and payment integration
+spec:
+  type: api
+  lifecycle: production
+  owner: checkout-team
+  relations:
+    - type: dependsOn
+      target: order-service
+    - type: dependsOn
+      target: payment-gateway
+---
+# user-service.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: user-service
+  description: Manages user accounts and authentication
+spec:
+  type: service
+  lifecycle: production
+  owner: user-team
+  relations:
+    - type: dependsOn
+      target: user-database
+---
+# inventory-service.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: inventory-service
+  description: Tracks product inventory levels
+spec:
+  type: service
+  lifecycle: production
+  owner: inventory-team
+  relations:
+    - type: dependsOn
+      target: inventory-database
+---
+# order-service.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: order-service
+  description: Processes and fulfills orders
+spec:
+  type: service
+  lifecycle: production
+  owner: order-team
+  relations:
+    - type: dependsOn
+      target: order-database
+    - type: dependsOn
+      target: inventory-service
+    - type: dependsOn
+      target: shipping-service
+---
+# shipping-service.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: shipping-service
+  description: Integrates with shipping providers
+spec:
+  type: service
+  lifecycle: production
+  owner: shipping-team
+  relations:
+    - type: dependsOn
+      target: shipping-api
+---
+# shipping-api.yaml
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: shipping-api
+  description: Provides shipping rates and tracking information
+spec:
+  type: api
+  lifecycle: production
+  owner: shipping-team
+---
+# payment-gateway.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: payment-gateway
+  description: External payment gateway service
+spec:
+  type: resource
+  lifecycle: production
+  owner: payments-team
+---
+# catalog-database.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: catalog-database
+  description: Database for product catalog data
+spec:
+  type: resource
+  lifecycle: production
+  owner: database-team
+---
+# cart-database.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: cart-database
+  description: Database for shopping cart data
+spec:
+  type: resource
+  lifecycle: production
+  owner: database-team
+---
+# user-database.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: user-database
+  description: Database for user account data
+spec:
+  type: resource
+  lifecycle: production
+  owner: database-team
+---
+# order-database.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: order-database
+  description: Database for order information
+spec:
+  type: resource
+  lifecycle: production
+  owner: database-team
+---
+# inventory-database.yaml
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: inventory-database
+  description: Database for inventory data
+spec:
+  type: resource
+  lifecycle: production
+  owner: database-team
