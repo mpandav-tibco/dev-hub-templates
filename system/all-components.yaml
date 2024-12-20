@@ -65,6 +65,8 @@ spec:
       target: order-service
     - type: dependsOn
       target: payment-gateway
+  definition:
+    $text: ../apis/checkout/checkout-api.yaml
 ---
 # user-service.yaml
 apiVersion: backstage.io/v1alpha1
