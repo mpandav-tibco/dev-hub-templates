@@ -44,11 +44,9 @@ spec:
   type: openapi
   lifecycle: production
   owner: catalog-team
-  relations:
-    - type: dependsOn
-      target: catalog-database
-    - type: dependsOn
-      target: inventory-service
+  dependsOn:
+    - catalog-database
+    - inventory-service
   definition:
     $text: ../apis/catalog/catalog-api.yaml
 ---
@@ -62,11 +60,9 @@ spec:
   type: openapi
   lifecycle: production
   owner: cart-team
-  relations:
-    - type: dependsOn
-      target: cart-database
-    - type: dependsOn
-      target: user-service
+  dependsOn:
+    - cart-database
+    - user-service
   definition:
     $text: ../apis/cart/cart-api.yaml
 ---
@@ -80,11 +76,9 @@ spec:
   type: opemapi
   lifecycle: production
   owner: checkout-team
-  relations:
-    - type: dependsOn
-      target: order-service
-    - type: dependsOn
-      target: payment-gateway
+  dependsOn:
+    - order-service
+    - payment-gateway
   definition:
     $text: ../apis/checkout/checkout-api.yaml
 ---
@@ -111,9 +105,8 @@ spec:
   type: service
   lifecycle: production
   owner: inventory-team
-  relations:
-    - type: dependsOn
-      target: inventory-database
+  dependsOn:
+    - inventory-database
 ---
 # order-service.yaml
 apiVersion: backstage.io/v1alpha1
@@ -125,13 +118,10 @@ spec:
   type: service
   lifecycle: production
   owner: order-team
-  relations:
-    - type: dependsOn
-      target: order-database
-    - type: dependsOn
-      target: inventory-service
-    - type: dependsOn
-      target: shipping-service
+  dependsOn:
+    - order-database
+    - inventory-service
+    - shipping-service
 ---
 # shipping-service.yaml
 apiVersion: backstage.io/v1alpha1
@@ -143,9 +133,8 @@ spec:
   type: service
   lifecycle: production
   owner: shipping-team
-  relations:
-    - type: dependsOn
-      target: shipping-api
+  dependsOn:
+    - shipping-api
 ---
 # shipping-api.yaml
 apiVersion: backstage.io/v1alpha1
