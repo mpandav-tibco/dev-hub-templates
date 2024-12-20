@@ -1,0 +1,18 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: ecommerce-team
+  description: The team responsible for the e-commerce platform
+spec:
+  type: team
+  profile:
+    displayName: E-Commerce Team
+    email: ecommerce-team@example.com
+    picture: https://example.com/ecommerce-team-logo.png
+  parent: group:default/engineering
+  children: []
+  members:
+    - user:default/jon doe
+    - user:default/neu bie
+    - user:default/old hand
+  tags: e-commerce-team
