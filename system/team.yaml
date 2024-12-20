@@ -28,7 +28,7 @@ spec:
     displayName: Engineering
     email: engineering@example.com
     picture: https://example.com/engineering-logo.png
-  parent: null
+  parent: E-Commerce
   children:
     - group:default/ecommerce-team
   members: []
