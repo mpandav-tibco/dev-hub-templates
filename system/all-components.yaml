@@ -98,9 +98,8 @@ spec:
   type: service
   lifecycle: production
   owner: user-team
-  relations:
-    - type: dependsOn
-      target: user-database
+  dependsOn:
+    - user-database
 ---
 # inventory-service.yaml
 apiVersion: backstage.io/v1alpha1
