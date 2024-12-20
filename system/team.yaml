@@ -11,10 +11,7 @@ spec:
     picture: https://example.com/ecommerce-team-logo.png
   parent: group:default/engineering
   children: []
-  members:
-    - user:default/jon doe
-    - user:default/neu bie
-    - user:default/old hand
+  members: []
   tags: e-commerce-team
 ---
 apiVersion: backstage.io/v1alpha1
