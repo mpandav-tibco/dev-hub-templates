@@ -17,6 +17,16 @@ spec:
   type: service
   lifecycle: production
   owner: ecommerce-team
+  dependsOn:
+    - catalog-api
+    - cart-api
+    - checkout-api
+    - user-service
+  consumesApi:
+    - catalog-api
+    - cart-api
+    - checkout-api
+    - user-service
   relations:
     - type: consumesApi
       target: catalog-api
@@ -37,6 +47,9 @@ spec:
   type: openapi
   lifecycle: production
   owner: catalog-team
+  dependsOn:
+    - catalog-database
+    - inventory-service
   relations:
     - type: dependsOn
       target: catalog-database
