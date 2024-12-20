@@ -18,14 +18,10 @@ spec:
   lifecycle: production
   owner: ecommerce-team
   consumesApi:
-    - apiName: catalog-api
-      version: 1.0.0
-    - apiName: cart-api
-      version: 1.0.0
-    - apiName: checkout-api
-      version: 1.0.0
-    - apiName: shipping-api
-      version: 1.0.0
+    - catalog-api
+    - cart-api
+    - checkout-api
+    - shipping-api
   dependsOn:
     - user-service
     - inventory-service
