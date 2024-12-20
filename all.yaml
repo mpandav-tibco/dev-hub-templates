@@ -6,4 +6,5 @@ metadata:
 spec:
   targets:
     - ./apis/all-apis.yaml
-    - ./templates/all-templates.yaml
+    - ./templates/bwce/all-bwce-templates.yaml
+    - ./templates/flogo/all-flogo-templates.yaml
