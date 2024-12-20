@@ -29,3 +29,57 @@ spec:
   children:
     - group:default/ecommerce-team
   members: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: inventory-team
+  description: The team responsible for managing inventory
+spec:
+  type: team
+  profile:
+    displayName: Inventory Team
+    email: inventory-team@example.com
+  parent: group:default/engineering
+  members: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: order-team
+  description: The team responsible for order processing
+spec:
+  type: team
+  profile:
+    displayName: Order Team
+    email: order-team@example.com
+  parent: group:default/engineering
+  members: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: shipping-team
+  description: The team responsible for shipping integration
+spec:
+  type: team
+  profile:
+    displayName: Shipping Team
+    email: shipping-team@example.com
+  parent: group:default/engineering
+  members: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: user-team
+  description: The team responsible for user management
+spec:
+  type: team
+  profile:
+    displayName: User Team
+    email: user-team@example.com
+  parent: group:default/engineering
+  members: []
+---
+
