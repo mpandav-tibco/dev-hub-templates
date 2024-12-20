@@ -1,0 +1,36 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: booking-system
+spec:
+  owner: team A
+  domain: e-coomerce
+  components:
+    - name: frontend
+      type: service
+      lifecycle: production
+      relations:
+        - type: consumesApi
+          target: backend-api
+        - type: dependsOn
+          target: auth-service
+    - name: backend-api
+      type: api
+      lifecycle: production
+      relations:
+        - type: dependsOn
+          target: database
+        - type: dependsOn
+          target: message-queue
+    - name: auth-service
+      type: service
+      lifecycle: production
+      relations:
+        - type: dependsOn
+          target: database
+    - name: database
+      type: resource
+      lifecycle: production
+    - name: message-queue
+      type: resource
+      lifecycle: production

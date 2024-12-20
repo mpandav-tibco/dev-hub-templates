@@ -1,0 +1,108 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: ecommerce-platform
+spec:
+  owner: ecommerce-team
+  domain: e-commerce
+  components:
+    - name: storefront
+      type: service
+      lifecycle: production
+      description: The user-facing storefront website
+      relations:
+        - type: consumesApi
+          target: catalog-api
+        - type: consumesApi
+          target: cart-api
+        - type: consumesApi
+          target: checkout-api
+        - type: dependsOn
+          target: user-service
+    - name: catalog-api
+      type: api
+      lifecycle: production
+      description: Provides product catalog information
+      relations:
+        - type: dependsOn
+          target: catalog-database
+        - type: dependsOn
+          target: inventory-service
+    - name: cart-api
+      type: api
+      lifecycle: production
+      description: Manages shopping carts and user sessions
+      relations:
+        - type: dependsOn
+          target: cart-database
+        - type: dependsOn
+          target: user-service
+    - name: checkout-api
+      type: api
+      lifecycle: production
+      description: Handles order processing and payment integration
+      relations:
+        - type: dependsOn
+          target: order-service
+        - type: dependsOn
+          target: payment-gateway
+    - name: user-service
+      type: service
+      lifecycle: production
+      description: Manages user accounts and authentication
+      relations:
+        - type: dependsOn
+          target: user-database
+    - name: inventory-service
+      type: service
+      lifecycle: production
+      description: Tracks product inventory levels
+      relations:
+        - type: dependsOn
+          target: inventory-database
+    - name: order-service
+      type: service
+      lifecycle: production
+      description: Processes and fulfills orders
+      relations:
+        - type: dependsOn
+          target: order-database
+        - type: dependsOn
+          target: inventory-service
+        - type: dependsOn
+          target: shipping-service
+    - name: shipping-service
+      type: service
+      lifecycle: production
+      description: Integrates with shipping providers
+      relations:
+        - type: dependsOn
+          target: shipping-api
+    - name: shipping-api
+      type: api
+      lifecycle: production
+      description: Provides shipping rates and tracking information
+    - name: payment-gateway
+      type: resource
+      lifecycle: production
+      description: External payment gateway service
+    - name: catalog-database
+      type: resource
+      lifecycle: production
+      description: Database for product catalog data
+    - name: cart-database
+      type: resource
+      lifecycle: production
+      description: Database for shopping cart data
+    - name: user-database
+      type: resource
+      lifecycle: production
+      description: Database for user account data
+    - name: order-database
+      type: resource
+      lifecycle: production
+      description: Database for order information
+    - name: inventory-database
+      type: resource
+      lifecycle: production
+      description: Database for inventory data
