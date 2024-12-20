@@ -137,7 +137,7 @@ spec:
   lifecycle: production
   owner: shipping-team
   definition:
-    $text: ./apis/shipment-tracking/shipping-api.yaml
+    $text: ../apis/shipment-tracking/shipping-api.yaml
 ---
 # payment-gateway.yaml
 apiVersion: backstage.io/v1alpha1
