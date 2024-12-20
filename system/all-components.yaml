@@ -26,15 +26,13 @@ spec:
       version: 1.0.0
     - apiName: shipping-api
       version: 1.0.0
-  relations:
-    - type: consumesApi
-      target: catalog-api
-    - type: consumesApi
-      target: cart-api
-    - type: consumesApi
-      target: checkout-api
-    - type: dependsOn
-      target: user-service
+  dependsOn:
+    - user-service
+    - inventory-service
+    - order-service
+    - shipping-service
+    - payment-gateway
+    - catalog-database
 ---
 # catalog-api.yaml
 apiVersion: backstage.io/v1alpha1
