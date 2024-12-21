@@ -137,6 +137,7 @@ spec:
   type: service
   lifecycle: production
   owner: group:default/user-team
+  system: ecommerce-platform
   providesApis:
     - api:default/cart-api
     - api:default/user-api
@@ -153,6 +154,7 @@ spec:
   type: service
   lifecycle: production
   owner: group:default/inventory-team
+  system: ecommerce-platform
   dependsOn: # Corrected relationship type here
     - resource:default/inventory-database
   providesApis:
@@ -169,6 +171,7 @@ spec:
   type: service
   lifecycle: production
   owner: group:default/order-team
+  system: ecommerce-platform
   consumesApis:
     - resource:default/order-database
     - component:default/inventory-service
@@ -186,6 +189,7 @@ spec:
   type: service
   lifecycle: production
   owner: group:default/shipping-team
+  system: ecommerce-platform
   consumesApis:
     - api:default/shipping-api
   providesApis:
