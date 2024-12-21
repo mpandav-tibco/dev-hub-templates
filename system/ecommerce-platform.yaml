@@ -65,7 +65,6 @@ spec:
     - component:default/order-service
     - component:default/shipping-service
     - resource:default/payment-gateway
-    - resource:default/catalog-service
   apiConsumedBy:
     - component:default/user-service
     - component:default/inventory-service
