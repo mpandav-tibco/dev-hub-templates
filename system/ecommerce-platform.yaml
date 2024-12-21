@@ -82,6 +82,7 @@ spec:
   type: openapi
   lifecycle: production
   owner: group:default/catalog-team
+  system: ecommerce-platform
   dependsOn:
     - resource:default/catalog-database
     - component:default/inventory-service
@@ -119,6 +120,7 @@ spec:
   type: openapi # Corrected typo here
   lifecycle: production
   owner: group:default/checkout-team
+  system: ecommerce-platform
   dependsOn:
     - component:default/order-service
     - resource:default/payment-gateway
