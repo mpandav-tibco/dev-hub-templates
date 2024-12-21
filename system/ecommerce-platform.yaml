@@ -6,6 +6,11 @@ metadata:
 spec:
   owner: ecommerce-team
   domain: e-commerce
+  description: This system comprises a collection of interconnected services and APIs, including a storefront web application, catalog management, shopping cart functionality, order processing, and payment integration. It leverages a microservices architecture to provide scalability and flexibility
+  tag:
+    - ecommerce
+    - microservices
+    - retail
   environments:
     - name: production
       baseUrl: https://ecommerce.example.com
@@ -20,6 +25,10 @@ kind: Domain
 metadata:
   name: e-commerce
   description: The e-commerce domain
+  tag:
+    - ecommerce
+    - microservices
+    - retail
 spec:
   owner: group:default/ecommerce-team
 ---
@@ -29,6 +38,10 @@ kind: Component
 metadata:
   name: storefront
   description: The user-facing storefront website
+  tag:
+    - ecommerce
+    - microservices
+    - retail
 spec:
   type: service
   lifecycle: production
