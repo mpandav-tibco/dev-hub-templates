@@ -2,7 +2,7 @@ site_name: E-Commerce Platform Documentation
 site_description: Technical documentation for the e-commerce platform
 site_author: Your Name or Team Name
 nav:
-  - Overview: index.md
+  - Overview: index.md#overview
   - Architecture: index.md#architecture
   - Components:
       - Storefront: index.md#storefront
