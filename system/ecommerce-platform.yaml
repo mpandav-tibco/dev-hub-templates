@@ -1,3 +1,19 @@
+# system: ecommerce
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: ecommerce-platform
+spec:
+  owner: ecommerce-team
+  domain: e-commerce
+  environments:
+    - name: production
+      baseUrl: https://ecommerce.example.com
+    - name: staging
+      baseUrl: https://staging.ecommerce.example.com
+    - name: development
+      baseUrl: https://dev.ecommerce.example.com
+---
 # domain: ecommerce
 apiVersion: backstage.io/v1alpha1
 kind: Domain
@@ -235,36 +251,5 @@ spec:
   type: resource
   lifecycle: production
   owner: group:default/database-team
----
-apiVersion: backstage.io/v1alpha1
-kind: System
-metadata:
-  name: my-ecommerce-platform
-spec:
-  owner: ecommerce-team
-  domain: e-commerce
-  components:
-    - name: storefront
-      type: service
-      lifecycle: production
-      description: The user-facing storefront website
-      consumesApis:
-        - catalog-api
-        - cart-api
-        - checkout-api
-        - shipping-api
-      dependsOn:
-        - user-service
-        - inventory-service
-        - order-service
-        - shipping-service
-        - payment-gateway
-        - catalog-database
-        - user-service
-      providesApis:
-        - cataöpg-api
-        - cart-api
-        - checkout-api
-        - shipping-api
 ---
 
