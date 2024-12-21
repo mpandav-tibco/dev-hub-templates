@@ -16,25 +16,25 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: ecommerce-team
+  owner: group:default/ecommerce-team
   consumesApis:
-    - catalog-api
-    - cart-api
-    - checkout-api
-    - shipping-api
+    - api:default/catalog-api
+    - api:default/cart-api
+    - api:default/checkout-api
+    - api:default/shipping-api
   dependsOn:
-    - user-service
-    - inventory-service
-    - order-service
-    - shipping-service
-    - payment-gateway
-    - catalog-database
+    - component:default/user-service
+    - component:default/inventory-service
+    - component:default/order-service
+    - component:default/shipping-service
+    - resource:default/payment-gateway
+    - resource:default/catalog-database
   apiConsumedBy:
-    - user-service
-    - inventory-service
-    - order-service
-    - shipping-service
-    - payment-gateway
+    - component:default/user-service
+    - component:default/inventory-service
+    - component:default/order-service
+    - component:default/shipping-service
+    - resource:default/payment-gateway
 ---
 # catalog-api.yaml
 apiVersion: backstage.io/v1alpha1
@@ -45,12 +45,12 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: catalog-team
+  owner: group:default/catalog-team
   dependsOn:
-    - catalog-database
-    - inventory-service
+    - resource:default/catalog-database
+    - component:default/inventory-service
   apiConsumedBy:
-    - storefront
+    - component:default/storefront
   definition:
     $text: ../apis/catalog/catalog-api.yaml
 ---
@@ -63,12 +63,12 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: cart-team
+  owner: group:default/cart-team
   dependsOn:
-    - cart-database
-    - user-service
+    - resource:default/cart-database
+    - component:default/user-service
   apiConsumedBy:
-    - storefront
+    - component:default/storefront
   definition:
     $text: ../apis/cart/cart-api.yaml
 ---
@@ -79,14 +79,14 @@ metadata:
   name: checkout-api
   description: Handles order processing and payment integration
 spec:
-  type: opemapi
+  type: openapi # Corrected typo here
   lifecycle: production
-  owner: checkout-team
+  owner: group:default/checkout-team
   dependsOn:
-    - order-service
-    - payment-gateway
+    - component:default/order-service
+    - resource:default/payment-gateway
   apiConsumedBy:
-    - storefront
+    - component:default/storefront
   definition:
     $text: ../apis/checkout/checkout-api.yaml
 ---
@@ -99,12 +99,12 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: user-team
+  owner: group:default/user-team
   providesApis:
-    - cart-api
-    - user-api
+    - api:default/cart-api
+    - api:default/user-api
   dependsOn:
-    - user-database
+    - resource:default/user-database
 ---
 # inventory-service.yaml
 apiVersion: backstage.io/v1alpha1
@@ -115,12 +115,12 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: inventory-team
-  consumesApis:
-    - inventory-database
+  owner: group:default/inventory-team
+  dependsOn: # Corrected relationship type here
+    - resource:default/inventory-database
   providesApis:
-    - catalog-api
-    - inventory-api
+    - api:default/catalog-api
+    - api:default/inventory-api
 ---
 # order-service.yaml
 apiVersion: backstage.io/v1alpha1
@@ -131,13 +131,13 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: order-team
+  owner: group:default/order-team
   consumesApis:
-    - order-database
-    - inventory-service
-    - shipping-service
+    - resource:default/order-database
+    - component:default/inventory-service
+    - component:default/shipping-service
   providesApis:
-    - order-api
+    - api:default/order-api
 ---
 # shipping-service.yaml
 apiVersion: backstage.io/v1alpha1
@@ -148,11 +148,11 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: shipping-team
+  owner: group:default/shipping-team
   consumesApis:
-    - shipping-api
+    - api:default/shipping-api
   providesApis:
-    - shipping-api
+    - api:default/shipping-api
 ---
 # shipping-api.yaml
 apiVersion: backstage.io/v1alpha1
@@ -163,10 +163,10 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: shipping-team
+  owner: group:default/shipping-team
   apiConsumedBy:
-    - shipping-service
-    - order-service
+    - component:default/shipping-service
+    - component:default/order-service
   definition:
     $text: ../apis/shipment-tracking/shipping-api.yaml
 ---
@@ -179,7 +179,7 @@ metadata:
 spec:
   type: resource
   lifecycle: production
-  owner: payments-team
+  owner: group:default/payments-team
 ---
 # catalog-database.yaml
 apiVersion: backstage.io/v1alpha1
@@ -190,7 +190,7 @@ metadata:
 spec:
   type: resource
   lifecycle: production
-  owner: database-team
+  owner: group:default/database-team
 ---
 # cart-database.yaml
 apiVersion: backstage.io/v1alpha1
@@ -201,7 +201,7 @@ metadata:
 spec:
   type: resource
   lifecycle: production
-  owner: database-team
+  owner: group:default/database-team
 ---
 # user-database.yaml
 apiVersion: backstage.io/v1alpha1
@@ -212,7 +212,7 @@ metadata:
 spec:
   type: resource
   lifecycle: production
-  owner: database-team
+  owner: group:default/database-team
 ---
 # order-database.yaml
 apiVersion: backstage.io/v1alpha1
@@ -223,7 +223,7 @@ metadata:
 spec:
   type: resource
   lifecycle: production
-  owner: database-team
+  owner: group:default/database-team
 ---
 # inventory-database.yaml
 apiVersion: backstage.io/v1alpha1
@@ -234,6 +234,4 @@ metadata:
 spec:
   type: resource
   lifecycle: production
-  owner: database-team
----
-
+  owner: group:default/database-team
