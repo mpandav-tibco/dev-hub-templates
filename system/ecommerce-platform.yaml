@@ -25,7 +25,7 @@ kind: Domain
 metadata:
   name: e-commerce
   description: The e-commerce domain
-  tag:
+  tags:
     - ecommerce
     - microservices
     - retail
