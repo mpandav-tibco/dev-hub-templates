@@ -40,7 +40,7 @@ metadata:
   description: The user-facing storefront website
   annotations:
     jenkins.io/job-full-name: storefront-relese-v1
-
+    backstage.io/techdocs-ref: ./doc/index.md
   tag:
     - ecommerce
     - microservices
@@ -273,4 +273,12 @@ spec:
   lifecycle: production
   owner: group:default/database-team
 ---
-
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: storefront
+  annotations:
+    backstage.io/techdocs-ref: value
+spec:
+  type: service
+  owner: group:default/ecommerce-team
