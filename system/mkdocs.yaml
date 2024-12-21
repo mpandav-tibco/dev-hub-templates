@@ -3,21 +3,21 @@ site_description: Technical documentation for the e-commerce platform
 site_author: Your Name or Team Name
 nav:
   - Overview: index.md
-  - Architecture: architecture.md
+  - Architecture: index.md#architecture
   - Components:
-      - Storefront: components/storefront.md
-      - Catalog Service: components/catalog-service.md
-      - Cart Service: components/cart-service.md
-      - Order Service: components/order-service.md
-      - Payment Service: components/payment-service.md
-      - User Service: components/user-service.md
-      - Inventory Service: components/inventory-service.md
-      - Shipping Service: components/shipping-service.md
-  - Data Management: data-management.md
-  - Deployment: deployment.md
-  - Monitoring and Logging: monitoring-and-logging.md
-  - Security: security.md
-  - Future Enhancements: future-enhancements.md
+      - Storefront: index.md#storefront
+      - Catalog Service: index.md#catalog-service
+      - Cart Service: index.md#cart-service
+      - Order Service: index.md#order-service
+      - Payment Service: index.md#payment-service
+      - User Service: index.md#user-service
+      - Inventory Service: index.md#inventory-service
+      - Shipping Service: index.md#shipping-service
+  - Data Management: index.md#data-management
+  - Deployment: index.md#deployment
+  - Monitoring and Logging: index.md#monitoring-and-logging
+  - Security: index.md#security
+  - Future Enhancements: index.md#future-enhancements
 plugins:
   - search
   - techdocs-core
