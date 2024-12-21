@@ -34,10 +34,10 @@ spec:
   lifecycle: production
   owner: group:default/ecommerce-team
   consumesApis:
-    - api:catalog-api
-    - api:default/cart-api
-    - api:default/checkout-api
-    - api:default/shipping-api
+    - catalog-api
+    - checkout-api
+    - shipping-api
+    - cart-api
   dependsOn:
     - component:default/user-service
     - component:default/inventory-service
