@@ -17,7 +17,7 @@ spec:
   type: service
   lifecycle: production
   owner: ecommerce-team
-  consumesApi:
+  consumesApis:
     - catalog-api
     - cart-api
     - checkout-api
