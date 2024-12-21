@@ -34,7 +34,7 @@ spec:
   lifecycle: production
   owner: group:default/ecommerce-team
   consumesApis:
-    - api:default/catalog-api
+    - api:catalog-api
     - api:default/cart-api
     - api:default/checkout-api
     - api:default/shipping-api
