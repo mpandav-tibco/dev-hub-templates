@@ -100,6 +100,7 @@ spec:
   type: openapi
   lifecycle: production
   owner: group:default/cart-team
+  system: ecommerce-platform
   dependsOn:
     - resource:default/cart-database
     - component:default/user-service
@@ -204,6 +205,7 @@ spec:
   type: openapi
   lifecycle: production
   owner: group:default/shipping-team
+  system: ecommerce-platform
   apiConsumedBy:
     - component:default/shipping-service
     - component:default/order-service
@@ -220,6 +222,7 @@ spec:
   type: resource
   lifecycle: production
   owner: group:default/payments-team
+  system: ecommerce-platform
 ---
 # catalog-database.yaml
 apiVersion: backstage.io/v1alpha1
@@ -231,6 +234,7 @@ spec:
   type: resource
   lifecycle: production
   owner: group:default/database-team
+  system: ecommerce-platform
 ---
 # cart-database.yaml
 apiVersion: backstage.io/v1alpha1
@@ -242,6 +246,7 @@ spec:
   type: resource
   lifecycle: production
   owner: group:default/database-team
+  system: ecommerce-platform
 ---
 # user-database.yaml
 apiVersion: backstage.io/v1alpha1
@@ -253,6 +258,7 @@ spec:
   type: resource
   lifecycle: production
   owner: group:default/database-team
+  system: ecommerce-platform
 ---
 # order-database.yaml
 apiVersion: backstage.io/v1alpha1
@@ -264,6 +270,7 @@ spec:
   type: resource
   lifecycle: production
   owner: group:default/database-team
+  system: ecommerce-platform
 ---
 # inventory-database.yaml
 apiVersion: backstage.io/v1alpha1
@@ -275,5 +282,6 @@ spec:
   type: resource
   lifecycle: production
   owner: group:default/database-team
+  system: ecommerce-platform
 ---
 
