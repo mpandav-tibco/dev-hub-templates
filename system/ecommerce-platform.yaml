@@ -40,7 +40,7 @@ metadata:
   description: The user-facing storefront website
   annotations:
     jenkins.io/job-full-name: storefront-relese-v1
-  tag:
+  tags:
     - ecommerce
     - microservices
     - retail
