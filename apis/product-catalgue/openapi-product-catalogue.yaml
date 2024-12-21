@@ -16,6 +16,6 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: sc-dach
+  owner: group:default/catalog-team
   definition:
     $text: ./skeleton/openapi-product-catalogue.json
