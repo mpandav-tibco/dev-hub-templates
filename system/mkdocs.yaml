@@ -3,7 +3,7 @@ site_description: Technical documentation for the e-commerce platform
 site_author: Your Name or Team Name
 nav:
   - Overview: index.md
-  - Architecture: /#architecture
+  - Architecture: index.md#architecture
   - Components:
       - Storefront: index.md#storefront
       - Catalog Service: index.md#catalog-service
