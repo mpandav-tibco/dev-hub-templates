@@ -45,8 +45,8 @@ metadata:
     - microservices
     - retail
 spec:
-  type: service
   lifecycle: production
+  type: service
   owner: group:default/ecommerce-team
   system: ecommerce-platform
   providesApis:
