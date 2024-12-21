@@ -116,7 +116,7 @@ spec:
   type: service
   lifecycle: production
   owner: inventory-team
-  dependsOn:
+  consumesApis:
     - inventory-database
   providesApis:
     - catalog-api
@@ -132,7 +132,7 @@ spec:
   type: service
   lifecycle: production
   owner: order-team
-  dependsOn:
+  consumesApis:
     - order-database
     - inventory-service
     - shipping-service
@@ -149,26 +149,28 @@ spec:
   type: service
   lifecycle: production
   owner: shipping-team
-  dependsOn:
+  consumesApis:
     - shipping-api
   providesApis:
     - shipping-api
 ---
-# shipping-api.yaml
-apiVersion: backstage.io/v1alpha1
-kind: API
-metadata:
-  name: shipping-api
-  description: Provides shipping rates and tracking information
-spec:
-  type: openapi
-  lifecycle: production
-  owner: shipping-team
-  apiConsumedBy:
-    - shipping-service
-    - order-service
-  definition:
-    $text: ../apis/shipment-tracking/shipping-api.yaml
+
+
+# # shipping-api.yaml
+# apiVersion: backstage.io/v1alpha1
+# kind: API
+# metadata:
+#   name: shipping-api
+#   description: Provides shipping rates and tracking information
+# spec:
+#   type: openapi
+#   lifecycle: production
+#   owner: shipping-team
+#   apiConsumedBy:
+#     - shipping-service
+#     - order-service
+#   definition:
+#     $text: ../apis/shipment-tracking/shipping-api.yaml
 ---
 # payment-gateway.yaml
 apiVersion: backstage.io/v1alpha1
