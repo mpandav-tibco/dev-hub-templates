@@ -273,12 +273,4 @@ spec:
   lifecycle: production
   owner: group:default/database-team
 ---
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: storefront
-  annotations:
-    backstage.io/techdocs-ref: value
-spec:
-  type: service
-  owner: group:default/ecommerce-team
+
