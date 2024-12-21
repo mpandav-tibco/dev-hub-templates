@@ -4,13 +4,13 @@ kind: System
 metadata:
   name: ecommerce-platform
   description: This system comprises a collection of interconnected services and APIs, including a storefront web application, catalog management, shopping cart functionality, order processing, and payment integration. It leverages a microservices architecture to provide scalability and flexibility
-spec:
-  owner: ecommerce-team
-  domain: e-commerce
   tags:
     - ecommerce
     - microservices
     - retail
+spec:
+  owner: ecommerce-team
+  domain: e-commerce
   environments:
     - name: production
       baseUrl: https://ecommerce.example.com
