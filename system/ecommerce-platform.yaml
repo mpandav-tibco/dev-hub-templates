@@ -3,14 +3,15 @@ apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: ecommerce-platform
-spec:
-  owner: ecommerce-team
-  domain: e-commerce
   description: This system comprises a collection of interconnected services and APIs, including a storefront web application, catalog management, shopping cart functionality, order processing, and payment integration. It leverages a microservices architecture to provide scalability and flexibility
   tag:
     - ecommerce
     - microservices
     - retail
+spec:
+  owner: ecommerce-team
+  domain: e-commerce
+
   environments:
     - name: production
       baseUrl: https://ecommerce.example.com
