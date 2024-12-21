@@ -29,6 +29,12 @@ spec:
     - shipping-service
     - payment-gateway
     - catalog-database
+  apiConsumedBy:
+    - user-service
+    - inventory-service
+    - order-service
+    - shipping-service
+    - payment-gateway
 ---
 # catalog-api.yaml
 apiVersion: backstage.io/v1alpha1
@@ -43,6 +49,8 @@ spec:
   dependsOn:
     - catalog-database
     - inventory-service
+  apiConsumedBy:
+    - storefront
   definition:
     $text: ../apis/catalog/catalog-api.yaml
 ---
@@ -59,6 +67,8 @@ spec:
   dependsOn:
     - cart-database
     - user-service
+  apiConsumedBy:
+    - storefront
   definition:
     $text: ../apis/cart/cart-api.yaml
 ---
@@ -75,6 +85,8 @@ spec:
   dependsOn:
     - order-service
     - payment-gateway
+  apiConsumedBy:
+    - storefront
   definition:
     $text: ../apis/checkout/checkout-api.yaml
 ---
@@ -88,6 +100,9 @@ spec:
   type: service
   lifecycle: production
   owner: user-team
+  providesApis:
+    - cart-api
+    - user-api
   dependsOn:
     - user-database
 ---
@@ -103,6 +118,9 @@ spec:
   owner: inventory-team
   dependsOn:
     - inventory-database
+  providesApis:
+    - catalog-api
+    - inventory-api
 ---
 # order-service.yaml
 apiVersion: backstage.io/v1alpha1
@@ -118,6 +136,8 @@ spec:
     - order-database
     - inventory-service
     - shipping-service
+  providesApis:
+    - order-api
 ---
 # shipping-service.yaml
 apiVersion: backstage.io/v1alpha1
@@ -131,6 +151,8 @@ spec:
   owner: shipping-team
   dependsOn:
     - shipping-api
+  providesApis:
+    - shipping-api
 ---
 # shipping-api.yaml
 apiVersion: backstage.io/v1alpha1
@@ -142,6 +164,9 @@ spec:
   type: openapi
   lifecycle: production
   owner: shipping-team
+  apiConsumedBy:
+    - shipping-service
+    - order-service
   definition:
     $text: ../apis/shipment-tracking/shipping-api.yaml
 ---
