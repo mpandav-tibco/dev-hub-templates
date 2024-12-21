@@ -1,0 +1,35 @@
+site_name: E-Commerce Platform Documentation
+site_description: Technical documentation for the e-commerce platform
+site_author: Your Name or Team Name
+nav:
+  - Overview: index.md
+  - Architecture: architecture.md
+  - Components:
+      - Storefront: components/storefront.md
+      - Catalog Service: components/catalog-service.md
+      - Cart Service: components/cart-service.md
+      - Order Service: components/order-service.md
+      - Payment Service: components/payment-service.md
+      - User Service: components/user-service.md
+      - Inventory Service: components/inventory-service.md
+      - Shipping Service: components/shipping-service.md
+  - Data Management: data-management.md
+  - Deployment: deployment.md
+  - Monitoring and Logging: monitoring-and-logging.md
+  - Security: security.md
+  - Future Enhancements: future-enhancements.md
+plugins:
+  - search
+  - techdocs-core
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - navigation.top
+    - content.code.annotate
+    - search.highlight
+    - search.suggest
+    - search.share

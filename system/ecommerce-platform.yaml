@@ -40,13 +40,14 @@ metadata:
   description: The user-facing storefront website
   annotations:
     jenkins.io/job-full-name: storefront-relese-v1
+    backstage.io/techdocs-ref: dir:.
   tags:
     - ecommerce
     - microservices
     - retail
 spec:
-  lifecycle: production
   type: service
+  lifecycle: production
   owner: group:default/ecommerce-team
   system: ecommerce-platform
   providesApis:
@@ -64,7 +65,7 @@ spec:
     - component:default/order-service
     - component:default/shipping-service
     - resource:default/payment-gateway
-    - resource:default/catalog-database
+    - resource:default/catalog-service
   apiConsumedBy:
     - component:default/user-service
     - component:default/inventory-service
