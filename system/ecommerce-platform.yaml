@@ -54,7 +54,6 @@ spec:
     - api:default/catalog-api
     - api:default/cart-api
     - api:default/checkout-api
-    - api:default/inventory-api
   consumesApis:
     - catalog-api
     - checkout-api
