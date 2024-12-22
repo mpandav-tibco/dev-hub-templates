@@ -7,10 +7,10 @@ metadata:
     - store
     - wsdl
   links:
-    - url: https://github.com/mpandav-tibco/dev-hub-templates/blob/mastart/templates/apis/
+    - url: https://github.com/mpandav-tibco/dev-hub-templates/tree/mastart/apis
       title: GitHub Repo
       icon: github
-    - url: https://github.com/mpandav-tibco/dev-hub-templates/blob/mastart/templates/apis/Soap-Example.wsdl
+    - url: https://github.com/mpandav-tibco/dev-hub-templates/blob/mastart/apis/soap-wsdl/skeleton/Soap-Example.wsdl
       title: WSDL Service
       icon: code
 spec:
