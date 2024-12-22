@@ -19,3 +19,18 @@ spec:
   owner: sc-dach
   definition:
     $text: ./skeleton/Soap-Example.wsdl
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: sc-dach
+  description: The SC DACH organization
+spec:
+  type: organization
+  profile:
+    displayName: SC DACH
+    email: sc-dach@example.com
+    picture: https://example.com/sc-dach-logo.png
+  parent: null
+  children: []
+  members:  []
