@@ -1,7 +1,7 @@
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: T-Shirt-Inventory-SOAP-Service
+  name: t-shirt-inventory-soap-service
   description: The T-Shirt Inventory Service
   tags:
     - store
