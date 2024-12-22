@@ -31,6 +31,6 @@ spec:
     displayName: SC DACH
     email: sc-dach@example.com
     picture: https://example.com/sc-dach-logo.png
-  parent: null
+  parent: ""
   children: []
   members:  []
