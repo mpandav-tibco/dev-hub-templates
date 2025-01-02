@@ -14,7 +14,7 @@ Require-Capability: com.tibco.bw.model; filter:="(name=bwext)",
  com.tibco.bw.sharedresource.model; filter:="(name=bw.kafkaconnection)",
  com.tibco.bw.sharedresource.model; filter:="(name=bw.cred)",
  com.tibco.bw.binding.model; filter:="(name=bw.rest)"
-TIBCO-BW-Edition: bwcloud
+TIBCO-BW-Edition: bwcf
 TIBCO-BW-ConfigProfile: META-INF/default.substvar
 TIBCO-BW-ApplicationModule: META-INF/module.bwm
 TIBCO-BW-JobSharedVariables: META-INF/module.jsv
