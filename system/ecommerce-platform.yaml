@@ -82,7 +82,7 @@ spec:
   type: openapi
   lifecycle: production
   owner: group:default/catalog-team
-  system: ecommerce-platform
+
   dependsOn:
     - resource:default/catalog-database
     - component:default/inventory-service
@@ -101,7 +101,7 @@ spec:
   type: openapi
   lifecycle: production
   owner: group:default/cart-team
-  system: ecommerce-platform
+
   dependsOn:
     - resource:default/cart-database
     - component:default/user-service
@@ -120,7 +120,7 @@ spec:
   type: openapi # Corrected typo here
   lifecycle: production
   owner: group:default/checkout-team
-  system: ecommerce-platform
+
   dependsOn:
     - component:default/order-service
     - resource:default/payment-gateway
@@ -260,7 +260,7 @@ spec:
   type: resource
   lifecycle: production
   owner: group:default/database-team
-  system: ecommerce-platform
+
 ---
 # order-database.yaml
 apiVersion: backstage.io/v1alpha1
@@ -272,7 +272,7 @@ spec:
   type: resource
   lifecycle: production
   owner: group:default/database-team
-  system: ecommerce-platform
+
 ---
 # inventory-database.yaml
 apiVersion: backstage.io/v1alpha1
@@ -284,6 +284,6 @@ spec:
   type: resource
   lifecycle: production
   owner: group:default/database-team
-  system: ecommerce-platform
+
 ---
 
