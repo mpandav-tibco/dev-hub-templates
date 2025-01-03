@@ -1,12 +1,12 @@
-Manifest-Version: 1.0.0.202212121350
+Manifest-Version: 1.0.0.202501031735
 Bundle-ManifestVersion: 2
 Bundle-Name: BwceLib Module
 Bundle-SymbolicName: bwceLib
-Bundle-Version: 1.0.0.202212121350
+Bundle-Version: 1.0.0.202501031735
 Bundle-Vendor: TIBCO Software Inc.
 TIBCO-BW-ConfigProfile: META-INF/default.substvar
 TIBCO-BW-SharedModule: META-INF/module.bwm
-TIBCO-BW-Edition: bwcf,bwcloud
+TIBCO-BW-Edition: bwcf
 TIBCO-BW-JobSharedVariables: META-INF/module.jsv
 Require-Capability: com.tibco.bw.model; filter:="(name=bwext)",com.tibco
  .bw.palette; filter:="(name=bw.generalactivities)",com.tibco.bw.palette
