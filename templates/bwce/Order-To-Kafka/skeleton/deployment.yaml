@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ${{values.name | dump}}
+  name: ""
   namespace: tibco-apps
 spec:
   selector:
     matchLabels:
-      app: {{values.name | dump}}
+      app: bwce
       appType: tibco
   replicas: 1
   template:
     metadata:
       labels:
-        app: {{values.name | dump}}
+        app: bwce
         appType: tibco
         backstage.io/kubernetes-id: ${{values.name | dump}}
     spec:
