@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ""
+  namespace: tibco-apps
+spec:
+  selector:
+    matchLabels:
+      app: bwce
+      appType: tibco
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bwce
+        appType: tibco
+        backstage.io/kubernetes-id: ${{values.name | dump}}
+    spec:
+      containers:
+        - name:
+          image:
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 18080
+            - containerPort: 8090
+          env:
+            - name: BW_LOGLEVEL
+              value: ERROR
+            - name: APP_CONFIG_PROFILE
+              value: "default"
+          resources:
+            limits:
+              memory: 1024Mi
+            requests:
+              memory: 1024Mi
+          livenessProbe:
+            httpGet:
+              path: /health/liveness
+              port: 8090
+            failureThreshold: 1
+            periodSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /health/startup
+              port: 8090
+            failureThreshold: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health/readiness
+              port: 8090
+            initialDelaySeconds: 5
+            periodSeconds: 5
