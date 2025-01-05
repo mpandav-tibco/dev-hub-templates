@@ -93,6 +93,7 @@ spec:
                             platformToken:
                               title: TIBCO Platform Token 
                               type: string
+                              ui:field: Secret                              
                             dpUrl:
                               title: Data Plane URL
                               type: string
