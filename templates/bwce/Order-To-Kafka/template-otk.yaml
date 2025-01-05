@@ -35,7 +35,7 @@ parameters:
         ui:field: EntityPicker
         ui:options:
           catalogFilter:
-            kind: API
+            kind: system
       owner:
         title: Owner
         type: string
@@ -141,6 +141,8 @@ steps:
       namespace: ${{ parameters.deploy.namespace }}
       platformToken: ${{ parameters.deploy.platformToken }}
       dpUrl: ${{ parameters.deploy.dpUrl }}
+      deployTarget: ${{ parameters.deploy.deployTarget }}
+      deploy: ${{ parameters.deploy.deploy }}
 output:
   links:
     - title: Repository
