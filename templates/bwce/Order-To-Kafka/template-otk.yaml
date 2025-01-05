@@ -144,7 +144,8 @@ spec:
         repoUrl: ${{ parameters.repoUrl | parseRepoUrl}}
         job: bwce/job/build_bwce_ear
         authToken: tibco
-        jenkinsInstructions: '&bw_project_folder=${{ values.repoUrl | parseRepoUrl).repo }}&namespace=${{ values.deploy.deployTarget.namespace }}&platformToken=${{ values.deploy.deployTarget.platformToken }}&dpUrl=${{ values.deploy.deployTarget.dpUrl }}&deployTarget=${{ values.deploy.deployTarget }}&deploy=${{ values.deploy }}'
+        jenkinsInstructions: '&bw_project_folder=${{ (parameters.repoUrl | parseRepoUrl).repo }}'
+
   output:
     links:
       - title: Repository
