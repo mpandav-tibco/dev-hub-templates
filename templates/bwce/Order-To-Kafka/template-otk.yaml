@@ -96,13 +96,20 @@ parameters:
                           dpUrl:
                             title: Data Plane URL
                             type: string
+                        required: 
+                          - namespace
+                          - platformToken
+                          - dpUrl
+                          
                       - properties:
                           deployTarget:
                             enum:
                               - K8S
                           namespace:
                             title: Kubernetes Namespace
-                            type: string                        
+                            type: string  
+                        required: 
+                          - namespace
             
 steps:
   - id: fetch
