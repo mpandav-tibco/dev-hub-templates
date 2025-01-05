@@ -5,7 +5,7 @@ metadata:
   title: BWCE - Order to Kafka
   description: Create a new DEMO - BWCE project for an order to Kafka
   tags:
-   - tibco
+    - tibco
     - bwce
     - recommended
 spec:
