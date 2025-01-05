@@ -1,5 +1,57 @@
 #!/bin/bash
 
+#######################################################################################################################
+#   This script is used to trigger a Jenkins pipeline to build a TIBCO BusinessWorks                                  #
+#   Container Edition (BWCE) application. The script performs the following steps:                                    #
+#   1. Clone the Git repository                                                                                       #
+#   2. Build the application EAR using Maven                                                                          #
+#   3. Build the Docker image                                                                                         #
+#   4. Update the deployment YAML                                                                                     #
+#   5. Update the Git repository                                                                                      #
+#   6. Deploy to Kubernetes or TIBCO Platform (conditional)                                                           #
+#                                                                                                                     #
+#   The script requires the following environment variables to be set:                                                #
+#   - repo_host: The Git repository host (e.g., github.com)                                                           #
+#   - repo_owner: The Git repository owner (e.g., tibco)                                                              #
+#   - repo_name: The Git repository name (e.g., bwce-sample)                                                          #
+#   - bw_project_folder: The BWCE project folder name (e.g., BWCE-Sample)                                             #
+#   - namespace: The Kubernetes namespace (e.g., default)                                                             #
+#   - platformToken: The TIBCO Platform token                                                                         #
+#   - dpUrl: The TIBCO Platform URL (e.g., https://cloud.tibco.com)                                                   #
+#   - deployTarget: The deployment target (K8S or TIBCO Platform)                                                     #
+#   - deploy: The deployment flag (true or false)                                                                     #
+#                                                                                                                     #
+#   The script also requires the following tools to be installed:                                                     #
+#   - git                                                                                                             #
+#   - tree                                                                                                            #
+#   - yq                                                                                                              #
+#   - docker                                                                                                          #
+#   - kubectl                                                                                                         #
+#   - mvn                                                                                                             #
+#                                                                                                                     #
+#   The script uses the following environment variables to set Jenkins build parameters:                              #
+#   - repoHost                                                                                                        #
+#   - repoOwner                                                                                                       #
+#   - repoName                                                                                                        #
+#   - projectName                                                                                                     #
+#   - k8s_namespace                                                                                                   #
+#   - platformToken                                                                                                   #
+#   - dpUrl                                                                                                           #
+#   - deployTarget                                                                                                    #
+#   - deploy                                                                                                          #
+#                                                                                                                     #
+#   The script uses the following environment variables to set the Docker image name:                                 #
+#   - IMAGE                                                                                                           #
+#                                                                                                                     #
+#   The script uses the following environment variables to set the Kubernetes deployment name:                        #
+#   - repoName                                                                                                        #
+#                                                                                                                     #
+#   The script uses the following environment variables to set the TIBCO Platform deployment parameters:              #
+#   - BASE_VERSION                                                                                                    #
+#   - BASE_IMAGE_TAG                                                                                                  #
+#                                                                                                                     #
+#######################################################################################################################
+
 # Set Jenkins build parameters
 export repoHost="$repo_host"
 export repoOwner="$repo_owner"
@@ -13,7 +65,7 @@ export deploy="$deploy"
 
 # Remove any existing directory with the same name (except the .git directory)
 rm -rf *
-  
+
 # Function to clone the Git repository
 clone_repo() {
   echo -----------------------------------------------------------
@@ -90,7 +142,7 @@ build_docker_image() {
   ear_file=$(find . -name "*.ear" -print -quit)
 
   # Create the Dockerfile
-  cat > Dockerfile <<EOF
+  cat >Dockerfile <<EOF
 FROM mpandav/bwce-291-rst:base
 LABEL maintainer="mpandav"
 ADD $ear_file /
@@ -122,7 +174,7 @@ update_deployment_yaml() {
 
   # start from base directory
   cd ../"$repoName" || exit 1
-  
+
   echo -----------------------------------------------------------
   echo "STEP 4: K8S DEPLOYMENT PREPARATION"
   echo -----------------------------------------------------------
@@ -130,12 +182,12 @@ update_deployment_yaml() {
   echo "###### Update the deployment.yaml file with variable substitution (using yq) #######"
 
   # Update the deployment.yaml file with variable substitution (using yq)
-  yq eval '.metadata.name = env(repoName)' deployment.yaml > deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
-  yq eval '.metadata.labels."backstage.io/kubernetes-id" = env(repoName)' deployment.yaml > deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
-  yq eval '.spec.template.spec.containers[0].name = env(projectName) + "-" + env(repoName)' deployment.yaml > deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
-  yq eval '.spec.template.spec.containers[0].image = env(IMAGE)' deployment.yaml > deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
-  yq eval '.spec.template.metadata.labels."backstage.io/kubernetes-id" = env(repoName)' deployment.yaml > deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
-  yq eval '.metadata.labels.app = (if (env(repoName) | length > 0) then env(repoName) else "" end)' deployment.yaml > deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
+  yq eval '.metadata.name = env(repoName)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
+  yq eval '.metadata.labels."backstage.io/kubernetes-id" = env(repoName)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
+  yq eval '.spec.template.spec.containers[0].name = env(projectName) + "-" + env(repoName)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
+  yq eval '.spec.template.spec.containers[0].image = env(IMAGE)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
+  yq eval '.spec.template.metadata.labels."backstage.io/kubernetes-id" = env(repoName)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
+  yq eval '.metadata.labels.app = (if (env(repoName) | length > 0) then env(repoName) else "" end)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
 
   echo "######### DEPLOYMENT.YAML #############"
   echo -----------------------------------------------------------
@@ -175,7 +227,7 @@ deploy_to_tibco_platform() {
   parent_dir=$(find . -type d -name "*.parent" -print -quit)
 
   if [ -z "$parent_dir" ]; then
-    echo "ERROR: Could not find the xxxx.xxx.parent directory."
+    echo "ERROR: Could not find the $repoName.parent directory."
     exit 1
   fi
 
@@ -190,7 +242,7 @@ deploy_to_tibco_platform() {
 }
 
 # --- Main execution ---
- 
+
 # Clone the repository
 clone_repo
 
@@ -224,7 +276,6 @@ if [ "$deploy" = "true" ]; then
 else
   echo "##### JENKINS: DEPLOYMENT SKIPPED (deploy parameter is false) #####"
 fi
-
 
 echo -----------------------------------------------------------
 echo "                 BUILD COMPLETE"
