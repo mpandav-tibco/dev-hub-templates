@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sca:composite xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:BW="http://xsd.tns.tibco.com/amf/models/sca/implementationtype/BW" xmlns:GetFileServiceAbstractWSDL="http://www.tibco.com/GetFileServiceAbstractWSDL/" xmlns:XMLSchema="http://www.w3.org/2001/XMLSchema" xmlns:attachments="http://www.example.com/interface/attachments" xmlns:axis2="http://xsd.tns.tibco.com/bw/models/binding/soap/axis2" xmlns:compositeext="http://schemas.tibco.com/amx/3.0/compositeext" xmlns:parameters="http://xmlns.example.com/routing-service/parameters" xmlns:parameters_1="http://xmlns.example.com/router/parameters" xmlns:rest="http://xsd.tns.tibco.com/bw/models/binding/rest" xmlns:sca="http://www.osoa.org/xmlns/sca/1.0" xmlns:scact="http://xsd.tns.tibco.com/amf/models/sca/componentType" xmlns:scaext="http://xsd.tns.tibco.com/amf/models/sca/extensions" xmi:id="_97O5YILgEe6jBansLhUkCQ" targetNamespace="http://tns.tibco.com/bw/composite/Scheduler-Java" name="Scheduler-Java" compositeext:version="1.0.0" compositeext:formatVersion="2">
+  <sca:property xmi:id="_-s2jkILgEe6jBansLhUkCQ" name="BW.APPNODE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_-tL6wILgEe6jBansLhUkCQ" name="BW.DEPLOYMENTUNIT.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_-tNv8ILgEe6jBansLhUkCQ" name="BW.HOST.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_-tQzQILgEe6jBansLhUkCQ" name="BW.DEPLOYMENTUNIT.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_-tSBYILgEe6jBansLhUkCQ" name="BW.MODULE.VERSION" type="XMLSchema:string" scalable="true"/>
+  <sca:property xmi:id="_-tUdoILgEe6jBansLhUkCQ" name="BW.CLOUD.PORT" type="XMLSchema:int" scalable="true"/>
+  <sca:property xmi:id="_-tVrwILgEe6jBansLhUkCQ" name="BW.MODULE.NAME" type="XMLSchema:string" scalable="true"/>
+  <sca:component xmi:id="_mLdPUIicEe6YQ4HIUvwafQ" name="ComponentCall-Java-Method" compositeext:version="1.0.0.qualifier">
+    <scaext:implementation xsi:type="BW:BWComponentImplementation" xmi:id="_mLd2YIicEe6YQ4HIUvwafQ" processName="scheduler.java.Java-Invoke"/>
+  </sca:component>
+</sca:composite>

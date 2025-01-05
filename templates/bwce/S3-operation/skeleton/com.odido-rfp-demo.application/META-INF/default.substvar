@@ -197,5 +197,23 @@
 			<useLookupValue>false</useLookupValue>
 			<lookupValue>/tmp/odido/s3/</lookupValue>
 		</globalVariable>
+		<globalVariable>
+			<name>//sharedLibrary///SharedResources/HTTP/port</name>
+			<value>18080</value>
+			<deploymentSettable>false</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>Integer</type>
+			<isOverride>false</isOverride>
+			<useLookupValue>false</useLookupValue>
+		</globalVariable>
+		<globalVariable>
+			<name>//sharedLibrary///SharedResources/HTTP/host</name>
+			<value></value>
+			<deploymentSettable>false</deploymentSettable>
+			<serviceSettable>false</serviceSettable>
+			<type>String</type>
+			<isOverride>false</isOverride>
+			<useLookupValue>false</useLookupValue>
+		</globalVariable>
 	</globalVariables>
 </repository>

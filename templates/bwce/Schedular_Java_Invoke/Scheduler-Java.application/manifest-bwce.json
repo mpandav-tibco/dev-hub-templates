@@ -1,0 +1,21 @@
+{
+	"name" : "Scheduler-Java.application",
+	"version" : "1.0",
+	"type" : "bwce",
+	"defaultProfile" : "default.substvar",
+	"appProperties" : [
+		{
+			"profile" : "default.substvar",
+			"properties" : [
+			]
+		}
+	],
+	"endpoints" : [
+		{
+			"type" : "private",
+			"pingable" : true,
+			"protocol" : "http",
+			"port" : "8090"
+		}
+	]
+}

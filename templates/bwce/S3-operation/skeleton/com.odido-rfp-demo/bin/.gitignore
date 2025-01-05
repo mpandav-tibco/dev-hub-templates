@@ -1,1 +1,2 @@
 #This file was created by a Quickfix to solve "BW Project Empty Folder Ignore by Git" warning on "src" folder.
+/.gitignore

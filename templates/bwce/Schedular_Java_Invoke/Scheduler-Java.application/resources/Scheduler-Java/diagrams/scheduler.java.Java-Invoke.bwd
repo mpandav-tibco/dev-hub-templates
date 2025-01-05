@@ -1,0 +1,56 @@
+<process-dir height="338" id="scheduler.java.Java-Invoke" name="scheduler.java.Java-Invoke" type="process" width="647" x="140" y="20">
+    <ProcessInfo createdBy="mpandav" createdOn="Tue Nov 21 19:34:25 CET 2023" description="" modifiedBy="" modifiedOn="" modifiers="public" productVersion="2.9.0 V23 2023-11-10" scalable="false" singleton="true" stateless="true" type="IT"/>
+    <link-dir id="64fe58c0-0462-4b6c-afb7-d6298f59334f" label="" linkType="SUCCESS" name="TimerToJavaInvoke" points="[[137,175],[202,175],[202,212],[268,212]]" source="7831e7b4-bcfa-4940-9448-b8766d24029b" target="cccbffe7-86b0-4106-8d15-7441aabc9acc"/>
+    <activity-dir height="48" id="7831e7b4-bcfa-4940-9448-b8766d24029b" name="Timer" type="bw.generalactivities.timer" width="48" x="88" y="151">
+        <BWActivity activityTypeID="bw.generalactivities.timer" version="6.0.0.001">
+            <activityConfig>
+                <properties name="config" type="activityconfig:EMFProperty">
+                    <type href="http://ns.tibco.com/bw/palette/generalactivities#//Timer"/>
+                    <value authoringTimeZone="+01:00" endTime="2023-11-21T19:34:35.199+0100" intervalUnit="Second" startTime="2023-11-21T19:34:35.199+0100" timeInterval="300" type="generalactivities:Timer" useLocalTime="true"/>
+                </properties>
+            </activityConfig>
+        </BWActivity>
+    </activity-dir>
+    <activity-dir height="48" id="e34404ff-b5ca-47ad-84ea-e887bc5dada3" name="LogEnd" type="bw.generalactivities.log" width="48" x="449" y="151">
+        <inputBinding expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns1=&quot;http://www.tibco.com/pe/WriteToLogActivitySchema&quot; version=&quot;2.0&quot;&gt;&lt;xsl:template name=&quot;LogEnd-input&quot; match=&quot;/&quot;&gt;&lt;tns1:ActivityInput&gt;&lt;message&gt;&lt;xsl:value-of select=&quot;&amp;quot;#### Hello World ######&amp;quot;&quot;/&gt;&lt;/message&gt;&lt;/tns1:ActivityInput&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;"/>
+        <partBinding expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns1=&quot;http://www.tibco.com/pe/WriteToLogActivitySchema&quot; version=&quot;2.0&quot;&gt;&lt;xsl:template name=&quot;LogEnd-input&quot; match=&quot;/&quot;&gt;&lt;tns1:ActivityInput&gt;&lt;message&gt;&lt;xsl:value-of select=&quot;&amp;quot;#### Hello World ######&amp;quot;&quot;/&gt;&lt;/message&gt;&lt;/tns1:ActivityInput&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;"/>
+        <BWActivity activityTypeID="bw.generalactivities.log" version="6.0.0.001">
+            <activityConfig>
+                <properties name="config" type="activityconfig:EMFProperty">
+                    <type href="http://ns.tibco.com/bw/palette/generalactivities#//Log"/>
+                    <value role="Info" suppressJobInfo="true" type="generalactivities:Log"/>
+                </properties>
+            </activityConfig>
+        </BWActivity>
+    </activity-dir>
+    <link-dir id="eac2e464-2437-4a2b-9273-a210adbad605" label="" linkType="SUCCESS" name="JavaInvokeToLogEnd" points="[[317,212],[383,212],[383,175],[449,175]]" source="cccbffe7-86b0-4106-8d15-7441aabc9acc" target="e34404ff-b5ca-47ad-84ea-e887bc5dada3"/>
+    <activity-dir height="48" id="cccbffe7-86b0-4106-8d15-7441aabc9acc" name="JavaInvoke" type="bw.java.javamethod" width="48" x="268" y="188">
+        <inputBinding expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns2=&quot;www.tibco.com/plugin/java/JavaInvokeActivityInput+cccbffe7-86b0-4106-8d15-7441aabc9acc+JavaInvokeActivityInput&quot; version=&quot;2.0&quot;&gt;&lt;xsl:template name=&quot;JavaInvoke-input&quot; match=&quot;/&quot;&gt;&lt;tns2:JavaInvokeActivityInput&gt;&lt;MethodParameters&gt;&lt;str1&gt;&lt;xsl:value-of select=&quot;&amp;quot;Hello&amp;quot;&quot;/&gt;&lt;/str1&gt;&lt;str2&gt;&lt;xsl:value-of select=&quot;&amp;quot;World&amp;quot;&quot;/&gt;&lt;/str2&gt;&lt;/MethodParameters&gt;&lt;/tns2:JavaInvokeActivityInput&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;"/>
+        <partBinding expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns2=&quot;www.tibco.com/plugin/java/JavaInvokeActivityInput+cccbffe7-86b0-4106-8d15-7441aabc9acc+JavaInvokeActivityInput&quot; version=&quot;2.0&quot;&gt;&lt;xsl:template name=&quot;JavaInvoke-input&quot; match=&quot;/&quot;&gt;&lt;tns2:JavaInvokeActivityInput&gt;&lt;MethodParameters&gt;&lt;str1&gt;&lt;xsl:value-of select=&quot;&amp;quot;Hello&amp;quot;&quot;/&gt;&lt;/str1&gt;&lt;str2&gt;&lt;xsl:value-of select=&quot;&amp;quot;World&amp;quot;&quot;/&gt;&lt;/str2&gt;&lt;/MethodParameters&gt;&lt;/tns2:JavaInvokeActivityInput&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;"/>
+        <BWActivity activityTypeID="bw.java.javamethod">
+            <activityConfig>
+                <properties name="config" type="activityconfig:EMFProperty">
+                    <type href="http://ns.tibco.com/bw/palette/java#//JavaMethod"/>
+                    <value className="com.tibco.custom.jfunctions.StringFunctions" constructDeclaredClass="true" isNew="true" isNewActivity="true" methodName="concat" methodReturn="string" type="java:JavaMethod">
+                        <methodParameter paramName="str1" paramType="string"/>
+                        <methodParameter paramName="str2" paramType="string"/>
+                    </value>
+                </properties>
+            </activityConfig>
+        </BWActivity>
+    </activity-dir>
+    <catch-all faultDetailsVar="FaultDetails" faultNameVar="FaultName" height="179" id="249b14aa-a273-4cb2-915d-53b266c0437e" type="catchAll" width="490" x="83" y="327">
+        <activity-dir height="48" id="769ef882-018c-40fc-aa96-cfbd67efa9ff" name="LogException" type="bw.generalactivities.log" width="48" x="188" y="65">
+            <inputBinding expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns1=&quot;http://www.tibco.com/pe/WriteToLogActivitySchema&quot; xmlns:tib=&quot;http://www.tibco.com/bw/xslt/custom-functions&quot; version=&quot;2.0&quot;&gt;&lt;xsl:param name=&quot;FaultDetails&quot;/&gt;&lt;xsl:template name=&quot;LogException-input&quot; match=&quot;/&quot;&gt;&lt;tns1:ActivityInput&gt;&lt;message&gt;&lt;xsl:value-of select=&quot;concat(&amp;quot; Exception : &amp;quot;, tib:render-xml($FaultDetails))&quot;/&gt;&lt;/message&gt;&lt;/tns1:ActivityInput&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;"/>
+            <partBinding expression="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#10;&lt;xsl:stylesheet xmlns:xsl=&quot;http://www.w3.org/1999/XSL/Transform&quot; xmlns:tns1=&quot;http://www.tibco.com/pe/WriteToLogActivitySchema&quot; xmlns:tib=&quot;http://www.tibco.com/bw/xslt/custom-functions&quot; version=&quot;2.0&quot;&gt;&lt;xsl:param name=&quot;FaultDetails&quot;/&gt;&lt;xsl:template name=&quot;LogException-input&quot; match=&quot;/&quot;&gt;&lt;tns1:ActivityInput&gt;&lt;message&gt;&lt;xsl:value-of select=&quot;concat(&amp;quot; Exception : &amp;quot;, tib:render-xml($FaultDetails))&quot;/&gt;&lt;/message&gt;&lt;/tns1:ActivityInput&gt;&lt;/xsl:template&gt;&lt;/xsl:stylesheet&gt;"/>
+            <BWActivity activityTypeID="bw.generalactivities.log" version="6.0.0.001">
+                <activityConfig>
+                    <properties name="config" type="activityconfig:EMFProperty">
+                        <type href="http://ns.tibco.com/bw/palette/generalactivities#//Log"/>
+                        <value role="Info" suppressJobInfo="true" type="generalactivities:Log"/>
+                    </properties>
+                </activityConfig>
+            </BWActivity>
+        </activity-dir>
+    </catch-all>
+</process-dir>
