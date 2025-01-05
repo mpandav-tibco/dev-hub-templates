@@ -11,6 +11,8 @@ dpUrl="$dpUrl"
 deployTarget="$deployTarget"
 deploy="$deploy"
 
+echo $k8s_namespace --- $platformToken --- $dpUrl --- $deployTarget --- $deploy
+
 # Function to clone the Git repository
 clone_repo() {
   echo -----------------------------------------------------------
