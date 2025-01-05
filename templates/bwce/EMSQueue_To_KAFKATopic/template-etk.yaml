@@ -151,6 +151,7 @@ spec:
         deployTarget: ${{ parameters.deploy.deployTarget }}
         deploy: ${{ parameters.deploy.deploy }}
   output:
+    links:
       - title: Repository
         url: ${{ steps.publish.output.remoteUrl }}
       - title: Open in catalog
