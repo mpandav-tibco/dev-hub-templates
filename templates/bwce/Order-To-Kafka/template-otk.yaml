@@ -11,7 +11,7 @@ metadata:
 spec:
   owner: ACME
   type: library
-  
+
 parameters:
   - title: Fill in some steps
     required:
@@ -138,6 +138,9 @@ steps:
       job: bwce/job/build_bwce_ear
       authToken: tibco
       jenkinsInstructions: "&bw_project_folder=OrderToKafka"
+      namespace: ${{ parameters.deploy.namespace }}
+      platformToken: ${{ parameters.deploy.platformToken }}
+      dpUrl: ${{ parameters.deploy.dpUrl }}
 output:
   links:
     - title: Repository
