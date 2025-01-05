@@ -1,26 +1,24 @@
 #!/bin/bash
 
 # Set Jenkins build parameters
-repoHost="$repo_host"
-repoOwner="$repo_owner"
-repoName="$repo_name"
-projectName=$(echo "$bw_project_folder" | tr '[:upper:]' '[:lower:]')
-k8s_namespace="$namespace"
-platformToken="$platformToken"
-dpUrl="$dpUrl"
-deployTarget="$deployTarget"
-deploy="$deploy"
+export repoHost="$repo_host"
+export repoOwner="$repo_owner"
+export repoName="$repo_name"
+export projectName=$(echo "$bw_project_folder" | tr '[:upper:]' '[:lower:]')
+export k8s_namespace="$namespace"
+export platformToken="$platformToken"
+export dpUrl="$dpUrl"
+export deployTarget="$deployTarget"
+export deploy="$deploy"
 
-echo $k8s_namespace --- $platformToken --- $dpUrl --- $deployTarget --- $deploy
-
+# Remove any existing directory with the same name (except the .git directory)
+rm -rf *
+  
 # Function to clone the Git repository
 clone_repo() {
   echo -----------------------------------------------------------
   echo "STEP 1: Clone the repo: https://$repoHost/$repoOwner/$repoName.git"
   echo -----------------------------------------------------------
-
-  # Remove any existing directory with the same name (except the .git directory)
-  rm -rf "$repoName"
 
   # Clone the repository
   git clone "https://$repoHost/$repoOwner/$repoName.git"
@@ -46,7 +44,7 @@ build_ear() {
   parent_dir=$(find "$repoName" -type d -name "*.parent" -print -quit)
 
   if [ -z "$parent_dir" ]; then
-    echo "ERROR: Could not find the $repoName.application.parent directory."
+    echo "ERROR: Could not find the xxxx.xxx.parent directory."
     exit 1
   fi
 
@@ -92,11 +90,14 @@ build_docker_image() {
   ear_file=$(find . -name "*.ear" -print -quit)
 
   # Create the Dockerfile
-  cat >Dockerfile <<EOF
+  cat > Dockerfile <<EOF
 FROM mpandav/bwce-291-rst:base
 LABEL maintainer="mpandav"
 ADD $ear_file /
 EOF
+
+  # Show folder structure: before docker build
+  tree -L 2
 
   echo "DOCKER FILE IN USE"
 
@@ -114,12 +115,14 @@ EOF
   echo "Docker image built: $IMAGE"
   echo -----------------------------------------------------------
 
-  # start from base directory
-  cd ../"$repoName" || exit 1
 }
 
 # Function to update the deployment YAML
 update_deployment_yaml() {
+
+  # start from base directory
+  cd ../"$repoName" || exit 1
+  
   echo -----------------------------------------------------------
   echo "STEP 4: K8S DEPLOYMENT PREPARATION"
   echo -----------------------------------------------------------
@@ -127,12 +130,12 @@ update_deployment_yaml() {
   echo "###### Update the deployment.yaml file with variable substitution (using yq) #######"
 
   # Update the deployment.yaml file with variable substitution (using yq)
-  yq eval '.metadata.name = env(repoName)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
-  yq eval '.metadata.labels."backstage.io/kubernetes-id" = env(repoName)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
-  yq eval '.spec.template.spec.containers[0].name = env(projectName) + "-" + env(repoName)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
-  yq eval '.spec.template.spec.containers[0].image = env(IMAGE)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
-  yq eval '.spec.template.metadata.labels."backstage.io/kubernetes-id" = env(repoName)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
-  yq eval '.metadata.labels.app = (if (env(repoName) | length > 0) then env(repoName) else "" end)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
+  yq eval '.metadata.name = env(repoName)' deployment.yaml > deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
+  yq eval '.metadata.labels."backstage.io/kubernetes-id" = env(repoName)' deployment.yaml > deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
+  yq eval '.spec.template.spec.containers[0].name = env(projectName) + "-" + env(repoName)' deployment.yaml > deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
+  yq eval '.spec.template.spec.containers[0].image = env(IMAGE)' deployment.yaml > deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
+  yq eval '.spec.template.metadata.labels."backstage.io/kubernetes-id" = env(repoName)' deployment.yaml > deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
+  yq eval '.metadata.labels.app = (if (env(repoName) | length > 0) then env(repoName) else "" end)' deployment.yaml > deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
 
   echo "######### DEPLOYMENT.YAML #############"
   echo -----------------------------------------------------------
@@ -149,9 +152,9 @@ update_git_repo() {
   cp -r ../build-artifacts .
 
   # Add, commit, and push changes to the Git repository
-  git add build-artifacts deployment.yaml Dockerfile
-  git commit -m "updated deployment.yaml"
-  git push origin HEAD
+  git add build-artifacts deployment.yaml
+  git commit -m "Add build-artifacts and updated deployment.yaml"
+  git push
 }
 
 # Function to deploy to Kubernetes
@@ -187,7 +190,7 @@ deploy_to_tibco_platform() {
 }
 
 # --- Main execution ---
-
+ 
 # Clone the repository
 clone_repo
 
@@ -222,8 +225,7 @@ else
   echo "##### JENKINS: DEPLOYMENT SKIPPED (deploy parameter is false) #####"
 fi
 
-# Show folder structure: before  build completion
-tree -L 2
+
 echo -----------------------------------------------------------
 echo "                 BUILD COMPLETE"
 echo -----------------------------------------------------------
