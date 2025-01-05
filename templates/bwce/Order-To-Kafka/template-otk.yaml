@@ -141,11 +141,10 @@ spec:
       name: Trigger Jenkins EAR Build & Platform Deployment
       action: tibco:trigger-jenkins-job
       input:
-        values:
-          repoUrl: ${{ parameters.repoUrl | parseRepoUrl}}
-          job: bwce/job/build_bwce_ear
-          authToken: tibco
-          jenkinsInstructions: '"&bw_project_folder="${{ parameters.repoUrl | parseRepoUrl).repo }}"&namespace="${{ parameters.deploy.deployTarget.namespace }}"&platformToken="${{ parameters.deploy.deployTarget.platformToken }}"&dpUrl="${{ parameters.deploy.deployTarget.dpUrl }}"&deployTarget="${{ parameters.deploy.deployTarget }}"&deploy="${{ parameters.deploy }}"'
+        repoUrl: ${{ parameters.repoUrl | parseRepoUrl}}
+        job: bwce/job/build_bwce_ear
+        authToken: tibco
+        jenkinsInstructions: '"&bw_project_folder="${{ values.repoUrl | parseRepoUrl).repo }}"&namespace="${{ values.deploy.deployTarget.namespace }}"&platformToken="${{ values.deploy.deployTarget.platformToken }}"&dpUrl="${{ values.deploy.deployTarget.dpUrl }}"&deployTarget="${{ values.deploy.deployTarget }}"&deploy="${{ values.deploy }}"'
   output:
     links:
       - title: Repository
