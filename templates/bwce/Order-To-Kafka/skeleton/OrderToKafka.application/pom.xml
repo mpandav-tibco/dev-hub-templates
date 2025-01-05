@@ -11,10 +11,18 @@
   <artifactId>OrderToKafka.application</artifactId>
   <packaging>bwear</packaging>
   <properties>
-    <project.type>None</project.type>
+    <project.type>Platform</project.type>
+    <buildName>build-order-to-kafka</buildName>
+    <platformConfigFile>../OrderToKafka.application/platform_config.json</platformConfigFile>
     <bw.Home>/bwce/2.10</bw.Home>
-    <skipTests>false</skipTests>
+    <appName>order-to-kafka</appName>
+    <replicas>1</replicas>
+    <profile>default.substvar</profile>
+    <eula>true</eula>
+    <enableAutoScaling>true</enableAutoScaling>
     <failIfNoTests>false</failIfNoTests>
+    <enableServiceMesh>false</enableServiceMesh>
+    <skipTests>false</skipTests>
     <tibco.Home>/Users/milindpandav/tibco_home/2.10</tibco.Home>
   </properties>
   <build>
@@ -24,6 +32,15 @@
         <artifactId>bw6-maven-plugin</artifactId>
         <version>2.10.0</version>
         <extensions>true</extensions>
+        <configuration>
+          <buildName>${buildName}</buildName>
+          <appName>${appName}</appName>
+          <profile>${profile}</profile>
+          <replicas>${replicas}</replicas>
+          <enableAutoScaling>${enableAutoScaling}</enableAutoScaling>
+          <enableServiceMesh>${enableServiceMesh}</enableServiceMesh>
+          <eula>${eula}</eula>
+        </configuration>
       </plugin>
     </plugins>
   </build>
