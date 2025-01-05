@@ -11,12 +11,12 @@ metadata:
 spec:
   owner: ACME
   type: library
-
-  parameters:
+  
+parameters:
   - title: Fill in some steps
     required:
-    - name
-    - description
+      - name
+      - description
     properties:
       name:
         title: Name
@@ -43,10 +43,10 @@ spec:
         ui:field: OwnerPicker
         ui:options:
           allowedKinds:
-          - Group
+            - Group
   - title: Choose a location
     required:
-    - repoUrl
+      - repoUrl
     properties:
       repoUrl:
         title: Repository Location
@@ -54,11 +54,10 @@ spec:
         ui:field: RepoUrlPicker
         ui:options:
           allowedHosts:
-          - github.com
-
+            - github.com
   - title: Deployment
     required:
-    - deploy
+      - deploy
     properties:
       deploy:
         title: Deploy?
@@ -67,89 +66,85 @@ spec:
         default: false
     dependencies:
       deploy:
-        allOf:
-        - if:
-            properties:
-              deploy:
-                const: true
-          then:
-            properties:
-              deployTarget:
-                title: Deployment Target
-                type: string
-                enum:
-                - K8S
-                - TIBCO Platform
-            dependencies:
-              deployTarget:
-                oneOf:
-                - properties:
-                    deployTarget:
-                      enum:
-                      - TIBCO Platform
-                    namespace:
-                      title: Kubernetes Namespace
-                      type: string
-                      default: default
-                    platformToken:
-                      title: TIBCO Platform Token
-                      type: string
-                    dpUrl:
-                      title: Data Plane URL
-                      type: string
-                - properties:
-                    deployTarget:
-                      enum:
+          allOf:
+            - if:
+                properties:
+                  deploy:
+                    const: true
+              then:
+                properties:
+                  deployTarget:
+                    title: Deployment Target
+                    type: string
+                    enum:   
                       - K8S
-                    namespace:
-                      title: Kubernetes Namespace
-                      type: string
-                      default: default
+                      - TIBCO Platform
+                dependencies:
+                  deployTarget:
+                    oneOf:
+                      - properties:
+                          deployTarget:
+                            enum:
+                              - TIBCO Platform
+                          namespace:
+                            title: Kubernetes Namespace
+                            type: string
+                            default: default
+                          platformToken:
+                            title: TIBCO Platform Token 
+                            type: string
+                          dpUrl:
+                            title: Data Plane URL
+                            type: string
+                      - properties:
+                          deployTarget:
+                            enum:
+                              - K8S
+                          namespace:
+                            title: Kubernetes Namespace
+                            type: string                        
+            
 steps:
-- id: fetch
-  name: BWCE Skeleton
-  action: fetch:template
-  input:
-    url: ./skeleton
-    values:
-      name: ${{ parameters.name }}
-      description: ${{ parameters.description }}
-      destination: ${{ parameters.repoUrl | parseRepoUrl }}
-      owner: ${{ parameters.owner }}
-      system: ${{ parameters.system }}
-- id: publish
-  name: Publish
-  action: publish:github
-  input:
-    allowedHosts:
-    - github.com
-    description: This is ${{ parameters.name }}
-    repoUrl: ${{ parameters.repoUrl }}
-- id: register
-  name: Register
-  action: catalog:register
-  input:
-    repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
-    catalogInfoPath: /catalog-info.yaml
-- id: jenkinsEarBuild
-  name: Trigger Jenkins EAR Build & Deployment
-  action: tibco:trigger-jenkins-job
-  input:
-    repoUrl: ${{ parameters.repoUrl | parseRepoUrl}}
-    job: bwce/job/build_bwce_ear
-    authToken: tibco
-    jenkinsInstructions: "&bw_project_folder=OrderToKafka"
-    namespace: ${{ parameters.dependencies.namespace }}
-    platformToken: ${{ parameters.dependencies.platformToken }}
-    dpUrl: ${{ parameters.dependencies.dpUrl }}
-
+  - id: fetch
+    name: BWCE Skeleton
+    action: fetch:template
+    input:
+      url: ./skeleton
+      values:
+        name: ${{ parameters.name }}
+        description: ${{ parameters.description }}
+        destination: ${{ parameters.repoUrl | parseRepoUrl }}
+        owner: ${{ parameters.owner }}
+        system: ${{ parameters.system }}
+  - id: publish
+    name: Publish
+    action: publish:github
+    input:
+      allowedHosts:
+        - github.com
+      description: This is ${{ parameters.name }}
+      repoUrl: ${{ parameters.repoUrl }}
+  - id: register
+    name: Register
+    action: catalog:register
+    input:
+      repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+      catalogInfoPath: /catalog-info.yaml
+  - id: jenkinsEarBuild
+    name: Trigger Jenkins EAR Build & Platform Deployment
+    action: tibco:trigger-jenkins-job
+    input:
+      repoUrl: ${{ parameters.repoUrl | parseRepoUrl}}
+      job: bwce/job/build_bwce_ear
+      authToken: tibco
+      jenkinsInstructions: "&bw_project_folder=OrderToKafka"
 output:
   links:
-  - title: Repository
-    url: ${{ steps.publish.output.remoteUrl }}
-  - title: Open in catalog
-    icon: catalog
-    entityRef: ${{ steps.register.output.entityRef }}
-  - title: Open Jenkins Job
-    icon: dashboard
-    url: ${{ steps.jenkinsEarBuild.output.jobLink }}
+    - title: Repository
+      url: ${{ steps.publish.output.remoteUrl }}
+    - title: Open in catalog
+      icon: catalog
+      entityRef: ${{ steps.register.output.entityRef }}
+    - title: Open Jenkins Job
+      icon: dashboard
+      url: ${{ steps.jenkinsEarBuild.output.jobLink }}
