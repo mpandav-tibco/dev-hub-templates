@@ -1,0 +1,156 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: bwce-template-sapk
+  title: BWCE - Schedule Java Invoke
+  description: Create a new BWCE project for Schedule Java Invoke
+  tags:
+    - tibco
+    - bwce
+    - recommended
+spec:
+  owner: ACME
+  type: library
+
+
+  parameters:
+    - title: Fill in some steps
+      required:
+        - name
+        - description
+      properties:
+        name:
+          title: Name
+          type: string
+          description: Unique name of the BWCE Project
+          ui:field: EntityNamePicker
+          ui:autofocus: true
+        description:
+          title: Description
+          type: string
+          description: A description for the BWCE Project
+        system:
+          title: System
+          type: string
+          description: Target System 
+          ui:field: EntityPicker
+          ui:options:
+            catalogFilter:
+              kind: system
+        owner:
+          title: Owner
+          type: string
+          description: Owner of the component
+          ui:field: OwnerPicker
+          ui:options:
+            allowedKinds:
+              - Group
+    - title: Choose a location
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoUrlPicker
+          ui:options:
+            allowedHosts:
+              - github.com
+    - title: Deployment
+      required:
+        - deploy
+      properties:
+        deploy:
+          title: Deploy?
+          type: boolean
+          description: Choose whether to deploy the application
+          default: false
+      dependencies:
+        deploy:
+            allOf:
+              - if:
+                  properties:
+                    deploy:
+                      const: true
+                then:
+                  properties:
+                    deployTarget:
+                      title: Deployment Target
+                      type: string
+                      enum:   
+                        - K8S
+                        - TIBCO Platform
+                  dependencies:
+                    deployTarget:
+                      oneOf:
+                        - properties:
+                            deployTarget:
+                              enum:
+                                - TIBCO Platform
+                            namespace:
+                              title: Kubernetes Namespace
+                              type: string
+                              default: default
+                            platformToken:
+                              title: TIBCO Platform Token 
+                              type: string
+                              ui:field: Secret
+                            dpUrl:
+                              title: Data Plane URL
+                              type: string
+                          required: 
+                            - namespace
+                            - platformToken
+                            - dpUrl
+                            
+                        - properties:
+                            deployTarget:
+                              enum:
+                                - K8S
+                            namespace:
+                              title: Kubernetes Namespace
+                              type: string  
+                          required: 
+                            - namespace
+            
+  steps:
+    - id: fetch
+      name: BWCE Skeleton
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values:
+          name: ${{ parameters.name }}
+          description: ${{ parameters.description }}
+          destination: ${{ parameters.repoUrl | parseRepoUrl }}
+          owner: ${{ parameters.owner }}
+          system: ${{ parameters.system }}
+    - id: publish
+      name: Publish
+      action: publish:github
+      input:
+        allowedHosts:
+          - github.com
+        description: This is ${{ parameters.name }}
+        repoUrl: ${{ parameters.repoUrl }}
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{ steps.publish.output.repoContentsUrl }}
+        catalogInfoPath: /catalog-info.yaml
+    - id: jenkinsEarBuild
+      name: Trigger Jenkins EAR Build & Platform Deployment
+      action: tibco:trigger-jenkins-job
+      input:
+        repoUrl: ${{ parameters.repoUrl | parseRepoUrl}}
+        job: bwce/job/build_bwce_ear
+        authToken: tibco
+        jenkinsInstructions: '&bw_project_folder=${{ (parameters.repoUrl | parseRepoUrl).repo }}&deploy=${{ parameters.deploy }}&deployTarget=${{ parameters.deployTarget }}&namespace=${{ parameters.namespace }}&platformToken=${{ parameters.platformToken }}&dpUrl=${{ parameters.dpUrl }}'
+  output:
+    links:
+      - title: Repository
+        url: ${{ steps.publish.output.remoteUrl }}
+      - title: Open in catalog
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}
