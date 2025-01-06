@@ -11,7 +11,7 @@ This repository contains a shell script (`jenkins-trigger-bwce-build.sh`) that a
 * Optionally deploys the application to Kubernetes or TIBCO Platform.
 * Pushes the updated code and artifacts back to the Git repository.
 
-## Requirements
+## Prerequisites
 
 * Jenkins server with a configured agent that has the following tools installed:
     * Git
