@@ -1,7 +1,7 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: bwce-template-sapk
+  name: bwce-template-sch-java
   title: BWCE - Schedule Java Invoke
   description: Create a new BWCE project for Schedule Java Invoke
   tags:
