@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: devhub-read-only
+  namespace: default
+  annotations:
+    kubernetes.io/service-account.expiration: "2026-12-31T00:00:00Z" # Example expiration date
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: devhub-read-only
+rules:
+- apiGroups:
+  - '*'
+  resources:
+  - pods
+  - pods/log
+  - configmaps
+  - services
+  - deployments
+  - replicasets
+  - horizontalpodautoscalers
+  - ingresses
+  - statefulsets
+  - limitranges
+  - resourcequotas
+  - daemonsets
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - batch
+  resources:
+  - jobs
+  - cronjobs
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - metrics.k8s.io
+  resources:
+  - pods
+  verbs:
+  - get
+  - list
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: devhub-read-only-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: devhub-read-only
+subjects:
+- kind: ServiceAccount
+  name: devhub-read-only
+  namespace: default
