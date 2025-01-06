@@ -4,24 +4,26 @@ This Dev Hub template simplifies the creation of new TIBCO BusinessWorks Contain
 
 ## Features
 
-* **Project Initialization:** Creates a new BWCE project with a predefined structure.
-* **GitHub Integration:** Publishes the project to a GitHub repository.
-* **Dev Hub Catalog Registration:** Registers the project as a component in your Dev Hub catalog.
-* **Jenkins Integration:** Triggers a Jenkins pipeline to build and deploy the application.
-* **Deployment Options:** Provides options to deploy the application to either Kubernetes or TIBCO Platform.
+* **Project Initialization:** Generates a new BWCE project with a predefined structure, reducing manual setup.
+* **GitHub Integration:** Seamlessly publishes the generated project to a GitHub repository for version control and collaboration.
+*   **Developer Hub Catalog Registration:** Automatically registers the project as a component in your Developer Hub catalog for centralized project management and discovery.
+*   **Jenkins Pipeline Trigger:**  Triggers a Jenkins pipeline to build and deploy the application, enabling continuous integration and continuous delivery (CI/CD).
+*   **Flexible Deployment Options:** Offers the choice to deploy the application to either a Kubernetes cluster or a TIBCO Platform environment.
 
-## Requirements
+
+## Prerequisites
 
 * **TIBCO Platform Data Plane (Developer Hub):** A TIBCO Data Plane environment hosting Developer Hub.
 * **Custom Dev Hub Image:** A custom Docker image for your Developer Hub that includes the Jenkins and Kubernetes plugins you can prepare one or (choose to use one available: `docker.io/mpandav/devhub-custom-130:latest`).
-* **Jenkins:** A Jenkins server with the necessary plugins and configuration to build and deploy BWCE applications. 
-  * Deploy you jenkins server using [quick setup script available here](https://github.com/mpandav-tibco/external-tools-installation/tree/main/jenkins)  
-  * (see the [Jenkins Build Script README](link-to-jenkins-readme.md) for details).
-* **Kubernetes Cluster (optional):** A Kubernetes cluster if you choose to deploy the application to Kubernetes.
+**Jenkins:** A Jenkins server configured with the required plugins and settings to build and deploy BWCE applications.
+    *   Utilize the [quick setup script](https://github.com/mpandav-tibco/external-tools-installation/tree/main/jenkins) to streamline Jenkins server deployment.
+    *   Refer to the [Jenkins Build Script README](jenkins-readme.md) for detailed Jenkins configuration instructions.
+*   **Kubernetes Cluster (Optional):** A Kubernetes cluster if you choose to deploy the application to a Kubernetes environment.
+
 
 ## Usage
 
-1.  **Install the template:** Add this template to your Dev Hub instance by including it in the `scaffolder` configuration in your `app-config.yaml` file.
+1.  **Template Installation:** Add this template to your Dev Hub instance by including it in the `scaffolder` configuration in your `app-config.yaml` file.
 2.  **Create a new component:** In the Dev Hub catalog, click "Create Component" and select this template.
 3.  **Fill in the parameters:** Provide the required information in the template form, including:
     *   Project name and description.
@@ -30,42 +32,57 @@ This Dev Hub template simplifies the creation of new TIBCO BusinessWorks Contain
     *   Repository location (GitHub URL).
     *   Deployment options (if you want to deploy the application):
         *   Deployment target (Kubernetes or TIBCO Platform).
-        *   Deployment details (namespace, tokens, etc.).
-4.  **Submit the form:** Click "Create" to generate the project and trigger the Jenkins pipeline.
+        *   Deployment-specific details (namespace, tokens, etc.).
+4.  **Template Execution:** Click "Create" to generate the project and trigger the Jenkins pipeline.
 
-## Jenkins Trigger
+## Jenkins Integration
 
-This template includes a step that triggers a Jenkins pipeline to build and deploy the BWCE application. The Jenkins job is configured to receive parameters from the template, including the Git repository URL, project details, and deployment options.
+This template leverages Jenkins to automate the build and deployment process. It triggers a Jenkins pipeline that performs the following actions:
 
-The Jenkins pipeline typically performs the following actions:
-
-*   Clones the Git repository.
+*   Clones the Git repository specified in the template parameters.
 *   Builds the BWCE application EAR file using Maven.
-*   Creates a Docker image containing the application.
-*   Optionally deploys the application to Kubernetes or TIBCO Platform.
-*   Pushes the updated code and artifacts back to the Git repository.
+*   Creates a Docker image containing the application for containerization.
+*   Optionally deploys the application to the chosen target environment (Kubernetes or TIBCO Platform).
+*   Pushes the updated code, Dockerfile, and build artifacts back to the Git repository for version control.
 
-For detailed information about the Jenkins pipeline and its configuration, see the [Jenkins Build Script README](link-to-jenkins-readme.md).
+For comprehensive information on setting up and configuring the Jenkins pipeline, refer to the [Jenkins Build Script README](link-to-jenkins-readme.md).
 
 ## Kubernetes Deployment
 
-If you choose to deploy the application to Kubernetes, the template will generate or update a Kubernetes Deployment YAML file. This file defines the deployment configuration, including the deployment name, container name, Docker image, resource limits, health checks, and labels.
+When opting for Kubernetes deployment, the template generates or updates a Kubernetes Deployment YAML file. This file defines the deployment configuration, including:
 
-The Dev Hub Kubernetes plugin can then be used to visualize and manage the deployed Kubernetes resources in your Dev Hub catalog.
+*   Deployment name
+*   Container name
+*   Docker image
+*   Resource limits (CPU and memory)
+*   Health checks (liveness, readiness, startup)
+*   Labels (including `backstage.io/kubernetes-id` for Dev Hub integration)
+
+The Backstage [Kubernetes plugin](https://backstage.io/docs/features/kubernetes/) enables visualization and management of these deployed Kubernetes resources within your Dev Hub catalog.
+
 
 ## Dev Hub Catalog Integration
 
-This template registers the new BWCE project as a component in your Dev Hub catalog. This allows you to:
+The template automatically registers the newly created BWCE project as a component in your Dev Hub catalog. This integration provides:
 
-*   View the component's details, including its description, owner, and repository location.
-*   Track the component's lifecycle and dependencies.
-*   Access related tools and documentation.
+*   Centralized view of component details, including ownership, repository, and description.
+*   Tracking of component lifecycle and dependencies for improved project management.
+*   Easy access to related tools and documentation associated with the component.
 
 ## Developer Hub Configuration
 
-To use this template, you'll need to configure your Developer Hub (`app-config.yaml`) with the necessary settings for authentication, GitHub integration, catalog rules, proxy endpoints for Jenkins, and Kubernetes integration. Refer to the Dev Hub documentation for detailed instructions on configuring these settings.
+To utilize this template effectively, configure your Developer Hub (`app-config.yaml`) with the necessary settings:
 
- ### app-config.yaml  
+*   **Authentication:** Configure authentication providers (e.g., GitHub, OAuth2 proxy) to secure your Dev Hub.
+*   **Integrations:** Integrate with GitHub and provide necessary credentials (e.g., API tokens).
+*   **Catalog Rules:** Define rules to manage the visibility and access control of different entity types in your catalog.
+*   **Proxy Endpoints:** Configure proxy endpoints to route requests to external services like Jenkins.
+*   **Jenkins Settings:** Provide Jenkins server details, credentials, and API tokens for seamless integration.
+*   **Kubernetes Settings:** Configure Kubernetes cluster connection details, including authentication and certificate information.
+
+Refer to the Dev Hub documentation and the provided code snippets and images for detailed configuration instructions.
+
+**Example `app-config.yaml` Configuration**
 
     // config starts here from auth
     
@@ -124,10 +141,10 @@ To use this template, you'll need to configure your Developer Hub (`app-config.y
             caFile: ${K8S_CLUSTER_CONFIG_CA_FILE}
 
 ### Kubernetes configmap
-Configmap holding values for environment varibale declared in app-config.yaml. We provide this configmap while provisioning dev hub instance.
+To enable seamless integration with your Kubernetes cluster, the Developer Hub requires specific configuration within its `app-config.yaml` file and a corresponding Kubernetes Secret.
 
     //configmap 
-    ubuntu@ip-172-31-9-71:~/work/devhub$ cat tibco-hub-secrets.yaml 
+    $ cat tibco-hub-secrets.yaml 
     apiVersion: v1
     kind: Secret
     metadata:
@@ -153,7 +170,7 @@ Configmap holding values for environment varibale declared in app-config.yaml. W
 caData: 
 caFile: 
     
-    Are required for backstage to successfully able to connect with your k8s API server. You will find these files for minikube and docker-desktop under .kube/config file. 
+    Are required for Developer Hub to successfully able to connect with your k8s API server. You will find these files for minikube and docker-desktop under .kube/config file. 
     Once you have the cert available then import them into same secret and refer them as volume into deployment config  of developer-hub.
     
     Interestingly(for good), any change in the dev hub config does not change / remove these deployment updates.
@@ -190,11 +207,43 @@ Wait for the token controller to populate a token, and retrieving it with:
 
     kubectl -n <NAMESPACE> get secret <SECRET_NAME> -o go-template='{{.data.token | base64decode}}'
 
-## Result
-- Create new component from Template ![create new component](./images/image-6.png)
-- Fill out Repository Location ![repository location](./images/image-7.png)
-- Choose whether to deploy and if deployment target ![ deploy ](./images/image-8.png)
-- Review and create ![review](./images/image-9.png)
-- Run the template and Result ![run template](./images/image-10.png)
-- Check component in catalog -> Jenkins Tab -> Pipeline Result ![component - jenkins](./images/image-11.png)  ![jenkins jib](./images/image-13.png)
-- Check K8S Tab -> ![k8s deployment](./images/image-14.png) ![deployment status](./images/image-15.png) ![pod data](./images/image-16.png) ![pod details](./images/image-17.png) ![pod logs](./images/image-18.png) ![deployment yaml](./images/image-19.png)
+# Example Workflow
+The following steps and screenshots illustrate the process of creating and deploying a BWCE application using this template:
+1.  **Create a New Component:**
+       From the Backstage catalog, initiate the creation of a new component and select this template.
+       ![create new component](./images/image-6.png)
+       
+
+2.  **Specify Repository Location:**
+       Provide the URL of the desired GitHub repository where the project will be published.
+       ![repository location](./images/image-7.png)
+       
+
+3.  **Configure Deployment Options:**
+       Choose whether to deploy the application and select the target environment (Kubernetes or TIBCO Platform). If deploying, provide the necessary deployment details.
+       ![ deploy ](./images/image-8.png)
+       
+
+4.  **Review and Create:**
+       Review the provided information and click "Create" to generate the project and trigger the Jenkins pipeline.
+       ![review](./images/image-9.png)
+       
+
+5.  **Template Execution and Jenkins Integration:**
+       The template will execute the defined steps, including fetching the base template, publishing to GitHub, registering the component in the Developer Hub catalog, and triggering the Jenkins pipeline.
+       ![run template](./images/image-10.png)
+       
+
+6.  **Monitor Jenkins Pipeline:**
+       Navigate to the "Jenkins" tab in the component's Developer Hub page to monitor the progress and results of the Jenkins pipeline.
+       ![component - jenkins](./images/image-11.png)  ![jenkins jib](./images/image-13.png)
+
+
+7.  **View Kubernetes Deployment (if applicable):**
+       
+       If you chose to deploy to Kubernetes, use the "Kubernetes" tab in the component's Developer Hub page to view the deployment details, pod status, logs, and other relevant information.
+       ![k8s deployment](./images/image-14.png) ![deployment status](./images/image-15.png) ![pod data](./images/image-16.png) ![pod details](./images/image-17.png) ![pod logs](./images/image-18.png) ![deployment yaml](./images/image-19.png)
+
+# Conclusion
+
+This Developer Hub template streamlines the creation and deployment of TIBCO BWCE projects, automating key tasks and promoting consistency. Its integration with Jenkins enables robust CI/CD, while the optional Kubernetes or TIBCO Platform deployment offers flexibility. By leveraging this template, you can accelerate development, enhance collaboration, and ensure reliable deployments within your TIBCO ecosystem
