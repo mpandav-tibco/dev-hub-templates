@@ -1,4 +1,4 @@
-# Jenkins Script for TIBCO BWCE Templates in Developer Hub
+# Jenkins Pipeline for TIBCO BWCE Dev Hub Templates
 
 This repository contains a shell script (`jenkins-trigger-bwce-build.sh`) that automates the build and deployment process for TIBCO BusinessWorks Container Edition (BWCE) applications within a Jenkins pipeline.
 
