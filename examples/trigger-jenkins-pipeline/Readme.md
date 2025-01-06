@@ -161,13 +161,13 @@ caFile:
 
 devhub Secret having caFile:
 
-![secret caFile](image-3.png)
+![secret caFile](./images/image-3.png)
 
 Developer Hub Deployment volume and volumemount udpate:
 
-![updated volume](image-4.png)
+![updated volume](./images/image-4.png)
 
-![volume mount](image-5.png)
+![volume mount](./images/image-5.png)
 
 ## Service Account for Dev Hub K8S Plugin
 Backstage [k8s plugin](https://backstage.io/docs/features/kubernetes/) requires read access to your k8s cluster to collect and get components data and details. You can [devhub-sa.yaml](./devhub-sa.yaml) to create one and using that generate token. 
@@ -191,10 +191,10 @@ Wait for the token controller to populate a token, and retrieving it with:
     kubectl -n <NAMESPACE> get secret <SECRET_NAME> -o go-template='{{.data.token | base64decode}}'
 
 ## Result
-- Create new component from Template ![create new component](image-6.png)
-- Fill out Repository Location ![repository location](image-7.png)
-- Choose whether to deploy and if deployment target ![ deploy ](image-8.png)
-- Review and create ![review](image-9.png)
-- Run the template and Result ![run template](image-10.png)
-- Check component in catalog -> Jenkins Tab -> Pipeline Result ![component - jenkins](image-11.png)  ![jenkins jib](image-13.png)
-- Check K8S Tab -> ![k8s deployment](image-14.png) ![deployment status](image-15.png) ![pod data](image-16.png) ![pod details](image-17.png) ![pod logs](image-18.png) ![deployment yaml](image-19.png)
+- Create new component from Template ![create new component](./images/image-6.png)
+- Fill out Repository Location ![repository location](./images/image-7.png)
+- Choose whether to deploy and if deployment target ![ deploy ](./images/image-8.png)
+- Review and create ![review](./images/image-9.png)
+- Run the template and Result ![run template](./images/image-10.png)
+- Check component in catalog -> Jenkins Tab -> Pipeline Result ![component - jenkins](./images/image-11.png)  ![jenkins jib](./images/image-13.png)
+- Check K8S Tab -> ![k8s deployment](./images/image-14.png) ![deployment status](./images/image-15.png) ![pod data](./images/image-16.png) ![pod details](./images/image-17.png) ![pod logs](./images/image-18.png) ![deployment yaml](./images/image-19.png)
