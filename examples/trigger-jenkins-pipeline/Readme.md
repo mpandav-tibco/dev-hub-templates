@@ -45,7 +45,7 @@ This template leverages Jenkins to automate the build and deployment process. It
 *   Optionally deploys the application to the chosen target environment (Kubernetes or TIBCO Platform).
 *   Pushes the updated code, Dockerfile, and build artifacts back to the Git repository for version control.
 
-For comprehensive information on setting up and configuring the Jenkins pipeline, refer to the [Jenkins Build Script README](link-to-jenkins-readme.md).
+For comprehensive information on setting up and configuring the Jenkins pipeline, refer to the [Jenkins Build Script README](jenkins-readme.md).
 
 ## Kubernetes Deployment
 
