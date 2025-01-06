@@ -110,7 +110,3 @@ The script performs the following steps:
 *   Error Handling: Add more robust error handling to the script to catch potential issues during the build or deployment process.
 *   Additional Steps: Extend the script to include other steps in your CI/CD pipeline, such as running tests, performing code analysis, or sending notifications.
 
-## Contributing
-
-Contributions are welcome! If you find any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
-
