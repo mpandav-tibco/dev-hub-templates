@@ -180,7 +180,7 @@ update_deployment_yaml() {
   echo -----------------------------------------------------------
 
   echo "###### Update the deployment.yaml file with variable substitution (using yq) #######"
-
+  
   # Update the deployment.yaml file with variable substitution (using yq)
   yq eval '.metadata.name = env(repoName)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
   yq eval '.metadata.labels."backstage.io/kubernetes-id" = env(repoName)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
