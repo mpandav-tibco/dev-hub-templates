@@ -15,7 +15,7 @@ This Dev Hub template simplifies the creation of new TIBCO BusinessWorks Contain
 
 * **TIBCO Platform Data Plane (Developer Hub):** A TIBCO Data Plane environment hosting Developer Hub.
 * **Custom Dev Hub Image:** A custom Docker image for your Developer Hub that includes the Jenkins and Kubernetes plugins you can prepare one or (choose to use one available: `docker.io/mpandav/devhub-custom-130:latest`).
-**Jenkins:** A Jenkins server configured with the required plugins and settings to build and deploy BWCE applications.
+* **Jenkins:** A Jenkins server configured with the required plugins and settings to build and deploy BWCE applications.
     *   Utilize the [quick setup script](https://github.com/mpandav-tibco/external-tools-installation/tree/main/jenkins) to streamline Jenkins server deployment.
     *   Refer to the [Jenkins Build Script README](jenkins-readme.md) for detailed Jenkins configuration instructions.
 *   **Kubernetes Cluster (Optional):** A Kubernetes cluster if you choose to deploy the application to a Kubernetes environment.
@@ -210,39 +210,56 @@ Wait for the token controller to populate a token, and retrieving it with:
 # Example Workflow
 The following steps and screenshots illustrate the process of creating and deploying a BWCE application using this template:
 1.  **Create a New Component:**
-       From the Backstage catalog, initiate the creation of a new component and select this template.
-       ![create new component](./images/image-6.png)
+      From the Backstage catalog, initiate the creation of a new component and select this template.
+
+      ![create new component](./images/image-6.png)
        
 
 2.  **Specify Repository Location:**
-       Provide the URL of the desired GitHub repository where the project will be published.
-       ![repository location](./images/image-7.png)
+
+    Provide the URL of the desired GitHub repository where the project will be published.
+   ![repository location](./images/image-7.png)
        
 
 3.  **Configure Deployment Options:**
-       Choose whether to deploy the application and select the target environment (Kubernetes or TIBCO Platform). If deploying, provide the necessary deployment details.
-       ![ deploy ](./images/image-8.png)
+
+    Choose whether to deploy the application and select the target environment (Kubernetes or TIBCO Platform). If deploying, provide the necessary deployment details.
+   ![ deploy ](./images/image-8.png)
        
 
 4.  **Review and Create:**
-       Review the provided information and click "Create" to generate the project and trigger the Jenkins pipeline.
-       ![review](./images/image-9.png)
+
+    Review the provided information and click "Create" to generate the project and trigger the Jenkins pipeline.
+   ![review](./images/image-9.png)
        
 
 5.  **Template Execution and Jenkins Integration:**
-       The template will execute the defined steps, including fetching the base template, publishing to GitHub, registering the component in the Developer Hub catalog, and triggering the Jenkins pipeline.
-       ![run template](./images/image-10.png)
+
+    The template will execute the defined steps, including fetching the base template, publishing to GitHub, registering the component in the Developer Hub catalog, and triggering the Jenkins pipeline.
+   ![run template](./images/image-10.png)
        
 
 6.  **Monitor Jenkins Pipeline:**
-       Navigate to the "Jenkins" tab in the component's Developer Hub page to monitor the progress and results of the Jenkins pipeline.
-       ![component - jenkins](./images/image-11.png)  ![jenkins jib](./images/image-13.png)
+
+    Navigate to the "Jenkins" tab in the component's Developer Hub page to monitor the progress and results of the Jenkins pipeline.
+   ![component - jenkins](./images/image-11.png)
+   ![jenkins jib](./images/image-13.png)
 
 
-7.  **View Kubernetes Deployment (if applicable):**
-       
-       If you chose to deploy to Kubernetes, use the "Kubernetes" tab in the component's Developer Hub page to view the deployment details, pod status, logs, and other relevant information.
-       ![k8s deployment](./images/image-14.png) ![deployment status](./images/image-15.png) ![pod data](./images/image-16.png) ![pod details](./images/image-17.png) ![pod logs](./images/image-18.png) ![deployment yaml](./images/image-19.png)
+11.  **View Kubernetes Deployment (if applicable):**
+
+If you chose to deploy to Kubernetes, use the "Kubernetes" tab in the component's Developer Hub page to view the deployment details, pod status, logs, and other relevant information
+![k8s deployment](./images/image-14.png) 
+
+![deployment status](./images/image-15.png) 
+
+![pod data](./images/image-16.png) 
+
+![pod details](./images/image-17.png) 
+
+![pod logs](./images/image-18.png) 
+
+![deployment yaml](./images/image-19.png)
 
 # Conclusion
 
