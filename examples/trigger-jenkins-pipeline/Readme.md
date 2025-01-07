@@ -14,7 +14,7 @@ The Developer Hub template simplifies the creation of new TIBCO BusinessWorks Co
 ## Prerequisites
 
 * **TIBCO Platform Data Plane (Developer Hub):** A TIBCO Data Plane environment hosting Developer Hub.
-* **Custom Dev Hub Image:** A custom Docker image for your Developer Hub that includes the Jenkins and Kubernetes plugins you can prepare one or (choose to use one available: `docker.io/mpandav/devhub-custom-130:latest`).
+* **Custom Dev Hub Image:** A custom Docker image for your Developer Hub that includes the Jenkins and Kubernetes plugins you can prepare one or (choose to use one available: [docker.io/mpandav/devhub-custom-130:latest](https://hub.docker.com/repository/docker/mpandav/devhub-custom-130/general)).
 * **Jenkins:** A Jenkins server configured with the required plugins and settings to build and deploy BWCE applications.
     *   Utilize the [quick setup script](https://github.com/mpandav-tibco/external-tools-installation/tree/main/jenkins) to streamline Jenkins server deployment.
     *   Refer to the [Jenkins Build Script README](jenkins-readme.md) for detailed Jenkins configuration instructions.
