@@ -21,8 +21,6 @@ This repository contains a shell script (`jenkins-trigger-bwce-build.sh`) that a
 * A Kubernetes cluster (if deploying to Kubernetes).
 * TIBCO Platform Data Plane (if deploying to Platform).
 
-## Usecase Scenario
-![image](https://github.com/user-attachments/assets/bec9b892-97b5-423f-9d21-4138cdc60678)
 
 ## Jenkins Job Configuration
 
