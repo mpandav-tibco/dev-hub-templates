@@ -219,39 +219,56 @@ The following steps and screenshots illustrate the process of creating and deplo
 1.  **Create a New Component:**
       From the Dev Hub Templates, initiate the creation of a new component and select this template.
 
-      ![create new component](./images/image-6.png)
+      ![image](https://github.com/user-attachments/assets/6c0d257d-25d6-47f6-b983-e441a69ab1a4)
        
 
 2.  **Specify Repository Location:**
 
     Provide the URL of the desired GitHub repository where the project will be published.
-   ![repository location](./images/image-7.png)
-       
 
-3.  **Configure Deployment Options:**
+    ![image](https://github.com/user-attachments/assets/fda3ad65-fb1c-4bc7-8c13-428f9b1c37bc)
+   
+
+3. **Configure Governace Options:**
+
+   Choose whenther to perform governance check on new component; Code Scanning though sonarqube with BW6 plugin and Security Scan of generated Image through Trivy.
+   ![image](https://github.com/user-attachments/assets/76b8c848-e2b3-462d-add1-2d077f348be8)
+
+   
+5.  **Configure Deployment Options:**
 
     Choose whether to deploy the application and select the target environment (Kubernetes or TIBCO Platform). If deploying, provide the necessary deployment details.
-   ![ deploy ](./images/image-8.png)
+   ![image](https://github.com/user-attachments/assets/7b4bf1cb-068b-4e73-8249-ea91434f5213)
        
 
-4.  **Review and Create:**
+6.  **Review and Create:**
 
     Review the provided information and click "Create" to generate the project and trigger the Jenkins pipeline.
-   ![review](./images/image-9.png)
+    ![image](https://github.com/user-attachments/assets/e28e5793-505f-4f93-a18f-0df06ac54a2e)
+
        
 
-5.  **Template Execution and Jenkins Integration:**
+7.  **Template Execution and Jenkins Integration:**
 
     The template will execute the defined steps, including fetching the base template, publishing to GitHub, registering the component in the Developer Hub catalog, and triggering the Jenkins pipeline.
    ![run template](./images/image-10.png)
        
 
-6.  **Monitor Jenkins Pipeline:**
+8.  **Monitor Jenkins Pipeline:**
 
     Navigate to the "Jenkins" tab in the component's Developer Hub page to monitor the progress and results of the Jenkins pipeline.
    ![component - jenkins](./images/image-11.png)
    ![jenkins jib](./images/image-13.png)
 
+9. **Trivy Sec Scanning Report**
+
+   The Docker Image scan report will be available under '/build-artifacts' folder
+   ![image](https://github.com/user-attachments/assets/e6efe88e-17e9-4e88-8d24-6985c520cb3d)
+
+10. **Sonarqube Code Scan Report:**
+
+   You can open the sonarqube dashboards -> project and review the result for your application. 
+   ![image](https://github.com/user-attachments/assets/2fb58a98-ad04-4db3-94ce-2cb1bc3871d8)
 
 11.  **View Kubernetes Deployment (if applicable):**
 
