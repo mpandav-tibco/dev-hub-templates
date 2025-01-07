@@ -161,7 +161,6 @@ spec:
         repoUrl: ${{ parameters.repoUrl | parseRepoUrl}}
         job: bwce/job/build_bwce_ear
         authToken: tibco
-        - sonar
         jenkinsInstructions: '&bw_project_folder=${{ (parameters.repoUrl | parseRepoUrl).repo }}&deploy=${{ parameters.deploy }}&deployTarget=${{ parameters.deployTarget }}&namespace=${{ parameters.namespace }}&platformToken=${{ parameters.platformToken }}&dpUrl=${{ parameters.dpUrl }}&sonar=${{ parameters.sonar }}&trivy=${{ parameters.trivy }}'
   output:
     links:
