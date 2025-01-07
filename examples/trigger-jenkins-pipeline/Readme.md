@@ -21,7 +21,8 @@ The Developer Hub template simplifies the creation of new TIBCO BusinessWorks Co
 *   **Kubernetes Cluster (Optional):** A Kubernetes cluster if you choose to deploy the application to a Kubernetes environment.
 
 ## Usecase Scenario
-![image](https://github.com/user-attachments/assets/bec9b892-97b5-423f-9d21-4138cdc60678)
+![image](https://github.com/user-attachments/assets/f72303d8-d735-4be5-9b92-43d8e301cd98)
+
 
 
 ## Usage
