@@ -216,9 +216,9 @@ governance_trivy_security_scan() {
   echo "STEP GOVERNANCE: SECURITY SCAN"
   echo -----------------------------------------------------------
 
-  echo "--trivy image --output ../$repoName/trivy-security-scan-report.txt  --scanners vuln --severity HIGH,CRITICAL --exit-code 0 $IMAGE"
+  echo "--trivy image --output trivy-security-scan-report.txt  --scanners vuln --severity HIGH,CRITICAL --exit-code 0 $IMAGE"
   # Run the Governance and Security scan
-  trivy image --output ../$repoName/trivy-security-scan-report.txt --scanners vuln --severity HIGH,CRITICAL --exit-code 0 "$IMAGE"
+  trivy image --output trivy-security-scan-report.txt  --scanners vuln --severity HIGH,CRITICAL --exit-code 0 "$IMAGE"
 
   echo "######### GOVERNANCE SECURITY SCAN COMPLETE #############"
 }
