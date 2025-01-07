@@ -146,9 +146,13 @@ spec:
         job: bwce/job/build_bwce_ear
         authToken: tibco
         jenkinsInstructions: '&bw_project_folder=${{ (parameters.repoUrl | parseRepoUrl).repo }}&deploy=${{ parameters.deploy }}&deployTarget=${{ parameters.deployTarget }}&namespace=${{ parameters.namespace }}&platformToken=${{ parameters.platformToken }}&dpUrl=${{ parameters.dpUrl }}'
+  output:
     links:
       - title: Repository
         url: ${{ steps.publish.output.remoteUrl }}
       - title: Open in catalog
         icon: catalog
         entityRef: ${{ steps.register.output.entityRef }}
+      - title: Open Jenkins Job
+        icon: dashboard
+        url: ${{ steps.jenkinsEarBuild.output.jobLink }}
