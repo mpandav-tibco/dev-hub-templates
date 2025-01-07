@@ -20,6 +20,9 @@ The Developer Hub template simplifies the creation of new TIBCO BusinessWorks Co
     *   Refer to the [Jenkins Build Script README](jenkins-readme.md) for detailed Jenkins configuration instructions.
 *   **Kubernetes Cluster (Optional):** A Kubernetes cluster if you choose to deploy the application to a Kubernetes environment.
 
+## Usecase Scenario
+![image](https://github.com/user-attachments/assets/bec9b892-97b5-423f-9d21-4138cdc60678)
+
 
 ## Usage
 
@@ -192,13 +195,12 @@ Wait for the token controller to populate a token, and retrieving it with:
 Below config param are required for Developer Hub to successfully able to connect with your k8s API server. You will find these files for `minikube and docker-desktop` under 
 `.kube/config` file. 
 Once you have the cert available then import them into same secret and refer them as volume into deployment config  of developer-hub. For more details refer [K8S Plugin documentation](https://backstage.io/docs/features/kubernetes/configuration)
+```
+caData:
 
-`caData:` 
-
-`caFile:`
-
-Interestingly(for good), any change in the dev hub config does not change / remove these deployment updates.
-
+caFile: /path/to/local/file
+```
+You can choose to use above secret to hold caFile data or you can create new Secrete and mount that in deployment yaml as Volume.
 
 Dev Hub (K8s) Secret having caFile:
 
@@ -212,9 +214,9 @@ Update to Developer Hub Deployment in volume and volumemount:
 
 
 # Example Workflow
-The following steps and screenshots illustrate the process of creating and deploying a BWCE application using this template:
+The following steps and screenshots illustrate the process of creating and deploying a BWCE application using BWCE - Order to Kafka template:
 1.  **Create a New Component:**
-      From the Backstage catalog, initiate the creation of a new component and select this template.
+      From the Dev Hub Templates, initiate the creation of a new component and select this template.
 
       ![create new component](./images/image-6.png)
        
