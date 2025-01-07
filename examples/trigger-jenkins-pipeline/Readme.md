@@ -20,6 +20,9 @@ The Developer Hub template simplifies the creation of new TIBCO BusinessWorks Co
     *   Refer to the [Jenkins Build Script README](jenkins-readme.md) for detailed Jenkins configuration instructions.
 *   **Kubernetes Cluster (Optional):** A Kubernetes cluster if you choose to deploy the application to a Kubernetes environment.
 
+## Usecase Scenario
+![image](https://github.com/user-attachments/assets/bec9b892-97b5-423f-9d21-4138cdc60678)
+
 
 ## Usage
 
