@@ -44,7 +44,7 @@ spec:
           ui:field: OwnerPicker
           ui:options:
             allowedKinds:
-              - Group
+              - Group                
     - title: Choose a location
       required:
         - repoUrl
@@ -56,6 +56,21 @@ spec:
           ui:options:
             allowedHosts:
               - github.com
+    - title: Governance
+      required:
+        - sonar
+        - trivy
+      properties:
+        sonar:
+          title: Code Scan (SonarQube)?
+          type: boolean
+          description: Choose whether to deploy the application
+          default: false  
+        trivy:
+          title: Security Scan (Trivy)?
+          type: boolean
+          description: Choose whether to Scan the Container the application
+          default: false                
     - title: Deployment
       required:
         - deploy
