@@ -66,10 +66,10 @@ spec:
           type: boolean
           description: Choose whether to deploy the application
           default: false  
-          trivy:
+        trivy:
           title: Security Scan (Trivy)?
           type: boolean
-          description: Choose whether to deploy the application
+          description: Choose whether to Scan the Container the application
           default: false                          
     - title: Deployment
       required:
