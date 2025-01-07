@@ -167,8 +167,9 @@ To enable seamless integration with your Kubernetes cluster, the Developer Hub r
     K8S_CLUSTER_SERVICE_ACCOUNT_TOKEN: <<SERVICE_ACCOUNT_TOKEN>>
     
 #### **NOTE:**
-Below config param are required for Developer Hub to successfully able to connect with your k8s API server. You will find these files for minikube and docker-desktop under .kube/config file. 
-Once you have the cert available then import them into same secret and refer them as volume into deployment config  of developer-hub.
+Below config param are required for Developer Hub to successfully able to connect with your k8s API server. You will find these files for `minikube and docker-desktop` under 
+`.kube/config` file. 
+Once you have the cert available then import them into same secret and refer them as volume into deployment config  of developer-hub. For more details refer [K8S Plugin documentation](https://backstage.io/docs/features/kubernetes/configuration)
 
 `caData: caFile:`
 
