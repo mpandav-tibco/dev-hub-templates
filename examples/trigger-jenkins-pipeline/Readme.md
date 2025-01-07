@@ -192,10 +192,11 @@ Wait for the token controller to populate a token, and retrieving it with:
 Below config param are required for Developer Hub to successfully able to connect with your k8s API server. You will find these files for `minikube and docker-desktop` under 
 `.kube/config` file. 
 Once you have the cert available then import them into same secret and refer them as volume into deployment config  of developer-hub. For more details refer [K8S Plugin documentation](https://backstage.io/docs/features/kubernetes/configuration)
+```
+caData:
 
-`caData:` 
-
-`caFile:`
+caFile: /path/to/local/file
+```
 
 Interestingly(for good), any change in the dev hub config does not change / remove these deployment updates.
 
