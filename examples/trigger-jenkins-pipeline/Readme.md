@@ -166,14 +166,13 @@ To enable seamless integration with your Kubernetes cluster, the Developer Hub r
     K8S_CLUSTER_SKIP_METRCS_LOOKUP: 'false'
     K8S_CLUSTER_SERVICE_ACCOUNT_TOKEN: <<SERVICE_ACCOUNT_TOKEN>>
     
-**NOTE**
-caData: 
-caFile: 
-    
-    Are required for Developer Hub to successfully able to connect with your k8s API server. You will find these files for minikube and docker-desktop under .kube/config file. 
-    Once you have the cert available then import them into same secret and refer them as volume into deployment config  of developer-hub.
-    
-    Interestingly(for good), any change in the dev hub config does not change / remove these deployment updates.
+#### **NOTE:**
+Below config param are required for Developer Hub to successfully able to connect with your k8s API server. You will find these files for minikube and docker-desktop under .kube/config file. 
+Once you have the cert available then import them into same secret and refer them as volume into deployment config  of developer-hub.
+
+`caData: caFile:`
+
+      Interestingly(for good), any change in the dev hub config does not change / remove these deployment updates.
 
 
 devhub Secret having caFile:
