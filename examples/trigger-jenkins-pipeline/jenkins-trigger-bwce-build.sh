@@ -27,7 +27,9 @@
 #   - yq                                                                                                              #
 #   - docker                                                                                                          #
 #   - kubectl                                                                                                         #
-#   - mvn                                                                                                             #
+#   - mvn
+#   - Sonarqube
+#   - Trivy                                                                                                           #
 #                                                                                                                     #
 #   The script uses the following environment variables to set Jenkins build parameters:                              #
 #   - repoHost                                                                                                        #
@@ -39,16 +41,9 @@
 #   - dpUrl                                                                                                           #
 #   - deployTarget                                                                                                    #
 #   - deploy                                                                                                          #
+#   - sonar                                                                                                           #
+#   - trivy                                                                                                           #
 #                                                                                                                     #
-#   The script uses the following environment variables to set the Docker image name:                                 #
-#   - IMAGE                                                                                                           #
-#                                                                                                                     #
-#   The script uses the following environment variables to set the Kubernetes deployment name:                        #
-#   - repoName                                                                                                        #
-#                                                                                                                     #
-#   The script uses the following environment variables to set the TIBCO Platform deployment parameters:              #
-#   - BASE_VERSION                                                                                                    #
-#   - BASE_IMAGE_TAG                                                                                                  #
 #                                                                                                                     #
 #######################################################################################################################
 
@@ -62,38 +57,54 @@ export platformToken="$platformToken"
 export dpUrl="$dpUrl"
 export deployTarget="$deployTarget"
 export deploy="$deploy"
+export sonar="$sonar"
+export trivy="$trivy"
 
 # Remove any existing directory with the same name (except the .git directory)
 rm -rf *
 
 # Function to clone the Git repository
+# Function to clone the Git repository with retry logic
 clone_repo() {
   echo -----------------------------------------------------------
   echo "STEP 1: Clone the repo: https://$repoHost/$repoOwner/$repoName.git"
   echo -----------------------------------------------------------
 
-  # Clone the repository
-  git clone "https://$repoHost/$repoOwner/$repoName.git"
+  # Retry loop
+  for i in {1..3}; do
+    # Clone the repository
+    if git clone "https://$repoHost/$repoOwner/$repoName.git"; then
+      echo "--- url: https://$repoHost/$repoOwner/$repoName.git"
 
-  # Print the repository URL
-  echo "--- url: https://$repoHost/$repoOwner/$repoName.git"
+      echo -----------------------------------------------------------
+      echo "$repoName FILE STRUCTURE"
+      echo -----------------------------------------------------------
 
-  echo -----------------------------------------------------------
-  echo "$repoName FILE STRUCTURE"
-  echo -----------------------------------------------------------
+      # Show folder structure: Show the first two levels of the directory structure
+      tree -L 2 "$repoName"
 
-  # Show folder structure: Show the first two levels of the directory structure
-  tree -L 2 "$repoName"
+      return 0 # Exit the function successfully
+    else
+      echo "Attempt $i failed. Retrying in 10 seconds..."
+      sleep 10
+    fi
+  done
+
+  echo "ERROR: Failed to clone the repository after 3 attempts."
+  exit 1 # Exit the script with an error code
 }
 
 # Function to build the application EAR using Maven
 build_ear() {
   echo -----------------------------------------------------------
   echo "STEP 2: Maven - BUILD APPLICATION EAR"
-  echo -----------------------------------------------------------
+  echo -- ---------------------------------------------------------
 
+  cd "$(dirname "$PWD")"
+  pwd
+  ls -lrt
   # Find the xxxx.xxx.parent directory
-  parent_dir=$(find "$repoName" -type d -name "*.parent" -print -quit)
+  parent_dir=$(find "." -type d -name "*.parent" -print -quit)
 
   if [ -z "$parent_dir" ]; then
     echo "ERROR: Could not find the xxxx.xxx.parent directory."
@@ -158,6 +169,8 @@ EOF
   echo -----------------------------------------------------------
 
   # Build the Docker image
+  echo " --- docker build -t $repoOwner/$repoName . "
+
   docker build -t "$repoOwner/$repoName" .
 
   # Print the Docker image name
@@ -180,32 +193,72 @@ update_deployment_yaml() {
   echo -----------------------------------------------------------
 
   echo "###### Update the deployment.yaml file with variable substitution (using yq) #######"
-  
+
   # Update the deployment.yaml file with variable substitution (using yq)
   yq eval '.metadata.name = env(repoName)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
   yq eval '.metadata.labels."backstage.io/kubernetes-id" = env(repoName)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
   yq eval '.spec.template.spec.containers[0].name = env(projectName) + "-" + env(repoName)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
   yq eval '.spec.template.spec.containers[0].image = env(IMAGE)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
   yq eval '.spec.template.metadata.labels."backstage.io/kubernetes-id" = env(repoName)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
-  yq eval '.metadata.labels.app = (if (env(repoName) | length > 0) then env(repoName) else "" end)' deployment.yaml >deployment.yaml.tmp && mv deployment.yaml.tmp deployment.yaml
+
+  rm -rf deployment.yaml.tmp
 
   echo "######### DEPLOYMENT.YAML #############"
   echo -----------------------------------------------------------
   cat deployment.yaml
   echo -----------------------------------------------------------
+
+}
+
+# Function to perform security scan on Image using Trivy
+governance_trivy_security_scan() {
+  echo -----------------------------------------------------------
+  echo "STEP GOVERNANCE: SECURITY SCAN"
+  echo -----------------------------------------------------------
+
+  echo "--trivy image --output ../$repoName/trivy-security-scan-report.txt  --scanners vuln --severity HIGH,CRITICAL --exit-code 0 $IMAGE"
+  # Run the Governance and Security scan
+  trivy image --output ../$repoName/trivy-security-scan-report.txt --scanners vuln --severity HIGH,CRITICAL --exit-code 0 "$IMAGE"
+
+  echo "######### GOVERNANCE SECURITY SCAN COMPLETE #############"
+}
+
+# Function to perform code scna on repository using SonarQube
+governance_sonar_code_scan() {
+
+  echo -----------------------------------------------------------
+  echo "STEP GOVERNANCE: CODE SCAN"
+  echo -----------------------------------------------------------
+
+  # Find the xxxx.xxx.application directory
+  application_dir=$(find "$repoName" -type d -name "*.application" -print -quit)
+
+  if [ -z "$  application_dir=$(find "$repoName" -type d -name "*.application" -print -quit)" ]; then
+    echo "ERROR: Could not find the xxxx.xxx.application directory."
+    exit 1
+  fi
+
+  # Navigate to the parent directory
+  cd "$application_dir" || exit 1
+
+  # Run the Governance and Security scan
+  mvn sonar:sonar -Dsonar.host.url=$sonarHostUrl -Dsonar.login=$sonarLogin -Dsonar.report.export.path=../sonar-report.txt
+  echo " --- mvn sonar:sonar -Dsonar.host.url=$sonarHostUrl -Dsonar.login=$sonarLogin -Dsonar.report.export.path=../sonar-report.txt "
+  echo "######### GOVERNANCE CODE SCAN COMPLETE #############"
+
 }
 
 # Function to update the Git repository
 update_git_repo() {
   echo -----------------------------------------------------------
-  echo "STEP 5: GIT UPDATE"
+  echo "STEP 6: GIT UPDATE"
   echo -----------------------------------------------------------
 
   cp -r ../build-artifacts .
 
   # Add, commit, and push changes to the Git repository
   git add build-artifacts deployment.yaml
-  git commit -m "Add build-artifacts and updated deployment.yaml"
+  git commit -m "Add build-artifacts, trivy-security-scan-report.txt and updated deployment.yaml"
   git push
 }
 
@@ -246,11 +299,25 @@ deploy_to_tibco_platform() {
 # Clone the repository
 clone_repo
 
+# Perform Governance and Code scan
+if [ "$sonar" = "true" ]; then
+  governance_sonar_code_scan
+else
+  echo "ERROR: Governance Code scan skipped (sonar parameter is false)."
+fi
+
 # Build the application EAR
 build_ear
 
 # Build the Docker image
 build_docker_image
+
+# Perform Governance and Security scan
+if [ "$trivy" = "true" ]; then
+  governance_trivy_security_scan
+else
+  echo "ERROR: Governance and security scan skipped (trivy parameter is false)."
+fi
 
 # Update the deployment YAML
 update_deployment_yaml
@@ -259,7 +326,7 @@ update_deployment_yaml
 update_git_repo
 
 echo -----------------------------------------------------------
-echo "           STEP 6: DEPLOYMENT (CONDITIONAL)"
+echo "           STEP 7: DEPLOYMENT (CONDITIONAL)"
 echo -----------------------------------------------------------
 
 # Check if deployment is required
