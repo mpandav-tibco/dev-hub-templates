@@ -84,7 +84,7 @@ Refer to the Dev Hub documentation and the provided code snippets and images for
 
 **Example `app-config.yaml` Configuration**
 
-    // config starts here from auth
+    // config starts here from auth you keep you baseUrl patha as-is
     
     auth:
     providers:
