@@ -19,3 +19,4 @@ spec:
   type: service
   lifecycle: development
   owner: ${{values.owner | dump}}
+  system: ${{values.system | dump}}
