@@ -20,4 +20,5 @@ spec:
   lifecycle: development
 #  system: psg-framework
   owner: ${{values.owner | dump}}
+  system: ${{values.system | dump}}
 
