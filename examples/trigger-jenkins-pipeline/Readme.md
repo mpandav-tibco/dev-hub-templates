@@ -216,9 +216,9 @@ Update to Developer Hub Deployment in volume and volumemount:
 
 
 # Example Workflow
-The following steps and screenshots illustrate the process of creating and deploying a BWCE application using this template:
+The following steps and screenshots illustrate the process of creating and deploying a BWCE application using BWCE - Order to Kafka template:
 1.  **Create a New Component:**
-      From the Backstage catalog, initiate the creation of a new component and select this template.
+      From the Dev Hub Templates, initiate the creation of a new component and select this template.
 
       ![create new component](./images/image-6.png)
        
