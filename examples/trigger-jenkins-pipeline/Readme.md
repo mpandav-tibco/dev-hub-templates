@@ -201,8 +201,6 @@ caData:
 caFile: /path/to/local/file
 ```
 
-Interestingly(for good), any change in the dev hub config does not change / remove these deployment updates.
-
 
 Dev Hub (K8s) Secret having caFile:
 
