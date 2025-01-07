@@ -18,6 +18,8 @@ This repository contains a shell script (`jenkins-trigger-bwce-build.sh`) that a
     * Maven
     * Docker
     * `yq` (YAML processor)
+    * [Sonarqube Server](https://github.com/mpandav-tibco/external-tools-installation/tree/main/sonarqube)) You can deploy one from here.
+    * [Trivy Code scanner](https://trivy.dev/latest/)
 * A Kubernetes cluster (if deploying to Kubernetes).
 * TIBCO Platform Data Plane (if deploying to Platform).
 
