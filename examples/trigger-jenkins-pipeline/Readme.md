@@ -23,7 +23,7 @@ The Developer Hub template simplifies the creation of new TIBCO BusinessWorks Co
 
 ## Usage
 
-1.  **Template Installation:** Add this template to your Dev Hub instance by including it in the `scaffolder` configuration in your `app-config.yaml` file.
+1.  **Template Installation:** Add [this template](https://github.com/mpandav-tibco/dev-hub-templates/blob/mastart/templates/bwce/Order-To-Kafka/template-otk.yaml) to your Dev Hub instance.
 2.  **Create a new component:** In the Dev Hub catalog, click "Create Component" and select this template.
 3.  **Fill in the parameters:** Provide the required information in the template form, including:
     *   Project name and description.
