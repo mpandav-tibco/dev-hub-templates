@@ -165,26 +165,6 @@ To enable seamless integration with your Kubernetes cluster, the Developer Hub r
     K8S_CLUSTER_SKIP_TLS_VERIFY: 'true'
     K8S_CLUSTER_SKIP_METRCS_LOOKUP: 'false'
     K8S_CLUSTER_SERVICE_ACCOUNT_TOKEN: <<SERVICE_ACCOUNT_TOKEN>>
-    
-#### **NOTE:**
-Below config param are required for Developer Hub to successfully able to connect with your k8s API server. You will find these files for `minikube and docker-desktop` under 
-`.kube/config` file. 
-Once you have the cert available then import them into same secret and refer them as volume into deployment config  of developer-hub. For more details refer [K8S Plugin documentation](https://backstage.io/docs/features/kubernetes/configuration)
-
-`caData: caFile:`
-
-      Interestingly(for good), any change in the dev hub config does not change / remove these deployment updates.
-
-
-devhub Secret having caFile:
-
-![secret caFile](./images/image-3.png)
-
-Developer Hub Deployment volume and volumemount udpate:
-
-![updated volume](./images/image-4.png)
-
-![volume mount](./images/image-5.png)
 
 ## Service Account for Dev Hub K8S Plugin
 Backstage [k8s plugin](https://backstage.io/docs/features/kubernetes/) requires read access to your k8s cluster to collect and get components data and details. You can [devhub-sa.yaml](./devhub-sa.yaml) to create one and using that generate token. 
@@ -206,6 +186,30 @@ Get a long-lived token by creating a secret
 Wait for the token controller to populate a token, and retrieving it with:
 
     kubectl -n <NAMESPACE> get secret <SECRET_NAME> -o go-template='{{.data.token | base64decode}}'
+
+   
+#### **NOTE:**
+Below config param are required for Developer Hub to successfully able to connect with your k8s API server. You will find these files for `minikube and docker-desktop` under 
+`.kube/config` file. 
+Once you have the cert available then import them into same secret and refer them as volume into deployment config  of developer-hub. For more details refer [K8S Plugin documentation](https://backstage.io/docs/features/kubernetes/configuration)
+
+`caData:` 
+
+`caFile:`
+
+Interestingly(for good), any change in the dev hub config does not change / remove these deployment updates.
+
+
+Dev Hub (K8s) Secret having caFile:
+
+![secret caFile](./images/image-3.png)
+
+Update to Developer Hub Deployment in volume and volumemount:
+
+![updated volume](./images/image-4.png)
+
+![volume mount](./images/image-5.png)
+
 
 # Example Workflow
 The following steps and screenshots illustrate the process of creating and deploying a BWCE application using this template:
