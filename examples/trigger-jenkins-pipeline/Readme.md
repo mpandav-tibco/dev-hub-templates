@@ -200,7 +200,7 @@ caData:
 
 caFile: /path/to/local/file
 ```
-
+You can choose to use above secret to hold caFile data or you can create new Secrete and mount that in deployment yaml as Volume.
 
 Dev Hub (K8s) Secret having caFile:
 
