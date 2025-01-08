@@ -101,8 +101,7 @@ build_ear() {
   echo -- ---------------------------------------------------------
 
   cd "$(dirname "$PWD")"
-  pwd
-  ls -lrt
+
   # Find the xxxx.xxx.parent directory
   parent_dir=$(find "." -type d -name "*.parent" -print -quit)
 
