@@ -19,6 +19,8 @@ The Developer Hub template simplifies the creation of new TIBCO BusinessWorks Co
     *   Utilize the [quick setup script](https://github.com/mpandav-tibco/external-tools-installation/tree/main/jenkins) to streamline Jenkins server deployment.
     *   Refer to the [Jenkins Build Script README](jenkins-readme.md) for detailed Jenkins configuration instructions.
 *   **Kubernetes Cluster (Optional):** A Kubernetes cluster if you choose to deploy the application to a Kubernetes environment.
+*   **Sonarqube with BW6 plugin (Optional):**  Utilize the [quick setup script](https://github.com/mpandav-tibco/external-tools-installation/tree/main/sonarqube) to streamline sonarqube server deployment.
+*   **Trivy (Optional):** [Security Scanner](https://trivy.dev/latest/)
 
 ## Usecase Scenario
 ![image](https://github.com/user-attachments/assets/f72303d8-d735-4be5-9b92-43d8e301cd98)
