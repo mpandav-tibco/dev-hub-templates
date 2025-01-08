@@ -45,5 +45,5 @@ spec:
     displayName: tibco-team
     email: tibco-team@example.com
     parent: group:default/engineering
-    children: []
+  children: []
   members: [jdoe]
