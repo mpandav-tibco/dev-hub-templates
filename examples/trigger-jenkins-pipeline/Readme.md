@@ -36,6 +36,9 @@ The Developer Hub template simplifies the creation of new TIBCO BusinessWorks Co
     *   Target system (if applicable).
     *   Owner of the component.
     *   Repository location (GitHub URL).
+    *   Governance:
+       * Code Scan (Sonarqube)
+       * Security Scan (Trivy)
     *   Deployment options (if you want to deploy the application):
         *   Deployment target (Kubernetes or TIBCO Platform).
         *   Deployment-specific details (namespace, tokens, etc.).
@@ -48,6 +51,7 @@ This template leverages Jenkins to automate the build and deployment process. It
 *   Clones the Git repository specified in the template parameters.
 *   Builds the BWCE application EAR file using Maven.
 *   Creates a Docker image containing the application for containerization.
+*   Optionally performs governace steps of sonarqube code scan and trivy image security scan 
 *   Optionally deploys the application to the chosen target environment (Kubernetes or TIBCO Platform).
 *   Pushes the updated code, Dockerfile, and build artifacts back to the Git repository for version control.
 
