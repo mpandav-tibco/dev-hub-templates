@@ -101,7 +101,8 @@ build_ear() {
   echo -- ---------------------------------------------------------
 
   cd "$(dirname "$PWD")"
-
+  pwd
+  ls -lrt
   # Find the xxxx.xxx.parent directory
   parent_dir=$(find "." -type d -name "*.parent" -print -quit)
 
@@ -254,11 +255,16 @@ update_git_repo() {
   echo -----------------------------------------------------------
 
   cp -r ../build-artifacts .
+  # Create a new branch
+  git checkout -b "update-$(date +%Y%m%d%H%M%S)"
 
-  # Add, commit, and push changes to the Git repository
+  # Add, commit, and push changes to the new branch
   git add build-artifacts deployment.yaml
   git commit -m "Add build-artifacts, trivy-security-scan-report.txt and updated deployment.yaml"
-  git push
+  git push origin HEAD
+
+  # Create a pull request (using GitHub CLI)
+  gh pr create --title "Update build artifacts and deployment" --body "This PR updates the build artifacts and deployment YAML."
 }
 
 # Function to deploy to Kubernetes
