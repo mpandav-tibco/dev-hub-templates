@@ -59,8 +59,9 @@ export deployTarget="$deployTarget"
 export deploy="$deploy"
 export sonar="$sonar"
 export trivy="$trivy"
-export SONAR_LOGIN_TOKEN=${SONAR_LOGIN_TOKEN} 
-
+export SONAR_LOGIN_TOKEN=${SONAR_LOGIN_TOKEN}
+export BASE_VERSION="2.9.2"
+export BASE_IMAGE_TAG="142-2.9.2-V87.1-GA-al"
 
 # Remove any existing directory with the same name (except the .git directory)
 rm -rf *
