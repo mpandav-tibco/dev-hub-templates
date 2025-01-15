@@ -59,6 +59,8 @@ export deployTarget="$deployTarget"
 export deploy="$deploy"
 export sonar="$sonar"
 export trivy="$trivy"
+export SONAR_LOGIN_TOKEN=${SONAR_LOGIN_TOKEN} 
+
 
 # Remove any existing directory with the same name (except the .git directory)
 rm -rf *
@@ -242,8 +244,8 @@ governance_sonar_code_scan() {
   cd "$application_dir" || exit 1
 
   # Run the Governance and Security scan
-  mvn sonar:sonar -Dsonar.host.url=$sonarHostUrl -Dsonar.login=$sonarLogin -Dsonar.report.export.path=../sonar-report.txt
-  echo " --- mvn sonar:sonar -Dsonar.host.url=$sonarHostUrl -Dsonar.login=$sonarLogin -Dsonar.report.export.path=../sonar-report.txt "
+  mvn sonar:sonar -Dsonar.host.url=$sonarHostUrl -Dsonar.login=$SONAR_LOGIN_TOKEN -Dsonar.report.export.path=../sonar-report.txt
+  echo " --- mvn sonar:sonar -Dsonar.host.url=$sonarHostUrl -Dsonar.login=$SONAR_LOGIN_TOKEN -Dsonar.report.export.path=../sonar-report.txt "
   echo "######### GOVERNANCE CODE SCAN COMPLETE #############"
 
 }
