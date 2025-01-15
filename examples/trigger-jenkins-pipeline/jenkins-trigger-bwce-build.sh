@@ -59,9 +59,10 @@ export deployTarget="$deployTarget"
 export deploy="$deploy"
 export sonar="$sonar"
 export trivy="$trivy"
-export SONAR_LOGIN_TOKEN=${SONAR_LOGIN_TOKEN}
+export SONAR_LOGIN_TOKEN=${SONAR_LOGIN_TOKEN} 
 export BASE_VERSION="2.9.2"
 export BASE_IMAGE_TAG="142-2.9.2-V87.1-GA-al"
+
 
 # Remove any existing directory with the same name (except the .git directory)
 rm -rf *
@@ -118,7 +119,7 @@ build_ear() {
   cd "$parent_dir" || exit 1
 
   # Run Maven commands
-  mvn clean package
+  mvn clean package --quiet
 
   # Move to parent directory
   cd ../../
@@ -172,9 +173,9 @@ EOF
   echo -----------------------------------------------------------
 
   # Build the Docker image
-  echo " --- docker build -t $repoOwner/$repoName . "
+  echo " --- docker build -q -t $repoOwner/$repoName . "
 
-  docker build -t "$repoOwner/$repoName" .
+  docker build -q -t "$repoOwner/$repoName" .
 
   # Print the Docker image name
   export IMAGE="$repoOwner/$repoName"
@@ -245,7 +246,7 @@ governance_sonar_code_scan() {
   cd "$application_dir" || exit 1
 
   # Run the Governance and Security scan
-  mvn sonar:sonar -Dsonar.host.url=$sonarHostUrl -Dsonar.login=$SONAR_LOGIN_TOKEN -Dsonar.report.export.path=../sonar-report.txt
+  mvn sonar:sonar -Dsonar.host.url=$sonarHostUrl -Dsonar.login=$SONAR_LOGIN_TOKEN -Dsonar.report.export.path=../sonar-report.txt --quiet
   echo " --- mvn sonar:sonar -Dsonar.host.url=$sonarHostUrl -Dsonar.login=$SONAR_LOGIN_TOKEN -Dsonar.report.export.path=../sonar-report.txt "
   echo "######### GOVERNANCE CODE SCAN COMPLETE #############"
 
@@ -284,7 +285,8 @@ deploy_to_k8s() {
 # Function to deploy to TIBCO Platform
 deploy_to_tibco_platform() {
   echo "######### DEPLOY APPLICATION: $repoName TO TIBCO PLATFORM #############"
-
+  echo "mvn install -DdpUrl=$dpUrl -DauthToken=$platformToken -Dnamespace=$k8s_namespace -DbaseVersion=$BASE_VERSION -DbaseImageTag=$BASE_IMAGE_TAG" --quiet
+  
   parent_dir=$(find . -type d -name "*.parent" -print -quit)
 
   if [ -z "$parent_dir" ]; then
@@ -296,7 +298,7 @@ deploy_to_tibco_platform() {
   cd "$parent_dir" || exit 1
 
   # Run Maven command for TIBCO Platform deployment with error handling
-  if ! mvn install -DdpUrl="$dpUrl" -DauthToken="$platformToken" -Dnamespace="$k8s_namespace" -DbaseVersion="$BASE_VERSION" -DbaseImageTag="$BASE_IMAGE_TAG"; then
+  if ! mvn install -DdpUrl="$dpUrl" -DauthToken="$platformToken" -Dnamespace="$k8s_namespace" -DbaseVersion="$BASE_VERSION" -DbaseImageTag="$BASE_IMAGE_TAG" --quiet; then
     echo "ERROR: TIBCO Platform deployment failed!"
     exit 1
   fi
@@ -341,7 +343,7 @@ echo -----------------------------------------------------------
 if [ "$deploy" = "true" ]; then
   # Call the appropriate deployment function
   if [ "$deployTarget" = "K8S" ]; then
-    deploy_to_k8s
+    deploy_to_k8s 
   elif [ "$deployTarget" = "TIBCO Platform" ]; then
     deploy_to_tibco_platform
   else
@@ -351,6 +353,7 @@ if [ "$deploy" = "true" ]; then
 else
   echo "##### JENKINS: DEPLOYMENT SKIPPED (deploy parameter is false) #####"
 fi
+
 
 echo -----------------------------------------------------------
 echo "                 BUILD COMPLETE"
