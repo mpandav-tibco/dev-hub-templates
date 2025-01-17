@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ms="http://mulesoft.org/tshirt-service" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="TshirtService" targetNamespace="http://mulesoft.org/tshirt-service">
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ms="http://tibco.org/tshirt-service" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="TshirtService" targetNamespace="http://tibc.org/tshirt-service">
    <wsdl:types>
-      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://mulesoft.org/tshirt-service">
+      <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://tibco.org/tshirt-service">
          <xsd:element name="ListInventory">
             <xsd:complexType>
                <xsd:sequence />
@@ -141,44 +141,44 @@
    <wsdl:binding name="TshirtServiceSoapBinding" type="ms:TshirtServicePortType">
       <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
       <wsdl:operation name="OrderTshirt">
-         <soap:operation soapAction="http://mulesoft.org/tshirt-service/order-tshirt" />
+         <soap:operation soapAction="http://tibco.org/tshirt-service/order-tshirt" />
          <wsdl:input>
-            <soap:body use="literal" namespace="http://mulesoft.org/tshirt-service" />
+            <soap:body use="literal" namespace="http://tibco.org/tshirt-service" />
             <soap:header use="literal" part="header" message="ms:AuthenticationHeader" />
          </wsdl:input>
          <wsdl:output>
-            <soap:body use="literal" namespace="http://mulesoft.org/tshirt-service" />
+            <soap:body use="literal" namespace="http://tibco.org/tshirt-service" />
             <soap:header use="literal" part="header" message="ms:APIUsageInformation" />
          </wsdl:output>
          <wsdl:fault name="TshirtFault">
-            <soap:body use="literal" namespace="http://mulesoft.org/tshirt-service" />
+            <soap:body use="literal" namespace="http://tibco.org/tshirt-service" />
             <soap:header use="literal" part="header" message="ms:APIUsageInformation" />
          </wsdl:fault>
       </wsdl:operation>
       <wsdl:operation name="ListInventory">
-         <soap:operation soapAction="http://mulesoft.org/tshirt-service/list-inventory" />
+         <soap:operation soapAction="http://tibco.org/tshirt-service/list-inventory" />
          <wsdl:input>
-            <soap:body use="literal" namespace="http://mulesoft.org/tshirt-service" />
+            <soap:body use="literal" namespace="http://tibco.org/tshirt-service" />
          </wsdl:input>
          <wsdl:output>
-            <soap:body use="literal" namespace="http://mulesoft.org/tshirt-service" />
+            <soap:body use="literal" namespace="http://tibco.org/tshirt-service" />
          </wsdl:output>
          <wsdl:fault name="TshirtFault">
-            <soap:body use="literal" namespace="http://mulesoft.org/tshirt-service" />
+            <soap:body use="literal" namespace="http://tibco.org/tshirt-service" />
          </wsdl:fault>
       </wsdl:operation>
       <wsdl:operation name="TrackOrder">
-         <soap:operation soapAction="http://mulesoft.org/tshirt-service/track-order" />
+         <soap:operation soapAction="http://tibco.org/tshirt-service/track-order" />
          <wsdl:input>
-            <soap:body use="literal" namespace="http://mulesoft.org/tshirt-service" />
+            <soap:body use="literal" namespace="http://tibco.org/tshirt-service" />
             <soap:header use="literal" part="header" message="ms:AuthenticationHeader" />
          </wsdl:input>
          <wsdl:output>
-            <soap:body use="literal" namespace="http://mulesoft.org/tshirt-service" />
+            <soap:body use="literal" namespace="http://tibco.org/tshirt-service" />
             <soap:header use="literal" part="header" message="ms:APIUsageInformation" />
          </wsdl:output>
          <wsdl:fault name="TshirtFault">
-            <soap:body use="literal" namespace="http://mulesoft.org/tshirt-service" />
+            <soap:body use="literal" namespace="http://tibco.org/tshirt-service" />
          </wsdl:fault>
       </wsdl:operation>
    </wsdl:binding>
